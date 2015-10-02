@@ -38,3 +38,5 @@ Route::controllers([
 	'password' => 'Auth\PasswordController'
 //	,'empleado' => 'EmpleadoController'
 ]);
+
+return view('welcome');
