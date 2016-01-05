@@ -120,6 +120,12 @@ class UsersController extends Controller {
 		$user = User::findOrFail($id);
 		Log::info(print_r($request->all(),TRUE));
 		$user->fill($request->all());
+		$dateIng = \Carbon\Carbon::parse($request->get('fecha_ing'));
+		$dateBaja = \Carbon\Carbon::parse($request->get('fecha_baja'));
+		$dateCmb = \Carbon\Carbon::parse($request->get('fecha_cambio'));
+		$user->fecha_ing = $dateIng;
+		$user->fecha_baja = $dateBaja;
+		$user->fecha_cambio = $dateCmb;
 		Log::info("Fill  exito");
 		$user->save();
 		Log::info("Save exito");
