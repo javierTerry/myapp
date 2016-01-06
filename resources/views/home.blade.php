@@ -11,7 +11,6 @@
 
 				<div class="panel-body" align="center">
 					
-					
 					@if( Auth::user()->clave_area === "100" )
 					<table aling="center">
 						<tr>
@@ -24,7 +23,6 @@
 						</tr>
 						<tr>
 
-							
 							@if( Auth::user()->clave_rol === "1000" )
 								<td><a href= "{{ url('/admin/users') }}" >{!! Html::image('img/user.png', 'a picture'
 									, array('class' => 'img-circle', 'width'=>'140px', 'title' => 'Empleado')) !!}</td>
@@ -61,6 +59,7 @@
 				<div class="alert alert-danger" role="alert">
 					<p>
 						<h1>Area Restringida</h1>
+						
 					</p>
 				</div>
 				@endif
