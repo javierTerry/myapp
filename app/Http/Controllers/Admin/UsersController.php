@@ -44,9 +44,17 @@ class UsersController extends Controller {
 	 */
 	public function create()
 	{
-		$roles 	= array_merge(array("" => "Seleccionar"),Rol::lists('desc_rol','clave_rol'));
-		$areas 	= array_merge(array("" => "Seleccionar"),Area::lists('desc_area','clave_area'));
-		$puestos= array_merge(array("" => "Seleccionar"),Puesto::lists('desc_puesto','clave_puesto'));
+		$tmpRoles = Rol::lists('desc_rol','clave_rol')->toArray();
+		$tmpAreas = Area::lists('desc_area','clave_area')->toArray();
+		$tmpPuestos= Puesto::lists('desc_puesto','clave_puesto')->toArray();
+	/*	 
+		//$listRoles =  (empty($tmpRoles)) ? array() : $tmpRoles -> toArray(); //$tmpRoles->toArray() ;
+		$listAreas =  (empty($tmpAreas)) ? array() : $tmpAreas -> toArray();
+		$listPuestos =  (empty($tmpRoles)) ? array() : $tmpPuestos ->toArray() ;
+		*/
+		$roles 	= array_merge(array("" => "Seleccionar"), $tmpRoles);
+		$areas 	= array_merge(array("" => "Seleccionar"), $tmpAreas);
+		$puestos= array_merge(array("" => "Seleccionar"), $tmpPuestos);
 
 		return view('admin.users.crear', compact('roles','areas','puestos'));
 	}
