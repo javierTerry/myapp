@@ -49,7 +49,7 @@
 						@foreach($users as $user)
 						<tr>
 							<th>{{ $user -> id}}</th>
-							<th>{{ $user -> name}}</th>
+							<th>{{ $user -> name }}  {{ $user -> apellidos }}</th>
 							<th>{{ $user -> email}}</th>
 							<th> {!! Form::open([ 'route' => ['admin.users.destroy', $user], 'method' => 'DELETE' ]) !!}
 							<button type="submit" class="btn btn-danger" >
