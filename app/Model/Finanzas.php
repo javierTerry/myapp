@@ -16,7 +16,7 @@ class Finanzas extends Model{
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['plataforma', 'ingresos'];
+	protected $fillable = ['plataforma', 'ingresos', 'grossmar','ebitda', 'grossideal', 'ebitdaideal'];
 
 
 }

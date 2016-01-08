@@ -28,8 +28,6 @@ class CrearUserRequest extends Request {
 			,'direccion'=> 'required'
 			,'jefe_inmediato'=> 'required'
 			,'fecha_ing'=> 'required'
-			,'fecha_baja'=> 'required'
-			,'fecha_cambio'=> 'required'
 			,'tel_casa'=> 'numeric'		
 			,'clave_area'=> 'required'
 			,'clave_puesto'=> 'required'

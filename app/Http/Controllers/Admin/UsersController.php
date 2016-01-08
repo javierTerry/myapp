@@ -126,7 +126,7 @@ class UsersController extends Controller {
 		$user = User::findOrFail($id);
 		Log::info(print_r($request->all(),TRUE));
 		$user->fill($request->all());
-		//dd($user);
+		dd($user);
 		Log::info("Fill  exito");
 		$user->fecha_ing = $dateIng;
 		$user->fecha_baja = $dateBaja;
