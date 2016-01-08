@@ -73,7 +73,7 @@ class UsersController extends Controller {
 		$usuario = new User($request->all());
 		
 		$usuario->email=$email;
-		$usuario->password = \Hash::make('pass');
+		$usuario->password = \Hash::make('Te3mp0r4l1');
 		$usuario->fecha_ing = $dateIng;
 		$usuario->fecha_baja = $dateBaja;
 		$usuario->fecha_cambio = $dateCmb;
@@ -126,7 +126,7 @@ class UsersController extends Controller {
 		$user = User::findOrFail($id);
 		Log::info(print_r($request->all(),TRUE));
 		$user->fill($request->all());
-		
+		//dd($user);
 		Log::info("Fill  exito");
 		$user->fecha_ing = $dateIng;
 		$user->fecha_baja = $dateBaja;

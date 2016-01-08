@@ -11,7 +11,7 @@
 
 				<div class="panel-body" align="center">
 					
-					@if( Auth::user()->clave_area === "100" )
+					<!-- @if( Auth::user()->clave_area === "100" ) -->
 					<table aling="center">
 						<tr>
 							@if( Auth::user()->clave_rol === "1000" )
@@ -30,7 +30,7 @@
 								<td><a href= "{{ route('admin.areas.index') }}" >{!! Html::image('img/area.png', 'Catalogo de Areas', array('class' => 'img-circle', 'width'=>'150px')) !!} </a></td>
 							@endif
 							
-							@if( Auth::user()->clave_rol === "1001" )
+							@if( Auth::user()->clave_area === "100" )
 								<td><a href= "{{ route('fnz.proy.index') }}" >{!! Html::image('img/mnu_fiananzas.jpg', 'Finanzas', array('class' => 'img-circle','width'=>'250px')) !!}</a></td>	
 							@endif
 							
@@ -54,7 +54,7 @@
 						@endif
 					</table>
 				</div>
-				@endif
+			<!-- @endif -->
 				@if( Auth::user()->clave_area != "100" )
 				<div class="alert alert-danger" role="alert">
 					<p>
