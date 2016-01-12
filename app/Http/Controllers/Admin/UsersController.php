@@ -73,7 +73,7 @@ class UsersController extends Controller {
 		$usuario = new User($request->all());
 		
 		$usuario->email=$email;
-		$usuario->password = \Hash::make('Te3mp0r4l1');
+		$usuario->password = \Hash::make('T3mp0r41');
 		$usuario->fecha_ing = $dateIng;
 		$usuario->fecha_baja = $dateBaja;
 		$usuario->fecha_cambio = $dateCmb;

@@ -11,10 +11,10 @@
 
 				<div class="panel-body" align="center">
 					
-					<!-- @if( Auth::user()->clave_area === "100" ) -->
+					
 					<table aling="center">
 						<tr>
-							@if( Auth::user()->clave_rol === "1000" )
+							@if( Auth::user()->clave_area == "100" )
 								<td>Empleado </td>
 								<td>Catalogo de Roles</td>
 								<td>Catalogo de Areas</td>
@@ -23,22 +23,22 @@
 						</tr>
 						<tr>
 
-							@if( Auth::user()->clave_rol === "1000" )
+							@if( Auth::user()->clave_area === "100" )
 								<td><a href= "{{ url('/admin/users') }}" >{!! Html::image('img/user.png', 'a picture'
 									, array('class' => 'img-circle', 'width'=>'140px', 'title' => 'Empleado')) !!}</td>
-								<td><a href= "{{ route('admin.roles.index') }}" >{!! Html::image('img/rol.png', 'Catalogo de Roles', array('class' => 'img-circle')) !!}}</a></td>
+								<td><a href= "{{ route('admin.roles.index') }}" >{!! Html::image('img/rol.png', 'Catalogo de Roles', array('class' => 'img-circle')) !!}</a></td>
 								<td><a href= "{{ route('admin.areas.index') }}" >{!! Html::image('img/area.png', 'Catalogo de Areas', array('class' => 'img-circle', 'width'=>'150px')) !!} </a></td>
 							@endif
 							
-							@if( Auth::user()->clave_area === "100" )
+							@if( Auth::user()->clave_area === "102" )
 								<td><a href= "{{ route('fnz.proy.index') }}" >{!! Html::image('img/mnu_fiananzas.jpg', 'Finanzas', array('class' => 'img-circle','width'=>'250px')) !!}</a></td>	
 							@endif
 							
-							@if( Auth::user()->clave_rol === "1002" )
+							@if( Auth::user()->clave_area === "101" )
 								<td><a href= "{{ route('bpo.proyectos.index') }}" >{!! Html::image('img/mnu_bpo-1.png', 'Finanzas', array('class' => 'img-circle','width'=>'250px')) !!}</a></td>	
 							@endif
 						</tr>
-						@if( Auth::user()->clave_rol === "1000" )
+						@if( Auth::user()->clave_area === "100" )
 						<tr>
 							<td><p></p></td>
 						</tr>
@@ -48,14 +48,15 @@
 
 						</tr>
 						<tr>
-							<td><a href= "{{ route('admin.puestos.index') }}" >{!! Html::image('img/puesto.png', 'Catalogo de Puesto', array('class' => 'img-circle', 'width'=>'150px')) !!} </a></td>
-							<td><a href= "{{ route('admin.estatus.index') }}" >{!! Html::image('img/activoInactivo.png', 'Catalogo de estatus', array('class' => 'img-circle', 'width'=>'150px')) !!} </a></td>
+							<td><a href= "{{ route('admin.puestos.index') }}" >{!! Html::image('img/puesto.png', 'Catalogo de Puesto'
+								, array('class' => 'img-circle', 'width'=>'150px')) !!} </a></td>
+							<td><a href= "{{ route('admin.estatus.index') }}" >{!! Html::image('img/activoInactivo.png', 'Catalogo de estatus'
+								, array('class' => 'img-circle', 'width'=>'150px')) !!} </a></td>
 						</tr>
 						@endif
 					</table>
 				</div>
-			<!-- @endif -->
-				@if( Auth::user()->clave_area != "100" )
+				@if( Auth::user()->clave_area < 10 )
 				<div class="alert alert-danger" role="alert">
 					<p>
 						<h1>Area Restringida</h1>

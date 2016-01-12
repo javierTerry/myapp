@@ -85,15 +85,15 @@
       selectOtherMonths: true
     });
     //DATAPICKER BPO
-    $( "#FECHACOMPRA" ).datepicker({
+    $( "#fechacompra" ).datepicker({
       showOtherMonths: true,
       selectOtherMonths: true
     });
-    $( "#FECHAINI" ).datepicker({
+    $( "#fechaini" ).datepicker({
       showOtherMonths: true,
       selectOtherMonths: true
     });
-    $( "#FECHAFIN" ).datepicker({
+    $( "#fechafin" ).datepicker({
       showOtherMonths: true,
       selectOtherMonths: true
     });
