@@ -10,8 +10,8 @@
 					@include('errors.parcial.campos_error')
 					@include('errors.parcial.campos_notices')
 					
-
-					{!!	Form::open([ 'route' => 'guests.password.store', 'method' => 'POST' ]) !!}
+					
+					{!!	Form::open([ 'route' => ['guests.password.update', Auth::user() -> id], 'method' => 'PUT' ]) !!}
 						  						  
 						<div class="form-group">
 							<label class="col-md-4 control-label">E-Mail </label>

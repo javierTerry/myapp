@@ -4,6 +4,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Redirect;
 use Illuminate\Database\Eloquent\Collection;
 use Log;
+
+use App\User;
 use App\Http\Requests\GuestsRequest;
 use App\Model\Guest;
 
@@ -58,26 +60,8 @@ class GuestsController extends Controller {
 	 */
 	public function store(GuestsRequest $request)
 	{
-		Log::info('Guests store');
-		$guest = new Guest($request->all());
-		//dd($request->get('password'));
-		$guest -> password = $request->get('password');
-		 /*
-		$proyecto -> plataforma = $request->get('plataforma');
-		$proyecto -> ingresos 	= $request->get('ingresos');
-		$proyecto -> fecha_ing 	= \Carbon\Carbon::parse($request->get('fecha_ing'));
-		$proyecto -> grossmar	= $request->get('grossmar');
-		$proyecto -> ebitda		= $request->get('ebitda');
-		$proyecto -> grossideal	= $request->get('grossideal');
-		$proyecto -> ebitdaideal= $request->get('ebitdaideal');
 		
 		
-	
-		$proyectos = Finanzas::paginate();*/
-		$guest -> save();
-		//dd ($guest);
-		$notices = array('Password Cambiado con exito');
-		return view('auth.reset', compact('notices', 'errors'));
 	}
 
 	/**
@@ -97,8 +81,10 @@ class GuestsController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit($id, GuestsRequest $request)
 	{
+		Log::info('Usuario actualizar id: '.$id);
+		return view('auth.reset', compact('notices', 'errors'));	
 		
 	}
 
@@ -108,8 +94,17 @@ class GuestsController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id, CrearProyectoRequest $request)
+	public function update($id, GuestsRequest $request)
 	{
+		$user = Guest::findOrFail($id);
+		Log::info(print_r($request->all(),TRUE));
+		$user->fill($request->all());
+		$user -> password = \Hash::make($request->get('password'));
+		Log::info("Fill  exito");
+		$user->save();
+		Log::info("Save exito");
+		$notices = array('Password Cambiado con exito');
+		return view('auth.reset', compact('notices', 'errors'));
 		
 	}
 
