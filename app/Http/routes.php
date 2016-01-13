@@ -33,6 +33,13 @@ Route::group([ 'prefix' => 'fnz', 'namespace' => 'Finanzas' ], function () {
 Route::group([ 'prefix' => 'bpo', 'namespace' => 'BPO' ], function () {
 	Route::resource('proyectos','BposController');	 	
 });
+
+Route::group([ 'prefix' => 'guests', 'namespace' => 'Guest' ], function () {
+	Route::resource('password','GuestsController');	 	
+});
+
+
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',	
 	'password' => 'Auth\PasswordController'

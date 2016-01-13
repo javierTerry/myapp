@@ -10,7 +10,7 @@
 				<div class="panel-body">
 					@include('errors.parcial.campos_error')
 					{!! Form::open([ 'route' => 'admin.users.store', 'method' => 'POST' ]) !!}
-						@include('admin.users.parcial.campos');
+						@include('admin.users.parcial.campos')
 						  <button type="submit" class="btn btn-info" >Guardar </button>
 					{!! Form::close() !!}
 				</div>

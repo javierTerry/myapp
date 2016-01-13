@@ -44,13 +44,9 @@ class UsersController extends Controller {
 	 */
 	public function create()
 	{
-		$tmpRoles = Rol::lists('desc_rol','clave_rol')->toArray();
-		$tmpAreas = Area::lists('desc_area','clave_area')->toArray();
-		$tmpPuestos= Puesto::lists('desc_puesto','clave_puesto')->toArray();
-
-		$roles 	= array_merge(array("" => "Seleccionar"), $tmpRoles);
-		$areas 	= array_merge(array("" => "Seleccionar"), $tmpAreas);
-		$puestos= array_merge(array("" => "Seleccionar"), $tmpPuestos);
+		$roles = Rol::lists('desc_rol','clave_rol')->toArray();
+		$areas = Area::lists('desc_area','clave_area')->toArray();
+		$puestos= Puesto::lists('desc_puesto','clave_puesto')->toArray();
 
 		return view('admin.users.crear', compact('roles','areas','puestos'));
 	}
@@ -126,7 +122,6 @@ class UsersController extends Controller {
 		$user = User::findOrFail($id);
 		Log::info(print_r($request->all(),TRUE));
 		$user->fill($request->all());
-		dd($user);
 		Log::info("Fill  exito");
 		$user->fecha_ing = $dateIng;
 		$user->fecha_baja = $dateBaja;
