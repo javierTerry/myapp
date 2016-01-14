@@ -60,7 +60,7 @@ class UsersController extends Controller {
 	{
 		$apellido = explode(" ", $request->get('apellidos'));
 		$nombre = explode(" ", $request->get('name'));
-		$email = strtolower($nombre[0].".".$apellido[0])."@prueba.com";
+		$email = strtolower($nombre[0].".".$apellido[0])."@masnegocio.com";
 		$dateIng = \Carbon\Carbon::parse($request->get('fecha_ing'));
 		$dateBaja = \Carbon\Carbon::parse($request->get('fecha_baja'));
 		$dateCmb = \Carbon\Carbon::parse($request->get('fecha_cambio'));
