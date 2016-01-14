@@ -64,7 +64,6 @@ class UsersController extends Controller {
 		$dateIng = \Carbon\Carbon::parse($request->get('fecha_ing'));
 		$dateBaja = \Carbon\Carbon::parse($request->get('fecha_baja'));
 		$dateCmb = \Carbon\Carbon::parse($request->get('fecha_cambio'));
-		//dd($date);
 		Log::info('Usuario store');
 		$usuario = new User($request->all());
 		
