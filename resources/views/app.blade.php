@@ -48,6 +48,8 @@
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
 								<li><a href="{{ url('/auth/logout') }}">Cerrar</a></li>
+								
+								<li><a href="{{ route('guests.password.index') }}">Cambiar Password</a></li>
 							</ul>
 						</li>
 					@endif
@@ -85,15 +87,15 @@
       selectOtherMonths: true
     });
     //DATAPICKER BPO
-    $( "#FECHACOMPRA" ).datepicker({
+    $( "#fechacompra" ).datepicker({
       showOtherMonths: true,
       selectOtherMonths: true
     });
-    $( "#FECHAINI" ).datepicker({
+    $( "#fechaini" ).datepicker({
       showOtherMonths: true,
       selectOtherMonths: true
     });
-    $( "#FECHAFIN" ).datepicker({
+    $( "#fechafin" ).datepicker({
       showOtherMonths: true,
       selectOtherMonths: true
     });

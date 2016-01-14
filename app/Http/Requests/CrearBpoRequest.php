@@ -22,14 +22,19 @@ class CrearBPORequest extends Request {
 	public function rules()
 	{
 		return [
-		/*	'plataforma'	=> 'required'
-			,'ingresos'	=> 'required'
-			,'grossmar'			=> 'required|min:12'
-			,'ebitda'=> 'required'
-			,'grossideal'=> 'required'
-			,'ebitdaideal'=> 'required'
-			,'fecha_ing'=> 'required'
-			*/
+			'proyecto'		=> 'required'
+			,'cliente'		=> 'required'
+			,'proveedor'	=> 'required'
+			,'costocompro'	=> 'required'
+			,'fechaini'		=> 'required'
+			,'fechafin'		=> 'required'
+			,'fechacompra'		=> 'required'
+			,'costoreal'		=> 'required'
+			,'precioventa'		=> 'required'
+			,'avance'		=> 'required'
+			
+			
+			
 		];
 	}
 

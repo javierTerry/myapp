@@ -99,7 +99,7 @@ class ProyectosController extends Controller {
 	{
 		Log::info('Proyecto editar id: '.$id);
 		$proyecto = Finanzas::findOrFail($id);
-		//dd();
+		//dd($proyecto);
 		/*$roles = Rol::lists('desc_rol',"clave_rol");
 		$areas 	= Area::lists('desc_area','clave_area');
 		$puestos= Puesto::lists('desc_puesto','clave_puesto');

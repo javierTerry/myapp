@@ -7,25 +7,16 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">Reset Password</div>
 				<div class="panel-body">
-					@if (count($errors) > 0)
-						<div class="alert alert-danger">
-							<strong>Whoops!</strong> There were some problems with your input.<br><br>
-							<ul>
-								@foreach ($errors->all() as $error)
-									<li>{{ $error }}</li>
-								@endforeach
-							</ul>
-						</div>
-					@endif
-
-					<form class="form-horizontal" role="form" method="POST" action="{{ url('/password/reset') }}">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-						<input type="hidden" name="token" value="{{ $token }}">
-
+					@include('errors.parcial.campos_error')
+					@include('errors.parcial.campos_notices')
+					
+					
+					{!!	Form::open([ 'route' => ['guests.password.update', Auth::user() -> id], 'method' => 'PUT' ]) !!}
+						  						  
 						<div class="form-group">
 							<label class="col-md-4 control-label">E-Mail </label>
 							<div class="col-md-6">
-								<input type="email" class="form-control" name="email" value="{{ old('email') }}">
+								<input type="email" class="form-control" name="email" value="{{ Auth::user() -> email }}">
 							</div>
 						</div>
 
@@ -43,14 +34,8 @@
 							</div>
 						</div>
 
-						<div class="form-group">
-							<div class="col-md-6 col-md-offset-4">
-								<button type="submit" class="btn btn-primary">
-									Reset Password
-								</button>
-							</div>
-						</div>
-					</form>
+					<button type="submit" class="btn btn-info" >Guardar </button>
+					{!! Form::close() !!}
 				</div>
 			</div>
 		</div>

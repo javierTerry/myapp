@@ -5,7 +5,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
-			<div class="panel panel-default">s
+			<div class="panel panel-default">
 				<div class="panel-heading">
 					B P O
 				</div>
@@ -24,7 +24,7 @@
 
 					{!! Form::model(Request::only(['name','email']), [ 'route' => ['bpo.proyectos.index'], 'method' => 'GET', 'class'=>'navbar-form navbar-left pull-right', 'role'=>'search' ]) !!}
 					<div class="form-group">
-						{!! Form::text( 'name', null, ['class' => 'form-control', 'placeholder' => 'Definir campos para busquedar' ]) !!}
+						{!! Form::text( 'name', null, ['class' => 'form-control', 'placeholder' => 'No implementado aun' ]) !!}
 					</div>
 					<button type="submit" class="btn btn-default" disabled="disabled">
 						Buscar
@@ -54,16 +54,16 @@
 						@forelse($bpos as $bpo)
 							<tr>
 								<th>{{ $bpo -> id}}</th>
-								<th>{{ $bpo -> PROYECTO}}</th>
-								<th>{{ $bpo -> FECHAINI}}</th>
-								<th>{{ $bpo -> FECHAFIN}}</th>
-								<th>{{ $bpo -> FECHACOMPRA}}</th>
-								<th>{{ $bpo -> CLIENTE}}</th>
-								<th>{{ $bpo -> COSTOCOMPRO}}</th>
-								<th>{{ $bpo -> COSTOREAL}}</th>
-								<th>{{ $bpo -> PRECIOVENTA}}</th>
-								<th>{{ $bpo -> PROVEEDOR}}</th>
-								<th>{{ $bpo -> AVANCE}}</th>
+								<th>{{ $bpo -> proyecto}}</th>
+								<th>{{ $bpo -> fechaini}}</th>
+								<th>{{ $bpo -> fechafin}}</th>
+								<th>{{ $bpo -> fechacompra}}</th>
+								<th>{{ $bpo -> cliente}}</th>
+								<th>{{ $bpo -> costocompro}}</th>
+								<th>{{ $bpo -> costoreal}}</th>
+								<th>{{ $bpo -> precioventa}}</th>
+								<th>{{ $bpo -> proveedor}}</th>
+								<th>{{ $bpo -> avance}}</th>
 								<th> {!! Form::open([ 'route' => ['bpo.proyectos.destroy', $bpo], 'method' => 'DELETE' ]) !!}
 								<button type="submit" class="btn btn-danger" >
 									Eliminar

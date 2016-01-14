@@ -1,71 +1,71 @@
 <div class="form-group">
 	{!! Form::label('proyecto', 'Proyecto') !!}
-	{!! Form::text('PROYECTO', null,
+	{!! Form::text('proyecto', null,
 	['class' 		=> 'form-control'
 	,'placeholder'	=> 'Introduce proyecto'])
 	!!}
 </div>
 <div class="form-group">
 	{!! Form::label('cliente', 'Cliente') !!}
-	{!! Form::text('CLIENTE', null,
+	{!! Form::text('cliente', null,
 	['class' 		=> 'form-control'
 	,'placeholder'	=> 'Introduce el cliente '])
 	!!}
 </div>
 <div class="form-group">
 	{!! Form::label('proveedor', 'Proveedor') !!}
-	{!! Form::text('PROVEEDOR', null,
+	{!! Form::text('proveedor', null,
 	['class' 		=> 'form-control'
 	,'placeholder'	=> 'Introduce el cliente '])
 	!!}
 </div>
 
 <div class="form-group">
-	{!! Form::label('FECHAINI', 'Fecha inicial') !!}
-	{!! Form::text('FECHAINI', null,
+	{!! Form::label('fechaini', 'Fecha inicial') !!}
+	{!! Form::text('fechaini', null,
 	['class' 		=> 'form-control'
 	,'placeholder'	=> 'Fecha'])
 	!!}
 	
-	{!! Form::label('FECHAFIN', 'Fecha Final') !!}
-	{!! Form::text('FECHAFIN', null,
+	{!! Form::label('fechafin', 'Fecha Final') !!}
+	{!! Form::text('fechafin', null,
 	['class' 		=> 'form-control'
 	,'placeholder'	=> 'Fecha'])
 	!!}
 </div>
 
 <div class="form-group">
-	{!! Form::label('FECHACOMPRA', 'Fecha Compra') !!}
-	{!! Form::text('FECHACOMPRA', null,
+	{!! Form::label('fechacompra', 'Fecha Compra') !!}
+	{!! Form::text('fechacompra', null,
 	['class' 		=> 'form-control'
 	,'placeholder'	=> 'indtroduce la fecha de compra'])
 	!!}
 </div>
 <div class="form-group">
 	{!! Form::label('costocompro', 'Costo de la compra') !!}
-	{!! Form::text('COSTOCOMPRO', null,
+	{!! Form::text('costocompro', null,
 	['class' 		=> 'form-control'
 	,'placeholder'	=> 'Ingresa el  costo de la compra'])
 	!!}
 </div>
 
 <div class="form-group">
-	{!! Form::label('costorealCOSTOREAL', 'Costo Real de la compra') !!}
-	{!! Form::text('COSTOREAL', null,
+	{!! Form::label('costoreal', 'Costo Real de la compra') !!}
+	{!! Form::text('costoreal', null,
 	['class' 		=> 'form-control'
 	,'placeholder'	=> 'Ingresa el costo de la compra '])
 	!!}
 </div>
 <div class="form-group">
 	{!! Form::label('precioventa', 'Precio de la venta') !!}
-	{!! Form::text('PRECIOVENTA', null,
+	{!! Form::text('precioventa', null,
 	['class' 		=> 'form-control'
 	,'placeholder'	=> 'Ingresa grossideal'])
 	!!}
 </div>
 <div class="form-group">
 	{!! Form::label('avance', 'Avance del proyecto') !!}
-	{!! Form::text('AVANCE', null,
+	{!! Form::text('avance', null,
 	['class' 		=> 'form-control'
 	,'placeholder'	=> 'Ingresa el avance del proyecto'])
 	!!}

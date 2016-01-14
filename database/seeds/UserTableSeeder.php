@@ -16,9 +16,16 @@ class UserTableSeeder extends Seeder {
 			'name' 	=> 'Javier Herndez'
 			,'email'=> 'javier@gmail.com'
 			,'password'	=>	\Hash::make('pass')
+			,
+			));
+		\DB::table('users')->insert(array(
+			'name' 	=> 'Administrator'
+			,'email'=> 'admin@gmail.com'
+			,'password'	=>	\Hash::make('administrator')
+			,
 			));
 	}
 
 } 
 
-?>php 
+?>

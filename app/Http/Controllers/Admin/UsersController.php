@@ -44,9 +44,9 @@ class UsersController extends Controller {
 	 */
 	public function create()
 	{
-		$roles 	= array_merge(array("" => "Seleccionar"),Rol::lists('desc_rol','clave_rol'));
-		$areas 	= array_merge(array("" => "Seleccionar"),Area::lists('desc_area','clave_area'));
-		$puestos= array_merge(array("" => "Seleccionar"),Puesto::lists('desc_puesto','clave_puesto'));
+		$roles = Rol::lists('desc_rol','clave_rol')->toArray();
+		$areas = Area::lists('desc_area','clave_area')->toArray();
+		$puestos= Puesto::lists('desc_puesto','clave_puesto')->toArray();
 
 		return view('admin.users.crear', compact('roles','areas','puestos'));
 	}
@@ -69,14 +69,14 @@ class UsersController extends Controller {
 		$usuario = new User($request->all());
 		
 		$usuario->email=$email;
-		$usuario->password = \Hash::make('pass');
+		$usuario->password = \Hash::make('T3mp0r41');
 		$usuario->fecha_ing = $dateIng;
 		$usuario->fecha_baja = $dateBaja;
 		$usuario->fecha_cambio = $dateCmb;
 		$usuario->save();
 		
 		$users = User::paginate();
-		$notices = array('Usuario creado',"  Email; $email ","Agregado en ActiveDirectory", "Nomina Agregada");
+		$notices = array('Usuario creado',"  Email: $email ","Agregado en ActiveDirectory", "Nomina Agregada");
 		return view('admin.users.index', compact('users','notices'));
 	}
 
@@ -101,7 +101,6 @@ class UsersController extends Controller {
 	{
 		Log::info('Usuario editar id: '.$id);
 		$user = User::findOrFail($id);
-		//dd();
 		$roles = Rol::lists('desc_rol',"clave_rol");
 		$areas 	= Area::lists('desc_area','clave_area');
 		$puestos= Puesto::lists('desc_puesto','clave_puesto');
@@ -117,6 +116,9 @@ class UsersController extends Controller {
 	public function update($id, CrearUserRequest $request)
 	{
 		Log::info('Usuario actualizar id: '.$id);
+		$dateIng = \Carbon\Carbon::parse($request->get('fecha_ing'));
+		$dateBaja = \Carbon\Carbon::parse($request->get('fecha_baja'));
+		$dateCmb = \Carbon\Carbon::parse($request->get('fecha_cambio'));
 		$user = User::findOrFail($id);
 		Log::info(print_r($request->all(),TRUE));
 		$user->fill($request->all());
@@ -127,10 +129,13 @@ class UsersController extends Controller {
 		$user->fecha_baja = $dateBaja;
 		$user->fecha_cambio = $dateCmb;
 		Log::info("Fill  exito");
+		$user->fecha_ing = $dateIng;
+		$user->fecha_baja = $dateBaja;
+		$user->fecha_cambio = $dateCmb;
 		$user->save();
 		Log::info("Save exito");
 		$users = User::paginate();
-		return view('admin.users.index', compact('users'))->with('notice',"Usuario Actualizado");
+		return view('admin.users.index', compact('users'))->with('notices',array("Usuario Actualizado"));
 	}
 
 	/**
@@ -142,9 +147,12 @@ class UsersController extends Controller {
 	public function destroy($id)
 	{
 		$user = User::find($id);
-		$user->delete();
+		$email = $user -> email;
+		$user-> delete();
 		$users = User::paginate();
-		return view('admin.users.index', compact('users'))->with('notice',"Usuario eliminado");
+		
+		$notices = array('Usuario eliminado con',"  Email: $email ","Eliminado del activeDirectory", "Nomina Eliminada");
+		return view('admin.users.index', compact('users','notices'));
 	}
 
 }

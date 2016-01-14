@@ -54,22 +54,20 @@ class BposController extends Controller {
 	public function store(CrearBpoRequest $request)
 	{
 		Log::info('BPO store');
-		$bpo = new Bpo();
-		$bpo -> proyecto = $request->get('PROYECTO');
-		$bpo -> cliente 	= $request->get('CLIENTE');
-		$bpo -> proveedor	= $request->get('PROVEEDOR');
-		$bpo -> fechaini 	= \Carbon\Carbon::parse($request->get('FECHAINI'));
-		$bpo -> fechafin 	= \Carbon\Carbon::parse($request->get('FECHAFIN'));
-		$bpo -> fechacompra 	= \Carbon\Carbon::parse($request->get('FECHACOMPRA'));
-		$bpo -> costocompro		= $request->get('COSTOCOMPRO');
-		$bpo -> costoreal	= $request->get('COSTOREAL');
-		$bpo -> precioventa= $request->get('PRECIOVENTA');
-		$bpo -> avance= $request->get('AVANCE');
+		$fechaini 	= \Carbon\Carbon::parse($request->get('FECHAINI'));
+		$fechafin 	= \Carbon\Carbon::parse($request->get('FECHAFIN'));
+		$fechacompra 	= \Carbon\Carbon::parse($request->get('FECHACOMPRA'));
+		
+		$bpo = new Bpo($request->all());
+		$bpo -> fechaini 	= $fechaini;
+		$bpo -> fechafin 	= $fechafin;
+		$bpo -> fechacompra = $fechacompra;
+		
 		
 		$bpo -> save();
 	
 		$bpos = Bpo::paginate();
-		$notices = array('BPO creado', "Nomina Agregada");
+		$notices = array('BPO creado');
 		return view('bpo.index', compact('notices', 'bpos'));
 	}
 
@@ -94,7 +92,7 @@ class BposController extends Controller {
 	{
 		Log::info('BPO editar id: '.$id);
 		$bpo = Bpo::findOrFail($id);
-		//dd();
+		//dd($bpo);
 		/*$roles = Rol::lists('desc_rol',"clave_rol");
 		$areas 	= Area::lists('desc_area','clave_area');
 		$puestos= Puesto::lists('desc_puesto','clave_puesto');
