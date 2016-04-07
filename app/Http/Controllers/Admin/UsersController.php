@@ -76,7 +76,7 @@ class UsersController extends Controller {
 		$usuario->save();
 		
 		$users = User::paginate();
-		$notices = array('Usuario creado',"  Email: $email ","Agregado en ActiveDirectory", "Nomina Agregada");
+		$notices = array('Usuario creado',"  Email: $email ","Agregado en ActiveDirectory", "Nomina Agregada", "Password: T3mp0r41");
 		return view('admin.users.index', compact('users','notices'));
 	}
 
