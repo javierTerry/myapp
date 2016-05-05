@@ -21,16 +21,33 @@ class CrearProyectoRequest extends Request {
 	 */
 	public function rules()
 	{
+		$this->sanitize();
 		return [
 			'plataforma'	=> 'required'
-			,'ingresos'	=> 'required'
-			,'grossmar'			=> 'required|numeric'
+			,'ingresos'		=> 'required'
+			,'grossmar'		=> 'required'
 			,'ebitda'=> 'required'
 			,'grossideal'=> 'required'
 			,'ebitdaideal'=> 'required'
 			,'fecha_ing'=> 'required'
 			
 		];
+	}
+	
+	
+	/**
+	 * Clean Request.
+	 *
+	 * @return array of type App\Http\Requests\Request
+	 */
+	public function sanitize()
+	{
+		 $input = $this->all();
+
+
+        $input['ingresos'] = str_replace(",", "", $input['ingresos']);
+
+        $this->replace($input);
 	}
 
 }
