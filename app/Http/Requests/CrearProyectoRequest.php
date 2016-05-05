@@ -24,7 +24,7 @@ class CrearProyectoRequest extends Request {
 		return [
 			'plataforma'	=> 'required'
 			,'ingresos'	=> 'required'
-			,'grossmar'			=> 'required|min:12'
+			,'grossmar'			=> 'required|numeric'
 			,'ebitda'=> 'required'
 			,'grossideal'=> 'required'
 			,'ebitdaideal'=> 'required'

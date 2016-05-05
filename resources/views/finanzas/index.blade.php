@@ -52,9 +52,9 @@
 								<th>{{ $proyecto -> fecha_ing}}</th>
 								<th>{{ $proyecto -> plataforma}}</th>
 								<th>{{ $proyecto -> grossmar}}</th>
-								<th>{{ $proyecto -> ebitda}}</th>
-								<th>{{ $proyecto -> grossideal}}</th>
-								<th>{{ $proyecto -> ebitdaideal}}</th>
+								<th>{{ $proyecto -> ebitda}} %</th>
+								<th>{{ $proyecto -> grossideal}} %</th>
+								<th>{{ $proyecto -> ebitdaideal}} %</th>
 								<th>{{ $proyecto -> ingresos}}</th>
 								<th> {!! Form::open([ 'route' => ['fnz.proy.destroy', $proyecto], 'method' => 'DELETE' ]) !!}
 								<button type="submit" class="btn btn-danger" >

@@ -24,21 +24,21 @@
 	{!! Form::label('ebitda', 'EBITDA') !!}
 	{!! Form::text('ebitda', null,
 	['class' 		=> 'form-control'
-	,'placeholder'	=> 'Ingresa ebitda '])
+	,'placeholder'	=> 'Ingresa la cantidad (si %)'])
 	!!}
 </div>
 <div class="form-group">
 	{!! Form::label('grossideal', 'GROSSIDEAL') !!}
 	{!! Form::text('grossideal', null,
 	['class' 		=> 'form-control'
-	,'placeholder'	=> 'Ingresa grossideal'])
+	,'placeholder'	=> 'Ingresa la cantidad (si %)'])
 	!!}
 </div>
 <div class="form-group">
 	{!! Form::label('ebitdaideal', 'EBITDAIDEAL') !!}
 	{!! Form::text('ebitdaideal', null,
 	['class' 		=> 'form-control'
-	,'placeholder'	=> 'Ingresa ebitdaideal '])
+	,'placeholder'	=> 'Ingresa la cantidad (si %)'])
 	!!}
 	
 	{!! Form::label('fecha_ing', 'FECHA') !!}
