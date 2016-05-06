@@ -40,7 +40,7 @@
 	<body>
 		<div class="container">
 			<div class="content">
-				<div class="title"><a href="http://172.20.53.87/homeblack/public/index.php/home">MásNegocio</a></div>
+				<div class="title"><a href="{{ url('/home') }}">MásNegocio</a></div>
 				<div class="quote">{{ Inspiring::quote() }}</div>
 			</div>
 		</div>

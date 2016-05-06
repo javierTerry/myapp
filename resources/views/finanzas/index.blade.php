@@ -46,7 +46,7 @@
 							<th>EBITDAIDEAL</th>
 							<th>INGRESOS</th>
 						</tr>
-						@forelse($proyectos as $proyecto)
+						@forelse( $proyectos as $proyecto)
 							<tr>
 								<th>{{ $proyecto -> id}}</th>
 								<th>{{ $proyecto -> fecha_ing}}</th>
