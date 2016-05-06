@@ -46,6 +46,7 @@ class CrearProyectoRequest extends Request {
 
 
         $input['ingresos'] = str_replace(",", "", $input['ingresos']);
+		$input['grossmar'] = str_replace(",", "", $input['grossmar']);
 
         $this->replace($input);
 	}
