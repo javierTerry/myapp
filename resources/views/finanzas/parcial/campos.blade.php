@@ -8,14 +8,14 @@
 <div class="form-group">
 	{!! Form::label('ingresos', 'INGRESOS') !!}
 	{!! Form::text('ingresos', null,
-	['class' 		=> 'form-control'
+	['class' 		=> 'maskMoney_'
 	,'placeholder'	=> 'indtroduce el ingreso '])
 	!!}
 </div>
 <div class="form-group">
 	{!! Form::label('grossmar', 'GROSSMAR') !!}
 	{!! Form::text('grossmar', null,
-	['class' 		=> 'form-control'
+	['class' 		=> 'maskMoney_'
 	,'placeholder'	=> 'Ingresa grossmar'])
 	!!}
 </div>
