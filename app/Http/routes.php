@@ -43,7 +43,6 @@ Route::group([ 'prefix' => 'guests', 'namespace' => 'Guest' ], function () {
 Route::controllers([
 	'auth' => 'Auth\AuthController',	
 	'password' => 'Auth\PasswordController'
-//	,'empleado' => 'EmpleadoController'
 ]);
 
 return view('welcome');

@@ -27,15 +27,6 @@ class GuestsController extends Controller {
 	 */
 	public function index()
 	{
-		/*
-		$users = User::nombre($request->get('name'))
-							->email($request->get('email'))
-							->paginate();
-		
-		
-		
-		$proyectos = Finanzas::paginate();
-		*/
 		return view('auth.reset');
 	}
 
@@ -46,10 +37,7 @@ class GuestsController extends Controller {
 	 */
 	public function create()
 	{
-		/*$roles 	= array_merge(array("" => "Seleccionar"),Rol::lists('desc_rol','clave_rol'));
-		$areas 	= array_merge(array("" => "Seleccionar"),Area::lists('desc_area','clave_area'));
-		$puestos= array_merge(array("" => "Seleccionar"),Puesto::lists('desc_puesto','clave_puesto'));
-*/
+	
 		return view('finanzas.crear');//, compact('roles','areas','puestos'));
 	}
 
