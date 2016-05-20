@@ -13,6 +13,11 @@
 
 Route::get('/', 'WelcomeController@index');
 
+Route::get('/test/jwk/', 'Auth\JwtController@index');
+Route::post('/test/jwk/login', 'Auth\JwtController@getAuthenticatedUser');
+Route::post('/test/jwk/resource/', 'Auth\JwtController@store');
+//Route::get('/test/jwk/resource/', 'Auth\JwtController@store');
+
 Route::get('home', 'HomeController@index');
 Route::get('empleado', 'EmpleadoController@index');
 Route::get('empleadoorm', 'EmpleadoController@indexOrm');
@@ -33,6 +38,14 @@ Route::group([ 'prefix' => 'fnz', 'namespace' => 'Finanzas' ], function () {
 Route::group([ 'prefix' => 'bpo', 'namespace' => 'BPO' ], function () {
 	Route::resource('proyectos','BposController');	 	
 });
+
+Route::group([ 'prefix' => 'areas'], function () {		 
+	Route::group([ 'prefix' => 'respaldobds' ], function () {	 	
+		Route::get('/listas', 'WelcomeController@index');
+		 return true; 
+	});
+});
+
 
 Route::group([ 'prefix' => 'guests', 'namespace' => 'Guest' ], function () {
 	Route::resource('password','GuestsController');	 	
