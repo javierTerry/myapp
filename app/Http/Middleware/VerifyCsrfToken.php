@@ -8,7 +8,7 @@ class VerifyCsrfToken extends BaseVerifier {
 	
 	
 	protected $except = [
-           'test/jwk/resource',
+           'api/dbadmins/upload',
    ];
 
 	/**
@@ -20,11 +20,9 @@ class VerifyCsrfToken extends BaseVerifier {
 	 */
 	public function handle($request, Closure $next)
 	{
-		//dd($request->is('test/jwk/resource'));
-		
 		foreach( $this-> except as $route )
         {
-        	Log::debug(print_r($route,TRUE));
+        	Log::debug(print_r("Route ---> ".$route,TRUE));
             if( $request->is( $route ) ) return $next($request);
         }
 

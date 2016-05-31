@@ -7,11 +7,15 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use JWTAuth	;
 use Tymon\JWTAuth\Exceptions\JWTException;
-use Input;
 use Log;
+
+
+
+//date_default_timezone_set('America/Mexico_City');
 
 class JwtController extends Controller
 {
+	
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +25,6 @@ class JwtController extends Controller
     {
         // grab credentials from the request
         $credentials = $request->only('email', 'password');
-		//dd($credentials);
         try {
             // attempt to verify the credentials and create a token for the user
             if (! $token = JWTAuth::attempt($credentials)) {
@@ -54,33 +57,12 @@ class JwtController extends Controller
      */
     public function store(Request $request)
     {
-	/*	$file = Input::file("file");
-		$content =  file($file ->getRealPath());
-		$matrizResplado = array();
-		$key = "";
-		foreach ( $content as $key => $value) {
-			
-			$value = str_replace(array("<tr><TH COLSPAN=6>"," </TH></tr>", "...................." ), "", $value);
-			$value = trim($value);
-			if (strlen($value) > 5){
-				
-				$values = explode("|", $value);	
-				if (  (int)count($values) === 1 ) {
-					$matrizKey = 	$values[0];
-					continue;
-				}
-								
-				$matrizResplado[$matrizKey][] = $values;
-				
-			}
-				
-		}//fin foreach
-		Log::debug(print_r($matrizResplado,TRUE));
-		*/
+		
         JWTAuth::parseToken();
+		$token = JWTAuth::getToken();
 		// and you can continue to chain methods
 		$user = JWTAuth::parseToken()->authenticate();
-		//dd($request);
+		dd(JWTAuth::getPayload($token));
 		 return ( response()->json($user));
     }
 
@@ -134,7 +116,7 @@ class JwtController extends Controller
      *
      * @return Response
      */
-    public function getAuthenticatedUser()
+    public function getAuthenticatedToken()
     {
         try {
         	//JWTAuth::parseToken();
@@ -144,18 +126,21 @@ class JwtController extends Controller
 	        }
 
 	    } catch (Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
-	
-	        dd(response()->json(['token_expired'], $e->getStatusCode()));
+			Log::debug(print_r("TokenExpiredException ---------->",TRUE));
+			Log::debug(print_r($e,TRUE));
+	        return(response()->json(['token_expired'], $e->getStatusCode()));
 	
 	    } catch (Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
-	
-	        dd(response()->json(['token_invalid'], $e->getStatusCode()));
+			Log::debug(print_r("TokenInvalidException ---------->",TRUE));
+			Log::debug(print_r($e,TRUE));
+	        return(response()->json(['token_invalid'], $e->getStatusCode()));
+			
 	
 	    } catch (Tymon\JWTAuth\Exceptions\JWTException $e) {
 			Log::debug(print_r("JWTException ---------->",TRUE));
 			Log::debug(print_r($e,TRUE));
 			
-	        dd( response()->json(['token_absent'], $e->getStatusCode()));
+	        return( response()->json(['token_absent'], $e->getStatusCode()));
 	
 	    } catch (\Exception $e) {
 			Log::debug(print_r("Exception ---------->",TRUE));
@@ -163,10 +148,30 @@ class JwtController extends Controller
 	        return ( response()->json(['token_absent'], $e->getStatusCode()));
 	
 	    }
-		 
-
-    // the token is valid and we have found the user via the sub claim
-    dd( response()->json(compact('user')));
+		Log::debug(print_r("Return token success ---------->",TRUE));
+    	// the token is valid and we have found the user via the sub claim
+		return( response()->json(compact('user')));
     }
+    
+    /**
+	 * Handle an incoming request.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  \Closure  $next
+	 * @return mixed
+	 */
+	public function handle($request)
+	{
+	/*	foreach( $this-> except as $route )
+        {
+        	Log::debug(print_r("Route ---> ".$route,TRUE));
+            if( $request->is( $route ) ) return $next($request);
+        }
+
+		return parent::handle($request, $next);
+	 */
+	 dd($this -> getAuthenticatedToken());
+	// return "exito";
+	}
 	
 }
