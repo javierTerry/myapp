@@ -18,7 +18,7 @@ class BposController extends Controller {
 	 */
 	public function __construct()
 	{
-		//$this->middleware('auth');
+		$this->middleware('auth');
 	}
 	/**
 	 * Display a listing of the resource.
@@ -28,7 +28,6 @@ class BposController extends Controller {
 	public function index(Request $request)
 	{
 		$bpos = Bpo::paginate();
-		//dd($bpos);
 		return view('bpo.index', compact('bpos'));
 	}
 

@@ -153,25 +153,5 @@ class JwtController extends Controller
 		return( response()->json(compact('user')));
     }
     
-    /**
-	 * Handle an incoming request.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @param  \Closure  $next
-	 * @return mixed
-	 */
-	public function handle($request)
-	{
-	/*	foreach( $this-> except as $route )
-        {
-        	Log::debug(print_r("Route ---> ".$route,TRUE));
-            if( $request->is( $route ) ) return $next($request);
-        }
-
-		return parent::handle($request, $next);
-	 */
-	 dd($this -> getAuthenticatedToken());
-	// return "exito";
-	}
 	
 }

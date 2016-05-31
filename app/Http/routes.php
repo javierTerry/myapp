@@ -37,10 +37,9 @@ Route::group([ 'prefix' => 'bpo', 'namespace' => 'BPO' ], function () {
 	Route::resource('proyectos','BposController');	 	
 });
 
-Route::group([ 'prefix' => 'api', 'middleware' => 'App\Http\Controllers\Auth\JwtController'], function () {		 
+Route::group([ 'prefix' => 'api', 'middleware' => 'jwkMiddle'], function () {		 
 	Route::group([ 'prefix' => 'dbadmins' ], function () {	 	
 		Route::post('/upload', 'HistoryBackupController@index');
-		 return true; 
 	});
 });
 

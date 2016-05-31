@@ -16,13 +16,12 @@ class HistoryBackupController extends Controller
      */
     public function index()
     {
-    	Log::info(print_r("",TRUE));
+    	Log::info(print_r("Index",TRUE));
         $file = Input::file("file");
 		$content =  file($file ->getRealPath());
 		$matrizResplado = array();
 		$key = "";
 		foreach ( $content as $key => $value) {
-			
 			$value = str_replace(array("<tr><TH COLSPAN=6>"," </TH></tr>", "...................." ), "", $value);
 			$value = trim($value);
 			if (strlen($value) > 5){
@@ -32,11 +31,8 @@ class HistoryBackupController extends Controller
 					$matrizKey = 	$values[0];
 					continue;
 				}
-								
 				$matrizResplado[$matrizKey][] = $values;
-				
 			}
-				
 		}//fin foreach
 		Log::debug(print_r($matrizResplado,TRUE));
 		dd("exito");
