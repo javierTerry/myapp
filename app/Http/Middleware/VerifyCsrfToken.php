@@ -9,6 +9,7 @@ class VerifyCsrfToken extends BaseVerifier {
 	
 	protected $except = [
            'api/dbadmins/upload',
+           'api/dbadmins/upload/test'
    ];
 
 	/**

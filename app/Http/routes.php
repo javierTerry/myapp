@@ -40,6 +40,7 @@ Route::group([ 'prefix' => 'bpo', 'namespace' => 'BPO' ], function () {
 Route::group([ 'prefix' => 'api', 'middleware' => 'jwkMiddle'], function () {		 
 	Route::group([ 'prefix' => 'dbadmins' ], function () {	 	
 		Route::post('/upload', 'HistoryBackupController@index');
+		Route::post('/upload/test', 'HistoryBackupController@store');
 	});
 });
 
