@@ -9,7 +9,7 @@
 
 				<div class="panel-body">
 					@include('errors.parcial.campos_error')
-					{!! Form::open([ 'route' => 'bpo.proyectos.store', 'method' => 'POST' ]) !!}
+					{!! Form::open([ 'route' => 'bpo.proyectos.store', 'method' => 'POST', 'class' => 'form-horizontal' ])!!}
 						@include('bpo.parcial.campos')
 						  <button type="submit" class="btn btn-info" >Guardar </button>
 					{!! Form::close() !!}

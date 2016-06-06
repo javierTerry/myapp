@@ -92,7 +92,7 @@
       showOtherMonths: true,
       selectOtherMonths: true
     });
-    $( "#fechaini" ).datepicker({
+    $( ".date" ).datepicker({
       showOtherMonths: true,
       selectOtherMonths: true
     });
