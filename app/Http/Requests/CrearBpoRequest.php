@@ -21,21 +21,26 @@ class CrearBPORequest extends Request {
 	 */
 	public function rules()
 	{
+		
 		return [
-			'proyecto'		=> 'required'
-			,'cliente'		=> 'required'
-			,'proveedor'	=> 'required'
-			,'costocompro'	=> 'required'
-			,'fechaini'		=> 'required'
-			,'fechafin'		=> 'required'
-			,'fechacompra'		=> 'required'
-			,'costoreal'		=> 'required'
-			,'precioventa'		=> 'required'
-			,'avance'		=> 'required'
-			
-			
-			
+			'PROYECTO'			=> 'required'
+			,'CLIENTE'			=> 'required'
+			,'PROVEEDOR'		=> 'required'
+			,'fecha_inicial_planeada'=> 'required'
+			,'fecha_final_planeada'	=> 'required'
+			,'fecha_inicial_real'=> 'required'
+			,'fecha_final_real'	=> 'required'
+			,'fecha_compra'		=> 'required'
+			,'costo_compra'		=> 'required'
+			,'costo_real'		=> 'required'
+			,'precio_venta'		=> 'required'
+			,'avance_real'		=> 'required'
+			,'avance_planeado'		=> 'required'
+			,'desviacion'		=> 'required'
+			,'periodo_reportado'=> 'required'
+				
 		];
+		
 	}
 
 }
