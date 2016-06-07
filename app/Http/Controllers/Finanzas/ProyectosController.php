@@ -18,7 +18,7 @@ class ProyectosController extends Controller {
 	 */
 	public function __construct()
 	{
-		//$this->middleware('auth');
+		$this->middleware('auth');
 	}
 	/**
 	 * Display a listing of the resource.
@@ -50,7 +50,6 @@ class ProyectosController extends Controller {
 	{
 		Log::info('Proyecto store');
 		$proyecto = new Finanzas();
-		dd($request);
 		
 		$proyecto -> plataforma = $request->get('plataforma');
 		$proyecto -> ingresos 	= $request->get('ingresos');

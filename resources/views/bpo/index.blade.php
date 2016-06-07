@@ -4,7 +4,7 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-md-10 col-md-offset-1">
+		<div class="col-md-12 col-md-offset-0">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					B P O
@@ -22,11 +22,11 @@
 					</p>
 					@endif
 
-					{!! Form::model(Request::only(['name','email']), [ 'route' => ['bpo.proyectos.index'], 'method' => 'GET', 'class'=>'navbar-form navbar-left pull-right', 'role'=>'search' ]) !!}
+					{!! Form::model(Request::only(['proyecto']), [ 'route' => ['bpo.proyectos.index'], 'method' => 'GET', 'class'=>'navbar-form navbar-left pull-right', 'role'=>'search' ]) !!}
 					<div class="form-group">
-						{!! Form::text( 'name', null, ['class' => 'form-control', 'placeholder' => 'No implementado aun' ]) !!}
+						{!! Form::text('serch_proyecto', null, ['class' => 'form-control', 'placeholder' => 'Proyectos' ]) !!}
 					</div>
-					<button type="submit" class="btn btn-default" disabled="disabled">
+					<button type="submit" class="btn btn-default" >
 						Buscar
 					</button>
 
@@ -34,46 +34,49 @@
 					<p>
 						<a class="btn btn-info" href=" {{ route('bpo.proyectos.create') }} " role="button"> Nuevo  </a>
 					</p>
-				
-					</p>
-					<table class="table table-striped">
-						<tr>
-							<th>ID</th>
-							<th>PROYECTO</th>
-							<th>FECHA INICIAL</th>
-							<th>FECHA FINAL</th>
-							<th>FECHA COMPRA</th>
-							<th>CLIENTE</th>
-							<th>COSTO COMPRA</th>
-							<th>COSTO REAL</th>
-							<th>PRECIO VENTA</th>
-							<th>PROVEEDOR</th>
-							<th>AVANCE</th>
-							<th>OPCIONES</th>
-						</tr>
-						@forelse($bpos as $bpo)
+					<div id="tabla">
+						<table class="table table-striped table-hover">
+						<thead class="">
 							<tr>
-								<th>{{ $bpo -> id}}</th>
-								<th>{{ $bpo -> proyecto}}</th>
-								<th>{{ $bpo -> fechaini}}</th>
-								<th>{{ $bpo -> fechafin}}</th>
-								<th>{{ $bpo -> fechacompra}}</th>
-								<th>{{ $bpo -> cliente}}</th>
-								<th>{{ $bpo -> costocompro}}</th>
-								<th>{{ $bpo -> costoreal}}</th>
-								<th>{{ $bpo -> precioventa}}</th>
-								<th>{{ $bpo -> proveedor}}</th>
-								<th>{{ $bpo -> avance}}</th>
-								<th> {!! Form::open([ 'route' => ['bpo.proyectos.destroy', $bpo], 'method' => 'DELETE' ]) !!}
-								<button type="submit" class="btn btn-danger" >
-									Eliminar
-								</button><a href="{{ route('bpo.proyectos.edit', $bpo -> id) }}" class="btn btn-info" >Editar</a> {!! Form::close() !!} </th>
+								<th>ID</th>
+								<th>PROYECTO</th>
+								<th>FECHA INICIAL</th>
+								<th>FECHA FINAL</th>
+								<th>FECHA COMPRA</th>
+								<th>CLIENTE</th>
+								<th>COSTO COMPRA</th>
+								<th>COSTO REAL</th>
+								<th>PRECIO VENTA</th>
+								<th>PROVEEDOR</th>
+								<th>AVANCE</th>
+								<th>OPCIONES</th>
 							</tr>
-						@empty
-						    <p>No Proyectos</p>
-						@endforelse
-					</table>
-					
+						</thead>
+						 <tbody>
+							@forelse($bpos as $bpo)
+								<tr>
+									<th>{{ $bpo -> id}}</th>
+									<th>{{ $bpo -> PROYECTO}}</th>
+									<th>{{ $bpo -> fecha_inicial_planeada}}</th>
+									<th>{{ $bpo -> fecha_inicial_planeada}}</th>
+									<th>{{ $bpo -> fecha_compra}}</th>
+									<th>{{ $bpo -> CLIENTE}}</th>
+									<th>{{ $bpo -> costo_compra}}</th>
+									<th>{{ $bpo -> costo_real}}</th>
+									<th>{{ $bpo -> precio_venta}}</th>
+									<th>{{ $bpo -> PROVEEDOR}}</th>
+									<th>{{ $bpo -> avance_real}}</th>
+									<th> {!! Form::open([ 'route' => ['bpo.proyectos.destroy', $bpo], 'method' => 'DELETE' ]) !!}
+									<button type="submit" class="btn btn-danger" >
+										Eliminar
+									</button><a href="{{ route('bpo.proyectos.edit', $bpo -> id) }}" class="btn btn-info" >Editar</a> {!! Form::close() !!} </th>
+								</tr>
+							@empty
+							    <p>No Proyectos</p>
+							@endforelse
+						 </tbody>
+						</table>
+				</div>
 				</div>
 			</div>
 		</div>

@@ -1,20 +1,20 @@
 <div class="form-group">
 	{!! Form::label('proyecto', 'Proyecto') !!}
-	{!! Form::text('proyecto', null,
+	{!! Form::text('PROYECTO', null,
 	['class' 		=> 'form-control'
 	,'placeholder'	=> 'Introduce proyecto'])
 	!!}
 </div>
 <div class="form-group">
 	{!! Form::label('cliente', 'Cliente') !!}
-	{!! Form::text('cliente', null,
+	{!! Form::text('CLIENTE', null,
 	['class' 		=> 'form-control'
 	,'placeholder'	=> 'Introduce el cliente '])
 	!!}
 </div>
 <div class="form-group">
-	{!! Form::label('proveedor', 'Proveedor') !!}
-	{!! Form::text('proveedor', null,
+	{!! Form::label('', 'Proveedor') !!}
+	{!! Form::text('PROVEEDOR', null,
 	['class' 		=> 'form-control'
 	,'placeholder'	=> 'Introduce el cliente '])
 	!!}
@@ -26,14 +26,14 @@
 		</p>
 		 <div class="col-lg-5">
 			{!! Form::label('fechaini', 'Fecha inicial') !!}
-			{!! Form::text('fechaini', null,
+			{!! Form::text('fecha_inicial_planeada', null,
 			['class' 		=> 'date form-control'
 			,'placeholder'	=> 'Fecha Inicial'])
 			!!}
 		</div>
 		<div class="col-lg-5">
 			{!! Form::label('fechafin', 'Fecha Final') !!}
-			{!! Form::text('fechafin', null,
+			{!! Form::text('fecha_final_planeada', null,
 			['class' 		=> 'date form-control'
 			,'placeholder'	=> 'Fecha Final'])
 			!!}
@@ -68,22 +68,22 @@
 <div class="form-group">
 	<div class="col-lg-3">
 		{!! Form::label('costocompro', 'Costo de la compra') !!}
-		{!! Form::text('costocompro', null,
-		['class' 		=> 'form-control'
+		{!! Form::text('costo_compra', null,
+		['class' 		=> 'maskMoney_  form-control'
 		,'placeholder'	=> 'Ingresa el  costo de la compra'])
 		!!}
 	</div>
 	<div class="col-lg-3">
 		{!! Form::label('costoreal', 'Costo Real de la compra') !!}
-		{!! Form::text('costoreal', null,
-		['class' 		=> 'form-control'
+		{!! Form::text('costo_real', null,
+		['class' 		=> 'maskMoney_  form-control'
 		,'placeholder'	=> 'Ingresa el costo de la compra '])
 		!!}
 	</div>
 	<div class="col-lg-3">
 		{!! Form::label('precioventa', 'Precio de la venta') !!}
-		{!! Form::text('precioventa', null,
-		['class' 		=> 'form-control'
+		{!! Form::text('precio_venta', null,
+		['class' 		=> 'maskMoney_ form-control'
 		,'placeholder'	=> 'Ingresa grossideal'])
 		!!}
 	</div>
@@ -106,7 +106,7 @@
 	</div>
 	<div class="col-lg-3">
 		{!! Form::label('', 'Desviación del proyecto') !!}
-		{!! Form::text('costocompro', null,
+		{!! Form::text('desviacion', null,
 		['class' 		=> 'form-control'
 		,'placeholder'	=> 'Porcentaje de desvición'])
 		!!}
@@ -115,9 +115,9 @@
 <div class="form-group">
 	<div class="col-lg-3">
 		{!! Form::label('', 'Periodo Reportado') !!}
-		{!! Form::text('costoreal', null,
+		{!! Form::text('periodo_reportado', null,
 		['class' 		=> 'form-control'
-		,'placeholder'	=> 'Ingresa el costo de la compra '])
+		,'placeholder'	=> 'Periodo Reportado '])
 		!!}
 	</div>
 </div>

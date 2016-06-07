@@ -58,7 +58,13 @@
 		</div>
 	</nav>
 
-	@yield('content')
+	 <div class="container">
+        @yield('content')
+        <hr>
+        <footer>
+        <p>&copy; MasNegocio 2016</p>
+        </footer>
+    </div> <!-- /container -->
 
 	<!-- Scripts -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
