@@ -27,14 +27,14 @@
 		 <div class="col-lg-5">
 			{!! Form::label('fechaini', 'Fecha inicial') !!}
 			{!! Form::text('fechaini', null,
-			['class' 		=> 'form-control'
+			['class' 		=> 'date form-control'
 			,'placeholder'	=> 'Fecha Inicial'])
 			!!}
 		</div>
 		<div class="col-lg-5">
 			{!! Form::label('fechafin', 'Fecha Final') !!}
 			{!! Form::text('fechafin', null,
-			['class' 		=> 'form-control'
+			['class' 		=> 'date form-control'
 			,'placeholder'	=> 'Fecha Final'])
 			!!}
 		</div>
@@ -43,28 +43,24 @@
 		{!! Form::label('', 'Real') !!}
 		</p>
 		 <div class="col-lg-5">
-			{!! Form::label('fechaini', 'Fecha inicial') !!}
-			{!! Form::text('fechaini', null,
+			{!! Form::label('', 'Fecha inicial') !!}
+			{!! Form::text('fecha_inicial_real', null,
 			['class' 		=> 'date form-control'
 			,'placeholder'	=> 'Fecha Inicial'])
 			!!}
 		</div>
 		<div class="col-lg-5">
-			{!! Form::label('fechafin', 'Fecha Final') !!}
-			{!! Form::text('fechafin', null,
+			{!! Form::label('', 'Fecha Final') !!}
+			{!! Form::text('fecha_final_real', null,
 			['class' 		=> 'date form-control'
 			,'placeholder'	=> 'Fecha Final'])
 			!!}
 		</div>
 	</div>
 	<div class="col-lg-2">
-		</p>
-		</p>
 		{!! Form::label('fechacompra', 'Fecha Compra') !!}
-		</p>
-		</p>
-		{!! Form::text('fechacompra', null,
-		['class' 		=> 'form-control'
+		{!! Form::text('fecha_compra', null,
+		['class' 		=> 'date form-control'
 		,'placeholder'	=> 'Fecha de compra'])
 		!!}
 	</div>
@@ -91,42 +87,37 @@
 		,'placeholder'	=> 'Ingresa grossideal'])
 		!!}
 	</div>
-	<div class="col-lg-3">
-		{!! Form::label('avance', 'Avance del proyecto') !!}
-		{!! Form::text('avance', null,
-		['class' 		=> 'form-control'
-		,'placeholder'	=> 'Ingresa el avance del proyecto'])
-		!!}
-	</div>
 </div>
 
 <div class="form-group">
 	<div class="col-lg-3">
-		{!! Form::label('costocompro', 'Porcentaje de avance planeado') !!}
-		{!! Form::text('costocompro', null,
+		{!! Form::label('avance', 'Porcentaje de avance real') !!}
+		{!! Form::text('avance_real', null,
 		['class' 		=> 'form-control'
-		,'placeholder'	=> 'Ingresa el  costo de la compra'])
+		,'placeholder'	=> 'Porcentaje real'])
 		!!}
 	</div>
 	<div class="col-lg-3">
-		{!! Form::label('costoreal', 'Costo Real de la compra') !!}
+		{!! Form::label('', 'Porcentaje de avance planeado') !!}
+		{!! Form::text('avance_planeado', null,
+		['class' 		=> 'form-control'
+		,'placeholder'	=> 'Porcentaje Planeado'])
+		!!}
+	</div>
+	<div class="col-lg-3">
+		{!! Form::label('', 'Desviación del proyecto') !!}
+		{!! Form::text('costocompro', null,
+		['class' 		=> 'form-control'
+		,'placeholder'	=> 'Porcentaje de desvición'])
+		!!}
+	</div>
+</div>
+<div class="form-group">
+	<div class="col-lg-3">
+		{!! Form::label('', 'Periodo Reportado') !!}
 		{!! Form::text('costoreal', null,
 		['class' 		=> 'form-control'
 		,'placeholder'	=> 'Ingresa el costo de la compra '])
-		!!}
-	</div>
-	<div class="col-lg-3">
-		{!! Form::label('precioventa', 'Precio de la venta') !!}
-		{!! Form::text('precioventa', null,
-		['class' 		=> 'form-control'
-		,'placeholder'	=> 'Ingresa grossideal'])
-		!!}
-	</div>
-	<div class="col-lg-3">
-		{!! Form::label('precioventa', 'Precio de la venta') !!}
-		{!! Form::text('precioventa', null,
-		['class' 		=> 'form-control'
-		,'placeholder'	=> 'Ingresa grossideal'])
 		!!}
 	</div>
 </div>

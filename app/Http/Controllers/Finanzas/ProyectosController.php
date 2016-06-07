@@ -50,6 +50,7 @@ class ProyectosController extends Controller {
 	{
 		Log::info('Proyecto store');
 		$proyecto = new Finanzas();
+		dd($request);
 		
 		$proyecto -> plataforma = $request->get('plataforma');
 		$proyecto -> ingresos 	= $request->get('ingresos');

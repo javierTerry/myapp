@@ -21,6 +21,7 @@ class CrearBPORequest extends Request {
 	 */
 	public function rules()
 	{
+		
 		return [
 			'proyecto'		=> 'required'
 			,'cliente'		=> 'required'
@@ -28,14 +29,14 @@ class CrearBPORequest extends Request {
 			,'costocompro'	=> 'required'
 			,'fechaini'		=> 'required'
 			,'fechafin'		=> 'required'
-			,'fechacompra'		=> 'required'
+			,'fecha_compra'		=> 'required'
 			,'costoreal'		=> 'required'
 			,'precioventa'		=> 'required'
-			,'avance'		=> 'required'
-			
-			
-			
+			,'avance_real'		=> 'required'
+			,'avance_planeado'		=> 'required'
+				
 		];
+		
 	}
 
 }
