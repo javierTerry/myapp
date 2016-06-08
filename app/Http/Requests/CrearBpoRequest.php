@@ -23,9 +23,9 @@ class CrearBPORequest extends Request {
 	{
 		
 		return [
-			'PROYECTO'			=> 'required'
-			,'CLIENTE'			=> 'required'
-			,'PROVEEDOR'		=> 'required'
+			'proyecto'			=> 'required'
+			,'cliente'			=> 'required'
+			,'proveedor'		=> 'required'
 			,'fecha_inicial_planeada'=> 'required'
 			,'fecha_final_planeada'	=> 'required'
 			,'fecha_inicial_real'=> 'required'

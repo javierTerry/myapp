@@ -17,7 +17,7 @@ class Bpo extends Model{
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['id','PROYECTO', 'CLIENTE', 'PROVEEDOR', 'fecha_inicial_planeada', 'fecha_final_planeada'
+	protected $fillable = ['id','proyecto', 'cliente', 'proveedor', 'fecha_inicial_planeada', 'fecha_final_planeada'
 						, 'fecha_compra','costo_compra', 'costo_real', 'precio_venta', 'avance_real', 'fecha_inicial_real'
 						,'fecha_final_real', 'avance_planeado', 'desviacion', 'periodo_reportado','status'
 						];

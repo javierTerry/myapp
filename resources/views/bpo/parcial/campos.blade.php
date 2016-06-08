@@ -1,20 +1,20 @@
 <div class="form-group">
 	{!! Form::label('proyecto', 'Proyecto') !!}
-	{!! Form::text('PROYECTO', null,
+	{!! Form::text('proyecto', null,
 	['class' 		=> 'form-control'
 	,'placeholder'	=> 'Introduce proyecto'])
 	!!}
 </div>
 <div class="form-group">
 	{!! Form::label('cliente', 'Cliente') !!}
-	{!! Form::text('CLIENTE', null,
+	{!! Form::text('cliente', null,
 	['class' 		=> 'form-control'
 	,'placeholder'	=> 'Introduce el cliente '])
 	!!}
 </div>
 <div class="form-group">
 	{!! Form::label('', 'Proveedor') !!}
-	{!! Form::text('PROVEEDOR', null,
+	{!! Form::text('proveedor', null,
 	['class' 		=> 'form-control'
 	,'placeholder'	=> 'Introduce el cliente '])
 	!!}
