@@ -30,7 +30,6 @@ class CrearBPORequest extends Request {
 			,'fecha_final_planeada'	=> 'required'
 			,'fecha_inicial_real'=> 'required'
 			,'fecha_final_real'	=> 'required'
-			,'fecha_compra'		=> 'required'
 			,'costo_compra'		=> 'required'
 			,'costo_real'		=> 'required'
 			,'precio_venta'		=> 'required'

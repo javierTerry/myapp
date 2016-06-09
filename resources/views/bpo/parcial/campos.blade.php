@@ -57,34 +57,27 @@
 			!!}
 		</div>
 	</div>
-	<div class="col-lg-2">
-		{!! Form::label('fechacompra', 'Fecha Compra') !!}
-		{!! Form::text('fecha_compra', null,
-		['class' 		=> 'date form-control'
-		,'placeholder'	=> 'Fecha de compra'])
-		!!}
-	</div>
 </div>
 <div class="form-group">
 	<div class="col-lg-3">
-		{!! Form::label('costocompro', 'Costo de la compra') !!}
+		{!! Form::label('costocompro', 'Costo del proyecto') !!}
 		{!! Form::text('costo_compra', null,
 		['class' 		=> 'maskMoney_  form-control'
-		,'placeholder'	=> 'Ingresa el  costo de la compra'])
+		,'placeholder'	=> 'Ingresa el  costo del proyecto'])
 		!!}
 	</div>
 	<div class="col-lg-3">
-		{!! Form::label('costoreal', 'Costo Real de la compra') !!}
+		{!! Form::label('costoreal', 'Costo Real del proyecto') !!}
 		{!! Form::text('costo_real', null,
 		['class' 		=> 'maskMoney_  form-control'
-		,'placeholder'	=> 'Ingresa el costo de la compra '])
+		,'placeholder'	=> 'Ingresa el costo del proyecto'])
 		!!}
 	</div>
 	<div class="col-lg-3">
-		{!! Form::label('precioventa', 'Precio de la venta') !!}
+		{!! Form::label('precioventa', 'Precio del proyecto') !!}
 		{!! Form::text('precio_venta', null,
 		['class' 		=> 'maskMoney_ form-control'
-		,'placeholder'	=> 'Ingresa grossideal'])
+		,'placeholder'	=> 'Ingresa el precio'])
 		!!}
 	</div>
 </div>

@@ -36,7 +36,11 @@ Route::group([ 'prefix' => 'fnz', 'namespace' => 'Finanzas' ], function () {
 });
 
 Route::group([ 'prefix' => 'bpo', 'namespace' => 'BPO' ], function () {
-	Route::resource('proyectos','BposController');	 	
+	Route::resource('proyectos','BposController');
+	
+	Route::get('proyectos/{id}/seguimientos', 'Proyectos\SeguimientosController@index');
+	Route::get('proyectos/{id}/seguimientos/test',[ 'as' => 'bpo.proyectos.seguimientos.index', 'Proyectos\SeguimientosController@store']);
+//	Route::resource('proyectos/','Proyectos\SeguimientosController');	 	
 });
 
 Route::group([ 'prefix' => 'areas'], function () {		 
