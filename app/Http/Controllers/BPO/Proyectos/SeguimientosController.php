@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use Log;
 use App\Model\Bpo;
 use App\Model\Bpo\Proyectos\Seguimiento;
 
@@ -31,14 +32,24 @@ class SeguimientosController extends Controller
         
     }
 
+
+
     /**
      * Show the form for creating a new resource.
      *
+     * @param Int $id
      * @return Response
      */
-    public function create()
+    public function create($id)
     {
         //
+        $bpos = array(Bpo::find($id));
+                        //-> paginate();
+        
+        $seguimientos = Seguimiento::orderBy('created_at', 'DESC')
+                                 -> paginate();
+                                 
+        return view('bpo.proyectos.seguimientos.index', compact('bpos', 'seguimientos'));
     }
 
     /**
@@ -50,7 +61,17 @@ class SeguimientosController extends Controller
     public function store(Request $request)
     {
         //
-        dd("hola");
+        //dd("hola");
+        Log::info('BPO store');
+        $seguimiento = new Seguimiento($request->all());
+        //$bpo -> parser();
+        $seguimiento -> save();
+    
+        $bpos = array(Bpo::find(2));
+        $seguimientos = Seguimiento::orderBy('created_at', 'DESC')
+                                 -> paginate();
+        $notices = array('Seguimiento creado');
+        return view('bpo.proyectos.index', compact('bpos', 'seguimientos'));
     }
 
     /**

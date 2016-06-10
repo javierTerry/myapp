@@ -7,7 +7,7 @@
 		<div class="col-md-12 col-md-offset-0">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					B P O - Proyectos - Seguimientos
+					B P O - P R O Y E C T O S - S E G U I M I E N T O S 
 				</div>
 				<div class="panel-body">
 
@@ -64,7 +64,7 @@
 					
 					<div id="tabla_seguimientos">
 						<table class="table table-striped table-hover">
-						@if ( count($seguimientos) === 1)
+						@if ( count($seguimientos) > 0)
 						    
 						<thead class="">
 							<tr>

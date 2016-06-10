@@ -7,10 +7,10 @@
 		<div class="col-md-12 col-md-offset-0">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					B P O - P R O Y E C T O S
+					B P O - P R O Y E C T O S - S E G U I M I E N T O S - A G R E G A R
 				</div>
 				<div class="panel-body">
-
+					
 					@if( isset($notices) && !empty($notices))
 					<p>
 						<div class="alert alert-warning" role="alert">
@@ -21,20 +21,8 @@
 						</div>
 					</p>
 					@endif
-
-					{!! Form::model(Request::only(['proyecto']), [ 'route' => ['bpo.proyectos.index'], 'method' => 'GET', 'class'=>'navbar-form navbar-left pull-right', 'role'=>'search' ]) !!}
-					<div class="form-group">
-						{!! Form::text('serch_proyecto', null, ['class' => 'form-control', 'placeholder' => 'Proyectos' ]) !!}
-					</div>
-					<button type="submit" class="btn btn-default">
-						Buscar
-					</button>
-
-					{!! Form::close() !!}
-					<p>
-						<a class="btn btn-info" href=" {{ route('bpo.proyectos.create') }} " role="button"> Nuevo  </a>
-					</p>
-					<div id="tabla">
+					@include('errors.parcial.campos_error')
+					<div id="tabla_head">
 						<table class="table table-striped table-hover">
 						<thead class="">
 							<tr>
@@ -43,7 +31,6 @@
 								<th>CLIENTE</th>
 								<th>PROVEEDOR</th>
 								<th>AVANCE</th>
-								<th>OPCIONES</th>
 							</tr>
 						</thead>
 						 <tbody>
@@ -54,14 +41,6 @@
 									<th>{{ $bpo -> cliente}}</th>
 									<th>{{ $bpo -> proveedor}}</th>
 									<th>{{ $bpo -> avance_real}}</th>
-									<th> {!! Form::open([ 'route' => ['bpo.proyectos.destroy', $bpo], 'method' => 'DELETE' ]) !!}
-										<button type="submit" class="btn btn-danger" >
-											Eliminar
-										</button>
-										<a href="{{ route('bpo.proyectos.edit', $bpo -> id) }}" class="btn btn-info" >Editar</a>
-										<a href="{{ route('bpo.proyectos.seguimientos', $bpo -> id) }}" class="btn btn-primary" >Seguimiento</a> 
-										{!! Form::close() !!} 
-									</th>
 								
 								</tr>
 							@empty
@@ -69,7 +48,11 @@
 							@endforelse
 						 </tbody>
 						</table>
-				</div>
+					</div>
+					{!! Form::open([ 'route' => 'bpo.proyectos.seguimientos.store', 'method' => 'POST', 'class' => 'form-horizontal' ])!!}
+						@include('bpo.proyectos.seguimientos.parcial.campos')
+						  <button type="submit" class="btn btn-info" >Guardar </button>
+					{!! Form::close() !!}
 				</div>
 			</div>
 		</div>
