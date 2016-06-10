@@ -26,6 +26,7 @@ class UpdateBpoTable extends Migration
 			$table -> double('avance_planeado', 4, 4);
 			$table -> double('desviacion', 4, 4);
 			$table -> string('periodo_reportado', 50);
+			$table -> tinyInteger('status') ->default(1) ;
         });
     }
 
@@ -50,6 +51,7 @@ class UpdateBpoTable extends Migration
 			$table -> dropColumn('avance_planeado');
 			$table -> dropColumn('desviacion');
 			$table -> string('periodo_reportado');
+			$table -> dropColumn('status');
         });
     }
 }

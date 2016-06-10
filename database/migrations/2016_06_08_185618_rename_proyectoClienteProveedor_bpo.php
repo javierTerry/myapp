@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateBpoTable extends Migration
+class RenameProyectoClienteProveedorBpo extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,9 @@ class UpdateBpoTable extends Migration
     {
         Schema::table('bpo', function (Blueprint $table) {
             //
-            $table -> tinyInteger('status') ->default(1) ;
+            $table -> renameColumn('PROYECTO', 'proyecto');
+			$table -> renameColumn('CLIENTE', 'cliente');
+			$table -> renameColumn('PROVEEDOR', 'proveedor');
         });
     }
 
@@ -27,7 +29,9 @@ class UpdateBpoTable extends Migration
     {
         Schema::table('bpo', function (Blueprint $table) {
             //
-            $table -> dropColumn('status');
+            $table -> renameColumn('proyecto','PROYECTO');
+			$table -> renameColumn('cliente', 'CLIENTE');
+			$table -> renameColumn('proveedor','PROVEEDOR');
         });
     }
 }

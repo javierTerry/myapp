@@ -7,7 +7,7 @@
 		<div class="col-md-12 col-md-offset-0">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					B P O
+					B P O - P R O Y E C T O S
 				</div>
 				<div class="panel-body">
 
@@ -26,7 +26,7 @@
 					<div class="form-group">
 						{!! Form::text('serch_proyecto', null, ['class' => 'form-control', 'placeholder' => 'Proyectos' ]) !!}
 					</div>
-					<button type="submit" class="btn btn-default" >
+					<button type="submit" class="btn btn-default">
 						Buscar
 					</button>
 
@@ -40,13 +40,7 @@
 							<tr>
 								<th>ID</th>
 								<th>PROYECTO</th>
-								<th>FECHA INICIAL</th>
-								<th>FECHA FINAL</th>
-								<th>FECHA COMPRA</th>
 								<th>CLIENTE</th>
-								<th>COSTO COMPRA</th>
-								<th>COSTO REAL</th>
-								<th>PRECIO VENTA</th>
 								<th>PROVEEDOR</th>
 								<th>AVANCE</th>
 								<th>OPCIONES</th>
@@ -56,20 +50,19 @@
 							@forelse($bpos as $bpo)
 								<tr>
 									<th>{{ $bpo -> id}}</th>
-									<th>{{ $bpo -> PROYECTO}}</th>
-									<th>{{ $bpo -> fecha_inicial_planeada}}</th>
-									<th>{{ $bpo -> fecha_inicial_planeada}}</th>
-									<th>{{ $bpo -> fecha_compra}}</th>
-									<th>{{ $bpo -> CLIENTE}}</th>
-									<th>{{ $bpo -> costo_compra}}</th>
-									<th>{{ $bpo -> costo_real}}</th>
-									<th>{{ $bpo -> precio_venta}}</th>
-									<th>{{ $bpo -> PROVEEDOR}}</th>
+									<th>{{ $bpo -> proyecto}}</th>
+									<th>{{ $bpo -> cliente}}</th>
+									<th>{{ $bpo -> proveedor}}</th>
 									<th>{{ $bpo -> avance_real}}</th>
 									<th> {!! Form::open([ 'route' => ['bpo.proyectos.destroy', $bpo], 'method' => 'DELETE' ]) !!}
-									<button type="submit" class="btn btn-danger" >
-										Eliminar
-									</button><a href="{{ route('bpo.proyectos.edit', $bpo -> id) }}" class="btn btn-info" >Editar</a> {!! Form::close() !!} </th>
+										<button type="submit" class="btn btn-danger" >
+											Eliminar
+										</button>
+										<a href="{{ route('bpo.proyectos.edit', $bpo -> id) }}" class="btn btn-info" >Editar</a>
+										<a href="{{ route('bpo.proyectos.seguimientos', $bpo -> id) }}" class="btn btn-primary" >Seguimiento</a> 
+										{!! Form::close() !!} 
+									</th>
+								
 								</tr>
 							@empty
 							    <p>No Proyectos</p>
