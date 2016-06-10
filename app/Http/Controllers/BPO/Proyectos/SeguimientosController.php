@@ -61,13 +61,11 @@ class SeguimientosController extends Controller
     public function store(Request $request)
     {
         //
-        //dd("hola");
         Log::info('BPO store');
         $seguimiento = new Seguimiento($request->all());
-        //$bpo -> parser();
         $seguimiento -> save();
     
-        $bpos = array(Bpo::find(2));
+        $bpos = array(Bpo::find());
         $seguimientos = Seguimiento::orderBy('created_at', 'DESC')
                                  -> paginate();
         $notices = array('Seguimiento creado');
