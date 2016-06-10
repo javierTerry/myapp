@@ -7,7 +7,11 @@
 		<div class="col-md-12 col-md-offset-0">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					B P O - P R O Y E C T O S - S E G U I M I E N T O S - A G R E G A R
+					<a href=" " > B P O</a> -
+					<a href=" {{ URL::to('/bpo/proyectos/') }} " > P R O Y E C T O S</a> -
+					<a href=" {{ route('bpo.proyectos.seguimientos', $bpos[0]->id) }} " > S E G U I M I E N T O S</a> -
+					<a href=" " > A G R E G A R</a>
+					
 				</div>
 				<div class="panel-body">
 					
@@ -30,7 +34,7 @@
 								<th>PROYECTO</th>
 								<th>CLIENTE</th>
 								<th>PROVEEDOR</th>
-								<th>AVANCE</th>
+	
 							</tr>
 						</thead>
 						 <tbody>
@@ -40,7 +44,7 @@
 									<th>{{ $bpo -> proyecto}}</th>
 									<th>{{ $bpo -> cliente}}</th>
 									<th>{{ $bpo -> proveedor}}</th>
-									<th>{{ $bpo -> avance_real}}</th>
+									
 								
 								</tr>
 							@empty
@@ -49,7 +53,7 @@
 						 </tbody>
 						</table>
 					</div>
-					{!! Form::open([ 'route' => 'bpo.proyectos.seguimientos.store', 'method' => 'POST', 'class' => 'form-horizontal' ])!!}
+					{!! Form::open([ 'route' => array('bpo.proyectos.seguimientos.store',$bpos[0] -> id) , 'method' => 'POST', 'class' => 'form-horizontal' ])!!}
 						@include('bpo.proyectos.seguimientos.parcial.campos')
 						  <button type="submit" class="btn btn-info" >Guardar </button>
 					{!! Form::close() !!}

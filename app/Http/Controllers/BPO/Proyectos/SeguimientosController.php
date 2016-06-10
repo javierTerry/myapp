@@ -44,8 +44,7 @@ class SeguimientosController extends Controller
     {
         //
         $bpos = array(Bpo::find($id));
-                        //-> paginate();
-        
+
         $seguimientos = Seguimiento::orderBy('created_at', 'DESC')
                                  -> paginate();
                                  
@@ -58,14 +57,15 @@ class SeguimientosController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
         //
         Log::info('BPO store');
         $seguimiento = new Seguimiento($request->all());
+		$seguimiento -> parser();
         $seguimiento -> save();
     
-        $bpos = array(Bpo::find());
+        $bpos = array(Bpo::find($id));
         $seguimientos = Seguimiento::orderBy('created_at', 'DESC')
                                  -> paginate();
         $notices = array('Seguimiento creado');

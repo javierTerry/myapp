@@ -7,7 +7,9 @@
 		<div class="col-md-12 col-md-offset-0">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					B P O - P R O Y E C T O S - S E G U I M I E N T O S 
+					<a href=" " > B P O</a> -
+					<a href=" {{ URL::to('/bpo/proyectos/') }} " > P R O Y E C T O S</a> -
+					<a href=" " > S E G U I M I E N T O S</a> 
 				</div>
 				<div class="panel-body">
 
@@ -22,15 +24,6 @@
 					</p>
 					@endif
 
-					{!! Form::model(Request::only(['proyecto']), [ 'route' => ['bpo.proyectos.index'], 'method' => 'GET', 'class'=>'navbar-form navbar-left pull-right', 'role'=>'search' ]) !!}
-					<div class="form-group">
-						{!! Form::text('serch_proyecto', null, ['class' => 'form-control', 'placeholder' => 'id Seguimiento' ]) !!}
-					</div>
-					<button type="submit" class="btn btn-default">
-						Buscar
-					</button>
-
-					{!! Form::close() !!}
 					<p>
 						<a class="btn btn-info" href=" {{ route('bpo.proyectos.seguimientos.index', $bpos[0]->id) }} " role="button"> Agregar Seguimiento  </a>
 					</p>
@@ -69,10 +62,12 @@
 						<thead class="">
 							<tr>
 								<th>ID</th>
-								<th>PROYECTO</th>
-								<th>CLIENTE</th>
-								<th>PROVEEDOR</th>
-								<th>AVANCE</th>
+								<th>AVANCE PLANEADO</th>
+								<th>AVANCE REAL</th>
+								<th>DESVIACIÓN</th>
+								<th>FECHA DE</th>
+								<th>FECHA HASTA</th>
+								<th>OBSERVACIONES</th>
 							</tr>
 						@endif
 						</thead>
@@ -80,10 +75,12 @@
 							@forelse($seguimientos as $seguimiento)
 								<tr>
 									<th>{{ $seguimiento -> id}}</th>
-									<th>{{ $seguimiento -> proyecto}}</th>
-									<th>{{ $seguimiento -> cliente}}</th>
-									<th>{{ $seguimiento -> proveedor}}</th>
+									<th>{{ $seguimiento -> avance_planeado}}</th>
 									<th>{{ $seguimiento -> avance_real}}</th>
+									<th>{{ $seguimiento -> desviacion}}</th>
+									<th>{{ $seguimiento -> fecha_de }}</th>
+									<th>{{ $seguimiento -> fecha_hasta}}</th>
+									<th>{{ $seguimiento -> observaciones}}</th>
 								
 								</tr>
 							@empty
