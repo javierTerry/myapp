@@ -18,8 +18,7 @@ class Bpo extends Model{
 	 * @var array
 	 */
 	protected $fillable = ['id','proyecto', 'cliente', 'proveedor', 'fecha_inicial_planeada', 'fecha_final_planeada'
-						, 'fecha_compra','costo_compra', 'costo_real', 'precio_venta', 'avance_real', 'fecha_inicial_real'
-						,'fecha_final_real', 'avance_planeado', 'desviacion', 'periodo_reportado','status'
+						, 'costo_proyecto', 'costo_real', 'fecha_inicial_real','fecha_final_real','status'
 						];
 	
 	/**
@@ -37,7 +36,6 @@ class Bpo extends Model{
 		Log::debug(print_r($this -> attributes, true));
 		$this -> fecha_inicial_planeada = \Carbon\Carbon::parse($this -> fecha_inicial_planeada);
 		$this -> fecha_final_planeada	= \Carbon\Carbon::parse($this -> fecha_final_planeada);
-		$this -> fecha_compra 	= \Carbon\Carbon::parse($this -> fecha_compra);
 		$this -> fecha_inicial_real = \Carbon\Carbon::parse($this -> fecha_inicial_real);
 		$this -> fecha_final_real	 = \Carbon\Carbon::parse($this -> fecha_final_real);
 		Log::info('BPO Parser Finalizado');

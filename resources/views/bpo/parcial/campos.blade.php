@@ -61,56 +61,16 @@
 <div class="form-group">
 	<div class="col-lg-3">
 		{!! Form::label('costocompro', 'Costo del proyecto') !!}
-		{!! Form::text('costo_compra', null,
+		{!! Form::text('costo_proyecto', null,
 		['class' 		=> 'maskMoney_  form-control'
 		,'placeholder'	=> 'Ingresa el  costo del proyecto'])
 		!!}
 	</div>
 	<div class="col-lg-3">
 		{!! Form::label('costoreal', 'Costo Real del proyecto') !!}
-		{!! Form::text('costo_real', null,
+		{!! Form::text('costo_real_proyecto', null,
 		['class' 		=> 'maskMoney_  form-control'
 		,'placeholder'	=> 'Ingresa el costo del proyecto'])
-		!!}
-	</div>
-	<div class="col-lg-3">
-		{!! Form::label('precioventa', 'Precio del proyecto') !!}
-		{!! Form::text('precio_venta', null,
-		['class' 		=> 'maskMoney_ form-control'
-		,'placeholder'	=> 'Ingresa el precio'])
-		!!}
-	</div>
-</div>
-
-<div class="form-group">
-	<div class="col-lg-3">
-		{!! Form::label('avance', 'Porcentaje de avance real') !!}
-		{!! Form::text('avance_real', null,
-		['class' 		=> 'form-control'
-		,'placeholder'	=> 'Porcentaje real'])
-		!!}
-	</div>
-	<div class="col-lg-3">
-		{!! Form::label('', 'Porcentaje de avance planeado') !!}
-		{!! Form::text('avance_planeado', null,
-		['class' 		=> 'form-control'
-		,'placeholder'	=> 'Porcentaje Planeado'])
-		!!}
-	</div>
-	<div class="col-lg-3">
-		{!! Form::label('', 'Desviación del proyecto') !!}
-		{!! Form::text('desviacion', null,
-		['class' 		=> 'form-control'
-		,'placeholder'	=> 'Porcentaje de desvición'])
-		!!}
-	</div>
-</div>
-<div class="form-group">
-	<div class="col-lg-3">
-		{!! Form::label('', 'Periodo Reportado') !!}
-		{!! Form::text('periodo_reportado', null,
-		['class' 		=> 'form-control'
-		,'placeholder'	=> 'Periodo Reportado '])
 		!!}
 	</div>
 </div>
