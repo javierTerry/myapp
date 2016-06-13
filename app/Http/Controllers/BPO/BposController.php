@@ -27,7 +27,9 @@ class BposController extends Controller {
 	 */
 	public function index(Request $request)
 	{
-		$bpos = Bpo::paginate();
+		$bpos = Bpo::proyecto($request->get('serch_proyecto')) -> proyectoactivo() -> orderBy('created_at', 'DESC')
+		
+			 -> paginate();
 		return view('bpo.index', compact('bpos'));
 	}
 
@@ -38,10 +40,7 @@ class BposController extends Controller {
 	 */
 	public function create()
 	{
-		/*$roles 	= array_merge(array("" => "Seleccionar"),Rol::lists('desc_rol','clave_rol'));
-		$areas 	= array_merge(array("" => "Seleccionar"),Area::lists('desc_area','clave_area'));
-		$puestos= array_merge(array("" => "Seleccionar"),Puesto::lists('desc_puesto','clave_puesto'));
-*/
+	
 		return view('bpo.crear');//, compact('roles','areas','puestos'));
 	}
 
@@ -53,19 +52,11 @@ class BposController extends Controller {
 	public function store(CrearBpoRequest $request)
 	{
 		Log::info('BPO store');
-		$fechaini 	= \Carbon\Carbon::parse($request->get('FECHAINI'));
-		$fechafin 	= \Carbon\Carbon::parse($request->get('FECHAFIN'));
-		$fechacompra 	= \Carbon\Carbon::parse($request->get('FECHACOMPRA'));
-		
 		$bpo = new Bpo($request->all());
-		$bpo -> fechaini 	= $fechaini;
-		$bpo -> fechafin 	= $fechafin;
-		$bpo -> fechacompra = $fechacompra;
-		
-		
+		$bpo -> parser();
 		$bpo -> save();
 	
-		$bpos = Bpo::paginate();
+		$bpos = Bpo::orderBy('created_at', 'DESC') -> paginate();
 		$notices = array('BPO creado');
 		return view('bpo.index', compact('notices', 'bpos'));
 	}
@@ -91,11 +82,7 @@ class BposController extends Controller {
 	{
 		Log::info('BPO editar id: '.$id);
 		$bpo = Bpo::findOrFail($id);
-		//dd($bpo);
-		/*$roles = Rol::lists('desc_rol',"clave_rol");
-		$areas 	= Area::lists('desc_area','clave_area');
-		$puestos= Puesto::lists('desc_puesto','clave_puesto');
-		 */
+		
 		return view('bpo.editar', compact('bpo'));
 	}
 
@@ -111,26 +98,30 @@ class BposController extends Controller {
 		$bpo = Bpo::findOrFail($id);
 		Log::info(print_r($request->all(),TRUE));
 		$bpo->fill($request->all());
+		$bpo -> parser();
 		$bpo->save();
 		Log::info("Save exito");
-		$bpos = Bpo::paginate();
+		$bpos = Bpo::orderBy('created_at', 'DESC') -> paginate();
 		return view('bpo.index', compact('bpos'))->with('notices',array("BPO Actualizado"));
 	}
 
 	/**
-	 * Remove the specified resource from storage.
+	 * Delete the specified resource from storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function destroy($id)
 	{
-		Log::info('BPO - Eliminar id: '.$id);
+		Log::info('BPO - Borrando id: '.$id);
 		$bpo = Bpo::find($id);
-		$bpo -> delete();
-		$bpos = Bpo::paginate();
-		Log::info('BPO - Exito al eliminar id: '.$id);
+		$bpo -> borradoLogico();
+		$bpo -> save();
+		//$bpo -> delete();
+		$bpos = Bpo::where('status', '=', 1) -> orderBy('created_at', 'DESC') -> paginate();
+		Log::info('BPO - Exito al borrar id: '.$id);
 		return view('bpo.index', compact('bpos'))->with('notices',array("BPO eliminado"));
 	}
+	
 
 }
