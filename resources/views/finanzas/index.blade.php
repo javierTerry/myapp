@@ -33,8 +33,10 @@
 					<p>
 						<a class="btn btn-info" href=" {{ route('fnz.proy.create') }} " role="button"> Nuevo  </a>
 					</p>
-				
+					Proyectos {{ $proyectos ->total()}}, Total de paginas {{ $proyectos ->lastPage()}} , Pagina actual {{ $proyectos ->currentPage()}}
 					</p>
+					
+					{!! $proyectos->render() !!}
 					<table class="table table-striped">
 						<tr>
 							<th>ID</th>
@@ -64,8 +66,12 @@
 						@empty
 						    <p>No Proyectos</p>
 						@endforelse
+						
 					</table>
+Proyectos {{ $proyectos ->total()}}, Total de paginas {{ $proyectos ->lastPage()}} , Pagina actual {{ $proyectos ->currentPage()}}
+					</p>
 					
+					{!! $proyectos->render() !!}					
 				</div>
 			</div>
 		</div>
