@@ -30,8 +30,7 @@ class HistoryBackup extends Model
 	 */
 	public function parser(Request $request){
 		
-		Log::info(print_r($request -> is("api/dbadmins/upload/test"),TRUE));
-		Log::info(print_r($request -> route()->getPath(),TRUE));
+			Log::info(print_r($request -> route()->getPath(),TRUE));
 		
 		
 		
