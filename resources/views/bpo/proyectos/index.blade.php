@@ -55,6 +55,10 @@
 						</table>
 					</div>
 					
+					Seguimientos {{ $seguimientos ->total()}}, Total de paginas {{ $seguimientos ->lastPage()}} , Pagina actual {{ $seguimientos ->currentPage()}}
+					</p>
+					
+					{!! $seguimientos->render() !!}
 					<div id="tabla_seguimientos">
 						<table class="table table-striped table-hover">
 						@if ( count($seguimientos) > 0)
@@ -68,6 +72,8 @@
 								<th>FECHA DE</th>
 								<th>FECHA HASTA</th>
 								<th>OBSERVACIONES</th>
+								<th>OPCIONES</th>
+								
 							</tr>
 						@endif
 						</thead>
@@ -81,6 +87,13 @@
 									<th>{{ $seguimiento -> fecha_de }}</th>
 									<th>{{ $seguimiento -> fecha_hasta}}</th>
 									<th>{{ $seguimiento -> observaciones}}</th>
+									<th> {!! Form::open([ 'route' => ['bpo.proyectos.seguimientos.update', $bpo -> id, $seguimiento -> id, 0], 'method' => 'PUT' ]) !!}
+										<button type="submit" class="btn btn-danger" >
+											Eliminar
+										</button>
+										<a href="{{ route('bpo.proyectos.seguimientos.edit', [$bpo -> id, $seguimiento -> id]) }}" class="btn btn-info" >Editar</a>
+										{!! Form::close() !!} 
+									</th>
 								
 								</tr>
 							@empty
@@ -89,6 +102,10 @@
 						 </tbody>
 						</table>
 					</div>
+					Seguimientos {{ $seguimientos ->total()}}, Total de paginas {{ $seguimientos ->lastPage()}} , Pagina actual {{ $seguimientos ->currentPage()}}
+					</p>
+					
+					{!! $seguimientos->render() !!}
 				</div>
 			</div>
 		</div>

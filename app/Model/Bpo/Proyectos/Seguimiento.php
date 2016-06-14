@@ -32,12 +32,58 @@ class Seguimiento extends Model
 	 * 
 	 */
 	 
-	public function parser($value = '')
+	public function parser($proyectoId = '')
 	{
 		Log::info('BPO-Seguimientos Parser');
 		Log::debug(print_r($this -> attributes, true));
 		$this -> fecha_de = \Carbon\Carbon::parse($this -> fecha_de);
 		$this -> fecha_hasta	= \Carbon\Carbon::parse($this -> fecha_hasta);
+		$this -> bpo_proyecto_id = $proyectoId;
 		Log::info('BPO-Seguimientos Parser Finalizado');
+	}
+	
+	/**
+	 * Parsed form fields to Object BPO .
+	 *
+	 * @author Christian Hernandez <christian.hernandez@masnegocio.com>
+	 * 
+	 * @param array Request
+	 * 
+	 */
+	 
+	public function borradoLogico()
+	{
+		Log::info('Asigando Borrado logico');
+		$this -> status = 0;
+		Log::info('Valor Asignado');
+	}
+
+	
+	/**
+	 * Serch proyects by strig, clause like  .
+	 *
+	 * @author Christian Hernandez <christian.hernandez@masnegocio.com>
+	 * 
+	 * @param array Request
+	 * 
+	 */
+	public function scopeProyectoActivo($query)
+	{
+		$query->where('status', '=', 1);	
+	
+	}
+	
+	/**
+	 * Serch proyects by bpo_proyecto_id, clause where  .
+	 *
+	 * @author Christian Hernandez <christian.hernandez@masnegocio.com>
+	 * 
+	 * @param array Request
+	 * 
+	 */
+	public function scopeProyectoId($query, $proyectoId = 0)
+	{
+		$query->where('bpo_proyecto_id', '=', $proyectoId);	
+	
 	}
 }

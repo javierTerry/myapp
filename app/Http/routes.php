@@ -33,18 +33,39 @@ Route::group([ 'prefix' => 'fnz', 'namespace' => 'Finanzas' ], function () {
 	Route::resource('proy','ProyectosController');	 	
 });
 
+/**
+ * @prefix bpo/proyectos
+ * @prefix bpo/proyectos/{id}/seguimientos/
+ * @prefix bpo/proyectos/{id}/seguimientos/{id/}
+ */
 Route::group([ 'prefix' => 'bpo', 'namespace' => 'BPO' ], function () {
 	Route::resource('proyectos','BposController');
 	
-	Route::get('proyectos/{id}/seguimientos', 
+	Route::group(['prefix' => 'proyectos/{id}/seguimientos/'], function () {
+		Route::get('/', 
 			[ 'as' => 'bpo.proyectos.seguimientos'
 			, 'uses' =>'Proyectos\SeguimientosController@index']);
-	Route::get('proyectos/{id}/seguimientos/create', 
+		Route::get('create', 
 			[ 'as' => 'bpo.proyectos.seguimientos.index'
 			, 'uses' =>'Proyectos\SeguimientosController@create']);
-	Route::post('proyectos/{id}/seguimientos/store', 
+		Route::post('store', 
 			[ 'as' => 'bpo.proyectos.seguimientos.store'
-			, 'uses' =>'Proyectos\SeguimientosController@store']);	 	
+			, 'uses' =>'Proyectos\SeguimientosController@store']);
+			
+		Route::group(['prefix' => '{seguimientoId}/'], function () {
+			Route::put('updates/{status}', 
+				[ 'as' => 'bpo.proyectos.seguimientos.update'
+				, 'uses' =>'Proyectos\SeguimientosController@update']);
+			Route::put('updates/', 
+				[ 'as' => 'bpo.proyectos.seguimientos.update.form'
+				, 'uses' =>'Proyectos\SeguimientosController@update']);
+				
+			Route::get('edits', 
+				[ 'as' => 'bpo.proyectos.seguimientos.edit'
+				, 'uses' =>'Proyectos\SeguimientosController@edit']);
+		});
+	});
+	
 });
 
 Route::group([ 'prefix' => 'api', 'middleware' => 'jwkMiddle'], function () {		 
