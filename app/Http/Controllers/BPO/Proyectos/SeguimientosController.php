@@ -25,16 +25,14 @@ class SeguimientosController extends Controller
 	}
 	
     /**
-     * Display a listing of the resource.
+     * Display a resource by Id.
      *
-     * @return Response
+     * @return View bpo.proyectos.index
      */
     public function index($id)
     {
         //
         $bpos = array(Bpo::find($id));
-        				//-> paginate();
-        
         $seguimientos = Seguimiento::orderBy('created_at', 'DESC')
 								 -> paginate();
 								 
