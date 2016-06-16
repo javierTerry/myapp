@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Log;
 use App\Model\Bpo;
 use App\Model\Bpo\Proyectos\Seguimiento;
+use App\Http\Requests\SeguimientoRequest;
 
 class SeguimientosController extends Controller
 {
@@ -32,14 +33,14 @@ class SeguimientosController extends Controller
     public function index($id)
     {
         //
-        Log::info('Seguimiento index, id psproyecto'.$id);
+        Log::info('Seguimiento index, id proyecto '.$id);
         $bpos = array(Bpo::find($id));
         $seguimientos = Seguimiento::orderBy('id', 'DESC')
 								-> proyectoactivo()
 								-> proyectoId($id)
 								-> paginate();
 								 
-		return view('bpo.proyectos.index', compact('bpos', 'seguimientos'));
+		return view('bpo.proyectos.index', compact('bpos', 'seguimientos','notices'));
        
         
     }
@@ -72,7 +73,7 @@ class SeguimientosController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store(Request $request, $id)
+    public function store(SeguimientoRequest $request, $id)
     {
         //
         Log::info('BPO - Seguimiento store');
@@ -86,7 +87,8 @@ class SeguimientosController extends Controller
 									-> proyectoId($id)
                                  	-> paginate();
         $notices = array('Seguimiento creado');
-        return view('bpo.proyectos.index', compact('bpos', 'seguimientos'));
+ 		return \Redirect::route('bpo.proyectos.seguimientos',[$id])	->with('seguimientos','bpos', 'notices')
+        															->with('notices',$notices);
     }
 
     /**
@@ -124,32 +126,29 @@ class SeguimientosController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(Request $request, $id,$seguimientoId, $status = 1)
+    public function update(SeguimientoRequest $request, $id,$seguimientoId)
     {
         //
         //dd($status);
-		Log::info('BPO - Seguimiento actualizar id seguimiento : '.$id);
+		Log::info('BPO - Seguimiento actualizar id seguimiento : '.$seguimientoId);
 		$seguimiento = Seguimiento::findOrFail($seguimientoId);
-		if($status === 1){
-			$seguimiento = Seguimiento::findOrFail($seguimientoId);
-			Log::debug(print_r($request->all(),TRUE));
-			$seguimiento->fill($request->all());
-			$seguimiento -> parser($id);
-				
-		} else {
-			$seguimiento -> borradoLogico();
-		}
+		Log::debug(print_r($request->all(),TRUE));
+		$seguimiento->fill($request->all());
+		$seguimiento -> parser($id);
 		$seguimiento -> save();
-		
 		
 		$bpos = array(Bpo::find($id));
         $seguimientos = Seguimiento::orderBy('id', 'DESC')
 									-> proyectoactivo()
 									-> proyectoId($id)
                                  	-> paginate();
-        $notices = array("Seguimiento Eliminado");
+        
 		
-        return view('bpo.proyectos.index', compact('bpos', 'seguimientos', 'notices'));
+		 $notices = array("Seguimiento Actualizado con ID $seguimientoId");
+		
+        
+        return \Redirect::route('bpo.proyectos.seguimientos',[$id])	-> with('notices',$notices)
+																	-> with('notices_tmp',"pruebas");
     }
 
     /**
@@ -158,8 +157,15 @@ class SeguimientosController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($idProyecto, $idSeguimiento)
     {
         //
+        Log::info('BPO - Seguimiento destroy id seguimiento : '.$idSeguimiento);
+        $seguimiento = Seguimiento::findOrFail($idSeguimiento);
+		$seguimiento -> borradoLogico();
+		$seguimiento -> save();
+		Log::info('BPO - Seguimiento destroy Finalizado id seguimiento : '.$idSeguimiento);
+		return \Redirect::route('bpo.proyectos.seguimientos',[$idProyecto])->with('seguimientos','bpos', 'notices');
+		
     }
 }

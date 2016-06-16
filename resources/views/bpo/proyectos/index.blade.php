@@ -12,18 +12,17 @@
 					<a href=" " > S E G U I M I E N T O S</a> 
 				</div>
 				<div class="panel-body">
-
-					@if( isset($notices) && !empty($notices))
+					@if(Session::has('notices'))
 					<p>
 						<div class="alert alert-warning" role="alert">
-							@foreach($notices as $notice)
+							@foreach(Session::get('notices') as $notice)
 							<p></p>
 							<strong> {{ $notice }} </strong>
 							@endforeach
 						</div>
 					</p>
+					
 					@endif
-
 					<p>
 						<a class="btn btn-info" href=" {{ route('bpo.proyectos.seguimientos.index', $bpos[0]->id) }} " role="button"> Agregar Seguimiento  </a>
 					</p>
@@ -87,7 +86,7 @@
 									<th>{{ $seguimiento -> fecha_de }}</th>
 									<th>{{ $seguimiento -> fecha_hasta}}</th>
 									<th>{{ $seguimiento -> observaciones}}</th>
-									<th> {!! Form::open([ 'route' => ['bpo.proyectos.seguimientos.update', $bpo -> id, $seguimiento -> id, 0], 'method' => 'PUT' ]) !!}
+									<th> {!! Form::open([ 'route' => ['bpo.proyectos.seguimientos.destroy', $bpo -> id, $seguimiento -> id], 'method' => 'DELETE' ]) !!}
 										<button type="submit" class="btn btn-danger" >
 											Eliminar
 										</button>
