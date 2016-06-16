@@ -12,18 +12,17 @@
 					<a href=" " > S E G U I M I E N T O S</a> 
 				</div>
 				<div class="panel-body">
-
-					@if( isset($notices) && !empty($notices))
+					@if(Session::has('notices'))
 					<p>
 						<div class="alert alert-warning" role="alert">
-							@foreach($notices as $notice)
+							@foreach(Session::get('notices') as $notice)
 							<p></p>
 							<strong> {{ $notice }} </strong>
 							@endforeach
 						</div>
 					</p>
+					
 					@endif
-
 					<p>
 						<a class="btn btn-info" href=" {{ route('bpo.proyectos.seguimientos.index', $bpos[0]->id) }} " role="button"> Agregar Seguimiento  </a>
 					</p>
@@ -55,6 +54,10 @@
 						</table>
 					</div>
 					
+					Seguimientos {{ $seguimientos ->total()}}, Total de paginas {{ $seguimientos ->lastPage()}} , Pagina actual {{ $seguimientos ->currentPage()}}
+					</p>
+					
+					{!! $seguimientos->render() !!}
 					<div id="tabla_seguimientos">
 						<table class="table table-striped table-hover">
 						@if ( count($seguimientos) > 0)
@@ -68,6 +71,8 @@
 								<th>FECHA DE</th>
 								<th>FECHA HASTA</th>
 								<th>OBSERVACIONES</th>
+								<th>OPCIONES</th>
+								
 							</tr>
 						@endif
 						</thead>
@@ -81,6 +86,13 @@
 									<th>{{ $seguimiento -> fecha_de }}</th>
 									<th>{{ $seguimiento -> fecha_hasta}}</th>
 									<th>{{ $seguimiento -> observaciones}}</th>
+									<th> {!! Form::open([ 'route' => ['bpo.proyectos.seguimientos.destroy', $bpo -> id, $seguimiento -> id], 'method' => 'DELETE' ]) !!}
+										<button type="submit" class="btn btn-danger" >
+											Eliminar
+										</button>
+										<a href="{{ route('bpo.proyectos.seguimientos.edit', [$bpo -> id, $seguimiento -> id]) }}" class="btn btn-info" >Editar</a>
+										{!! Form::close() !!} 
+									</th>
 								
 								</tr>
 							@empty
@@ -89,6 +101,10 @@
 						 </tbody>
 						</table>
 					</div>
+					Seguimientos {{ $seguimientos ->total()}}, Total de paginas {{ $seguimientos ->lastPage()}} , Pagina actual {{ $seguimientos ->currentPage()}}
+					</p>
+					
+					{!! $seguimientos->render() !!}
 				</div>
 			</div>
 		</div>

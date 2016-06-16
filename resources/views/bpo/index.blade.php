@@ -34,7 +34,12 @@
 					<p>
 						<a class="btn btn-info" href=" {{ route('bpo.proyectos.create') }} " role="button"> Nuevo  </a>
 					</p>
+					
 					<div id="tabla">
+						Proyectos {{ $bpos ->total()}}, Total de paginas {{ $bpos ->lastPage()}} , Pagina actual {{ $bpos ->currentPage()}}
+					</p>
+					
+					{!! $bpos -> render() !!}
 						<table class="table table-striped table-hover">
 						<thead class="">
 							<tr>
@@ -69,6 +74,10 @@
 							@endforelse
 						 </tbody>
 						</table>
+						Proyectos {{ $bpos ->total()}}, Total de paginas {{ $bpos ->lastPage()}} , Pagina actual {{ $bpos ->currentPage()}}
+					</p>
+					
+					{!! $bpos -> render() !!}
 				</div>
 				</div>
 			</div>

@@ -3,21 +3,21 @@
 	<div class="col-lg-3">
 		{!! Form::label('avance', 'Porcentaje de avance real') !!}
 		{!! Form::text('avance_real', null,
-		['class' 		=> 'maskMoney_ form-control'
+		['class' 		=> 'form-control'
 		,'placeholder'	=> 'Porcentaje real'])
 		!!}
 	</div>
 	<div class="col-lg-3">
 		{!! Form::label('', 'Porcentaje de avance planeado') !!}
 		{!! Form::text('avance_planeado', null,
-		['class' 		=> 'maskMoney_ form-control'
+		['class' 		=> 'form-control'
 		,'placeholder'	=> 'Porcentaje Planeado'])
 		!!}
 	</div>
 	<div class="col-lg-3">
 		{!! Form::label('', 'Desviación del proyecto') !!}
 		{!! Form::text('desviacion', null,
-		['class' 		=> 'maskMoney_ form-control'
+		['class' 		=> 'form-control'
 		,'placeholder'	=> 'Porcentaje de desvición'])
 		!!}
 	</div>
