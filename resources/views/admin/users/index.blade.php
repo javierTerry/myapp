@@ -9,19 +9,8 @@
 					Empleado
 				</div>
 				<div class="panel-body">
-
-					@if( isset($notices))
-					<p>
-
-						<div class="alert alert-warning" role="alert">
-							@foreach($notices as $notice)
-							<p></p>
-							<strong> {{ $notice }} </strong>
-							@endforeach
-						</div>
-
-					</p>
-					@endif
+					@include('errors.parcial.campos_error')
+					@include('errors.parcial.campos_notices')
 					{!! Form::model(Request::only(['name','email']), [ 'route' => ['admin.users.index'], 'method' => 'GET', 'class'=>'navbar-form navbar-left pull-right', 'role'=>'search' ]) !!}
 					<div class="form-group">
 						{!! Form::text( 'name', null, ['class' => 'form-control', 'placeholder' => 'Nombre, apellidos' ]) !!}
@@ -33,7 +22,7 @@
 
 					{!! Form::close() !!}
 					<p>
-						<a class="btn btn-info" href=" {{ route('admin.users.create') }} " role="button"> Nuevo Empleado </a>
+						<a class="btn btn-success" href=" {{ route('admin.users.create') }} " role="button"> Nuevo Empleado </a>
 					</p>
 
 					Empleado registrados {{ $users ->total()}}, Total de paginas {{ $users ->lastPage()}} , Pagina actual {{ $users ->currentPage()}}

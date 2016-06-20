@@ -6,21 +6,31 @@ use App\Http\Requests\CrearAreaRequest;
 
 use Log;
 use Illuminate\Http\Request;
-use Illuminate\Http\Redirect;
 use App\Model\Area;
 
 class AreasController extends Controller {
 
 	/**
+	 * Create a new controller instance.
+	 *
+	 * @return void
+	 */
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
+	
+	/**
 	 * Display a listing of the resource.
 	 *
-	 * @return Response
+	 * @return View admin.areas.index
 	 */
 	public function index(Request $request)
 	{
 		$areas = Area::descripcion($request->get('desc'))
 								->clave($request->get('clave'))
 								->paginate();
+								
 		return view('admin.areas.index', compact('areas'));
 		
 	}
@@ -49,7 +59,8 @@ class AreasController extends Controller {
 		$clave = $request->get('clave_area');
 		$notices = array("Registro creado, clave : $clave");
 		$areas = Area::paginate();
-		return view('admin.areas.index', compact('areas', 'notices'));
+		
+		return \Redirect::route('admin.areas.index') -> with('notices',$notices);
 	}
 
 	/**
@@ -91,9 +102,8 @@ class AreasController extends Controller {
 		Log::info("Fill  exito");
 		$area->save();
 		Log::info("Save exito");
-		$areas = Area::paginate();
 		$notices = array("Actualizacion Exitosa");
-		return view('admin.areas.index', compact('areas', 'notices'));
+		return \Redirect::route('admin.areas.index') -> with('notices',$notices);
 	}
 
 	/**
@@ -108,7 +118,7 @@ class AreasController extends Controller {
 		$area->delete();
 		$areas = Area::paginate();
 		$notices = array("Registro Eliminado");
-		return view('admin.areas.index', compact('areas','notices'));
+		return \Redirect::route('admin.areas.index') -> with('notices',$notices);
 	}
 
 }

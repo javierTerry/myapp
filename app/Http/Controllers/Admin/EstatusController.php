@@ -10,6 +10,16 @@ use Log;
 use App\Model\Estatus;
 
 class EstatusController extends Controller {
+	
+	/**
+	 * Create a new controller instance.
+	 *
+	 * @return void
+	 */
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
 
 	/**
 	 * Display a listing of the resource.
@@ -45,14 +55,12 @@ class EstatusController extends Controller {
 	public function store(CrearEstatusRequest $request)
 	{
 		Log::info('Estatus store');
-		//dd($request->all());
 		$estatus = new Estatus($request->all());
 		$estatus->save();
 		Log::info('Esatus store save');
 		$clave = $request->get('clave_estatus');
 		$notices = array("Registro creado, clave : $clave");
-		$estatus = Estatus::paginate();
-		return view('admin.estatus.index', compact('estatus', 'notices'));
+		return \Redirect::route('admin.estatus.index') -> with ('notices',$notices);
 	}
 
 	/**
@@ -97,7 +105,7 @@ class EstatusController extends Controller {
 		Log::info("Save exito");
 		$estatus = Estatus::paginate();
 		$notices = array("Actualizacion Exitosa");
-		return view('admin.estatus.index', compact('estatus', 'notices'));
+		return \Redirect::route('admin.estatus.index') -> with ('notices',$notices);
 	}
 
 	/**
@@ -114,7 +122,7 @@ class EstatusController extends Controller {
 		$Rol->delete();
 		$estatus = Estatus::paginate();
 		$notices = array("Registro Eliminado");
-		return view('admin.estatus.index', compact('estatus','notices'));
+		return \Redirect::route('admin.estatus.index') -> with ('notices',$notices);
 	}
 
 }

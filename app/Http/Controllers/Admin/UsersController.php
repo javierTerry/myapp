@@ -23,6 +23,7 @@ class UsersController extends Controller {
 	{
 		$this->middleware('auth');
 	}
+	
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -58,6 +59,7 @@ class UsersController extends Controller {
 	 */
 	public function store(CrearUserRequest $request)
 	{
+		
 		$apellido = explode(" ", $request->get('apellidos'));
 		$nombre = explode(" ", $request->get('name'));
 		$email = strtolower($nombre[0].".".$apellido[0])."@masnegocio.com";
@@ -74,9 +76,8 @@ class UsersController extends Controller {
 		$usuario->fecha_cambio = $dateCmb;
 		$usuario->save();
 		
-		$users = User::paginate();
-		$notices = array('Usuario creado',"  Email: $email ","Agregado en ActiveDirectory", "Nomina Agregada", "Password: T3mp0r41");
-		return view('admin.users.index', compact('users','notices'));
+		$notices = array('Usuario creado',"  Email: $email ","Agregado en ActiveDirectory", "Nomina Agregada", "Password: T3mp0r41");	 
+		return \Redirect::route('admin.users.index') -> with ('notices',$notices);
 	}
 
 	/**
@@ -114,6 +115,7 @@ class UsersController extends Controller {
 	 */
 	public function update($id, CrearUserRequest $request)
 	{
+		
 		Log::info('Usuario actualizar id: '.$id);
 		$dateIng = \Carbon\Carbon::parse($request->get('fecha_ing'));
 		$dateBaja = \Carbon\Carbon::parse($request->get('fecha_baja'));
@@ -133,8 +135,10 @@ class UsersController extends Controller {
 		$user->fecha_cambio = $dateCmb;
 		$user->save();
 		Log::info("Save exito");
-		$users = User::paginate();
-		return view('admin.users.index', compact('users'))->with('notices',array("Usuario Actualizado"));
+		
+		$notices = array("Usuario Actualizado");
+		return \Redirect::route('admin.users.index') -> with ('notices',$notices);
+		//return view('admin.users.index', compact('users'))->with('notices',);
 	}
 
 	/**
@@ -151,7 +155,8 @@ class UsersController extends Controller {
 		$users = User::paginate();
 		
 		$notices = array('Usuario eliminado con',"  Email: $email ","Eliminado del activeDirectory", "Nomina Eliminada");
-		return view('admin.users.index', compact('users','notices'));
+		return \Redirect::route('admin.users.index') -> with ('notices',$notices);
+		
 	}
 
 }
