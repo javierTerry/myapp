@@ -19,7 +19,7 @@ class Area extends Model {
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['clave_area', 'desc_area'];
+	protected $fillable = ['clave_area', 'desc_area' ,'id'];
 	
 	public function scopeDescripcion($query, $descripcion)
 	{

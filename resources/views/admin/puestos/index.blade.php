@@ -8,16 +8,8 @@
 				<div class="panel-heading">Puestos</div>
 
 				<div class="panel-body">
-					@if( isset($notices))
-					<p>
-						<div class="alert alert-warning" role="alert">
-							@foreach($notices as $notice)
-							<p></p>
-							<strong> {{ $notice }} </strong>
-							@endforeach
-						</div>
-					</p>
-					@endif
+					@include('errors.parcial.campos_error')
+					@include('errors.parcial.campos_notices')
 					{!! Form::model(Request::only(['desc','clave']), [ 'route' => ['admin.puestos.index'], 'method' => 'GET', 'class'=>'navbar-form navbar-left pull-right', 'role'=>'search' ]) !!}				
 						<div class="form-group">
 							{!! Form::text( 'desc', null, ['class' => 'form-control', 'placeholder' => 'Descripcion' ]) !!}

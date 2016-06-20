@@ -9,6 +9,16 @@ use Log;
 use App\Model\Rol;
 
 class RolesController extends Controller {
+	
+	/**
+	 * Create a new controller instance.
+	 *
+	 * @return void
+	 */
+	public function __construct()
+	{
+		//$this->middleware('auth');
+	}
 
 	/**
 	 * Display a listing of the resource.
@@ -48,9 +58,9 @@ class RolesController extends Controller {
 		$Rol->save();
 		Log::info('Rol store save');
 		$clave = $request->get('clave_rol');
-		$notices = array("Registro creado, clave : $clave");
-		$roles = Rol::paginate();
-		return view('admin.roles.index', compact('roles', 'notices'));
+		
+	 	$notices = array("Registro creado, clave : $clave");
+		return \Redirect::route('admin.roles.index') -> with ('notices',$notices);
 	}
 
 	/**
@@ -83,8 +93,9 @@ class RolesController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id, CrearRolRequest $request)
+	public function update($id, Request $request)
 	{
+		
 		Log::info('Rol actualizar id: '.$id);
 		$rol = Rol::findOrFail($id);
 		Log::info(print_r($request->all(),TRUE));
@@ -92,9 +103,9 @@ class RolesController extends Controller {
 		Log::info("Fill  exito");
 		$rol->save();
 		Log::info("Save exito");
-		$roles = Rol::paginate();
+		
 		$notices = array("Actualizacion Exitosa");
-		return view('admin.roles.index', compact('roles','notices'));
+		return \Redirect::route('admin.roles.index') -> with ('notices',$notices);
 	}
 
 	/**
@@ -106,10 +117,10 @@ class RolesController extends Controller {
 	public function destroy($id)
 	{
 		$rol = Rol::find($id);
-		$rol->delete();
+		$rol -> delete();
 		$roles = Rol::paginate();
 		$notices = array("Registro Eliminado");
-		return view('admin.roles.index', compact('roles','notices'));
+		return \Redirect::route('admin.roles.index') -> with ('notices',$notices);
 	}
 
 }

@@ -19,7 +19,7 @@ class Puesto extends Model {
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['clave_puesto', 'desc_puesto'];
+	protected $fillable = ['is', 'clave_puesto', 'desc_puesto'];
 
 	public function scopeDescripcion($query, $descripcion)
 	{

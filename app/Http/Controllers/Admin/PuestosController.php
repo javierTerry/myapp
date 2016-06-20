@@ -9,6 +9,16 @@ use Log;
 use App\Model\Puesto;
 
 class PuestosController extends Controller {
+	
+	/**
+	 * Create a new controller instance.
+	 *
+	 * @return void
+	 */
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
 
 	/**
 	 * Display a listing of the resource.
@@ -43,15 +53,17 @@ class PuestosController extends Controller {
 	 */
 	public function store(CrearPuestoRequest $request)
 	{
+		
 		Log::info('Puesto store');
-		//dd($request->all());
 		$puesto = new Puesto($request->all());
 		$puesto->save();
 		Log::info('Puesto store save');
 		$clave = $request->get('clave_puesto');
 		$notices = array("Registro creado, clave : $clave");
-		$puestos = Puesto::paginate();
-		return view('admin.puestos.index', compact('puestos', 'notices'));
+		
+		$notices = array("Registro creado, clave : $clave");
+		return \Redirect::route('admin.puestos.index') -> with ('notices',$notices);
+		
 	}
 
 	/**
@@ -86,6 +98,7 @@ class PuestosController extends Controller {
 	 */
 	public function update($id,CrearPuestoRequest $request)
 	{
+		
 		Log::info('Puesto actualizar id: '.$id);
 		//	Log::info(print_r(Request::all(),true));
 		$puesto = Puesto::findOrFail($id);
@@ -94,9 +107,9 @@ class PuestosController extends Controller {
 		Log::info("Fill  exito");
 		$puesto->save();
 		Log::info("Save exito");
-		$puestos = Puesto::paginate();
+		
 		$notices = array("Actualizacion Exitosa");
-		return view('admin.puestos.index', compact('puestos', 'notices'));
+		return \Redirect::route('admin.puestos.index') -> with ('notices',$notices);
 	}
 
 	/**
@@ -111,7 +124,7 @@ class PuestosController extends Controller {
 		$puesto->delete();
 		$puestos = Puesto::paginate();
 		$notices = array("Registro Eliminado");
-		return view('admin.puestos.index', compact('puestos', 'notices'));
+		return \Redirect::route('admin.puestos.index') -> with ('notices',$notices);
 	}
 
 }
