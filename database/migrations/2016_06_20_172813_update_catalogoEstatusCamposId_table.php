@@ -17,8 +17,8 @@ class UpdateCatalogoEstatusCamposIdTable extends Migration
             
             $table->increments('id');
 			$table->timestamps();
-			$table -> renameColumn('`clave_status', 'desc_status');
-			$table -> renameColumn('`costo_compra', 'costo_proyecto');
+			$table -> renameColumn('`clave_status', 'clave_estatus');
+			$table -> renameColumn('`desc_status', 'desc_estatus');
 			
         });
     }
