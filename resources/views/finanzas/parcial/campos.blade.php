@@ -15,8 +15,8 @@
 <div class="form-group">
 	{!! Form::label('grossmar', 'GROSSMAR') !!}
 	{!! Form::text('grossmar', null,
-	['class' 		=> 'maskMoney_'
-	,'placeholder'	=> 'Ingresa grossmar'])
+	['class' 		=> 'form-control'
+	,'placeholder'	=> 'Ingresa la cantidad (sin %)'])
 	!!}
 </div>
 
@@ -24,21 +24,21 @@
 	{!! Form::label('ebitda', 'EBITDA') !!}
 	{!! Form::text('ebitda', null,
 	['class' 		=> 'form-control'
-	,'placeholder'	=> 'Ingresa la cantidad (si %)'])
+	,'placeholder'	=> 'Ingresa la cantidad (sin %)'])
 	!!}
 </div>
 <div class="form-group">
 	{!! Form::label('grossideal', 'GROSSIDEAL') !!}
 	{!! Form::text('grossideal', null,
 	['class' 		=> 'form-control'
-	,'placeholder'	=> 'Ingresa la cantidad (si %)'])
+	,'placeholder'	=> 'Ingresa la cantidad (sin %)'])
 	!!}
 </div>
 <div class="form-group">
 	{!! Form::label('ebitdaideal', 'EBITDAIDEAL') !!}
 	{!! Form::text('ebitdaideal', null,
 	['class' 		=> 'form-control'
-	,'placeholder'	=> 'Ingresa la cantidad (si %)'])
+	,'placeholder'	=> 'Ingresa la cantidad (sin %)'])
 	!!}
 	
 	{!! Form::label('fecha_ing', 'FECHA') !!}
