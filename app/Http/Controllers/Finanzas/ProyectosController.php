@@ -38,7 +38,7 @@ class ProyectosController extends Controller {
 	 */
 	public function create()
 	{
-		return view('finanzas.crear');//, compact('roles','areas','puestos'));
+		return view('finanzas.crear');
 	}
 
 	/**
@@ -58,12 +58,10 @@ class ProyectosController extends Controller {
 		$proyecto -> ebitda		= $request->get('ebitda');
 		$proyecto -> grossideal	= $request->get('grossideal');
 		$proyecto -> ebitdaideal= $request->get('ebitdaideal');
-		
 		$proyecto -> save();
 	
-		$proyectos = Finanzas::paginate();
-		$notices = array('Proyecto creado', "Nomina Agregada");
-		return view('finanzas.index', compact('notices', 'proyectos'));
+		$notices = array('Proyecto creado');		
+		return \Redirect::route('fnz.proy.index') -> with ('notices',$notices);
 	}
 
 	/**
@@ -107,6 +105,7 @@ class ProyectosController extends Controller {
 		Log::info("Save exito");
 		$proyectos = Finanzas::paginate();
 		return view('finanzas.index', compact('proyectos'))->with('notices',array("Proyecto Actualizado"));
+		return \Redirect::route('fnz.proy.index') -> with ('notices',$notices);
 	}
 
 	/**
@@ -120,7 +119,9 @@ class ProyectosController extends Controller {
 		$proyecto = Finanzas::find($id);
 		$proyecto->delete();
 		$proyectos = Finanzas::paginate();
-		return view('finanzas.index', compact('proyectos'))->with('notices',array("Proyecto eliminado"));
+		
+		$notices = array("Proyecto eliminado");
+		return \Redirect::route('fnz.proy.index') -> with ('notices',$notices);
 	}
 
 }
