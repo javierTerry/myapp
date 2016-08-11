@@ -13,9 +13,6 @@
 
 Route::get('/', 'WelcomeController@index');
 
-Route::get('/api/jwk/token/', 'Auth\JwtController@index');
-Route::get('/api/jwk/token/validations/', 'Auth\JwtController@getAuthenticatedToken');
-
 Route::get('home', 'HomeController@index');
 Route::get('empleado', 'EmpleadoController@index');
 Route::get('empleadoorm', 'EmpleadoController@indexOrm');
@@ -33,24 +30,50 @@ Route::group([ 'prefix' => 'fnz', 'namespace' => 'Finanzas' ], function () {
 	Route::resource('proy','ProyectosController');	 	
 });
 
+/**
+ * @prefix bpo/proyectos
+ * @prefix bpo/proyectos/{id}/seguimientos/
+ * @prefix bpo/proyectos/{id}/seguimientos/{id/}
+ */
 Route::group([ 'prefix' => 'bpo', 'namespace' => 'BPO' ], function () {
 	Route::resource('proyectos','BposController');
 	
-	Route::get('proyectos/{id}/seguimientos', 
+	Route::group(['prefix' => 'proyectos/{id}/seguimientos'], function () {
+		Route::get('/', 
 			[ 'as' => 'bpo.proyectos.seguimientos'
 			, 'uses' =>'Proyectos\SeguimientosController@index']);
-	Route::get('proyectos/{id}/seguimientos/create', 
+		Route::get('create', 
 			[ 'as' => 'bpo.proyectos.seguimientos.index'
 			, 'uses' =>'Proyectos\SeguimientosController@create']);
-	Route::post('proyectos/{id}/seguimientos/store', 
+		Route::post('store', 
 			[ 'as' => 'bpo.proyectos.seguimientos.store'
-			, 'uses' =>'Proyectos\SeguimientosController@store']);	 	
+			, 'uses' =>'Proyectos\SeguimientosController@store']);
+			
+		Route::group(['prefix' => '{seguimientoId}'], function () {
+			Route::delete('/', 
+				[ 'as' => 'bpo.proyectos.seguimientos.destroy'
+				, 'uses' =>'Proyectos\SeguimientosController@destroy']);
+			Route::put('updates/', 
+				[ 'as' => 'bpo.proyectos.seguimientos.update.form'
+				, 'uses' =>'Proyectos\SeguimientosController@update']);
+				
+			Route::get('edits', 
+				[ 'as' => 'bpo.proyectos.seguimientos.edit'
+				, 'uses' =>'Proyectos\SeguimientosController@edit']);
+		});
+	});
+	
 });
 
-Route::group([ 'prefix' => 'api', 'middleware' => 'jwkMiddle'], function () {		 
+
+Route::get('/api/jwk/token/login', 'Auth\JwtController@index');
+Route::get('/api/jwk/token/validations/', 'Auth\JwtController@getAuthenticatedToken');
+//Route::group([ 'prefix' => 'api', 'middleware' => 'jwkMiddle'], function () {
+Route::group([ 'prefix' => 'api', ], function () {		 
 	Route::group([ 'prefix' => 'dbadmins' ], function () {	 	
-		Route::post('/upload', 'HistoryBackupController@index');
-		Route::post('/upload/test', 'HistoryBackupController@store');
+		Route::post('/respaldos/uploads', 'HistoryBackupController@store');
+		Route::get('/respaldos/', 'HistoryBackupController@index');
+		
 	});
 });
 
