@@ -13,9 +13,6 @@
 
 Route::get('/', 'WelcomeController@index');
 
-Route::get('/api/jwk/token/', 'Auth\JwtController@index');
-Route::get('/api/jwk/token/validations/', 'Auth\JwtController@getAuthenticatedToken');
-
 Route::get('home', 'HomeController@index');
 Route::get('empleado', 'EmpleadoController@index');
 Route::get('empleadoorm', 'EmpleadoController@indexOrm');
@@ -68,9 +65,16 @@ Route::group([ 'prefix' => 'bpo', 'namespace' => 'BPO' ], function () {
 	
 });
 
-Route::group([ 'prefix' => 'api', 'middleware' => 'jwkMiddle'], function () {		 
-	Route::group([ 'prefix' => 'dbadmins' ], function () {	 	
-		Route::post('/upload', 'HistoryBackupController@index');
+
+Route::get('/api/jwk/token/login', 'Auth\JwtController@index');
+Route::get('/api/jwk/token/validations/', 'Auth\JwtController@getAuthenticatedToken');
+//Route::group([ 'prefix' => 'api', 'middleware' => 'jwkMiddle'], function () {
+Route::group([ 'prefix' => 'api', ], function () {		 
+	Route::group([ 'prefix' => 'dbadmins' ], function () {
+		Route::get('/respaldos/', 'HistoryBackupController@index');	 	
+		Route::post('/respaldos/uploads', 'HistoryBackupController@store');
+		
+		
 	});
 });
 

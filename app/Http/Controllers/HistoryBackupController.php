@@ -2,10 +2,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-
+use Illuminate\Http\Request;
 use Input;
 use Log;
 
+use App\Model\HistoryBackup as Hbkp;
 
 class HistoryBackupController extends Controller
 {
@@ -14,27 +15,20 @@ class HistoryBackupController extends Controller
      *
      * @return Response
      */
+     
+    /**
+	 * Create a new controller instance.
+	 *
+	 * @return void
+	 */
+	public function __construct()
+	{
+		//$this->middleware('auth');
+	}
+	
     public function index()
     {
-    	Log::info(print_r("Index",TRUE));
-        $file = Input::file("file");
-		$content =  file($file ->getRealPath());
-		$matrizResplado = array();
-		$key = "";
-		foreach ( $content as $key => $value) {
-			$value = str_replace(array("<tr><TH COLSPAN=6>"," </TH></tr>", "...................." ), "", $value);
-			$value = trim($value);
-			if (strlen($value) > 5){
-				
-				$values = explode("|", $value);	
-				if (  (int)count($values) === 1 ) {
-					$matrizKey = 	$values[0];
-					continue;
-				}
-				$matrizResplado[$matrizKey][] = $values;
-			}
-		}//fin foreach
-		Log::debug(print_r($matrizResplado,TRUE));
+    	
 		dd("exito");
     }
 
@@ -56,7 +50,50 @@ class HistoryBackupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    	try{
+    		Log::info(print_r("Start store ".dirname(__FILE__),TRUE));
+			$backups = new Hbkp();
+			$file = Input::file("file");
+			
+			$backups -> analyzeFormat($file);
+			
+			try{
+				foreach ($backups -> getMatrizRespaldos() as $key => $values) {
+					foreach ($values as $value) {
+						$backup = new Hbkp();
+						Log::info(print_r($value,TRUE));
+						$backup -> parser ($key, $value);
+						Log::info(print_r("start save ".dirname(__FILE__),TRUE));
+						$backup -> save();	
+					 	unset($backup);
+					}
+					
+				}
+			} catch (\Exception $e) {
+				Log::debug(print_r("Store => ". dirname(__FILE__),TRUE));
+			}
+			
+			
+/*			
+			$backups -> cliente = "test";
+			$backups -> host = "test";
+			$backups -> esquema = "test";
+			$backups -> tipo = "test";
+			$backups -> recurrente = "test";
+			$backups -> nombre_log = "test";
+			$backups -> estatus = "test";
+		*/	
+			//$backups -> save();
+			//dd($backups -> clave_area); 
+			
+			
+			Log::info(print_r("Finalizando storage ".__FILE__,TRUE));
+			return "exito";	
+    	} catch (\Exception $e) {
+    		Log::info(print_r("Finalizando storage Error ".$e -> getMessage()." ".__FILE__,TRUE));
+    		return "fallo";
+    	}
+        
     }
 
     /**
