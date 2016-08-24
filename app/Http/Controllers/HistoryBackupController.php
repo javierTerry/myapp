@@ -60,12 +60,12 @@ class HistoryBackupController extends Controller
 			try{
 				foreach ($backups -> getMatrizRespaldos() as $key => $values) {
 					foreach ($values as $value) {
-							
-							  Log::info(print_r($value,TRUE));
-						$backups -> parser ($key, $value);
+						$backup = new Hbkp();
+						Log::info(print_r($value,TRUE));
+						$backup -> parser ($key, $value);
 						Log::info(print_r("start save ".dirname(__FILE__),TRUE));
-						$backups -> save();	
-					 
+						$backup -> save();	
+					 	unset($backup);
 					}
 					
 				}

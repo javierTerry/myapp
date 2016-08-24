@@ -70,9 +70,10 @@ Route::get('/api/jwk/token/login', 'Auth\JwtController@index');
 Route::get('/api/jwk/token/validations/', 'Auth\JwtController@getAuthenticatedToken');
 //Route::group([ 'prefix' => 'api', 'middleware' => 'jwkMiddle'], function () {
 Route::group([ 'prefix' => 'api', ], function () {		 
-	Route::group([ 'prefix' => 'dbadmins' ], function () {	 	
+	Route::group([ 'prefix' => 'dbadmins' ], function () {
+		Route::get('/respaldos/', 'HistoryBackupController@index');	 	
 		Route::post('/respaldos/uploads', 'HistoryBackupController@store');
-		Route::get('/respaldos/', 'HistoryBackupController@index');
+		
 		
 	});
 });
