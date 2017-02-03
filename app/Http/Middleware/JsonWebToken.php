@@ -17,7 +17,7 @@ class JsonWebToken
 	 */
 	public function handle($request, Closure $next)
 	{
-		Log::debug(print_r("Iniciando handle ",TRUE));
+		Log::debug(print_r("Iniciando handle ".__FILE__,TRUE));
 	 	$jwtController = new JwtController();
 	 	
 		$tmp = $jwtController -> getAuthenticatedToken() -> getData();

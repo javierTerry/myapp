@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateCatalogoAreaCamposIdTable extends Migration
+class CreateCatalogoAreasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,9 @@ class UpdateCatalogoAreaCamposIdTable extends Migration
      */
     public function up()
     {
-        Schema::table('catalogo_areas', function (Blueprint $table) {
-            //
+        Schema::create('catalogo_areas', function (Blueprint $table) {
             $table->increments('id');
-			$table->timestamps();
+            $table->timestamps();
         });
     }
 
@@ -26,8 +25,6 @@ class UpdateCatalogoAreaCamposIdTable extends Migration
      */
     public function down()
     {
-        Schema::table('catalogo_areas', function (Blueprint $table) {
-            //
-        });
+        Schema::drop('catalogo_areas');
     }
 }

@@ -14,6 +14,8 @@ class CreateCatalogoRolTable extends Migration {
 	{
 		Schema::create('catalogo_rol', function(Blueprint $table)
 		{
+			$table->increments('id');
+			$table->timestamps();
 			$table->integer('clave_rol')->length(6);
 			$table->string('desc_rol',50);
 		

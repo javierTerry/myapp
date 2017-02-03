@@ -9,6 +9,8 @@ class VerifyCsrfToken extends BaseVerifier {
 	
 	protected $except = [
            'api/dbadmins/upload',
+           'api/dbadmins/upload/test'
+           ,'api/dbadmins/respaldos/uploads'
    ];
 
 	/**
@@ -23,10 +25,13 @@ class VerifyCsrfToken extends BaseVerifier {
 		foreach( $this-> except as $route )
         {
         	Log::debug(print_r("Route ---> ".$route,TRUE));
-            if( $request->is( $route ) ) return $next($request);
+			//Log::debug(print_r("dd ---> ".print_r($request,true),TRUE));
+			
+            if( $request-> is( $route ) ) return $next($request);
         }
 
-		return parent::handle($request, $next);
+		 return $next($request);
+		//return parent::handle($request, $next);
 	}
 
 }
