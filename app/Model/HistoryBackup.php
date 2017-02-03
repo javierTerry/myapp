@@ -36,17 +36,19 @@ class HistoryBackup extends Model
 	 * @param  
      * @return Response
 	 */
-	public function parser($client, $backupArray){
+	public function parser($client, $backupArray,$type_db,$dateFromFileName){
 		
-			Log::info(print_r("inicia parser",TRUE));
-			
-			$this -> cliente = $client;		
-			$this -> host = $backupArray[0];
-			$this -> esquema = $backupArray[1];
-			$this -> tipo = $backupArray[2];
-			$this -> recurrente = $backupArray[3];
-			$this -> nombre_log = $backupArray[4];
-			$this -> estatus = $backupArray[5];	
+		Log::info(print_r("inicia parser",TRUE));
+		
+		$this -> cliente = $client;		
+		$this -> host = $backupArray[0];
+		$this -> esquema = $backupArray[1];
+		$this -> tipo = $backupArray[2];
+		$this -> recurrente = $backupArray[3];
+		$this -> nombre_log = $backupArray[4];
+		$this -> estatus = $backupArray[5];	
+		$this -> tipo_bd = $type_db;
+		$this -> fecha = $dateFromFileName;	
 
 			
 		Log::info(print_r("Finaliza parser",TRUE));
@@ -154,5 +156,28 @@ class HistoryBackup extends Model
 	 */
 	public function getMatrizRespaldos(){
 		return $this -> matrizRespaldos;
+	}
+
+	/**
+	 * Parsed the data that get by file request
+	 * 
+	 * @author Christian Hernandez <christian.hernandez@masnegocio.com>
+     * @return String date from file name
+	 */
+	public function getDateFromFile($type,$nameFile){
+		$dateFromFileName = '19991201';
+		switch ($type) {
+			case 'oracle':
+				$dateFromFileName = str_replace(".txt", "", array_reverse(explode('_', $nameFile))[0]);
+				break;
+			case 'uploads':
+				$dateFromFileName = str_replace(".txt", "", array_reverse(explode('_', $nameFile))[0]);
+				break;
+			
+			default:
+				Log::info(print_r("No existe caso para ".$type,TRUE));
+				break;
+		}
+		return $dateFromFileName ;
 	}
 }

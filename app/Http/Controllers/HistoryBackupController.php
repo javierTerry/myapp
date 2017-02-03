@@ -55,17 +55,22 @@ class HistoryBackupController extends Controller
 			$backups = new Hbkp();
 			$file = null;
             $file = Input::file("file");
-            $type = array_reverse(explode('/',$request->url()))[0];
-            $backups -> analyzeFormat($file, $type);
-            Log::debug(print_r($type,TRUE));
 
+            
+            $type_db = array_reverse(explode('/',$request->url()))[0];
+            $backups -> analyzeFormat($file, $type_db);
+            Log::debug(print_r($type_db,TRUE));
+            Log::debug(print_r($file->getClientOriginalName(),TRUE));
+            $dateFromFileName = $backups -> getDateFromFile($type_db, $file->getClientOriginalName());
+            Log::debug(print_r("--------------------------------------------------------",TRUE));
+            Log::debug(print_r($dateFromFileName,TRUE)); 
 			try{
 				foreach ($backups -> getMatrizRespaldos() as $nameCliet => $values) {
 					
-                    Log::info(print_r($values,TRUE));
+                    Log::debug(print_r($values,TRUE));
                     foreach ($values as $key => $value) {
                         $backup = new Hbkp();
-						$backup -> parser ($nameCliet, $value);
+						$backup -> parser ($nameCliet, $value, $type_db,$dateFromFileName);
 						Log::info(print_r("start save ".dirname(__FILE__),TRUE));
 						$backup -> save();	
 					 	unset($backup);

@@ -15,7 +15,6 @@ class CreateBpoTable extends Migration {
 		Schema::create('bpo', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->timestamps();
 			$table->string("PROYECTO", 255);
 			$table->date("FECHAINI");
 			$table->date("FECHAFIN");
@@ -26,6 +25,7 @@ class CreateBpoTable extends Migration {
 			$table->integer("PRECIOVENTA");
 			$table->string("PROVEEDOR", 255);
 			$table->integer("AVANCE");
+			$table->timestamps();
 		});
 	}
 

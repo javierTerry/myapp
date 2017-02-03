@@ -14,7 +14,7 @@ class CreateHistoryBackupTable extends Migration
 	{
 		Schema::create('history_backups', function(Blueprint $table)
 		{
-			$table -> increments('id');
+			$table->increments('id');
 			$table -> string('cliente');
 			$table -> string('host');
 			$table -> string('esquema');
@@ -22,6 +22,9 @@ class CreateHistoryBackupTable extends Migration
 			$table -> string('recurrente');
 			$table -> string('nombre_log');
 			$table -> string('estatus');
+			$table -> date('fecha');
+			$table -> string('tipo_bd');
+			$table->timestamps();
 			
 		});
 	}
