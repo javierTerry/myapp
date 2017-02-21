@@ -51,27 +51,23 @@ class HistoryBackupController extends Controller
     public function store(Request $request)
     {
     	try{
+            $i =0;
     		Log::info(print_r("Start store ".dirname(__FILE__),TRUE));
 			$backups = new Hbkp();
 			$file = null;
             $file = Input::file("file");
-
             
             $type_db = array_reverse(explode('/',$request->url()))[0];
             $backups -> analyzeFormat($file, $type_db);
-            Log::debug(print_r($type_db,TRUE));
-            Log::debug(print_r($file->getClientOriginalName(),TRUE));
+            Log::info(print_r($type_db,TRUE));
+            Log::info(print_r($file->getClientOriginalName(),TRUE));
             $dateFromFileName = $backups -> getDateFromFile($type_db, $file->getClientOriginalName());
-            Log::debug(print_r("--------------------------------------------------------",TRUE));
-            Log::debug(print_r($dateFromFileName,TRUE)); 
 			try{
 				foreach ($backups -> getMatrizRespaldos() as $nameCliet => $values) {
-					
-                    Log::debug(print_r($values,TRUE));
                     foreach ($values as $key => $value) {
                         $backup = new Hbkp();
 						$backup -> parser ($nameCliet, $value, $type_db,$dateFromFileName);
-						Log::info(print_r("start save ".dirname(__FILE__),TRUE));
+						Log::info(print_r("start save ".$i++." ".dirname(__FILE__),TRUE));
 						$backup -> save();	
 					 	unset($backup);
 					}
@@ -85,7 +81,7 @@ class HistoryBackupController extends Controller
 			return "exito";	
     	} catch (\Exception $e) {
     		Log::info(print_r("Finalizando storage Error ".$e -> getMessage()." ".__FILE__,TRUE));
-    		return "fallo";
+    		return "Fallo ".$e -> getMessage() ;
     	}
         
     }

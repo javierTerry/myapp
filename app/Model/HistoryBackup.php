@@ -6,6 +6,13 @@ use Log;
 
 class HistoryBackup extends Model
 {
+	/**
+	 * The database table used by the model.
+	 *
+	 * @var string
+	 */
+	protected $MSG_100 = "No existe caso para parsear 1" ;
+
     /**
 	 * The database table used by the model.
 	 *
@@ -72,22 +79,26 @@ class HistoryBackup extends Model
 		
 		if ($filesize < 5 ) 
 			throw new \Exception("El tamaño del archivo es muy pequeño favor de validar");
-		
-		switch ($type) {
-			case 'oracle':
-				$this -> matrizOracle($content);
-				break;
-			case 'uploads':
-				$this -> matrizDB($content);
-				break;
-			
-			default:
-				Log::info(print_r("No existe caso para parsear",TRUE));
-				break;
+		try{
+			switch ($type) {
+				case 'oracle':
+					$this -> matrizOracle($content);
+					break;
+				case 'oracleps':
+					$this -> matrizDB($content);
+					break;
+				
+				default:
+					Log::info(print_r($this -> MSG_100,TRUE));
+					throw new \Exception($this -> MSG_100);
+					break;
+			}
+		} catch (\Exception $e) {
+			$msg = $e -> getMessage();
+			Log::info(print_r($msg." ".__FILE__,TRUE));
+            throw new \Exception($msg);
 		}
 		
-		
-		Log::debug(print_r($this -> matrizRespaldos,TRUE));
 		Log::info(print_r("Finalize analyzeFormat",TRUE));
 		
 	}
@@ -126,23 +137,29 @@ class HistoryBackup extends Model
      * @param  $content 
 	 */
 	protected function matrizDB($content){
+		Log::info(print_r("Start matrizDB",TRUE));
+
 		$matrizResplado = array();
+		$matrizKey = array();
 		foreach ( $content as $key => $value) {
-			$value = str_replace(array("<tr><TH COLSPAN=6>"," </TH></tr>", "...................." ), "", $value);
-			
 			$value = trim($value);
-			if (strlen($value) > 5){
-				
-				$values = explode("|", $value);	
-				if (  (int)count($values) === 1 ) {
-					$matrizKey = 	$values[0];
-					continue;
-				}
-				$matrizResplado[$matrizKey][] = $values;
-			}
+			$verificador = substr_count($value,"|");
+			Log::debug(print_r("verificador 7 = ".$verificador,TRUE));	
+
+			$value = trim($value);
+			if (strlen($value) === 7)
+				throw new \Exception("El formato no coincide con la estructura");
+
+			$values = explode("|", $value);	
+			$matrizKey = $values[0];
+			unset($values[0]);
+			unset($values[3]);
+			$matrizResplado[$matrizKey][] = array_values($values);
+
+			
 		}//fin foreach
 		$this -> matrizRespaldos = $matrizResplado;
-		Log::info(print_r($this -> matrizRespaldos,TRUE));
+		Log::debug(print_r($this -> matrizRespaldos,TRUE));
 		Log::info(print_r("end matrizDB",TRUE));
 
 	}//matrizDB

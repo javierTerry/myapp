@@ -71,17 +71,21 @@ Route::get('/api/jwk/token/validations/', 'Auth\JwtController@getAuthenticatedTo
 //Route::group([ 'prefix' => 'api', 'middleware' => 'jwkMiddle'], function () {
 Route::group([ 'prefix' => 'api', ], function () {		 
 	Route::group([ 'prefix' => 'dbadmins' ], function () {
-		Route::get('/respaldos/', 'HistoryBackupController@index');	 	
-		#Route::post('', 'HistoryBackupController@store');
+		Route::get('/oracleps/ping', function () { return "ping exitoso";});
+		Route::post('/oracleps',	 	
+			[ 'as' => 'dbadmins.oracleps.store'
+			, 'uses' =>'HistoryBackupController@store']);
 		
+
 		Route::get('oracle/ping', function () { return "ping exitoso";});
 		Route::post('oracle', 
 			[ 'as' => 'dbadmins.oracle.store'
 			, 'uses' =>'HistoryBackupController@store']);
-		Route::post('respaldos/uploads', 
-			[ 'as' => 'dbadmins.respaldos'
+
+		Route::get('sqlserver/ping', function () { return "ping exitoso";});
+		Route::post('sqlserver', 
+			[ 'as' => 'dbadmins.oracle.store'
 			, 'uses' =>'HistoryBackupController@store']);
-		
 			
 	});
 });
