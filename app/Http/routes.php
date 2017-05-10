@@ -1,4 +1,4 @@
-<?php
+	<?php
 
 /*
 |--------------------------------------------------------------------------
@@ -84,7 +84,7 @@ Route::group([ 'prefix' => 'api', ], function () {
 
 		Route::get('sqlserver/ping', function () { return "ping exitoso";});
 		Route::post('sqlserver', 
-			[ 'as' => 'dbadmins.oracle.store'
+			[ 'as' => 'dbadmins.sqlserver.store'
 			, 'uses' =>'HistoryBackupController@store']);
 			
 	});

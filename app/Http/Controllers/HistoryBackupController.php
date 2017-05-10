@@ -61,6 +61,7 @@ class HistoryBackupController extends Controller
             $backups -> analyzeFormat($file, $type_db);
             Log::info(print_r($type_db,TRUE));
             Log::info(print_r($file->getClientOriginalName(),TRUE));
+            die();
             $dateFromFileName = $backups -> getDateFromFile($type_db, $file->getClientOriginalName());
 			try{
 				foreach ($backups -> getMatrizRespaldos() as $nameCliet => $values) {

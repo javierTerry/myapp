@@ -87,6 +87,9 @@ class HistoryBackup extends Model
 				case 'oracleps':
 					$this -> matrizDB($content);
 					break;
+				case 'sqlserver':
+					$this -> matrizSqlserver($content);
+					break;
 				
 				default:
 					Log::info(print_r($this -> MSG_100,TRUE));
@@ -164,6 +167,69 @@ class HistoryBackup extends Model
 
 	}//matrizDB
 
+	/**
+	 * Parsed the data that get by file request
+	 * 
+	 * @author Christian Hernandez <javierv31@gmail.com>
+     * @param  $content 
+	 */
+	protected function matrizSqlserver($content){
+		Log::info(print_r("Start matrizSqlserver",TRUE));
+		$matrizResplado = array();
+		#Log::debug(print_r($content,TRUE));
+		$ignoreLineZero = false;
+		$matrizResplado = array();
+		$matrizKey = "";
+		foreach ( $content as $key => $value) {
+			if ( !$ignoreLineZero ){
+				$ignoreLineZero = true;	
+				continue;
+			}
+				
+			if ( (string)strripos($value,"instancia:") === "0"){
+				$lineInstance = explode(":", $value);
+				#Log::debug(print_r($lineInstance ,TRUE));
+
+				$host =  $lineInstance[1];
+			}
+			$values 	= explode(",", $value);
+			$matrizKey 	= $values[0];
+			$values[0] = $host;
+
+			
+
+
+			Log::debug(print_r($value,true));
+			#die();
+			$this -> host = $backupArray[0];
+		$this -> esquema = $backupArray[1];
+		$this -> tipo = $backupArray[2];
+		$this -> recurrente = $backupArray[3];
+		$this -> nombre_log = $backupArray[4];
+		$this -> estatus = $backupArray[5];	
+		$this -> tipo_bd = $type_db;
+		$this -> fecha = $dateFromFileName;	
+			#Instancia
+			/*
+			$value = trim($value);
+			$verificador = substr_count($value,"|");
+			Log::debug(print_r($verificador,TRUE));
+			if( 6 != $verificador)
+				continue;
+			$values = explode("|", $value);	
+			$matrizKey = $values[6];
+			unset($values[6]);
+			Log::debug(print_r($values,TRUE));
+			*/
+			$matrizResplado[$matrizKey][] = $values;
+			
+		}//fin foreach
+
+		
+		$this -> matrizRespaldos = $matrizResplado;
+		Log::debug(print_r($this -> matrizRespaldos,TRUE));
+		Log::info(print_r("end matrizSqlserver",TRUE));
+	}//matrizOracle
 
 	/**
 	 * Parsed the data that get by file request
