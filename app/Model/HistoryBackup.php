@@ -175,60 +175,52 @@ class HistoryBackup extends Model
 	 */
 	protected function matrizSqlserver($content){
 		Log::info(print_r("Start matrizSqlserver",TRUE));
-		$matrizResplado = array();
 		#Log::debug(print_r($content,TRUE));
 		$ignoreLineZero = false;
-		$matrizResplado = array();
-		$matrizKey = "";
+		$matrizRespaldo = array();
+		$cliente = "";
+		$host = "" ;
+		$values = array();
 		foreach ( $content as $key => $value) {
+			
 			if ( !$ignoreLineZero ){
 				$ignoreLineZero = true;	
 				continue;
 			}
 				
+			Log::debug(print_r(strlen($value),true));
+
+			if ( strlen($value) < 30)
+				continue;
+			
 			if ( (string)strripos($value,"instancia:") === "0"){
 				$lineInstance = explode(":", $value);
-				#Log::debug(print_r($lineInstance ,TRUE));
 
-				$host =  $lineInstance[1];
-			}
-			$values 	= explode(",", $value);
-			$matrizKey 	= $values[0];
-			$values[0] = $host;
-
-			
-
-
-			Log::debug(print_r($value,true));
-			#die();
-			$this -> host = $backupArray[0];
-		$this -> esquema = $backupArray[1];
-		$this -> tipo = $backupArray[2];
-		$this -> recurrente = $backupArray[3];
-		$this -> nombre_log = $backupArray[4];
-		$this -> estatus = $backupArray[5];	
-		$this -> tipo_bd = $type_db;
-		$this -> fecha = $dateFromFileName;	
-			#Instancia
-			/*
-			$value = trim($value);
-			$verificador = substr_count($value,"|");
-			Log::debug(print_r($verificador,TRUE));
-			if( 6 != $verificador)
+				$host =  "";
+				$lineInstancevalue = explode("_", $lineInstance[1]);
+				$host 	= $lineInstancevalue[1];
+				$cliente = trim($lineInstance[2]);
 				continue;
-			$values = explode("|", $value);	
-			$matrizKey = $values[6];
-			unset($values[6]);
-			Log::debug(print_r($values,TRUE));
-			*/
-			$matrizResplado[$matrizKey][] = $values;
-			
-		}//fin foreach
+			}
+
+			Log::debug(print_r(explode(",",$value),true));
+
+			$tmp = explode(",",$value);
+			$values[0]= $host;
+			$values[1] =  $tmp[0];
+			$values[2] = $tmp[1];
+			$values[3] = $tmp[7];
+			$values[4] = trim($tmp[9]);
+			$values[5] = $tmp[10];
+
+			$matrizRespaldo[$cliente][] = $values;
+			}//fin foreach
 
 		
-		$this -> matrizRespaldos = $matrizResplado;
-		Log::debug(print_r($this -> matrizRespaldos,TRUE));
+		$this -> matrizRespaldos = $matrizRespaldo;
+		log::debug(print_r($this -> matrizRespaldos,TRUE));
 		Log::info(print_r("end matrizSqlserver",TRUE));
+		
 	}//matrizOracle
 
 	/**
@@ -256,9 +248,12 @@ class HistoryBackup extends Model
 			case 'uploads':
 				$dateFromFileName = str_replace(".txt", "", array_reverse(explode('_', $nameFile))[0]);
 				break;
+			case 'sqlserver':
+				$dateFromFileName = str_replace(".csv", "", array_reverse(explode('_', $nameFile))[0]);
+				break;
 			
 			default:
-				Log::info(print_r("No existe caso para ".$type,TRUE));
+				Log::info(print_r("DateFromFile - No existe caso  para ".$type,TRUE));
 				break;
 		}
 		return $dateFromFileName ;
