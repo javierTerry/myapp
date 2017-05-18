@@ -88,6 +88,18 @@ Route::group([ 'prefix' => 'api', ], function () {
 			, 'uses' =>'HistoryBackupController@store']);
 			
 	});
+
+	Route::group([ 'prefix' => 'monitores', 'namespace' => 'Monitoreo' ], function () {
+		Route::get('porsites/ping', function () { return "ping exitoso";});
+		Route::get('porsites', 
+			[ 'as' => 'monitores.porsites.index'
+			, 'uses' =>'HistoryMonitoreoController@index']);
+		/*
+		Route::post('sqlserver', 
+			[ 'as' => 'dbadmins.sqlserver.store'
+			, 'uses' =>'HistoryBackupController@store']);
+		*/
+	});
 });
 
 
