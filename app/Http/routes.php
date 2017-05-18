@@ -89,11 +89,11 @@ Route::group([ 'prefix' => 'api', ], function () {
 			
 	});
 
-	Route::group([ 'prefix' => 'monitores', 'namespace' => 'Monitoreo' ], function () {
-		Route::get('porsites/ping', function () { return "ping exitoso";});
-		Route::get('porsites', 
-			[ 'as' => 'monitores.porsites.index'
-			, 'uses' =>'HistoryMonitoreoController@index']);
+	Route::group([ 'prefix' => 'monitores' ], function () {
+		Route::get('porsitios/ping', function () { return "ping exitoso";});
+		Route::post('porsitios', 
+			[ 'as' => 'monitores.porsitios.store'
+			, 'uses' =>'Monitoreo\HistoryMonitoreoController@store']);
 		/*
 		Route::post('sqlserver', 
 			[ 'as' => 'dbadmins.sqlserver.store'

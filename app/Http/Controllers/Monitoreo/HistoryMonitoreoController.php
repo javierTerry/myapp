@@ -48,14 +48,31 @@ class HistoryMonitoreoController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store()
     {
     	try{
             $i =0;
     		Log::info(print_r("Start store ".dirname(__FILE__),TRUE));
-			$backups = new Hbkp();
+			$file = Input::file("file");
+            $monitoreos = new ModelMonitoreo();
+            $monitoreos -> analyzeFormat($file);
+
+
+            foreach ($monitoreos -> matrizMonitores() as $sitio => $values) {
+                         
+                    foreach ($values as $key => $value) {
+                        $monitor = new ModelMonitoreo();
+                        $monitor -> parser ($sitio, $value);
+                        Log::debug(print_r("start save ".$i++." ".dirname(__FILE__),TRUE));
+                        $monitor -> save();  
+                        unset($backup);
+                    }
+                    
+                Log::info(print_r($sitio,TRUE));
+            }//fin foreach
+            /*
 			$file = null;
-            $file = Input::file("file");
+            
             
             $type_db = array_reverse(explode('/',$request->url()))[0];
             $backups -> analyzeFormat($file, $type_db);
@@ -76,7 +93,7 @@ class HistoryMonitoreoController extends Controller
 			} catch (\Exception $e) {
 				Log::debug(print_r("Store => ". $e -> getMessage()." ". dirname(__FILE__),TRUE));
 			}
-			
+			*/
 			Log::info(print_r("Finalizando storage ".__FILE__,TRUE));
 			return "exito";	
     	} catch (\Exception $e) {

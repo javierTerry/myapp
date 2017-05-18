@@ -11,7 +11,7 @@ class HistoryBackup extends Model
 	 *
 	 * @var string
 	 */
-	protected $MSG_100 = "No existe caso para parsear 1" ;
+	protected $MSG_100 = "No existe caso para parsear " ;
 
     /**
 	 * The database table used by the model.
@@ -63,7 +63,7 @@ class HistoryBackup extends Model
 	}
 	
 	/**
-	 * Parsed the data that get by file request by oracle area
+	 * Parsed the data that get by file request by several areas
 	 * 
 	 * @author Christian Hernandez <javierv31@gmail.com>
 	 * @var file

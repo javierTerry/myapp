@@ -10,7 +10,7 @@ class Monitoreo extends Model{
 	 *
 	 * @var string
 	 */
-	protected $table = 'history_monitoreo';
+	protected $table = 'history_monitores';
 
 	/**
 	 * The attributes that are mass assignable.
@@ -19,71 +19,143 @@ class Monitoreo extends Model{
 	 */
 	protected $fillable = ['id','site', 'cliente', 'total', 'so', 'bd'
 						, 'app_server', 'url', 'query','otro'];
-	
-	/**
-	 * Parsed form fields to Object monitoreo .
-	 *
-	 * @author Christian Hernandez <christian.hernandez@masnegocio.com>
-	 * 
-	 * @param array Request
-	 * 
-	 */
-	 
-	public function parser($value = '')
-	{
-		Log::info('monitoreo Parser');
-		Log::debug(print_r($this -> attributes, true));
-		$this -> fecha_inicial_planeada = \Carbon\Carbon::parse($this -> fecha_inicial_planeada);
-		$this -> fecha_final_planeada	= \Carbon\Carbon::parse($this -> fecha_final_planeada);
-		$this -> fecha_inicial_real = \Carbon\Carbon::parse($this -> fecha_inicial_real);
-		$this -> fecha_final_real	 = \Carbon\Carbon::parse($this -> fecha_final_real);
-		Log::info('monitoreo Parser Finalizado');
-	}
+
 
 	/**
-	 * Parsed form fields to Object monitoreo .
+	 * Variable que contiene la matriz sitios vs monitores
 	 *
-	 * @author Christian Hernandez <christian.hernandez@masnegocio.com>
-	 * 
-	 * @param array Request
-	 * 
+	 * @var array
 	 */
 	 
-	public function borradoLogico()
-	{
-		Log::info('Asigando Borrado logico');
-		$this -> status = 0;
-		Log::info('Valor Asignado');
-	}
+	private $matrizMonitores = array();	
 
 	/**
-	 * Serch proyects by strig, clause like  .
-	 *
+	 * Analiza que el archvio tenga un tamaño autorizado
+	 * 
 	 * @author Christian Hernandez <christian.hernandez@masnegocio.com>
-	 * 
-	 * @param array Request
-	 * 
+	 * @var file
+	 * @param  Request  file
+     * @return void
 	 */
-	public function scopeProyecto($query, $nombre)
-	{
-		if ( trim($nombre) != "")
-		{
-			$query->where('proyecto', 'like', "%$nombre%");	
+	public function analyzeFormat($file){
+		Log::info(print_r("Start analyzeFormat",TRUE));
+		$content =  file($file ->getRealPath());
+		$filesize = filesize($file);
+		Log::debug(print_r($filesize,TRUE));
+		
+		if ($filesize < 50 ) 
+			throw new \Exception("El tamaño del archivo es muy pequeño favor de validar");
+		try{
+
+			$this -> matriz($content);
+
+
+			
+		} catch (\Exception $e) {
+			$msg = $e -> getMessage();
+			Log::info(print_r($msg." ".__FILE__,TRUE));
+            throw new \Exception($msg);
 		}
 		
+		Log::info(print_r("Finalize analyzeFormat",TRUE));
+		
 	}
-	
+
+
 	/**
-	 * Serch proyects by strig, clause like  .
-	 *
+	 * Extrae os datos y los deja en un array asocciativo
+	 * 
 	 * @author Christian Hernandez <christian.hernandez@masnegocio.com>
-	 * 
-	 * @param array Request
-	 * 
+	 * @param  Strings  $contenido
+     * @return void
 	 */
-	public function scopeProyectoActivo($query)
-	{
-		$query->where('status', '=', 1);	
-	
+	protected function matriz($contenido){
+		Log::info(print_r("Inicia Matriz",TRUE));
+		$iniciador = true;
+		$ignoreCabeceras = true;
+		$count = 0;
+		$sitio = "";
+		
+		
+		foreach ($contenido as $key => $value){
+
+			if ( $iniciador ){
+				$tmp = explode(",", $value);	
+				$sitio = trim($tmp[0]);
+				$iniciador = false;
+				$ignoreCabeceras = true;
+				Log::debug(print_r(	"sitio ".$sitio,true));
+				continue;
+			}
+
+			if ($ignoreCabeceras){
+				Log::debug(print_r(	"Ignorando cabeceras",true));
+				$ignoreCabeceras = false;
+				continue;
+			}
+			
+			$data = explode(",", $value);
+
+			if (empty($data[0])){
+				
+				$count += 1;
+				if ($count === 2){
+					Log::debug(print_r(	"Ignorando Linea final del iniciador",true));
+					$iniciador = true;
+					$ignoreCabeceras = true;
+					$count = 0;
+					continue;
+				}
+				Log::debug(print_r(	"Ignorando totales",true));
+				continue;	
+			}
+
+			$matrizMonitores[$sitio][] = $data;			
+		}
+
+		$this -> matrizMonitores = $matrizMonitores;
+
+		Log::info(print_r("Termina Matriz",TRUE));
+
+	} // fin matriz
+
+
+	/**
+	 * Parsed the data that get by request
+	 * 
+	 * @author Christian Hernandez <christian.hernandez@masnegociocom>
+	 * @var array
+	 * @param  
+     * @return Response
+	 */
+	public function parser($sitio, $matriz){
+		
+		Log::info(print_r("inicia parser",TRUE));
+		
+		$this -> site = $sitio;		
+		$this -> cliente = $matriz[0];
+		$this -> total = $matriz[1];
+		$this -> so = $matriz[2];
+		$this -> bd = $matriz[3];
+		$this -> app_server = $matriz[4];
+		$this -> url = $matriz[5];	
+		$this -> query = $matriz[6];
+		$this -> otros = $matriz[7];	
+
+			
+		Log::info(print_r("Finaliza parser",TRUE));
+
+	}
+
+
+
+	/**
+	 * get
+	 * 
+	 * @author Christian Hernandez <christian.hernandez@masnegocio.com>
+     * @return Array matrizRespaldos
+	 */
+	public function matrizMonitores(){
+		return $this -> matrizMonitores;
 	}
 }
