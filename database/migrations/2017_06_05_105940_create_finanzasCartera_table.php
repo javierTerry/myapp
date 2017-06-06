@@ -29,6 +29,8 @@ class CreateFinanzasCarteraTable extends Migration
             $table->string('tipo_moneda_doc',5);
             $table->string('referencia', 20);
             $table->integer('referencia_factura');
+            $table->integer('cartera_id');
+            $table->integer('cartera_periodo');
         });
     }
 

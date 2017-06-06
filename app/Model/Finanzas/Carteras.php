@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Log;
 use File;
 use Exception;
-
+use \Carbon\Carbon;
 class Carteras extends Model
 {
 	/**
@@ -26,7 +26,7 @@ class Carteras extends Model
 	/**
 	 * Variable that content data information 
 	 *
-	 * @var string
+	 * @var strin
 	 */
 	 
 	private $contenido = array();
@@ -83,6 +83,8 @@ class Carteras extends Model
 	 */
 	public function guardar(){
 		Log::info(print_r("inicia guardar",TRUE));
+		//Log::info();
+		$carterasPeriodo = Carbon::now()-> year."".Carbon::now()-> month;
 		foreach ($this -> contenido as $key => $value) {
 			try{
 				if (!$key)
@@ -94,7 +96,7 @@ class Carteras extends Model
 				$carteras -> id_cliente = $tmp[0];
 				$carteras -> cliente = $tmp[1];
 				$carteras -> antiguedad = $tmp[2];		
-				$carteras -> fecha = \Carbon\Carbon::parse($tmp[3]);
+				$carteras -> fecha = Carbon::parse($tmp[3]);
 				$carteras -> importe_moneda_local = $tmp[4];
 				$carteras -> tipo_moneda = $tmp[5];
 				$carteras -> texto = $tmp[6];
@@ -102,14 +104,13 @@ class Carteras extends Model
 				$carteras -> tipo_moneda_doc = $tmp[8];
 				$carteras -> referencia = $tmp[9];
 				$carteras -> referencia_factura = $tmp[10];
+				$carteras -> carter_paeriodo = $carterasPeriodo;
 				$carteras -> save();
 	
 			} catch (Exception $e){
 				Log::info(print_r($e -> getMessage(),TRUE));
 			}
 		}
-		
-		
 		Log::info(print_r("Finaliza guardar",TRUE));
 
 	}

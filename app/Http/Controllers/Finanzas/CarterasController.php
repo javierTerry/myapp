@@ -31,7 +31,8 @@ class CarterasController extends Controller {
 	{
 		//$carteras = new object ;//Finanzas::orderBy('created_at', 'DESC') -> paginate();
 		$urlupload = 'fnz.carteras.store';
-		return view('finanzas.cartera.index', compact('carteras', 'urlupload'));
+		$carteras  = Carteras::orderBy('created_at', 'DESC') ->groupBy('cartera_periodo') -> paginate();
+		return view('finanzas.cartera.index', compact('carteras', 'urlupload', 'carteras'));
 	}
 
 	/**
@@ -57,7 +58,7 @@ class CarterasController extends Controller {
 			$carteras = new Carteras();
 			$carteras -> contenido($request);
 			$carteras -> guardar();
-			$notices = array("Carga exitosa");
+			$notices = array("Carga exitosa")	;
 			return \Redirect::route('fnz.carteras.index') -> with ('notices',$notices);
 		} catch (Exception $e) {
 			return \Redirect::route('fnz.carteras.index') -> withErrors ($e -> getMessage());	

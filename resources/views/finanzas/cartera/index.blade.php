@@ -13,21 +13,35 @@
 					
 				</div>
 				
-					<table class="table table-striped">
-						<tr>
-							<th>ID</th>
-							<th>FECHA</th>
-							<th>PLATAFORMA</th>
-							<th>GROSSMAR</th>
-							<th>EBITDA</th>
-							<th>GROSSIDEAL</th>
-							<th>EBITDAIDEAL</th>
-							<th>INGRESOS</th>
-							<th>OPCIONES</th>
-						</tr>
-					</table>
-					</p>
-					
+				<table class="table table-striped">
+					<tr>
+						<th>ID</th>
+						<th>FECHA</th>
+						<th>OPCIONES</th>
+					</tr>
+					<tbody>
+							@forelse($carteras as $value)
+								<tr>
+									<th>{{ $value -> cartera_periodo}}</th>
+									<th>{{ $value -> created_at}}</th>
+									
+									<th> {!! Form::open([ 'route' => ['bpo.proyectos.destroy', $value], 'method' => 'DELETE' ]) !!}
+										<button type="submit" class="btn btn-danger" >
+											Eliminar
+										</button>
+										<a href="{{ route('bpo.proyectos.edit', $value -> id) }}" class="btn btn-info" >Editar</a>
+										<a href="{{ route('bpo.proyectos.seguimientos', $value -> id) }}" class="btn btn-primary" >Seguimiento</a> 
+										{!! Form::close() !!} 
+									</th>
+								
+								</tr>
+							@empty
+							    <p>No hay carteras cargadas</p>
+							@endforelse
+						 </tbody>
+				</table>
+				</p>
+				
 				
 			</div>
 		</div>
