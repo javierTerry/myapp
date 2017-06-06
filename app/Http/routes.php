@@ -26,8 +26,17 @@ Route::group([ 'prefix' => 'admin', 'namespace' => 'Admin' ], function () {
 	Route::resource('estatus','EstatusController');
 });
 
+
 Route::group([ 'prefix' => 'fnz', 'namespace' => 'Finanzas' ], function () {
 	Route::resource('proy','ProyectosController');	 	
+
+	Route::get('carteras/ping', function () { return "ping exitoso";});
+	Route::get('carteras', 
+		[ 'as' => 'fnz.carteras.index'
+		, 'uses' =>'CarterasController@index']);
+	Route::post('carteras', 
+		[ 'as' => 'fnz.carteras.store'
+		, 'uses' =>'CarterasController@store']);
 });
 
 /**
