@@ -22,15 +22,12 @@
 					<tbody>
 							@forelse($carteras as $value)
 								<tr>
-									<th>{{ $value -> cartera_periodo}}</th>
+									<th>{{ $value -> finanzas_cartera}}</th>
 									<th>{{ $value -> created_at}}</th>
 									
-									<th> {!! Form::open([ 'route' => ['bpo.proyectos.destroy', $value], 'method' => 'DELETE' ]) !!}
-										<button type="submit" class="btn btn-danger" >
-											Eliminar
-										</button>
-										<a href="{{ route('bpo.proyectos.edit', $value -> id) }}" class="btn btn-info" >Editar</a>
-										<a href="{{ route('bpo.proyectos.seguimientos', $value -> id) }}" class="btn btn-primary" >Seguimiento</a> 
+									<th> {!! Form::open([ 'route' => ['fnz.carteras.destroy', $value -> cartera_periodo], 'method' => 'DELETE' ]) !!}
+										<button type="submit" class="btn btn-danger" > Eliminar </button>
+										<a href="{{ route('fnz.carteras.show', $value -> finanzas_cartera ) }}" class="btn btn-primary" >Seguimiento</a> 
 										{!! Form::close() !!} 
 									</th>
 								

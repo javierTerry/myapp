@@ -22,15 +22,14 @@ class CreateFinanzasCarteraTable extends Migration
             $table->string('cliente');
             $table->date('fecha');
             $table->string('antiguedad',50);
-            $table->float('importe_moneda_local',9,4);
+            $table->float('importe_moneda_local',11,2);
             $table->string('tipo_moneda',5);
             $table->string('texto',100);
-            $table->float('importe_moneda_doc',9,4);
+            $table->float('importe_moneda_doc',11,2);
             $table->string('tipo_moneda_doc',5);
             $table->string('referencia', 20);
             $table->integer('referencia_factura');
-            $table->integer('cartera_id');
-            $table->integer('cartera_periodo');
+            $table->string('finanzas_cartera',10);
         });
     }
 

@@ -30,21 +30,5 @@ class CarterasRequest extends Request {
 		
 	}
 	
-	
-	/**
-	 * Clean Request.
-	 *
-	 * @return array of type App\Http\Requests\Request
-	 */
-	public function sanitize()
-	{
-		 $input = $this->all();
-
-
-        $input['ingresos'] = str_replace(",", "", $input['ingresos']);
-		$input['grossmar'] = str_replace(",", "", $input['grossmar']);
-
-        $this->replace($input);
-	}
 
 }

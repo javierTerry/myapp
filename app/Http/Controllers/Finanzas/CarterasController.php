@@ -31,7 +31,7 @@ class CarterasController extends Controller {
 	{
 		//$carteras = new object ;//Finanzas::orderBy('created_at', 'DESC') -> paginate();
 		$urlupload = 'fnz.carteras.store';
-		$carteras  = Carteras::orderBy('created_at', 'DESC') ->groupBy('cartera_periodo') -> paginate();
+		$carteras  = Carteras::orderBy('created_at', 'DESC') ->groupBy('finanzas_cartera') -> paginate();
 		return view('finanzas.cartera.index', compact('carteras', 'urlupload', 'carteras'));
 	}
 
@@ -63,25 +63,6 @@ class CarterasController extends Controller {
 		} catch (Exception $e) {
 			return \Redirect::route('fnz.carteras.index') -> withErrors ($e -> getMessage());	
 		}
-		
-		
-		 
-		
-		/*
-
-		$proyecto = new Finanzas();
-		
-		$proyecto -> plataforma = $request->get('plataforma');
-		$proyecto -> ingresos 	= $request->get('ingresos');
-		$proyecto -> fecha_ing 	= \Carbon\Carbon::parse($request->get('fecha_ing'));
-		$proyecto -> grossmar	= $request->get('grossmar');
-		$proyecto -> ebitda		= $request->get('ebitda');
-		$proyecto -> grossideal	= $request->get('grossideal');
-		$proyecto -> ebitdaideal= $request->get('ebitdaideal');
-		$proyecto -> save();
-	*/
-		//$errors = array("File ");
-		
 													 
 	}
 
@@ -91,9 +72,14 @@ class CarterasController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($cartera_periodo)
 	{
-		//
+		Log::info('Carteras show id: '.$cartera_periodo);
+		$carteras = new Carteras();
+		$aglomerado = $carteras -> procesa($cartera_periodo);
+		Log::info('Finaliza Carteras show id: '.$cartera_periodo);
+		return view('finanzas.cartera.aglomerado', compact('aglomerado'));
+		
 	}
 
 	/**
@@ -115,14 +101,14 @@ class CarterasController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id, CrearProyectoRequest $request)
+	public function update()
 	{
 		Log::info('Proyecto actualizar id: '.$id);
-		$finanzas = Finanzas::findOrFail($id);
+		//$finanzas = Finanzas::findOrFail($id);
 		Log::info(print_r($request->all(),TRUE));
-		$finanzas->fill($request->all());
+		//$finanzas->fill($request->all());
 		Log::info("Fill  exito");
-		$finanzas->save();
+		//$finanzas->save();
 		Log::info("Save exito");
 		$Carteras = Finanzas::paginate();
 		return view('finanzas.index', compact('Carteras'))->with('notices',array("Proyecto Actualizado"));
@@ -137,12 +123,14 @@ class CarterasController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		$proyecto = Finanzas::find($id);
-		$proyecto->delete();
-		$Carteras = Finanzas::paginate();
-		
-		$notices = array("Proyecto eliminado");
-		return \Redirect::route('fnz.proy.index') -> with ('notices',$notices);
+		Log::info('Carteras destroy id: '.$id);
+		$carteras = Carteras::where('cartera_periodo', '=', $id);
+		//$carteras = Carteras::where('id', '=', '1');
+		//dd($carteras);
+		$carteras -> delete();
+		$notices = array("Proyecto eliminado - $id");
+		Log::info('Finaliza Carteras destroy id: '.$id);
+		return \Redirect::route('fnz.carteras.index') -> with ('notices',$notices);
 	}
 
 }

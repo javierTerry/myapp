@@ -28,7 +28,8 @@ Route::group([ 'prefix' => 'admin', 'namespace' => 'Admin' ], function () {
 
 
 Route::group([ 'prefix' => 'fnz', 'namespace' => 'Finanzas' ], function () {
-	Route::resource('proy','ProyectosController');	 	
+	Route::resource('proy','ProyectosController');
+	Route::resource('carteras','CarterasController');	 	
 
 	Route::get('carteras/ping', function () { return "ping exitoso";});
 	Route::get('carteras', 
