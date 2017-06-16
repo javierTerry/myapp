@@ -7,6 +7,7 @@ use Log;
 use File;
 use Exception;
 use \Carbon\Carbon;
+use DB;
 class Carteras extends Model
 {
 	/**
@@ -139,6 +140,11 @@ class Carteras extends Model
 	public function procesa($cartera_periodo){
 		$this -> cartera_periodo = $cartera_periodo;
 		Log::info("Inicia procesa cartera_periodo = ".$cartera_periodo);
+
+		$rows = DB::select('select * from view_finanzas_cartera;');
+		Log::debug(print_r($rows,true));
+		die();
+
 		$startTime = Carbon::now();
 		
 		log::info($startTime);
