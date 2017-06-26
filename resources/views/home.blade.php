@@ -33,8 +33,9 @@
 							@if( Auth::user()->clave_area === "102" )
 								<td><a href= "{{ route('fnz.proy.index') }}" >{!! Html::image('img/mnu_fiananzas.jpg', 'Finanzas', array('class' => 'img-circle','width'=>'250px')) !!}</a></td>	
 							@endif
-							
+							hola
 							@if( Auth::user()->clave_area === "101" )
+								Hola 2
 								<td><a href= "{{ route('bpo.proyectos.index') }}" >{!! Html::image('img/mnu_bpo-1.png', 'Finanzas', array('class' => 'img-circle','width'=>'250px')) !!}</a></td>	
 							@endif
 						</tr>

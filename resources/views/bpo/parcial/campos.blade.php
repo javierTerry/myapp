@@ -28,7 +28,8 @@
 			{!! Form::label('fechaini', 'Fecha inicial') !!}
 			{!! Form::text('fecha_inicial_planeada', null,
 			['class' 		=> 'date form-control'
-			,'placeholder'	=> 'Fecha Inicial'])
+			,'placeholder'	=> 'Fecha Inicial'
+			,'readonly' => 'true'])
 			!!}
 		</div>
 		<div class="col-lg-5">

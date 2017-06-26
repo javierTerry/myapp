@@ -7,7 +7,11 @@
 		<div class="col-md-12 col-md-offset-0">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					B P O - P R O Y E C T O S
+					<div class="panel-heading">
+					<a href=" " > B P O</a> -
+					<a href=" {{ URL::to('/bpo/proyectos/') }} " > P R O Y E C T O S</a> 
+					
+				</div>
 				</div>
 				<div class="panel-body">
 
@@ -46,7 +50,7 @@
 								<th>ID</th>
 								<th>PROYECTO</th>
 								<th>CLIENTE</th>
-								<th>PROVEEDOR</th>
+								<th>ESTATUS</th>
 								<th>AVANCE</th>
 								<th>OPCIONES</th>
 							</tr>

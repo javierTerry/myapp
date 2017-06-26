@@ -5,7 +5,12 @@
 	<div class="row">
 		<div class="col-md-12 col-md-offset-0">
 			<div class="panel panel-default">
-				<div class="panel-heading">Actualizar Seguimiento ID '{{ $seguimientos -> id	}}'</div>
+				<div class="panel-heading">Actualizar Seguimiento ID '{{ $seguimientos -> id	}}'
+					<div class="panel-heading">
+						<a href=" " > B P O</a> -
+						<a href=" {{ URL::to('/bpo/proyectos/') }} " > P R O Y E C T O S</a> 	
+					</div>
+				</div>
 
 				<div class="panel-body">
 					@include('errors.parcial.campos_error')
