@@ -3,11 +3,12 @@
 use Illuminate\Database\Eloquent\Model;
 //use Illuminate\Database\Eloquent\Model\Finanzas;
 use Illuminate\Http\Request;
-use Log;
+
 use File;
 use Exception;
 use \Carbon\Carbon;
 use DB;
+use Log;
 class Carteras extends Model
 {
 	/**
@@ -115,7 +116,6 @@ class Carteras extends Model
 				$carteras -> referencia = $tmp[9];
 				$carteras -> referencia_factura = $tmp[10];
 				$carteras -> finanzas_cartera = $carterasPeriodo;
-				
 				$carteras -> save();
 				
 				
@@ -138,25 +138,20 @@ class Carteras extends Model
      * @return void
 	 */
 	public function procesa($cartera_periodo){
+		$startTime = Carbon::now();
+		log::info($startTime);
 		$this -> cartera_periodo = $cartera_periodo;
 		Log::info("Inicia procesa cartera_periodo = ".$cartera_periodo);
 
 		$rows = DB::select('select * from view_finanzas_cartera;');
-		Log::debug(print_r($rows,true));
-		die();
-
-		$startTime = Carbon::now();
+		$clientes = $this -> agruparPorCliente($rows);
+		$seguimientos = $this -> calcularPeriodo($clientes);
+		#die();
 		
-		log::info($startTime);
-		$datas = $this::where('finanzas_cartera', '=', trim($cartera_periodo)) ->get();
-		
-		$clientes = $this -> agruparPorCliente($datas);
-		$this -> calcularPeriodo($clientes);
 		$finishTime = Carbon::now();
 		log::info($finishTime->diffForHumans($startTime));
-		return 	$this -> calcularPeriodo($clientes);
 		Log::info(print_r("Finaliza procesa cartera_periodo = ".$cartera_periodo,TRUE));
-
+		return $seguimientos;
 	}
 
 
@@ -170,13 +165,16 @@ class Carteras extends Model
      * @var   
      * @return void
 	 */
-	protected function agruparPorCliente( $datas ) {
+	protected function agruparPorCliente( $rows ) {
 		Log::info("Inicia agruparPorCliente cartera_periodo = ".$this -> cartera_periodo);
 		$clientes = array();
-		foreach ($datas as $value) {
-			$clientes[$value -> id_cliente][] = json_decode($value);
+		foreach ($rows as $value) {
+			$clientes[$value -> id_cliente][] = $value;
+			#$clientes = array_combine((array)$value, (array)$value);
 		}
 		Log::info(print_r("Finaliza agruparPorCliente cartera_periodo = ".$this -> cartera_periodo,TRUE));
+		
+		Log::debug(print_r($clientes,true));
 		return $clientes;
 	}
 
@@ -193,39 +191,38 @@ class Carteras extends Model
 	 */
 	protected function calcularPeriodo( $clientes ) {
 		Log::info("Inicia agruparPorCliente cartera_periodo = ".$this -> cartera_periodo);
-		
 		$clientePeriodo = array();
 		foreach ($clientes as $key => $cliente) {
-			$periodos = array( 'cliente' => "",'corriente' => "", 'atreinta' => "", 'asesenta' => "", 'anoventa' => "") ;
-			
-			Log::info($key);
+			$periodos = array( 'alcorriente' => "0.0", 'atreinta' => "0.0", 'asesenta' => "0.0", 'anoventa' => "0.0") ;
+			$tmp = array();
 			foreach ($cliente as $key1 => $value) {
-				# code...
-				#Log::info(print_r($value,true));
-				$periodos['cliente'] =  $value -> cliente;
-				$origen = Carbon::parse($value -> fecha);
-				$valor = $origen -> diffInDays(Carbon::now());
-				switch($valor) {
-				    case ($valor < 31):
-				    	$periodos['coriente'][] = $value;
+				$tmp =  $value;
+				
+				switch($value -> cartera_vencida) {
+				    case ($value -> cartera_vencida === 'alcorriente'):
+				    	Log::debug("corriente 1");
+				    	$periodos['alcorriente'] = $value -> alcorriente  ;
 				    break;
-				    case (($valor >= 31) && ($valor <= 60)):
-				    	$periodos['atreinta'][] = $value;
+				    case ($value -> cartera_vencida === 'atreinta'):
+				    	Log::debug("atreinta 1");
+				    	$periodos['atreinta'] = $value -> atreinta;
 				    break;
-				    case (($valor >= 61) && ($valor <= 90)):
-				    	$periodos['asesenta'][] = $value;
+				    case ($value -> cartera_vencida === 'asesenta'):
+				    	Log::debug("asesenta 1");
+				    	$periodos['asesenta'] = $value -> asesenta;
 				    break;
-				    case ($valor > 91):
-				    	$periodos['anoventa'][] = $value; 
+				    case ( $value -> cartera_vencida === 'anoventa' ):
+				    	Log::debug("anoventa 1"); 
+				    	$periodos['anoventa'] = $value -> anoventa;
 				    break;
 
 				}
-				$clientePeriodo[$key] = $periodos;
-			}
-		}
-		Log::debug(print_r($clientePeriodo,true));
-		return $clientePeriodo;
-		Log::info(print_r("Finaliza agruparPorCliente cartera_periodo = ".$this -> cartera_periodo,TRUE));
-	}
 
+			}
+			
+			$tmp -> cartera_vencida = $periodos ;	
+			$clientePeriodo[$key] = $tmp;
+		}
+		return $clientePeriodo; 
+	}
 }

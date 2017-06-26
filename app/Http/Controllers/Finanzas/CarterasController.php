@@ -29,7 +29,6 @@ class CarterasController extends Controller {
 	 */
 	public function index()
 	{
-		//$carteras = new object ;//Finanzas::orderBy('created_at', 'DESC') -> paginate();
 		$urlupload = 'fnz.carteras.store';
 		$carteras  = Carteras::orderBy('created_at', 'DESC') ->groupBy('finanzas_cartera') -> paginate();
 		return view('finanzas.cartera.index', compact('carteras', 'urlupload', 'carteras'));
@@ -76,9 +75,12 @@ class CarterasController extends Controller {
 	{
 		Log::info('Carteras show id: '.$cartera_periodo);
 		$carteras = new Carteras();
-		$aglomerado = $carteras -> procesa($cartera_periodo);
+		$seguimientos = $carteras -> procesa($cartera_periodo)
+									;
+
+		Log::debug(print_r($seguimientos,TRUE));
 		Log::info('Finaliza Carteras show id: '.$cartera_periodo);
-		return view('finanzas.cartera.aglomerado', compact('aglomerado'));
+		return view('finanzas.cartera.seguimiento', compact('seguimientos'));
 		
 	}
 
