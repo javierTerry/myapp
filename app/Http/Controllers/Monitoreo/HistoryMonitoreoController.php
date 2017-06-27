@@ -70,30 +70,7 @@ class HistoryMonitoreoController extends Controller
                     
                 Log::info(print_r($sitio,TRUE));
             }//fin foreach
-            /*
-			$file = null;
-            
-            
-            $type_db = array_reverse(explode('/',$request->url()))[0];
-            $backups -> analyzeFormat($file, $type_db);
-            Log::info(print_r($type_db,TRUE));
-            Log::info(print_r($file->getClientOriginalName(),TRUE));
-            $dateFromFileName = $backups -> getDateFromFile($type_db, $file->getClientOriginalName());
-			try{
-				foreach ($backups -> getMatrizRespaldos() as $nameCliet => $values) {
-                    foreach ($values as $key => $value) {
-                        $backup = new Hbkp();
-						$backup -> parser ($nameCliet, $value, $type_db,$dateFromFileName);
-						Log::info(print_r("start save ".$i++." ".dirname(__FILE__),TRUE));
-						$backup -> save();	
-					 	unset($backup);
-					}
-					
-				}
-			} catch (\Exception $e) {
-				Log::debug(print_r("Store => ". $e -> getMessage()." ". dirname(__FILE__),TRUE));
-			}
-			*/
+           
 			Log::info(print_r("Finalizando storage ".__FILE__,TRUE));
 			return "exito";	
     	} catch (\Exception $e) {

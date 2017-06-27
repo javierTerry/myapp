@@ -81,6 +81,11 @@ Route::get('/api/jwk/token/validations/', 'Auth\JwtController@getAuthenticatedTo
 //Route::group([ 'prefix' => 'api', 'middleware' => 'jwkMiddle'], function () {
 Route::group([ 'prefix' => 'api', ], function () {		 
 	Route::group([ 'prefix' => 'dbadmins' ], function () {
+		Route::group([ 'prefix' => 'respaldos' ], function () {
+			Route::get('ping', function () { return "ping exitoso";});
+			Route::resource('uploads','HistoryBackupController');
+		});
+
 		Route::get('/oracleps/ping', function () { return "ping exitoso";});
 		Route::post('/oracleps',	 	
 			[ 'as' => 'dbadmins.oracleps.store'
@@ -92,6 +97,7 @@ Route::group([ 'prefix' => 'api', ], function () {
 			[ 'as' => 'dbadmins.oracle.store'
 			, 'uses' =>'HistoryBackupController@store']);
 
+		Route::get('sqlserver/', function () { return "ping exitoso";});
 		Route::get('sqlserver/ping', function () { return "ping exitoso";});
 		Route::post('sqlserver', 
 			[ 'as' => 'dbadmins.sqlserver.store'
@@ -104,11 +110,6 @@ Route::group([ 'prefix' => 'api', ], function () {
 		Route::post('porsitios', 
 			[ 'as' => 'monitores.porsitios.store'
 			, 'uses' =>'Monitoreo\HistoryMonitoreoController@store']);
-		/*
-		Route::post('sqlserver', 
-			[ 'as' => 'dbadmins.sqlserver.store'
-			, 'uses' =>'HistoryBackupController@store']);
-		*/
 	});
 });
 

@@ -3,6 +3,7 @@
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Log;
+use Input;
 
 class HistoryBackup extends Model
 {
@@ -12,6 +13,13 @@ class HistoryBackup extends Model
 	 * @var string
 	 */
 	protected $MSG_100 = "No existe caso para parsear " ;
+
+	/**
+	 * Variable usada para almacenar el contenedio del archivo.
+	 *
+	 * @var string
+	 */
+	protected $contenido = "" ;
 
     /**
 	 * The database table used by the model.
@@ -35,6 +43,20 @@ class HistoryBackup extends Model
 	 */
 	protected $fillable = [];
 	
+	/**
+	 * Realiza un scope por tipo de BD
+	 * 
+	 * @author Christian Hernandez <christian.hernandez@masnegocio.com>
+	 * @var array
+	 * @param  
+     * @return Response
+	 */
+	 public function scopeTipoBD($query)
+    {
+        return $query->where('tipo_bd', 'sqlserver') -> groupBy('fecha');
+    }
+
+
 	/**
 	 * Parsed the data that get by request
 	 * 
@@ -61,6 +83,26 @@ class HistoryBackup extends Model
 		Log::info(print_r("Finaliza parser",TRUE));
 
 	}
+
+	/**
+	 * Parsed the data that get by request
+	 * 
+	 * @author Christian Hernandez <christian.hernandez@masnegocio.com>
+	 * @var 
+	 * @param  contenedor Contenedor de Input o Request
+     * @return file
+	 */
+	public function cargarContenido($contenedor){
+		
+		Log::info(print_r("Iniciando cargarContenido",TRUE));
+		Log::debug(print_r(count($contenedor ->file('archivo')) ,true));
+        $file = (count($contenedor ->file('archivo'))) ? $contenedor->file('archivo') : Input::file("file");
+        
+		$this -> contenido = file($file ->getRealPath());
+		Log::info(print_r("Finalizando cargarContenido",TRUE));
+		return $file;
+
+	}
 	
 	/**
 	 * Parsed the data that get by file request by several areas
@@ -72,7 +114,7 @@ class HistoryBackup extends Model
 	 */
 	public function analyzeFormat($file, $type){
 		Log::info(print_r("Start analyzeFormat",TRUE));
-		$content =  file($file ->getRealPath());
+		$content =  $this -> contenido ;
 		$key = "";
 		$filesize = filesize($file);
 		Log::debug(print_r($filesize,TRUE));
@@ -240,6 +282,7 @@ class HistoryBackup extends Model
      * @return String date from file name
 	 */
 	public function getDateFromFile($type,$nameFile){
+
 		$dateFromFileName = '19991201';
 		switch ($type) {
 			case 'oracle':

@@ -1,9 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Input;
 use Log;
 
 use App\Model\HistoryBackup as Hbkp;
@@ -29,7 +29,13 @@ class HistoryBackupController extends Controller
     public function index()
     {
     	
-		dd("exito");
+		
+        $urlupload = 'dbadmins.sqlserver.store';
+        #$carteras  = Carteras::orderBy('created_at', 'DESC') ->groupBy('finanzas_cartera') -> paginate();
+        #$backups = new Hbkp();
+        $rows = Hbkp::TipoBD() -> paginate(); 
+
+        return view('historybackup.index', compact('urlupload', 'rows' ));
     }
 
     /**
@@ -54,9 +60,9 @@ class HistoryBackupController extends Controller
             $i =0;
     		Log::info(print_r("Start store ".dirname(__FILE__),TRUE));
 			$backups = new Hbkp();
-			$file = null;
-            $file = Input::file("file");
-            
+			$file =  $backups -> cargarContenido($request);
+
+            Log::debug($request->url());
             $type_db = array_reverse(explode('/',$request->url()))[0];
             $backups -> analyzeFormat($file, $type_db);
             Log::info(print_r($type_db,TRUE));
@@ -78,7 +84,9 @@ class HistoryBackupController extends Controller
 			}
 			
 			Log::info(print_r("Finalizando storage ".__FILE__,TRUE));
-			return "exito";	
+            $notices = array("se inserto la informacion de forma correcta", "test");
+            return \Redirect::route('api.dbadmins.respaldos.uploads.index') -> with ('notices',$notices);;
+			#return "exito";	
     	} catch (\Exception $e) {
     		Log::info(print_r("Finalizando storage Error ".$e -> getMessage()." ".__FILE__,TRUE));
     		return "Fallo ".$e -> getMessage() ;
