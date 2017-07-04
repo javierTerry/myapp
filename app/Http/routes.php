@@ -79,6 +79,7 @@ Route::group([ 'prefix' => 'bpo', 'namespace' => 'BPO' ], function () {
 Route::get('/api/jwk/token/login', 'Auth\JwtController@index');
 Route::get('/api/jwk/token/validations/', 'Auth\JwtController@getAuthenticatedToken');
 //Route::group([ 'prefix' => 'api', 'middleware' => 'jwkMiddle'], function () {
+
 Route::group([ 'prefix' => 'api', ], function () {		 
 	Route::group([ 'prefix' => 'dbadmins' ], function () {
 		Route::group([ 'prefix' => 'respaldos' ], function () {
@@ -97,7 +98,6 @@ Route::group([ 'prefix' => 'api', ], function () {
 			[ 'as' => 'dbadmins.oracle.store'
 			, 'uses' =>'HistoryBackupController@store']);
 
-		Route::get('sqlserver/', function () { return "ping exitoso";});
 		Route::get('sqlserver/ping', function () { return "ping exitoso";});
 		Route::post('sqlserver', 
 			[ 'as' => 'dbadmins.sqlserver.store'
@@ -111,6 +111,21 @@ Route::group([ 'prefix' => 'api', ], function () {
 			[ 'as' => 'monitores.porsitios.store'
 			, 'uses' =>'Monitoreo\HistoryMonitoreoController@store']);
 	});
+
+
+});
+
+Route::group(['prefix' => 'kpi', 'namespace' => 'Kpi'], function () {
+	Route::group(['prefix' => 'aplicaciones'], function ( ) {
+		Route::resource("soa",'SoaController');
+		/*
+		Route::group(['prefix' => 'soa'], function () {
+			Route::get('ping', function () { return "ping exitoso";});
+
+		});
+		*/
+	});
+
 });
 
 

@@ -17,7 +17,6 @@ class CreateFinanzasCarteraTable extends Migration
         {
             $table->increments('id');
             $table->timestamps();
-
             $table->string('id_cliente');
             $table->string('cliente');
             $table->date('fecha');

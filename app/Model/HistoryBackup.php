@@ -94,8 +94,8 @@ class HistoryBackup extends Model
 	 */
 	public function cargarContenido($contenedor){
 		
-		Log::info(print_r("Iniciando cargarContenido",TRUE));
-		Log::debug(print_r(count($contenedor ->file('archivo')) ,true));
+		Log::info(print_r("Iniciando cargarContenido",TRUE))
+;		Log::debug(print_r(count($contenedor ->file('archivo')) ,true));
         $file = (count($contenedor ->file('archivo'))) ? $contenedor->file('archivo') : Input::file("file");
         
 		$this -> contenido = file($file ->getRealPath());
