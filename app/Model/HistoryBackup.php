@@ -234,8 +234,10 @@ class HistoryBackup extends Model
 
 			if ( strlen($value) < 30)
 				continue;
-			
-			if ( (string)strripos($value,"instancia:") === "0"){
+					
+			Log::debug(print_r($value,true));
+			//die();
+			if ( (string)strripos($value,"Instancia:") === "0"){
 				$lineInstance = explode(":", $value);
 
 				$host =  "";
@@ -248,12 +250,14 @@ class HistoryBackup extends Model
 			Log::debug(print_r(explode(",",$value),true));
 
 			$tmp = explode(",",$value);
+			Log::debug(print_r($tmp,true));
+
 			$values[0]= $host;
 			$values[1] =  $tmp[0];
 			$values[2] = $tmp[1];
-			$values[3] = $tmp[7];
-			$values[4] = trim($tmp[9]);
-			$values[5] = $tmp[10];
+			$values[3] = $tmp[3];
+			$values[4] = "No aplica";
+			$values[5] = trim($tmp[4]);
 
 			$matrizRespaldo[$cliente][] = $values;
 			}//fin foreach
