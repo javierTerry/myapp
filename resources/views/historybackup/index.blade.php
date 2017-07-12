@@ -9,7 +9,7 @@
 				<div class="panel-body">
 					@include('errors.parcial.campos_error')
 					@include('errors.parcial.campos_notices')
-					
+					@include('utils.upload')
 					
 				</div>
 				
