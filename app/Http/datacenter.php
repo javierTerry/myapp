@@ -26,30 +26,7 @@ Route::group([ 'prefix' => 'datacenter', 'namespace' => 'Datacenter' ], function
 			, 'uses' =>'DataCenterController@index']);
 
 
-	Route::group(['prefix' => 'proyectos/{id}/seguimientos'], function () {
-		Route::get('/', 
-			[ 'as' => 'bpo.proyectos.seguimientos'
-			, 'uses' =>'Proyectos\SeguimientosController@index']);
-		Route::get('create', 
-			[ 'as' => 'bpo.proyectos.seguimientos.index'
-			, 'uses' =>'Proyectos\SeguimientosController@create']);
-		Route::post('store', 
-			[ 'as' => 'bpo.proyectos.seguimientos.store'
-			, 'uses' =>'Proyectos\SeguimientosController@store']);
-			
-		Route::group(['prefix' => '{seguimientoId}'], function () {
-			Route::delete('/', 
-				[ 'as' => 'bpo.proyectos.seguimientos.destroy'
-				, 'uses' =>'Proyectos\SeguimientosController@destroy']);
-			Route::put('updates/', 
-				[ 'as' => 'bpo.proyectos.seguimientos.update.form'
-				, 'uses' =>'Proyectos\SeguimientosController@update']);
-				
-			Route::get('edits', 
-				[ 'as' => 'bpo.proyectos.seguimientos.edit'
-				, 'uses' =>'Proyectos\SeguimientosController@edit']);
-		});
-	});
+	
 	
 });
 
