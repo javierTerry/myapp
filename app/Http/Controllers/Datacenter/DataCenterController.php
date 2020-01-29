@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Datacenter;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
+#use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Log;
-use App\Model\Datacenter;
-use Illuminate\Http\Request;
+use App\Model\Datacenter\Datacenter;
+
 
 class DataCenterController extends Controller
 {
@@ -23,8 +23,10 @@ class DataCenterController extends Controller
         //
         Log::info('DATACENTER index ');
         $urlupload = 'fnz.carteras.store';
-        $dcs  = Datacenter::orderBy('created_at', 'DESC') ->groupBy('finanzas_cartera') -> paginate();
-        return view('infra.datacenter.index', compact('carteras', 'urlupload', 'carteras'));
+        $dcs  = Datacenter::orderBy('created_at', 'DESC') 
+            #->groupBy('finanzas_cartera') 
+            -> paginate();
+        return view('infra.datacenter.index', compact('dcs', 'urlupload', 'dcs'));
 
     }
 

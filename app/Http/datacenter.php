@@ -18,11 +18,12 @@ Route::get('/datacenter/ping', 'WelcomeController@index');
  * @prefix bpo/proyectos/{id}/seguimientos/
  * @prefix bpo/proyectos/{id}/seguimientos/{id/}
  */
-Route::group([ 'prefix' => 'datacenter', 'namespace' => 'DATACENTER' ], function () {
+
+Route::group([ 'prefix' => 'datacenter', 'namespace' => 'Datacenter' ], function () {
 	#Route::resource('proyectos','BposController');
 	Route::get('/', 
 			[ 'as' => 'dc.index'
-			, 'uses' =>'Proyectos\SeguimientosController@index']);
+			, 'uses' =>'DataCenterController@index']);
 
 
 	Route::group(['prefix' => 'proyectos/{id}/seguimientos'], function () {

@@ -20,7 +20,7 @@ class Datacenter extends Model
 	 */
 	#protected $fillable = ['id','proyecto', 'cliente', 'proveedor', 'fecha_inicial_planeada', 'fecha_final_planeada'
 	#					, 'costo_proyecto', 'costo_real', 'fecha_inicial_real','fecha_final_real','status'
-						];
+	#					];
 	
 	/**
 	 * Parsed form fields to Object DATACENTER .
