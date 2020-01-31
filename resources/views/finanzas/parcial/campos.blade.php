@@ -1,49 +1,14 @@
 <div class="form-group">
-	{!! Form::label('plataforma', 'Plataforma') !!}
-	{!! Form::text('plataforma', null,
+	{!! Form::label('name', 'NAME') !!}
+	{!! Form::text('name', null,
 	['class' 		=> 'form-control'
-	,'placeholder'	=> 'Introduce la plataforma'])
+	,'placeholder'	=> 'Ingresa el name '])
 	!!}
 </div>
 <div class="form-group">
-	{!! Form::label('ingresos', 'INGRESOS') !!}
-	{!! Form::text('ingresos', null,
-	['class' 		=> 'maskMoney_'
-	,'placeholder'	=> 'indtroduce el ingreso '])
-	!!}
-</div>
-<div class="form-group">
-	{!! Form::label('grossmar', 'GROSSMAR') !!}
-	{!! Form::text('grossmar', null,
+	{!! Form::label('descripcion', 'DESCRIPCION') !!}
+	{!! Form::text('descripcion', null,
 	['class' 		=> 'form-control'
-	,'placeholder'	=> 'Ingresa la cantidad (sin %)'])
-	!!}
-</div>
-
-<div class="form-group">
-	{!! Form::label('ebitda', 'EBITDA') !!}
-	{!! Form::text('ebitda', null,
-	['class' 		=> 'form-control'
-	,'placeholder'	=> 'Ingresa la cantidad (sin %)'])
-	!!}
-</div>
-<div class="form-group">
-	{!! Form::label('grossideal', 'GROSSIDEAL') !!}
-	{!! Form::text('grossideal', null,
-	['class' 		=> 'form-control'
-	,'placeholder'	=> 'Ingresa la cantidad (sin %)'])
-	!!}
-</div>
-<div class="form-group">
-	{!! Form::label('ebitdaideal', 'EBITDAIDEAL') !!}
-	{!! Form::text('ebitdaideal', null,
-	['class' 		=> 'form-control'
-	,'placeholder'	=> 'Ingresa la cantidad (sin %)'])
-	!!}
-	
-	{!! Form::label('fecha_ing', 'FECHA') !!}
-	{!! Form::text('fecha_ing', null,
-	['class' 		=> 'form-control'
-	,'placeholder'	=> 'Fecha'])
+	,'placeholder'	=> 'Ingrese una descripcion'])
 	!!}
 </div>

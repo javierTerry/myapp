@@ -22,7 +22,7 @@
 
 					{!! Form::close() !!}
 					<p>
-						<a class="btn btn-success" href=" {{ route('fnz.proy.create') }} " role="button"> Nuevo  </a>
+						<a class="btn btn-success" href=" {{ route('infra.dcs.create') }} " role="button"> Nuevo  </a>
 					</p>
 					DataCenters {{ $dcs ->total()}}, Total de paginas {{ $dcs ->lastPage()}} , Pagina actual {{ $dcs ->currentPage()}}
 					</p>
@@ -32,7 +32,7 @@
 						<tr>
 							<th>ID</th>
 							<th>NAME</th>
-							<th>PLATAFORMA</th>
+							<th>DESCRIPCION</th>
 							<th>No. de Fases</th>
 							
 						</tr>

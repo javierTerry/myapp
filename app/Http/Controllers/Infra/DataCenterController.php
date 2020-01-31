@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Datacenter;
+namespace App\Http\Controllers\Infra;
 
 use Illuminate\Http\Request;
 
@@ -38,6 +38,7 @@ class DataCenterController extends Controller
     public function create()
     {
         //
+        return view('infra.datacenter.crear');
     }
 
     /**
