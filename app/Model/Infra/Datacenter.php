@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Model\Datacenter;
+namespace App\Model\Infra;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,6 +11,7 @@ class Datacenter extends Model
 	 *
 	 * @var string
 	 */
+
 	protected $table = 'datacenter';
 
 	/**
@@ -18,7 +19,7 @@ class Datacenter extends Model
 	 *
 	 * @var array
 	 */
-	#protected $fillable = ['id','proyecto', 'cliente', 'proveedor', 'fecha_inicial_planeada', 'fecha_final_planeada'
+	protected $fillable = ['name', 'descripcion'];
 	#					, 'costo_proyecto', 'costo_real', 'fecha_inicial_real','fecha_final_real','status'
 	#					];
 	

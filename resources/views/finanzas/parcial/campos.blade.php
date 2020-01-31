@@ -6,8 +6,8 @@
 	!!}
 </div>
 <div class="form-group">
-	{!! Form::label('descripcion', 'DESCRIPCION') !!}
-	{!! Form::text('descripcion', null,
+	{!! Form::label('desc', 'DESCRIPCION') !!}
+	{!! Form::text('desc', null,
 	['class' 		=> 'form-control'
 	,'placeholder'	=> 'Ingrese una descripcion'])
 	!!}

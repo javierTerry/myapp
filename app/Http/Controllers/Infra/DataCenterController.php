@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use Log;
-use App\Model\Datacenter\Datacenter;
+use App\Model\Infra\Datacenter;
 
 
 class DataCenterController extends Controller
@@ -23,9 +23,9 @@ class DataCenterController extends Controller
         //
         Log::info('DATACENTER index ');
         $urlupload = 'fnz.carteras.store';
-        $dcs  = Datacenter::orderBy('created_at', 'DESC') 
-            #->groupBy('finanzas_cartera') 
+        $dcs  = Datacenter::orderBy('created_at', 'DESC')  
             -> paginate();
+
         return view('infra.datacenter.index', compact('dcs', 'urlupload', 'dcs'));
 
     }
@@ -49,7 +49,23 @@ class DataCenterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        try{
+            Log::info('Datacenter store');
+
+            $dc = new Datacenter();
+            
+            $dc -> name         = $request->get('name');
+            $dc -> descripcion  = $request->get('descripcion');
+            
+            $dc -> save();
+            
+            $notices = array("Carga exitosa");
+
+            return \Redirect::route('infra.dcs.index') -> with ('notices',$notices);
+        } catch (Exception $e) {
+            return \Redirect::route('infra.dcs.index') -> withErrors ($e -> getMessage());   
+        }
     }
 
     /**

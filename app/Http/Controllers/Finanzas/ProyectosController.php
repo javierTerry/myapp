@@ -36,6 +36,7 @@ class ProyectosController extends Controller {
 	 *
 	 * @return Response
 	 */
+	
 	public function create()
 	{
 		return view('finanzas.crear');
@@ -60,7 +61,8 @@ class ProyectosController extends Controller {
 		$proyecto -> ebitdaideal= $request->get('ebitdaideal');
 		$proyecto -> save();
 	
-		$notices = array('Proyecto creado');		
+		$notices = array('Proyecto creado');
+		
 		return \Redirect::route('fnz.proy.index') -> with ('notices',$notices);
 	}
 
