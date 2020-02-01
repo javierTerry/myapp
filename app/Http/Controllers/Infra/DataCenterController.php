@@ -55,8 +55,8 @@ class DataCenterController extends Controller
 
             $dc = new Datacenter();
             
-            $dc -> name         = $request->get('name');
-            $dc -> descripcion  = $request->get('descripcion');
+            $dc -> name  = $request->get('name');
+            $dc -> desc  = $request->get('desc');
             
             $dc -> save();
             

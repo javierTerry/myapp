@@ -19,7 +19,7 @@ class Datacenter extends Model
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['name', 'descripcion'];
+	protected $fillable = ['name', 'desc'];
 	#					, 'costo_proyecto', 'costo_real', 'fecha_inicial_real','fecha_final_real','status'
 	#					];
 	
