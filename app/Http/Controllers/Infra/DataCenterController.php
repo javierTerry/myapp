@@ -54,7 +54,7 @@ class DataCenterController extends Controller
             Log::info('Datacenter store');
 
             $dc = new Datacenter();
-            
+            #dd($request->all());
             $dc -> name  = $request->get('name');
             $dc -> desc  = $request->get('desc');
             

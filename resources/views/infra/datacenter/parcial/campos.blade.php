@@ -1,14 +1,14 @@
 <div class="form-group">
 	{!! Form::label('name', 'Nombre') !!}
-	{!! Form::text('plataforma', null,
+	{!! Form::text('name', null,
 	['class' 		=> 'form-control'
-	,'placeholder'	=> 'Introduce la plataforma'])
+	,'placeholder'	=> 'Introduce el id descriotivo de DataCenter'])
 	!!}
 </div>
 <div class="form-group">
-	{!! Form::label('descripcion', 'DESCRIPCION') !!}
-	{!! Form::text('ingresos', null,
+	{!! Form::label('desc', 'DESCRIPCION') !!}
+	{!! Form::text('desc', null,
 	['class' 		=> 'form-control'
-	,'placeholder'	=> 'indtroduce el ingreso '])
+	,'placeholder'	=> 'Introduce una descripción del DataCenter  '])
 	!!}
 </div>

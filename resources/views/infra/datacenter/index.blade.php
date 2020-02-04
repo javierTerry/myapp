@@ -40,7 +40,7 @@
 							<tr>
 								<th>{{ $dc -> id}}</th>
 								<th>{{ $dc -> name}}</th>
-								<th>{{ $dc -> plataforma}}</th>
+								<th>{{ $dc -> desc}}</th>
 								<th>{{ $dc -> plataforma}}</th>
 								
 								<th> {!! Form::open([ 'route' => ['fnz.proy.destroy', $dc], 'method' => 'DELETE' ]) !!}

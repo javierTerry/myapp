@@ -11,11 +11,7 @@
 |
 */
 
-/**
- * @prefix bpo/proyectos
- * @prefix bpo/proyectos/{id}/seguimientos/
- * @prefix bpo/proyectos/{id}/seguimientos/{id/}
- */
+
 
 Route::get('/datacenter/ping', 'WelcomeController@index');
 
