@@ -30,7 +30,7 @@
 						@forelse( $racks as $item)
 							<tr>
 								<th>{{ $item -> name}}</th>
-								<th>{{ $item -> ur}}</th>
+								<th>{{ $item -> coordenada}}</th>
 								
 								
 								<th> {!! Form::open([ 'route' => ['fnz.proy.destroy', $item], 'method' => 'DELETE' ]) !!}

@@ -35,6 +35,7 @@ class RackController extends Controller
     public function create()
     {
         //
+        return view('infra.rack.crear');
     }
 
     /**
@@ -45,7 +46,23 @@ class RackController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            Log::info('rack store');
+
+            $dc = new Rack();
+            #dd($request->all());
+            $dc -> name  = $request->get('name');
+            $dc -> ur  = $request->get('ur');
+            $dc -> coordenada  = $request->get('coordenada');
+            
+            $dc -> save();
+            
+            $notices = array("Carga exitosa");
+
+            return \Redirect::route('infra.rack.index') -> with ('notices',$notices);
+        } catch (Exception $e) {
+            return \Redirect::route('infra.rack.index') -> withErrors ($e -> getMessage());   
+        }
     }
 
     /**
