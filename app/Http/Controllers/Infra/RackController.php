@@ -34,8 +34,7 @@ class RackController extends Controller
      */
     public function create()
     {
-        //
-        return view('infra.rack.crear');
+        return view('infra.rack.crear' );
     }
 
     /**
