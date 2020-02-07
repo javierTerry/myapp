@@ -24,13 +24,14 @@
 						<tr>
 							<th>NAME</th>
 							<th>COORDENADA</th>
-							<th>EQUIPOS</th>
+							<th>NO EQUIPOS</th>
 							
 						</tr>
 						@forelse( $racks as $item)
 							<tr>
 								<th>{{ $item -> name}}</th>
-								<th>{{ $item -> coordenada}}</th>
+								<th>{{	 $item -> coordenada}}</th>
+								<th>{{	 $item -> no_equipo}}</th>
 								
 								
 								<th> {!! Form::open([ 'route' => ['fnz.proy.destroy', $item], 'method' => 'DELETE' ]) !!}

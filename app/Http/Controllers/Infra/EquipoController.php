@@ -7,12 +7,12 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use Log;
-use App\Model\Infra\Rack;
-use App\Model\Infra\Equipo;
-use App\Model\Infra\RackView;
 
-class RackController extends Controller
+use Log;
+use App\Model\Infra\Equipo;
+use App\Model\Infra\Rack;
+
+class EquipoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,17 +21,12 @@ class RackController extends Controller
      */
     public function index()
     {
-        //
-        Log::info('RACK index ');
-        $racks  = RackView::orderBy('created_at', 'DESC')  
+        Log::info('EQUIPO index ');
+        $equipos  = Equipo::orderBy('created_at', 'DESC')  
             -> paginate();
 
-
-        #dd(Equipo::all());
-
-        
-
-        return view('infra.rack.index', compact('racks') );
+            
+        return view('infra.equipo.index', compact('equipos') );
     }
 
     /**
@@ -41,7 +36,10 @@ class RackController extends Controller
      */
     public function create()
     {
-        return view('infra.rack.crear' );
+        //
+        $racks  = Rack::all();
+        #dd($racks);
+        return view('infra.equipo.crear', compact('racks'));
     }
 
     /**
@@ -53,21 +51,22 @@ class RackController extends Controller
     public function store(Request $request)
     {
         try{
-            Log::info('rack store');
+            Log::info('Equipo store');
 
-            $dc = new Rack();
+            $item = new Equipo();
             #dd($request->all());
-            $dc -> name  = $request->get('name');
-            $dc -> ur  = $request->get('ur');
-            $dc -> coordenada  = $request->get('coordenada');
-            
-            $dc -> save();
+            $item -> hostname  = $request->get('hostname');
+            $item -> ip  = $request->get('ip');
+            $item -> serial  = $request->get('serial');
+            $item -> responsable  = $request->get('responsable');
+            $item -> id_rack = $request->get('id_rack');
+            $item -> save();
             
             $notices = array("Carga exitosa");
 
-            return \Redirect::route('infra.rack.index') -> with ('notices',$notices);
+            return \Redirect::route('infra.equipo.index') -> with ('notices',$notices);
         } catch (Exception $e) {
-            return \Redirect::route('infra.rack.index') -> withErrors ($e -> getMessage());   
+            return \Redirect::route('infra.equipo.index') -> withErrors ($e -> getMessage());   
         }
     }
 
