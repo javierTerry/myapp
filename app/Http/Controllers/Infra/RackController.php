@@ -82,7 +82,10 @@ class RackController extends Controller
      */
     public function edit($id)
     {
-        //
+        Log::debug("Rack Controller edit ".$id);
+        $rack = Rack::find($id);
+        $fase  = Fase::all();
+        return view('infra.fase.editar', compact('rack', 'fase'));
     }
 
     /**
@@ -94,7 +97,14 @@ class RackController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Log::debug('Rack actualizar id: '.$id);
+        $item = Rack::findOrFail($id);
+        $item -> fill($request->all());
+        $item -> save();
+
+        $notices = array("Actualizacion correcta de ".$item -> name);
+
+        return \Redirect::route('infra.rack.index') -> with ('notices',$notices);
     }
 
     /**
@@ -105,6 +115,11 @@ class RackController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = Rack::find($id);
+        $notices = array("Rack ". $item -> name. " eliminado");
+        $item->delete();
+        
+
+        return \Redirect::route('infra.rack.index') -> with ('notices',$notices);
     }
 }

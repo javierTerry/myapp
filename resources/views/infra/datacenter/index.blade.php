@@ -11,7 +11,7 @@
 					@include('errors.parcial.campos_error')
 					@include('errors.parcial.campos_notices')
 					
-					{!! Form::model(Request::only(['name','email']), [ 'route' => ['fnz.proy.index'], 'method' => 'GET', 'class'=>'navbar-form navbar-left pull-right', 'role'=>'search' ]) !!}
+					{!! Form::model(Request::only(['name','email']), [ 'route' => ['infra.dcs.index'], 'method' => 'GET', 'class'=>'navbar-form navbar-left pull-right', 'role'=>'search' ]) !!}
 					<div class="form-group">
 						{!! Form::text( 'name', null, ['class' => 'form-control', 'placeholder' => 'Definir campos para busquedar' ]) !!}
 					</div>
@@ -42,7 +42,7 @@
 								<th>{{ $dc -> desc}}</th>
 								<th>{{ $dc -> no_fase}}</th>
 								
-								<th> {!! Form::open([ 'route' => ['fnz.proy.destroy', $dc], 'method' => 'DELETE' ]) !!}
+								<th> {!! Form::open([ 'route' => ['infra.dcs.destroy', $dc], 'method' => 'DELETE' ]) !!}
 								<button type="submit" class="btn btn-danger" >
 									Eliminar
 								</button><a href="{{ route('infra.dcs.edit', $dc -> id) }}" class="btn btn-info" >Editar</a> {!! Form::close() !!} </th>

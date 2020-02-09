@@ -13,10 +13,15 @@
 	!!}
 </div>
 <div class="form-group">
-    DATACENTER
+    DATACENTER 
+    
     <select class="form-control" name="id_datacenter">
+    	<option value="" > Selecciona </option>
         @foreach($dcs as $item)
-        <option value="{{$item->id}}">{{$item->name}}</option>
+
+   	        <option value="{{ $item->id }}" {{ ( $fase->id_datacenter == $item->id) ? 'selected' : '' }}> {{ $item->name }} </option> 
+
         @endforeach
+
     </select>
 </div>

@@ -34,7 +34,7 @@
 								<th>{{ $item -> desc}}</th>
 								
 								
-								<th> {!! Form::open([ 'route' => ['fnz.proy.destroy', $item], 'method' => 'DELETE' ]) !!}
+								<th> {!! Form::open([ 'route' => ['infra.fase.destroy', $item], 'method' => 'DELETE' ]) !!}
 								<button type="submit" class="btn btn-danger" >
 									Eliminar
 								</button><a href="{{ route('infra.fase.edit', $item -> id) }}" class="btn btn-info" >Editar</a> {!! Form::close() !!} </th>

@@ -88,7 +88,11 @@ class DataCenterController extends Controller
      */
     public function edit($id)
     {
-        //
+        Log::debug("Datacenter Controller edit ".$id);
+
+        $dc = Datacenter::find($id);
+        
+        return view('infra.datacenter.editar', compact('dc'));
     }
 
     /**
@@ -101,6 +105,15 @@ class DataCenterController extends Controller
     public function update(Request $request, $id)
     {
         //
+        Log::debug('Datacenter actualizar id: '.$id);
+        $item = Datacenter::findOrFail($id);
+        $item -> fill($request->all());
+        $item -> save();
+
+        $notices = array("Actualizacion correcta de ".$item -> name);
+
+        return \Redirect::route('infra.dcs.index') -> with ('notices',$notices);
+
     }
 
     /**
@@ -111,6 +124,11 @@ class DataCenterController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = Datacenter::find($id);
+        $notices = array("Datacenter ". $item -> name. " eliminado");
+        $item->delete();
+        
+
+        return \Redirect::route('infra.dcs.index') -> with ('notices',$notices);
     }
 }

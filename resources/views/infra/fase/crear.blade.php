@@ -11,7 +11,8 @@
 					@include('errors.parcial.campos_error')
 					{!! Form::open([ 'route' => 'infra.fase.store', 'method' => 'POST' ]) !!}
 						@include('infra.fase.parcial.campos')
-						  <button type="submit" class="btn btn-info" >Guardar </button>
+						  <button type="submit" class="btn btn-success" >Guardar </button>
+						  <a href="{{ route('infra.fase.index') }}" class="btn btn-danger" >Cancelar</a>
 					{!! Form::close() !!}
 				</div>
 			</div>

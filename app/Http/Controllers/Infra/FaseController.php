@@ -38,7 +38,9 @@ class FaseController extends Controller
     {
         
         $dcs  = Datacenter::all();
-        return view('infra.fase.crear', compact('dcs'));
+        $fase = new Fase();
+
+        return view('infra.fase.crear', compact('dcs', 'fase'));
     }
 
     /**
@@ -81,7 +83,10 @@ class FaseController extends Controller
      */
     public function edit($id)
     {
-        //
+        Log::debug("Fase Controller edit ".$id);
+        $fase = Fase::find($id);
+        $dcs  = Datacenter::all();
+        return view('infra.fase.editar', compact('fase', 'dcs'));
     }
 
     /**
@@ -93,7 +98,14 @@ class FaseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Log::debug('Fase actualizar id: '.$id);
+        $item = Fase::findOrFail($id);
+        $item -> fill($request->all());
+        $item -> save();
+
+        $notices = array("Actualizacion correcta de ".$item -> name);
+
+        return \Redirect::route('infra.fase.index') -> with ('notices',$notices);
     }
 
     /**
@@ -104,6 +116,11 @@ class FaseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = Fase::find($id);
+        $notices = array("Fase ". $item -> name. " eliminado");
+        $item->delete();
+        
+
+        return \Redirect::route('infra.fase.index') -> with ('notices',$notices);
     }
 }
