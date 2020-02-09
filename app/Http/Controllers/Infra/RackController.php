@@ -9,7 +9,6 @@ use App\Http\Controllers\Controller;
 
 use Log;
 use App\Model\Infra\Rack;
-use App\Model\Infra\Equipo;
 use App\Model\Infra\RackView;
 
 class RackController extends Controller
@@ -27,10 +26,6 @@ class RackController extends Controller
             -> paginate();
 
 
-        #dd(Equipo::all());
-
-        
-
         return view('infra.rack.index', compact('racks') );
     }
 
@@ -41,7 +36,9 @@ class RackController extends Controller
      */
     public function create()
     {
-        return view('infra.rack.crear' );
+        $fases = Rack::joinDcFase();
+        
+        return view('infra.rack.crear' , compact('fases'));
     }
 
     /**
@@ -55,13 +52,8 @@ class RackController extends Controller
         try{
             Log::info('rack store');
 
-            $dc = new Rack();
-            #dd($request->all());
-            $dc -> name  = $request->get('name');
-            $dc -> ur  = $request->get('ur');
-            $dc -> coordenada  = $request->get('coordenada');
-            
-            $dc -> save();
+            $item = new Rack($request->all());
+            $item -> save();
             
             $notices = array("Carga exitosa");
 

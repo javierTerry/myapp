@@ -19,3 +19,11 @@
 	,'placeholder'	=> 'Introduce una descripción del DataCenter  '])
 	!!}
 </div>
+<div class="form-group">
+    FASE
+    <select class="form-control" name="id_fase">
+        @foreach($fases as $item)
+        <option value="{{$item->id}}">{{$item->name}}</option>
+        @endforeach
+    </select>
+</div>

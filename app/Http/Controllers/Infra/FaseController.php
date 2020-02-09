@@ -4,15 +4,15 @@ namespace App\Http\Controllers\Infra;
 
 use Illuminate\Http\Request;
 
-#use App\Http\Requests;
+use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Log;
+use App\Model\Infra\Fase;
+use App\Model\Infra\FaseView;
 use App\Model\Infra\Datacenter;
-use App\Model\Infra\DatacenterView;
 
-
-class DataCenterController extends Controller
+class FaseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,14 +21,12 @@ class DataCenterController extends Controller
      */
     public function index()
     {
-        //
-        Log::info('DATACENTER index ');
-        $urlupload = 'fnz.carteras.store';
-        $dcs  = DatacenterView::orderBy('created_at', 'DESC')  
+        Log::info('Fase index ');
+        $fases  = FaseView::orderBy('created_at', 'DESC')  
             -> paginate();
 
-        return view('infra.datacenter.index', compact('dcs', 'urlupload', 'dcs'));
-
+            
+        return view('infra.fase.index', compact('fases') );
     }
 
     /**
@@ -38,8 +36,9 @@ class DataCenterController extends Controller
      */
     public function create()
     {
-        //
-        return view('infra.datacenter.crear');
+        
+        $dcs  = Datacenter::all();
+        return view('infra.fase.crear', compact('dcs'));
     }
 
     /**
@@ -50,22 +49,16 @@ class DataCenterController extends Controller
      */
     public function store(Request $request)
     {
-        
         try{
-            Log::info('Datacenter store');
-
-            $dc = new Datacenter();
-            #dd($request->all());
-            $dc -> name  = $request->get('name');
-            $dc -> desc  = $request->get('desc');
-            
-            $dc -> save();
-            
+            Log::info('Fase store');
+              
+            $item = new Fase($request->all());
+            $item -> save();
             $notices = array("Carga exitosa");
 
-            return \Redirect::route('infra.dcs.index') -> with ('notices',$notices);
+            return \Redirect::route('infra.fase.index') -> with ('notices',$notices);
         } catch (Exception $e) {
-            return \Redirect::route('infra.dcs.index') -> withErrors ($e -> getMessage());   
+            return \Redirect::route('infra.fase.index') -> withErrors ($e -> getMessage());   
         }
     }
 

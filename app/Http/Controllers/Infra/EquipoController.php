@@ -25,7 +25,6 @@ class EquipoController extends Controller
         $equipos  = Equipo::orderBy('created_at', 'DESC')  
             -> paginate();
 
-            
         return view('infra.equipo.index', compact('equipos') );
     }
 
@@ -53,13 +52,8 @@ class EquipoController extends Controller
         try{
             Log::info('Equipo store');
 
-            $item = new Equipo();
-            #dd($request->all());
-            $item -> hostname  = $request->get('hostname');
-            $item -> ip  = $request->get('ip');
-            $item -> serial  = $request->get('serial');
-            $item -> responsable  = $request->get('responsable');
-            $item -> id_rack = $request->get('id_rack');
+            $item = new Equipo($request->all());
+            #dd();
             $item -> save();
             
             $notices = array("Carga exitosa");

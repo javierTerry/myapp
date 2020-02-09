@@ -14,16 +14,21 @@ class CreateEquipoTable extends Migration
     {
         Schema::create('equipo', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->timestamps();      
 
+            $table->string('ur_usada',50);
+            $table->string('soporte',100);
             $table->string('hostname',50);
-            $table->string('ip',50);
-            $table->string('serial',50);
-            $table->string('responsable',100);
-            
+            $table->string('iphw',50);
+            $table->string('equipo_tipo',50);
+            $table->string('modelo',50);
+            $table->string('marca',50);
+            $table->string('serie',50);
+            $table->string('power',50);
+            $table->tinyInteger('alarmado');
 
 
-        });
+        } );
     }
 
     /**

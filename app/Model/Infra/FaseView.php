@@ -4,23 +4,22 @@ namespace App\Model\Infra;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Equipo extends Model
+class FaseView extends Model
 {
+        //
     /**
 	 * The database table used by the model.
 	 *
 	 * @var string
 	 */
 
-	protected $table = 'equipo';
+	protected $table = 'fase_rack';
 
 	/**
 	 * The attributes that are mass assignable.
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['id', 'hostname', 'iphw', 'serie', 'soporte','ur_usada', 'equipo_tipo', 'modelo', 'marca', 'power','alarmado', 'id_rack'];
-	
-	
+	protected $fillable = ['id', 'name', 'desc', 'no_rack'];
+
 }
- 

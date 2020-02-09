@@ -3,11 +3,10 @@
 @section('content')
 <div class="container">
 	<div class="row">
-		<div class="col-md-10 col-md-offset-1">
+		<div class="col-md-30 col-md-offset-1">
 			<div class="panel panel-default">
-				<div class="panel-heading">
-					D A T A C E N T E R
-				</div>
+
+				@include('infra/navigator')
 				<div class="panel-body">
 					@include('errors.parcial.campos_error')
 					@include('errors.parcial.campos_notices')
@@ -41,12 +40,12 @@
 								<th>{{ $dc -> id}}</th>
 								<th>{{ $dc -> name}}</th>
 								<th>{{ $dc -> desc}}</th>
-								<th>{{ $dc -> plataforma}}</th>
+								<th>{{ $dc -> no_fase}}</th>
 								
 								<th> {!! Form::open([ 'route' => ['fnz.proy.destroy', $dc], 'method' => 'DELETE' ]) !!}
 								<button type="submit" class="btn btn-danger" >
 									Eliminar
-								</button><a href="{{ route('fnz.proy.edit', $dc -> id) }}" class="btn btn-info" >Editar</a> {!! Form::close() !!} </th>
+								</button><a href="{{ route('infra.dcs.edit', $dc -> id) }}" class="btn btn-info" >Editar</a> {!! Form::close() !!} </th>
 							</tr>
 						@empty
 						    <p>No existen DCs</p>

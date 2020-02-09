@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
 	<div class="row">
-		<div class="col-md-10 col-md-offset-1">
+		<div class="col-md-30 col-md-offset-1">
 			<div class="panel panel-default">
 				@include('infra/navigator')
 				<div class="panel-body">
@@ -12,42 +12,42 @@
 					
 					{!! Form::close() !!}
 					<p>
-						<a class="btn btn-success" href=" {{ route('infra.rack.create') }} " role="button"> Nuevo  </a>
+						<a class="btn btn-success" href=" {{ route('infra.fase.create') }} " role="button"> Nuevo  </a>
 					</p>
-					Racks {{ $racks ->total()}}, Total de paginas {{ $racks ->lastPage()}} , Pagina actual {{ $racks ->currentPage()}}
+					Fases {{ $fases ->total()}}, Total de paginas {{ $fases ->lastPage()}} , Pagina actual {{ $fases ->currentPage()}}
 					</p>
 					
-					{!! $racks->render() !!}
+					{!! $fases->render() !!}
 					<table class="table table-striped">
 						<tr>
 							<th>ID</th>
-							<th>NAME</th>
-							<th>COORDENADA</th>
-							<th>NO EQUIPOS</th>
-							
+							<th>FASE</th>
+							<th>NO RACKS</th>
+							<th>DESCRIPCION</th>
+
 						</tr>
-						@forelse( $racks as $item)
+						@forelse( $fases as $item)
 							<tr>
 								<th>{{ $item -> id}}</th>
 								<th>{{ $item -> name}}</th>
-								<th>{{$item -> coordenada}}</th>
-								<th>{{ $item -> no_equipo}}</th>
+								<th>{{ $item -> no_rack}}</th>
+								<th>{{ $item -> desc}}</th>
 								
 								
 								<th> {!! Form::open([ 'route' => ['fnz.proy.destroy', $item], 'method' => 'DELETE' ]) !!}
 								<button type="submit" class="btn btn-danger" >
 									Eliminar
-								</button><a href="{{ route('infra.rack.edit', $item -> id) }}" class="btn btn-info" >Editar</a> {!! Form::close() !!} </th>
+								</button><a href="{{ route('infra.fase.edit', $item -> id) }}" class="btn btn-info" >Editar</a> {!! Form::close() !!} </th>
 							</tr>
 						@empty
-						    <p>No existen Racks</p>
+						    <p>No existen Fases</p>
 						@endforelse
 						
 					</table>
-						Racks {{ $racks ->total()}}, Total de paginas {{ $racks ->lastPage()}} , Pagina actual {{ $racks ->currentPage()}}
+						Fases {{ $fases ->total()}}, Total de paginas {{ $fases ->lastPage()}} , Pagina actual {{ $fases ->currentPage()}}
 					</p>
 					
-					{!! $racks->render() !!}					
+					{!! $fases->render() !!}					
 				</div>
 			</div>
 		</div>

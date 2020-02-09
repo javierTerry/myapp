@@ -62,7 +62,7 @@
         @yield('content')
         <hr>
         <footer>
-        <p>&copy; MasNegocio 2016</p>
+        <p>&copy; MasNegocio 2020</p>
         </footer>
     </div> <!-- /container -->
 
