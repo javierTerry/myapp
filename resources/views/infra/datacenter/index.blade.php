@@ -33,6 +33,8 @@
 							<th>NAME</th>
 							<th>DESCRIPCION</th>
 							<th>No. de Fases</th>
+							<th></th>
+							<th></th>
 							
 						</tr>
 						@forelse( $dcs as $dc)
@@ -41,11 +43,28 @@
 								<th>{{ $dc -> name}}</th>
 								<th>{{ $dc -> desc}}</th>
 								<th>{{ $dc -> no_fase}}</th>
-								
-								<th> {!! Form::open([ 'route' => ['infra.dcs.destroy', $dc], 'method' => 'DELETE' ]) !!}
-								<button type="submit" class="btn btn-danger" >
-									Eliminar
-								</button><a href="{{ route('infra.dcs.edit', $dc -> id) }}" class="btn btn-info" >Editar</a> {!! Form::close() !!} </th>
+
+								<th>	
+									<div class="navbar-header">
+										<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+											<span class="sr-only">Toggle Navigation</span>
+											<span class="btn btn-link">Acciones</span>
+										</button>
+									</div>
+
+									<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+										<ul >
+											{!! Form::open([ 'route' => ['infra.dcs.destroy', $dc], 'method' => 'DELETE' ]) !!}
+											<button type="submit" class="btn btn-danger" >
+												Eliminar
+											</button>			
+										
+											<a href="{{ route('infra.dcs.edit', $dc -> id) }}" class="btn btn-info" >Editar</a>  
+											{!! Form::close() !!}				
+										</ul>
+									</div>
+									
+								</th>
 							</tr>
 						@empty
 						    <p>No existen DCs</p>
