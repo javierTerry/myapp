@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
 	<div class="row">
-		<div class="col-md-10 col-md-offset-1">
+		<div class="col-md-30 col-md-offset-1">
 			<div class="panel panel-default">
 				@include('infra/navigator')
 				<div class="panel-body">
@@ -34,7 +34,7 @@
 								<th>{{ $item -> no_equipo}}</th>
 								
 								
-								<th> {!! Form::open([ 'route' => ['fnz.proy.destroy', $item], 'method' => 'DELETE' ]) !!}
+								<th> {!! Form::open([ 'route' => ['infra.rack.destroy', $item], 'method' => 'DELETE' ]) !!}
 								<button type="submit" class="btn btn-danger" >
 									Eliminar
 								</button><a href="{{ route('infra.rack.edit', $item -> id) }}" class="btn btn-info" >Editar</a> {!! Form::close() !!} </th>

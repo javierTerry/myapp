@@ -42,13 +42,13 @@
 </div>
 
 <div class="form-group">
-	<div class="form-group">
-		{!! Form::label('marca', 'MARCA ') !!}
-		{!! Form::text('marca', null,
-		['class' 		=> 'form-control'
-		,'placeholder'	=> 'Indica que marca'])
-		!!}
-	</div>
+	{!! Form::label('marca', 'MARCA ') !!}
+	{!! Form::text('marca', null,
+	['class' 		=> 'form-control'
+	,'placeholder'	=> 'Indica que marca'])
+	!!}
+</div>
+<div class="form-group">
 	{!! Form::label('modelo', 'MODELO ') !!}
 	{!! Form::text('modelo', null,
 	['class' 		=> 'form-control'
@@ -59,8 +59,9 @@
 <div class="form-group">
     Rack
     <select class="form-control" name="id_rack">
-        @foreach($racks as $item)
-        <option value="{{$item->id}}">{{$item->name}}</option>
+    	<option value=""> Seleccionar </option>
+        @foreach($rack as $item)
+        <option value="{{$item->id}}" {{ ($equipo->id_rack == $item->id) ? 'selected' : '' }} >{{$item->name}}</option>
         @endforeach
     </select>
 </div>
@@ -68,15 +69,15 @@
 <div class="form-group">
     Estado
     <select class="form-control" name="power">
-        <option value="1">Encendido</option>
-        <option value="0">Apagado</option>
+        <option value="1" {{ ($equipo->power == '1') ? 'selected' : '' }} > Encendido</option>
+        <option value="0" {{ ($equipo->power == '0') ? 'selected' : '' }}> Apagado</option>
     </select>
 </div>
 
 <div class="form-group">
     Alarma
     <select class="form-control" name="alarmado">
-        <option value="0">Sin Alarma</option>
-        <option value="1">Alarmado</option>
+        <option value="0" {{ ($equipo->alarmado == '0') ? 'selected' : '' }}>Sin Alarma</option>
+        <option value="1" {{ ($equipo->alarmado == '1') ? 'selected' : '' }}>Alarmado</option>
     </select>
 </div>

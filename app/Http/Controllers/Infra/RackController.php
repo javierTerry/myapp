@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 use Log;
 use App\Model\Infra\Rack;
 use App\Model\Infra\RackView;
-
+use App\Model\Infra\Fase;
 class RackController extends Controller
 {
     /**
@@ -36,9 +36,11 @@ class RackController extends Controller
      */
     public function create()
     {
-        $fases = Rack::joinDcFase();
+        $rack = new Rack();        
+        $fase = Rack::joinDcFase();
         
-        return view('infra.rack.crear' , compact('fases'));
+        #dd($fase);
+        return view('infra.rack.crear' , compact('rack','fase'));
     }
 
     /**
@@ -55,7 +57,7 @@ class RackController extends Controller
             $item = new Rack($request->all());
             $item -> save();
             
-            $notices = array("Carga exitosa");
+            $notices = array("Carga exitosa del RACK ".$item->name);
 
             return \Redirect::route('infra.rack.index') -> with ('notices',$notices);
         } catch (Exception $e) {
@@ -84,8 +86,9 @@ class RackController extends Controller
     {
         Log::debug("Rack Controller edit ".$id);
         $rack = Rack::find($id);
-        $fase  = Fase::all();
-        return view('infra.fase.editar', compact('rack', 'fase'));
+        $fase = Rack::joinDcFase();
+        
+        return view('infra.rack.editar', compact('rack', 'fase'));
     }
 
     /**
@@ -98,6 +101,7 @@ class RackController extends Controller
     public function update(Request $request, $id)
     {
         Log::debug('Rack actualizar id: '.$id);
+        
         $item = Rack::findOrFail($id);
         $item -> fill($request->all());
         $item -> save();

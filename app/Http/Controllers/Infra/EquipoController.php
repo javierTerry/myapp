@@ -35,10 +35,10 @@ class EquipoController extends Controller
      */
     public function create()
     {
-        //
-        $racks  = Rack::all();
-        #dd($racks);
-        return view('infra.equipo.crear', compact('racks'));
+
+        $rack  = Rack::all();
+        $equipo = new Equipo();
+        return view('infra.equipo.crear', compact('rack', 'equipo'));
     }
 
     /**
@@ -83,7 +83,11 @@ class EquipoController extends Controller
      */
     public function edit($id)
     {
-        //
+        Log::debug("Equipo Controller edit ".$id);
+        $equipo = Equipo::find($id);
+        $rack  = Rack::all();
+        
+        return view('infra.equipo.editar', compact('equipo', 'rack'));
     }
 
     /**
@@ -95,7 +99,15 @@ class EquipoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Log::debug('Equipo actualizar id: '.$id);
+        
+        $item = Equipo::findOrFail($id);
+        $item -> fill($request->all());
+        $item -> save();
+
+        $notices = array("Actualizacion correcta de ".$item -> hostname);
+
+        return \Redirect::route('infra.equipo.index') -> with ('notices',$notices);
     }
 
     /**
@@ -106,6 +118,11 @@ class EquipoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = Equipo::find($id);
+        $notices = array("Equipo ". $item -> hostname. " eliminado");
+        $item->delete();
+        
+
+        return \Redirect::route('infra.equipo.index') -> with ('notices',$notices);
     }
 }
