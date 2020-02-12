@@ -24,6 +24,7 @@
 							<th>FASE</th>
 							<th>NO RACKS</th>
 							<th>DESCRIPCION</th>
+							<th></th>
 
 						</tr>
 						@forelse( $fases as $item)
@@ -33,11 +34,26 @@
 								<th>{{ $item -> no_rack}}</th>
 								<th>{{ $item -> desc}}</th>
 								
+								<th>	
+									<div class="navbar-header">
+										<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+											<span class="sr-only">Toggle Navigation</span>
+											<span class="btn btn-link">Acciones</span>
+										</button>
+									</div>
+
+									<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+										<ul >
+											{!! Form::open([ 'route' => ['infra.fase.destroy', $item], 'method' => 'DELETE' ]) !!}
+											<button type="submit" class="btn btn-danger" >
+												Eliminar
+											</button><a href="{{ route('infra.fase.edit', $item -> id) }}" class="btn btn-info" >Editar</a> {!! Form::close() !!}				
+										</ul>
+									</div>
+									
+								</th>
 								
-								<th> {!! Form::open([ 'route' => ['infra.fase.destroy', $item], 'method' => 'DELETE' ]) !!}
-								<button type="submit" class="btn btn-danger" >
-									Eliminar
-								</button><a href="{{ route('infra.fase.edit', $item -> id) }}" class="btn btn-info" >Editar</a> {!! Form::close() !!} </th>
+								
 							</tr>
 						@empty
 						    <p>No existen Fases</p>

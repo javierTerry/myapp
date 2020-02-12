@@ -24,7 +24,9 @@
 							<th>NAME</th>
 							<th>COORDENADA</th>
 							<th>NO EQUIPOS</th>
-							
+							<th></th>
+							<th></th>
+
 						</tr>
 						@forelse( $racks as $item)
 							<tr>
@@ -32,12 +34,25 @@
 								<th>{{ $item -> name}}</th>
 								<th>{{$item -> coordenada}}</th>
 								<th>{{ $item -> no_equipo}}</th>
-								
-								
-								<th> {!! Form::open([ 'route' => ['infra.rack.destroy', $item], 'method' => 'DELETE' ]) !!}
-								<button type="submit" class="btn btn-danger" >
-									Eliminar
-								</button><a href="{{ route('infra.rack.edit', $item -> id) }}" class="btn btn-info" >Editar</a> {!! Form::close() !!} </th>
+																
+								<th> 
+									<div class="navbar-header">
+										<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+											<span class="sr-only">Toggle Navigation</span>
+											<span class="btn btn-link">Acciones</span>
+										</button>
+									</div>
+
+									<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+										<ul >
+										{!! Form::open([ 'route' => ['infra.rack.destroy', $item], 'method' => 'DELETE' ]) !!}
+									<button type="submit" class="btn btn-danger" >
+										Eliminar
+									</button>
+									<p>
+									<a href="{{ route('infra.rack.edit', $item -> id) }}" class="btn btn-info" >Editar</a> {!! Form::close() !!} 
+									</ul>
+								</th>
 							</tr>
 						@empty
 						    <p>No existen Racks</p>

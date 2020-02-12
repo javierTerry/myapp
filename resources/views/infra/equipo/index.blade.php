@@ -24,6 +24,7 @@
 							<th>HOSTNAME</th>
 							<th>I P</th>
 							<th>NS</th>
+							<th></th>
 							
 						</tr>
 						@forelse( $equipos as $item)
@@ -34,12 +35,26 @@
 								<th>{{ $item -> serie}}</th>
 								
 								
-								<th> {!! Form::open([ 'route' => ['infra.equipo.destroy', $item], 'method' => 'DELETE' ]) !!}
-								<button type="submit" class="btn btn-danger" >
-									Eliminar 
-								</button>
-								<p>
-								<a href="{{ route('infra.equipo.edit', $item -> id) }}" class="btn btn-info" >Editar</a> {!! Form::close() !!} </th>
+								<th> 
+									<div class="navbar-header">
+										<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+											<span class="sr-only">Toggle Navigation</span>
+											<span class="btn btn-link">Acciones</span>
+										</button>
+									</div>
+
+									<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+										<ul >
+											{!! Form::open([ 'route' => ['infra.equipo.destroy', $item], 'method' => 'DELETE' ]) !!}
+											<button type="submit" class="btn btn-danger" >
+												Eliminar 
+											</button>
+											<p>
+											<a href="{{ route('infra.equipo.edit', $item -> id) }}" class="btn btn-info" >Editar</a> {!! Form::close() !!} 				
+										</ul>
+									</div>
+									
+								</th>
 							</tr>
 						@empty
 						    <p>No existen equipos</p>
