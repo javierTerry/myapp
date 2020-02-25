@@ -21,6 +21,21 @@ class Equipo extends Model
 	 */
 	protected $fillable = ['id', 'hostname', 'iphw', 'serie', 'soporte','ur_usada', 'equipo_tipo', 'modelo', 'marca', 'power','alarmado', 'id_rack'];
 	
+
+	/**
+	 * Serch proyects by strig, clause like  .
+	 *
+	 * @author Christian Hernandez <chhernandezs@kionetworks.com>
+	 * 
+	 * @param array Request
+	 * 
+	 */
+	public function scopeHostname($query, $hostname)
+	{
+		if (trim($hostname) !=  "") {
+			$query->where('hostname', 'like', "%$hostname%");
+		}
+	}
 	
 }
  

@@ -10,16 +10,9 @@
 				<div class="panel-body">
 					@include('errors.parcial.campos_error')
 					@include('errors.parcial.campos_notices')
-					
-					{!! Form::model(Request::only(['name','email']), [ 'route' => ['infra.dcs.index'], 'method' => 'GET', 'class'=>'navbar-form navbar-left pull-right', 'role'=>'search' ]) !!}
-					<div class="form-group">
-						{!! Form::text( 'name', null, ['class' => 'form-control', 'placeholder' => 'Definir campos para busquedar' ]) !!}
-					</div>
-					<button type="submit" class="btn btn-default" disabled="disabled">
-						Buscar
-					</button>
 
-					{!! Form::close() !!}
+					@include('infra.datacenter.parcial.buscar')
+					
 					<p>
 						<a class="btn btn-success" href=" {{ route('infra.dcs.create') }} " role="button"> Nuevo  </a>
 					</p>

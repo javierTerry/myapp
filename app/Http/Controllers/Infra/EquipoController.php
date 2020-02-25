@@ -19,10 +19,11 @@ class EquipoController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
         Log::info('EQUIPO index ');
-        $equipos  = Equipo::orderBy('created_at', 'DESC')  
+        $equipos  = Equipo::hostname( $request -> get('hostname'))
+            -> orderBy('created_at', 'DESC')  
             -> paginate();
 
         return view('infra.equipo.index', compact('equipos') );

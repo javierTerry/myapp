@@ -10,7 +10,7 @@
 					@include('errors.parcial.campos_error')
 					@include('errors.parcial.campos_notices')
 					
-					{!! Form::close() !!}
+					@include('infra.fase.parcial.buscar')
 					<p>
 						<a class="btn btn-success" href=" {{ route('infra.fase.create') }} " role="button"> Nuevo  </a>
 					</p>

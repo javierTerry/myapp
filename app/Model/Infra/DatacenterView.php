@@ -23,11 +23,17 @@ class DatacenterView extends Model
 	
 	
 	/**
-	 * Parsed form fields to Object DATACENTER .
+	 * Serch proyects by strig, clause like  .
 	 *
-	 * @author Christian Hernandez <chhernandezs@kionetwork.com>
+	 * @author Christian Hernandez <chhernandezs@kionetworks.com>
 	 * 
 	 * @param array Request
 	 * 
 	 */
+	public function scopeName($query, $name)
+	{
+		if (trim($name) !=  "") {
+			$query->where('name', 'like', "%$name%");
+		}
+	}
 }

@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Infra;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
+#use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Log;
 use App\Model\Infra\Rack;
 use App\Model\Infra\RackView;
-use App\Model\Infra\Fase;
+
 class RackController extends Controller
 {
     /**
@@ -18,11 +18,12 @@ class RackController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+
         Log::info('RACK index ');
-        $racks  = RackView::orderBy('created_at', 'DESC')  
+        $racks  = RackView::name( $request ->get('name'))
+            -> orderBy('created_at', 'DESC')  
             -> paginate();
 
 
@@ -71,9 +72,9 @@ class RackController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+         return view('infra.rack.show');
     }
 
     /**

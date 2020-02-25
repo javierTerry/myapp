@@ -19,13 +19,13 @@ class FaseController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request )
     {
         Log::info('Fase index ');
-        $fases  = FaseView::orderBy('created_at', 'DESC')  
+        $fases  = FaseView::name( $request -> get('name')) 
+            -> orderBy('created_at', 'DESC')  
             -> paginate();
 
-            
         return view('infra.fase.index', compact('fases') );
     }
 

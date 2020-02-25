@@ -16,9 +16,13 @@
 
 Route::group([ 'prefix' => 'infra', 'namespace' => 'Infra' ], function () {
 
-	Route::get('/datacenter/ping', 
+	Route::get('/dcs/ping', 
 		function () {
-	    	return '<h1>DATACENTER PING</h1>';
+
+
+
+
+	    	return 'ping';
 	    }
 	);
 	Route::resource('dcs','DataCenterController');

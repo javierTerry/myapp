@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Infra;
 
 use Illuminate\Http\Request;
 
-#use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Log;
@@ -19,12 +18,14 @@ class DataCenterController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        //dd();
+
         Log::info('DATACENTER index ');
         $urlupload = 'fnz.carteras.store';
-        $dcs  = DatacenterView::orderBy('created_at', 'DESC')  
+        $dcs  = DatacenterView::name( $request -> get('name') )
+            -> orderBy('created_at', 'DESC')  
             -> paginate();
 
         return view('infra.datacenter.index', compact('dcs', 'urlupload', 'dcs'));
