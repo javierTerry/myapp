@@ -24,9 +24,7 @@ class DataCenterController extends Controller
 
         Log::info('DATACENTER index ');
         $urlupload = 'fnz.carteras.store';
-        $dcs  = DatacenterView::name( $request -> get('name') )
-            -> orderBy('created_at', 'DESC')  
-            -> paginate();
+        $dcs  = DatacenterView::name( $request -> get('name') ) ->get();
 
         return view('infra.datacenter.index', compact('dcs', 'urlupload', 'dcs'));
 

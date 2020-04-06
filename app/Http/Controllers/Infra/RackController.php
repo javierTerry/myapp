@@ -22,11 +22,7 @@ class RackController extends Controller
     {
 
         Log::info('RACK index ');
-        $racks  = RackView::name( $request ->get('name'))
-            -> orderBy('created_at', 'DESC')  
-            -> paginate();
-
-
+        $racks  = RackView::name( $request ->get('name')) -> get();
         return view('infra.rack.index', compact('racks') );
     }
 

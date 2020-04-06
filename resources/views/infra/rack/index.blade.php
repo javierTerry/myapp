@@ -31,7 +31,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					@forelse($racks as $item)
+					@foreach($racks as $item)
 					<tr>
 						<td></td>
 						<td>{{ $item -> id}}</td>
@@ -56,10 +56,7 @@
 						</td>
 						<td></td>
 					</tr>
-				
-					@empty
-					    <p>No existen Racks</p>
-					@endforelse
+				@endforeach
 				</tbody>
 			</table> <!-- id="dynamic-table" -->
 		</div> <!-- class="table-responsive text-center"--> 
