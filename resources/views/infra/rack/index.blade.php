@@ -1,72 +1,69 @@
 @extends('app')
 
 @section('content')
-<div class="container">
-	<div class="row">
-		<div class="col-md-30 col-md-offset-1">
-			<div class="panel panel-default">
-				@include('infra/navigator')
-				<div class="panel-body">
-					@include('errors.parcial.campos_error')
-					@include('errors.parcial.campos_notices')
-					
-					@include('infra.rack.parcial.buscar')
+<div class="page-header">
+	<h1>
+		R A C K 
+		<small>
+			<i class="ace-icon fa fa-angle-double-right"></i>
+			Vista general &amp; Estadisticas
+		</small>
+	</h1>
+</div><!-- /.page-header -->
+<div class="row">
+	<div class="col-xs-12">
+		@include('errors.parcial.campos_error')
+		@include('errors.parcial.campos_notices')
 
-					<p>
-						<a class="btn btn-success" href=" {{ route('infra.rack.create') }} " role="button"> Nuevo  </a>
-					</p>
-					Racks {{ $racks ->total()}}, Total de paginas {{ $racks ->lastPage()}} , Pagina actual {{ $racks ->currentPage()}}
-					</p>
-					
-					{!! $racks->render() !!}
-					<table class="table table-striped">
-						<tr>
-							<th>ID</th>
-							<th>NAME</th>
-							<th>COORDENADA</th>
-							<th>NO EQUIPOS</th>
-							<th></th>
-							<th></th>
+		<a class="btn btn-success" href=" {{ route('infra.rack.create') }} " role="button"> Nuevo  </a>				
 
-						</tr>
-						@forelse( $racks as $item)
-							<tr>
-								<th>{{ $item -> id}}</th>
-								<th>{{ $item -> name}}</th>
-								<th>{{$item -> coordenada}}</th>
-								<th>{{ $item -> no_equipo}}</th>
-																
-								<th> 
-									<div class="navbar-header">
-										<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
-											<span class="sr-only">Toggle Navigation</span>
-											<span class="btn btn-link">Acciones</span>
-										</button>
-									</div>
+		<div class="table-responsive text-center">
+			<table class="table table-striped table-bordered table-hover" id="dynamic-table">
+				<thead>
+					<tr>
+						<th></th>
+						<th>ID</th>
+						<th>NAME</th>
+						<th>COORDENADA</th>
+						<th>NO EQUIPOS</th>
+						<th>ACCIONES</th>
+						<th>
+					</tr>
+				</thead>
+				<tbody>
+					@forelse($racks as $item)
+					<tr>
+						<td></td>
+						<td>{{ $item -> id}}</td>
+						<td>{{ $item -> name}}</td>
+						<td>{{$item -> coordenada}}</td>
+						<td>{{ $item -> no_equipo}}</td>	
+						<td>
+							<div class="navbar-header">
+								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+									<span class="sr-only">Toggle Navigation</span>
+									<span class="btn btn-link">Acciones</span>
+								</button>
+							</div>
 
-									<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-										<ul >
-										{!! Form::open([ 'route' => ['infra.rack.destroy', $item], 'method' => 'DELETE' ]) !!}
+							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+								{!! Form::open([ 'route' => ['infra.rack.destroy', $item], 'metdod' => 'DELETE' ]) !!}
 									<button type="submit" class="btn btn-danger" >
-										Eliminar
-									</button>
-									<p>
-									<a href="{{ route('infra.rack.edit', $item -> id) }}" class="btn btn-info" >Editar</a> {!! Form::close() !!} 
-									</ul>
-								</th>
-							</tr>
-						@empty
-						    <p>No existen Racks</p>
-						@endforelse
-						
-					</table>
-						Racks {{ $racks ->total()}}, Total de paginas {{ $racks ->lastPage()}} , Pagina actual {{ $racks ->currentPage()}}
-					</p>
-					
-					{!! $racks->render() !!}					
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+										Eliminar 
+									</button><a href="{{ route('infra.rack.edit', $item -> id) }}" class="btn btn-info" >Editar</a> 
+								{!! Form::close() !!} 				
+							</div> 
+						</td>
+						<td></td>
+					</tr>
+				
+					@empty
+					    <p>No existen Racks</p>
+					@endforelse
+				</tbody>
+			</table> <!-- id="dynamic-table" -->
+		</div> <!-- class="table-responsive text-center"--> 
+	</div> <!-- class="col-xs-12" -->
+</div> <!-- class="row" -->
+
 @endsection

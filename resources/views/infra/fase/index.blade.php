@@ -1,72 +1,72 @@
 @extends('app')
 
 @section('content')
-<div class="container">
-	<div class="row">
-		<div class="col-md-30 col-md-offset-1">
-			<div class="panel panel-default">
-				@include('infra/navigator')
-				<div class="panel-body">
-					@include('errors.parcial.campos_error')
-					@include('errors.parcial.campos_notices')
-					
-					@include('infra.fase.parcial.buscar')
-					<p>
-						<a class="btn btn-success" href=" {{ route('infra.fase.create') }} " role="button"> Nuevo  </a>
-					</p>
-					Fases {{ $fases ->total()}}, Total de paginas {{ $fases ->lastPage()}} , Pagina actual {{ $fases ->currentPage()}}
-					</p>
-					
-					{!! $fases->render() !!}
-					<table class="table table-striped">
-						<tr>
-							<th>ID</th>
-							<th>FASE</th>
-							<th>NO RACKS</th>
-							<th>DESCRIPCION</th>
-							<th></th>
+<div class="page-header">
+	<h1>
+		F A S E
+		<small>
+			<i class="ace-icon fa fa-angle-double-right"></i>
+			Vista general &amp; Estadisticas
+		</small>
+	</h1>
+</div><!-- /.page-header -->
 
-						</tr>
-						@forelse( $fases as $item)
-							<tr>
-								<th>{{ $item -> id}}</th>
-								<th>{{ $item -> name}}</th>
-								<th>{{ $item -> no_rack}}</th>
-								<th>{{ $item -> desc}}</th>
-								
-								<th>	
-									<div class="navbar-header">
-										<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
-											<span class="sr-only">Toggle Navigation</span>
-											<span class="btn btn-link">Acciones</span>
-										</button>
-									</div>
 
-									<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-										<ul >
-											{!! Form::open([ 'route' => ['infra.fase.destroy', $item], 'method' => 'DELETE' ]) !!}
-											<button type="submit" class="btn btn-danger" >
-												Eliminar
-											</button><a href="{{ route('infra.fase.edit', $item -> id) }}" class="btn btn-info" >Editar</a> {!! Form::close() !!}				
-										</ul>
-									</div>
-									
-								</th>
-								
-								
-							</tr>
-						@empty
-						    <p>No existen Fases</p>
-						@endforelse
+<div class="row">
+	<div class="col-xs-12">	
+		@include('errors.parcial.campos_error')
+		@include('errors.parcial.campos_notices')
+
+		<a class="btn btn-success" href=" {{ route('infra.fase.create') }} " role="button"> Nuevo  </a>
+
+		<div class="table-responsive text-center">
+			<table class="table table-striped table-bordered table-hover" id="dynamic-table">
+				<thead>
+					<tr>
+						<th></th>
+						<th>ID</th>
+						<th>FASE</th>
+						<th>NO RACKS</th>
+						<th>DESCRIPCION</th>
+						<th class="sorting_disabled"></th>
+						<th class="sorting_disabled"></th>
 						
-					</table>
-						Fases {{ $fases ->total()}}, Total de paginas {{ $fases ->lastPage()}} , Pagina actual {{ $fases ->currentPage()}}
-					</p>
-					
-					{!! $fases->render() !!}					
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach( $fases as $item)
+					<tr>
+						<td></td>
+						<td>{{ $item -> id}}</td>
+						<td>{{ $item -> name}}</td>
+						<td>{{ $item -> no_rack}}</td>
+						<td>{{ $item -> desc}}</td>						
+						<td>	
+							<div class="navbar-header">
+								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+									<span class="sr-only">Toggle Navigation</span>
+									<span class="btn btn-link">Acciones</span>
+								</button>
+							</div>
+
+							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+								{!! Form::open([ 'route' => ['infra.fase.destroy', $item], 'metdod' => 'DELETE' ]) !!}
+									<button type="submit" class="btn btn-danger" >
+										Eliminar 
+									</button><a href="{{ route('infra.fase.edit', $item -> id) }}" class="btn btn-info" >Editar</a> 
+								{!! Form::close() !!} 				
+							</div>
+						</td>
+						<td></td>
+
+					</tr>		
+						
+					@endforeach
+						
+				</tbody>
+			</table> <!-- id="dynamic-table" -->
+		</div> <!-- class="table-responsive text-center"--> 
+	</div> <!-- class="col-xs-12" -->
+</div> <!-- class="row" -->
+
 @endsection

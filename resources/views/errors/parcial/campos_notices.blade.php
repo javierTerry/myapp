@@ -1,11 +1,14 @@
 @if(Session::has('notices'))
-<p>
-	<div class="alert alert-warning" role="alert">
-		@foreach(Session::get('notices') as $notice)
+
+<div class="alert alert-block alert-success">
+	<button type="button" class="close" data-dismiss="alert">
+		<i class="ace-icon fa fa-times"></i>
+	</button>
+
+	@foreach(Session::get('notices') as $notice)
 		<p></p>
-		<strong> {{ $notice }} </strong>
-		@endforeach
-	</div>
-</p>
+		<strong> {{ $notice }} </strong> <i class="ace-icon fa fa-check green"></i>
+	@endforeach
+</div>
 
 @endif
