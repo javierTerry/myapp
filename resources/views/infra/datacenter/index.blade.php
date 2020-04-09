@@ -67,18 +67,18 @@
 													Seguro que quieres eliminar el ID {{ $item -> id }} con NOMBRE {{ $item -> name}}?  	
 												</p>
 									      	</div>
-									      <div class="modal-footer">
-									      	{!! Form::open([ 'route' => ['infra.dcs.destroy', $item], 'metdod' => 'PUT' ]) !!}
-									      		{{method_field('DELETE')}}
-												<button type="submit" class="btn btn-danger" >
-													OK
-												</button>
-												 <input type="button"  value="Close" data-dismiss="modal" class="btn btn-info" /> 							
-											{!! Form::close() !!}
-									      </div>
-									    </div>
-								  	</div>
-								</div>
+										     <div class="modal-footer">
+										      	{!! Form::open([ 'route' => ['infra.dcs.destroy', $item], 'metdod' => 'PUT' ]) !!}
+										      		{{method_field('DELETE')}}
+													<button type="submit" class="btn btn-danger" >
+														OK
+													</button>
+													 <input type="button"  value="Close" data-dismiss="modal" class="btn btn-info" /> 							
+												{!! Form::close() !!}
+										    </div> <!-- modal-footer -->
+									    </div> <!-- modal-content -->
+								  	</div> <!-- modal-dialog -->
+								</div> <!--modal fad -->
 							</td>
 							<td>
 						</tr>
@@ -91,28 +91,4 @@
 	</div> <!-- class="col-xs-12" -->
 </div> <!-- class="row" -->
 				
-<script>
-
-	var dialogEliminar = $( ".dialog-eliminar" ).on('click', function(e) {
-			e.preventDefault();
-			
-			console.log( $(this).attr('id') )
-			;
-			dialogModal = $( ".dialog-modal" ).removeClass('hide').dialog({
-				resizable: false,
-				width: '320',
-				modal: true,
-				title: " Eliminar registro?",
-				title_html: true,
-			});
-	});
-
-
-
-	$ (".btnClosePopup").on('click', function(e) {
-		$( ".dialog-modal" ).addClass('hide dialog-modal');
-		console.log("Cerrando");
-	});
-	</script>
-
 @endsection

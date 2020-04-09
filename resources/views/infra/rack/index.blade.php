@@ -39,21 +39,35 @@
 						<td>{{$item -> coordenada}}</td>
 						<td>{{ $item -> no_equipo}}</td>	
 						<td>
-							<div class="navbar-header">
-								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
-									<span class="sr-only">Toggle Navigation</span>
-									<span class="btn btn-link">Acciones</span>
-								</button>
-							</div>
-
 							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-								{!! Form::open([ 'route' => ['infra.dcs.destroy', $item], 'metdod' => 'DELETE' ]) !!}
-									<button type="submit" class="btn btn-danger" >
-										Eliminar 
-									</button>
-									<a href="{{ route('infra.dcs.edit', $item -> id) }}" class="btn btn-info" ><i class="ace-icon fa fa-pencil"></i></a>
-								{!! Form::close() !!} 				
-							</div> 
+									<a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modal{{ $item -> id }}" ><i class="ace-icon fa fa-trash-o"></i></a>
+									<a href="{{ route('infra.rack.edit', $item -> id) }}" class="btn btn-info" ><i class="ace-icon fa fa-pencil"></i></a>
+
+								</div><!-- id="bs-example-navbar-collapse-2 -->			
+
+								<div class="modal fade" id="modal{{ $item -> id }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+								  aria-hidden="true">
+									<div class="modal-dialog" role="document">
+									    <div class="modal-content">
+									    	<div class="modal-body">
+									        	<p class="bigger-50 bolder center grey">
+													<i class="ace-icon fa fa-hand-o-right blue bigger-120"></i>
+													
+													Seguro que quieres eliminar el ID {{ $item -> id }} con NOMBRE {{ $item -> name}}?  	
+												</p>
+									      	</div>
+										     <div class="modal-footer">
+										      	{!! Form::open([ 'route' => ['infra.rack.destroy', $item], 'metdod' => 'PUT' ]) !!}
+										      		{{method_field('DELETE')}}
+													<button type="submit" class="btn btn-danger" >
+														OK
+													</button>
+													 <input type="button"  value="Close" data-dismiss="modal" class="btn btn-info" /> 							
+												{!! Form::close() !!}
+										    </div> <!-- modal-footer -->
+									    </div> <!-- modal-content -->
+								  	</div> <!-- modal-dialog -->
+								</div> <!--modal fad -->
 						</td>
 						<td></td>
 					</tr>
