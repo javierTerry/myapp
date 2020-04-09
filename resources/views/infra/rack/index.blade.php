@@ -47,10 +47,11 @@
 							</div>
 
 							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-								{!! Form::open([ 'route' => ['infra.rack.destroy', $item], 'metdod' => 'DELETE' ]) !!}
+								{!! Form::open([ 'route' => ['infra.dcs.destroy', $item], 'metdod' => 'DELETE' ]) !!}
 									<button type="submit" class="btn btn-danger" >
 										Eliminar 
-									</button><a href="{{ route('infra.rack.edit', $item -> id) }}" class="btn btn-info" >Editar</a> 
+									</button>
+									<a href="{{ route('infra.dcs.edit', $item -> id) }}" class="btn btn-info" ><i class="ace-icon fa fa-pencil"></i></a>
 								{!! Form::close() !!} 				
 							</div> 
 						</td>

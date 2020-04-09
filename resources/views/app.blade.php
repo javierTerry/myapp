@@ -15,7 +15,6 @@
 
 	<!-- FUENTES DE TEXTO . CSS -->
 	<link href="{{ asset('/css/new/fonts.googleapis.com.css') }}" rel="stylesheet">
-	<!-- ESTILOS CSS -->
 	<link href="{{ asset('/css/new/ace.min.css') }}" rel="stylesheet" class="ace-main-stylesheet" id="main-ace-style">
 	<link href="{{ asset('/css/new/ace-skins.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/new/ace-rtl.min.css') }}" rel="stylesheet">
@@ -23,14 +22,15 @@
 
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	
 
-
-	<script src="{{{ URL::asset('js/jquery-2.1.4.min.js')}}}"></script>
-	<script src="{{{ URL::asset('js/jquery-ui.min.js')}}}"></script>
-	<script src="{{{ URL::asset('js/jquery.dataTables.min.js')}}}"></script>
-	<script src="{{{ URL::asset('js/jquery.dataTables.bootstrap.min.js')}}}"></script>
-  	<script src="{{{ URL::asset('js/jquery.jqGrid.min.js')}}}"></script>
+	<script type="text/javascript" src="{{{ URL::asset('js/jquery-2.1.4.min.js')}}}"></script>
+	<script type="text/javascript" src="{{{ URL::asset('js/jquery-ui.min.js')}}}"></script>
+	<script type="text/javascript" src="{{{ URL::asset('js/jquery.dataTables.min.js')}}}"></script>
+	<script type="text/javascript" src="{{{ URL::asset('js/jquery.dataTables.bootstrap.min.js')}}}"></script>
+	<script type="text/javascript" src="{{{ URL::asset('js/dataTables.buttons.min.js')}}}"></script>
+	
+  	<script type="text/javascript" src="{{{ URL::asset('js/jquery.jqGrid.min.js')}}}"></script>
   		<script type="text/javascript">
 		if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 	</script>
@@ -268,9 +268,6 @@
 
 			<!-- Menu -->
 			@include('Menu/principal')
-
-
-			
 		</div> <!-- sidebar -->
 		
 

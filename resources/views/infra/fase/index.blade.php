@@ -48,12 +48,13 @@
 									<span class="btn btn-link">Acciones</span>
 								</button>
 							</div>
-
 							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
 								{!! Form::open([ 'route' => ['infra.fase.destroy', $item], 'metdod' => 'DELETE' ]) !!}
+								{{method_field('DELETE')}}
 									<button type="submit" class="btn btn-danger" >
 										Eliminar 
-									</button><a href="{{ route('infra.fase.edit', $item -> id) }}" class="btn btn-info" >Editar</a> 
+									</button>
+									<a href="{{ route('infra.fase.edit', $item -> id) }}" class="btn btn-info" ><i class="ace-icon fa fa-pencil"></i></a>
 								{!! Form::close() !!} 				
 							</div>
 						</td>

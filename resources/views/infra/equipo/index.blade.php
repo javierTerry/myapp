@@ -52,9 +52,11 @@
 								{!! Form::open([ 'route' => ['infra.equipo.destroy', $item], 'metdod' => 'DELETE' ]) !!}
 									<button type="submit" class="btn btn-danger" >
 										Eliminar 
-									</button><a href="{{ route('infra.equipo.edit', $item -> id) }}" class="btn btn-info" >Editar</a> 
+									</button>
+									<a href="{{ route('infra.equipo.edit', $item -> id) }}" class="btn btn-info" ><i class="ace-icon fa fa-pencil"></i></a>
 								{!! Form::close() !!} 				
 							</div>
+
 						</td>
 						<td></td>
 					</tr>		

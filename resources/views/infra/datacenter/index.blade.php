@@ -51,13 +51,34 @@
 								</div>
 
 								<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-									{!! Form::open([ 'route' => ['infra.dcs.destroy', $item], 'metdod' => 'DELETE' ]) !!}
-										<button type="submit" class="btn btn-danger" >
-											Eliminar 
-										</button><a href="{{ route('infra.dcs.edit', $item -> id) }}" class="btn btn-info" >Editar</a> 
-									{!! Form::close() !!} 				
-								</div>
+									<a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modal{{ $item -> id }}" ><i class="ace-icon fa fa-trash-o"></i></a>
+									<a href="{{ route('infra.dcs.edit', $item -> id) }}" class="btn btn-info" ><i class="ace-icon fa fa-pencil"></i></a>
 
+								</div><!-- id="bs-example-navbar-collapse-2 -->			
+
+								<div class="modal fade" id="modal{{ $item -> id }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+								  aria-hidden="true">
+									<div class="modal-dialog" role="document">
+									    <div class="modal-content">
+									    	<div class="modal-body">
+									        	<p class="bigger-50 bolder center grey">
+													<i class="ace-icon fa fa-hand-o-right blue bigger-120"></i>
+													
+													Seguro que quieres eliminar el ID {{ $item -> id }} con NOMBRE {{ $item -> name}}?  	
+												</p>
+									      	</div>
+									      <div class="modal-footer">
+									      	{!! Form::open([ 'route' => ['infra.dcs.destroy', $item], 'metdod' => 'PUT' ]) !!}
+									      		{{method_field('DELETE')}}
+												<button type="submit" class="btn btn-danger" >
+													OK
+												</button>
+												 <input type="button"  value="Close" data-dismiss="modal" class="btn btn-info" /> 							
+											{!! Form::close() !!}
+									      </div>
+									    </div>
+								  	</div>
+								</div>
 							</td>
 							<td>
 						</tr>
@@ -70,4 +91,28 @@
 	</div> <!-- class="col-xs-12" -->
 </div> <!-- class="row" -->
 				
+<script>
+
+	var dialogEliminar = $( ".dialog-eliminar" ).on('click', function(e) {
+			e.preventDefault();
+			
+			console.log( $(this).attr('id') )
+			;
+			dialogModal = $( ".dialog-modal" ).removeClass('hide').dialog({
+				resizable: false,
+				width: '320',
+				modal: true,
+				title: " Eliminar registro?",
+				title_html: true,
+			});
+	});
+
+
+
+	$ (".btnClosePopup").on('click', function(e) {
+		$( ".dialog-modal" ).addClass('hide dialog-modal');
+		console.log("Cerrando");
+	});
+	</script>
+
 @endsection
