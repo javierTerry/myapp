@@ -41,11 +41,8 @@
 						<td>{{ $item -> iphw}}</td>
 						<td>{{ $item -> serie}}</td>
 						<td> 
-							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-								<a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modal{{ $item -> id }}" ><i class="ace-icon fa fa-trash-o"></i></a>
-								<a href="{{ route('infra.equipo.edit', $item -> id) }}" class="btn btn-info" ><i class="ace-icon fa fa-pencil"></i></a>
-
-							</div><!-- id="bs-example-navbar-collapse-2 -->			
+							<a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modal{{ $item -> id }}" ><i class="ace-icon fa fa-trash-o"></i></a>
+							<a href="{{ route('infra.equipo.edit', $item -> id) }}" class="btn btn-info" ><i class="ace-icon fa fa-pencil"></i></a>
 
 							<div class="modal fade" id="modal{{ $item -> id }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
 							  aria-hidden="true">
@@ -55,7 +52,7 @@
 								        	<p class="bigger-50 bolder center grey">
 												<i class="ace-icon fa fa-hand-o-right blue bigger-120"></i>
 												
-												Seguro que quieres eliminar el ID {{ $item -> id }} con NOMBRE {{ $item -> name}}?  	
+												Seguro que quieres eliminar el ID {{ $item -> id }} con NOMBRE {{ $item -> hostname}}?  	
 											</p>
 								      	</div>
 									     <div class="modal-footer">

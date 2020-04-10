@@ -38,23 +38,18 @@
 						<tr>
 							<td></td>
 							<td>{{ $item -> id}}</td>
-							<td>{{ $item -> name}}</td>
-							<td>{{ $item -> desc}}</td>
+							<td>{{ $item -> name}} <i class="ace-icon fa fa-check bigger-110 green"></i></td>
+							<td>{{ $item -> desc}} <i class="ace-icon fa fa-bell-o bigger-110 purple"></i></td>
 							<td>{{ $item -> no_fase}}</td>
 
 							<td>	
-								<div class="navbar-header">
-									<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
-										<span class="sr-only">Toggle Navigation</span>
-										<span class="btn btn-link">Acciones</span>
-									</button>
-								</div>
-
-								<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-									<a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modal{{ $item -> id }}" ><i class="ace-icon fa fa-trash-o"></i></a>
-									<a href="{{ route('infra.dcs.edit', $item -> id) }}" class="btn btn-info" ><i class="ace-icon fa fa-pencil"></i></a>
-
-								</div><!-- id="bs-example-navbar-collapse-2 -->			
+								
+								<a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modal{{ $item -> id }}" >
+									<i class="ace-icon fa fa-trash-o"></i>
+								</a>
+								<a href="{{ route('infra.dcs.edit', $item -> id) }}" class="btn btn-info" >
+									<i class="ace-icon fa fa-pencil"></i>
+								</a>
 
 								<div class="modal fade" id="modal{{ $item -> id }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
 								  aria-hidden="true">
