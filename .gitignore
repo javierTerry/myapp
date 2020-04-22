@@ -2,3 +2,5 @@ vendor/
 .project
 composer.lock
 .env
+*.sql
+

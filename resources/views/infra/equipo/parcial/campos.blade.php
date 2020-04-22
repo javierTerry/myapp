@@ -1,24 +1,56 @@
 <div class="form-group">
-	{!! Form::label('hostname', 'HOSTNAME') !!}
-	{!! Form::text('hostname', null,
-	['class' 		=> 'form-control'
-	,'placeholder'	=> 'Introduce el hostname del equipo'])
-	!!}
+	<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Text Field </label>
+
+	<div class="col-sm-9">
+		<input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />
+	</div>
 </div>
+<div class="space-6"></div>
+
+<br></br>
+<p></p>
+
 <div class="form-group">
-	{!! Form::label('iphw', 'IP HW') !!}
+	<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Full Length </label>
+
+	<div class="col-sm-9">
+		<input type="text" id="form-field-1-1" placeholder="Text Field" class="form-control" />
+	</div>
+</div>
+
+
+<div class="form-group">
+	{!! Form::label('hostname', 'HOSTNAME'
+		, ['class'	=> 'col-sm-3 control-label no-padding-right']) 
+	!!}
+	<div class="col-sm-9">
+		{!! Form::text('hostname', null,
+			['class' 		=> 'col-xs-10 col-sm-12'
+			,'placeholder'	=> 'Introduce el hostname del equipo'])
+		!!}
+	</div>
+</div>
+
+
+<div class="form-group">
+	{!! Form::label('iphw', 'IP HW'
+		, ['class' 		=> 'col-sm-2 ']) 
+	!!}
 	{!! Form::text('iphw', null,
-	['class' 		=> 'form-control'
-	,'placeholder'	=> 'Introduce la IP de hardware'])
+		['class' 		=> 'col-xs-10'
+		,'placeholder'	=> 'Introduce la IP de hardware'])
 	!!}
 </div>
+
 <div class="form-group">
-	{!! Form::label('serie', 'NO SERIE') !!}
-	{!! Form::text('serie', null,
-	['class' 		=> 'form-control'
-	,'placeholder'	=> 'Introduce el numero de serie '])
-	!!}
+	<label class="col-sm-2 control-label " for=""> No. SERIE </label>
+		{!! Form::text('serie', null,
+			['class' 		=> 'col-xs-10'
+			,'placeholder'	=> 'Introduce el numero de serie '])
+		!!}
 </div>
+	
+
 <div class="form-group">
 	{!! Form::label('soporte', 'RESPONSABLE') !!}
 	{!! Form::text('soporte', null,

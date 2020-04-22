@@ -12,7 +12,7 @@ class CreateCatalogosAreaTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('catalogo_areas', function(Blueprint $table)
+		Schema::create('catalogo_areas', function(Blueprint $table)
 		{
 			$table->integer('clave_area');
 			$table->string('desc_area',10);
