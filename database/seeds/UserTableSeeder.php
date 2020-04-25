@@ -42,7 +42,7 @@ class UserTableSeeder extends Seeder {
 
 		\DB::table('users')->insert(array(
 			'name' 	=> 'Gustavo Cuatepotzo'
-			,'email'=> 'mruiz@kionetworks.com'
+			,'email'=> 'gcuatepotzo@kionetworks.com'
 			,'password'	=>	\Hash::make('gus$01QRO1')
 			,
 			));
