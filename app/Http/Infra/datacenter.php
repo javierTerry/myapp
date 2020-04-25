@@ -14,13 +14,14 @@
 
 
 
-Route::group([ 'prefix' => 'infra', 'namespace' => 'Infra' ], function () {
+Route::group([ 'prefix' => 'infra'
+	, 'namespace' => 'Infra' 
+	, 'middleware' => 'auth']
+
+	, function () {
 
 	Route::get('/dcs/ping', 
 		function () {
-
-
-
 
 	    	return 'ping';
 	    }

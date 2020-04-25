@@ -185,8 +185,11 @@
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
 								
 								<span class="user-info">
-									<small>Welcome,</small>
-									Jason
+									<small>Welcome,
+									</br>
+										{{Auth::user()->name}}
+									</small>
+									
 								</span>
 
 								<i class="ace-icon fa fa-caret-down"></i>
@@ -201,7 +204,7 @@
 								</li>
 
 								<li>
-									<a href="profile.html">
+									<a href="#">
 										<i class="ace-icon fa fa-user"></i>
 										Profile
 									</a>
@@ -210,7 +213,7 @@
 								<li class="divider"></li>
 
 								<li>
-									<a href="#">
+									<a href="{{ url('/auth/logout') }}">  
 										<i class="ace-icon fa fa-power-off"></i>
 										Logout
 									</a>
@@ -235,38 +238,12 @@
 				try{ace.settings.loadState('sidebar')}catch(e){}
 			</script>
 
-			<div class="sidebar-shortcuts" id="sidebar-shortcuts">
-				<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-					<button class="btn btn-success">
-						<i class="ace-icon fa fa-signal"></i>
-					</button>
-
-					<button class="btn btn-info">
-						<i class="ace-icon fa fa-pencil"></i>
-					</button>
-
-					<button class="btn btn-warning">
-						<i class="ace-icon fa fa-users"></i>
-					</button>
-
-					<button class="btn btn-danger">
-						<i class="ace-icon fa fa-cogs"></i>
-					</button>
-				</div>
-
-				<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
-					<span class="btn btn-success"></span>
-
-					<span class="btn btn-info"></span>
-
-					<span class="btn btn-warning"></span>
-
-					<span class="btn btn-danger"></span>
-				</div>
-			</div><!-- /.sidebar-shortcuts -->
+					
 
 
-			<!-- Menu -->
+			<!-- Menu 
+			@include('Menu/sidebar-shortcuts') 
+			-->
 			@include('Menu/principal')
 		</div> <!-- sidebar -->
 		

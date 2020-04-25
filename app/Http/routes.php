@@ -18,7 +18,7 @@ Route::get('empleado', 'EmpleadoController@index');
 Route::get('empleadoorm', 'EmpleadoController@indexOrm');
 
 
-Route::group([ 'prefix' => 'admin', 'namespace' => 'Admin' ], function () {
+Route::group([ 'prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth' ], function () {
 	Route::resource('users','UsersController');	 	
 	Route::resource('puestos','PuestosController');
 	Route::resource('roles','RolesController');
