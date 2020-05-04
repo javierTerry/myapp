@@ -9,6 +9,7 @@
 	<!--<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
 	-->
 	<!-- BOOTSTRAPS & FONTAWESOME -->
+	
 	<link href="{{ asset('/css/new/bootstrap.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/new/font-awesome/4.5.0/css/font-awesome.min.css') }}" rel="stylesheet">
 

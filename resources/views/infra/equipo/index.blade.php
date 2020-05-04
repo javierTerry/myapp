@@ -37,7 +37,11 @@
 					<tr>
 						<td></td>
 						<td>{{ $item -> id}}</td>
-						<th>{{ $item -> hostname}}</td>
+						<td>
+							{{ $item -> hostname}}
+							<i class="ace-icon fa {{ $item-> alarmado ? 'fa-times red2' : 'fa-check bigger-110 green' }}"></i>
+									  
+						</td>
 						<td>{{ $item -> iphw}}</td>
 						<td>{{ $item -> serie}}</td>
 						<td> 

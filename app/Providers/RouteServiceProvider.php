@@ -38,10 +38,10 @@ class RouteServiceProvider extends ServiceProvider {
 		$router->group(['namespace' => $this->namespace], function($router)
 		{
 			require app_path('Http/routes.php');
-			require app_path('Http/Infra/datacenter.php');
-			require app_path('Http/Infra/fase.php');
-			require app_path('Http/Infra/rack.php');
-			require app_path('Http/Infra/equipo.php');
+			require app_path('Http/Routes/Infra/datacenter.php');
+			require app_path('Http/Routes/Infra/fase.php');
+			require app_path('Http/Routes/Infra/rack.php');
+			require app_path('Http/Routes/Infra/equipo.php');
 		});
 	}
 

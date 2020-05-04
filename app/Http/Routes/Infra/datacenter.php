@@ -13,15 +13,22 @@
 
 
 
-Route::group([ 'prefix' => 'infra', 'namespace' => 'Infra' ], function () {
 
-	Route::get('/rack/ping', 
+Route::group([ 'prefix' => 'infra'
+	, 'namespace' => 'Infra' 
+	, 'middleware' => 'auth']
+	, function () {
+
+	Route::get('/dcs/ping', 
 		function () {
-	    	return '<h1>DATACENTER PING</h1>';
+
+	    	return 'ping';
 	    }
 	);
-	
-	Route::resource('rack','RackController');
+	Route::resource('dcs','DataCenterController');
 	
 });
 
+
+
+return view('welcome');

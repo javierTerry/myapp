@@ -13,15 +13,17 @@
 
 
 
-Route::group([ 'prefix' => 'infra', 'namespace' => 'Infra' ], function () {
-
-	Route::get('/equipo/ping', 
+Route::group([ 'prefix' => 'infra'
+	, 'namespace' => 'Infra' 
+	, 'middleware' => 'auth']
+	, function () {
+	Route::get('/fase/ping', 
 		function () {
-	    	return '<h1>EQUIPO PING</h1>';
+	    	return '<h1>FASE PING</h1>';
 	    }
 	);
 	
-	Route::resource('equipo','EquipoController');
+	Route::resource('fase','FaseController');
 	
 });
 

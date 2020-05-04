@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 
 use Log;
 use App\Model\Infra\Equipo;
+use App\Model\Infra\EquipoHistorial;
 use App\Model\Infra\Rack;
 
 class EquipoController extends Controller
@@ -83,10 +84,19 @@ class EquipoController extends Controller
     public function edit($id)
     {
         Log::debug("Equipo Controller edit ".$id);
+        \DB::enableQueryLog();
         $equipo = Equipo::find($id);
+        
         $rack  = Rack::all();
         
-        return view('infra.equipo.editar', compact('equipo', 'rack'));
+        $equipoHisorial = EquipoHistorial::idEquipo($id)
+                        ->get();
+
+        $quries = \DB::getQueryLog();        
+        #dd($quries);
+        #dd($equipoHisorial);
+        
+        return view('infra.equipo.editar', compact('equipo', 'rack', 'equipoHisorial'));
     }
 
     /**
@@ -100,13 +110,16 @@ class EquipoController extends Controller
     {
         Log::debug('Equipo actualizar id: '.$id);
         
+        #dd($request->all());
         $item = Equipo::findOrFail($id);
         $item -> fill($request->all());
+        
         $item -> save();
 
-        $notices = array("Actualizacion correcta de ".$item -> hostname);
+        $tmp = sprintf("Actualizacion correcta de %s con id %d", $item -> hostname, $id);
+        $notices = array($tmp);
 
-        return \Redirect::route('infra.equipo.index') -> with ('notices',$notices);
+        return \Redirect::route('infra.equipo.edit', ['id'=>$id]) -> with ('notices',$notices);
     }
 
     /**
@@ -124,4 +137,5 @@ class EquipoController extends Controller
 
         return \Redirect::route('infra.equipo.index') -> with ('notices',$notices);
     }
+
 }
