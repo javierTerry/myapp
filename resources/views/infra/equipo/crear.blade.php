@@ -11,8 +11,10 @@
 					@include('errors.parcial.campos_error')
 					{!! Form::open([ 'route' => 'infra.equipo.store', 'method' => 'POST' ]) !!}
 						@include('infra.equipo.parcial.campos')
-						  <button type="submit" class="btn btn-success" >Guardar </button>
-						  <a href="{{ route('infra.equipo.index') }}" class="btn btn-danger" >Cancelar</a>
+						  <div class="form-actions center no-padding-right">
+								<button type="submit" class="btn btn-success" >Guardar Cambios</button>
+								
+							</div>
 					{!! Form::close() !!}
 				</div>
 			</div>

@@ -17,7 +17,7 @@
 		@include('errors.parcial.campos_error')
 		@include('errors.parcial.campos_notices')
 
-		<a class="btn btn-success" href=" {{ route('infra.dcs.create') }} " role="button"> Nuevo  </a>
+		<a class="btn btn-success" href=" {{ route('infra.equipo.create') }} " role="button"> Nuevo  </a>
 
 		<div class="table-responsive text-center">
 			<table class="table table-striped table-bordered table-hover" id="dynamic-table">
@@ -85,3 +85,4 @@
 
 
 @endsection
+
