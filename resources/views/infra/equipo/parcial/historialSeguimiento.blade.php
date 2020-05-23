@@ -23,7 +23,7 @@
 
 <div class="form-group">
 	{!! Form::text('id_equipo', $equipo->id ,
-		['class' 		=> ''])
+		['class' 		=> 'hidden'])
 	!!} 
 </div>
 

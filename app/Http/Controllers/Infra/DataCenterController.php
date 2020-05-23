@@ -20,13 +20,11 @@ class DataCenterController extends Controller
      */
     public function index(Request $request)
     {
-        //dd();
 
         Log::info('DATACENTER index ');
-        $urlupload = 'fnz.carteras.store';
-        $dcs  = DatacenterView::name( $request -> get('name') ) ->get();
-
-        return view('infra.datacenter.index', compact('dcs', 'urlupload', 'dcs'));
+        $dcs = DatacenterView::all();
+ 
+        return view('infra.datacenter.index', compact('dcs'));
 
     }
 
@@ -54,13 +52,12 @@ class DataCenterController extends Controller
             Log::info('Datacenter store');
 
             $dc = new Datacenter();
-            #dd($request->all());
             $dc -> name  = $request->get('name');
             $dc -> desc  = $request->get('desc');
             
             $dc -> save();
             
-            $notices = array("Carga exitosa");
+            $notices = array("Carga exitosa ".$dc -> name);
 
             return \Redirect::route('infra.dcs.index') -> with ('notices',$notices);
         } catch (Exception $e) {
@@ -123,9 +120,10 @@ class DataCenterController extends Controller
      */
     public function destroy($id)
     {
-        $item = Datacenter::find($id);
-        $notices = array("Datacenter ". $item -> name. " eliminado");
-        $item->delete();
+        $item = Datacenter::findOrFail($id);
+        $notices = array("Datacenter ". $item -> name. " borrado");
+        $item->status = 0;
+        $item->save();
         
 
         return \Redirect::route('infra.dcs.index') -> with ('notices',$notices);

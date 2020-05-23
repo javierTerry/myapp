@@ -8,11 +8,11 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "laravel/framework": "5.1.1",
-        "illuminate/html": "5.*",
+        "laravel/framework": "5.2.0",
         "tymon/jwt-auth": "0.5.*",
-        "doctrine/dbal": "v2.5.4"
-        ,"symfony/console": "2.7.*"
+        "doctrine/dbal": "v2.5.4",
+        "laravelcollective/bus": "^5.2.0"
+        ,"laravelcollective/html": "^5.2"
 
         
     },
@@ -20,8 +20,8 @@
         "phpspec/phpspec": "2.5.8",
         "fzaninotto/faker": "1.5.*@dev",
         "composer/composer": "^1.10"
-        ,"symfony/dom-crawler": "2.7.*"
-        ,"symfony/css-selector": "2.7.*"
+        ,"symfony/dom-crawler": "~3.0"
+        ,"symfony/css-selector": "~3.0"
     },
     "autoload": {
         "classmap": [

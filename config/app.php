@@ -2,6 +2,7 @@
 
 return [
 
+	'env' => env('APP_ENV', 'production'),
 	/*
 	|--------------------------------------------------------------------------
 	| Application Debug Mode
@@ -115,12 +116,13 @@ return [
 		/*
 		 * Laravel Framework Service Providers...
 		 */
-		'Illuminate\Foundation\Providers\ArtisanServiceProvider',
+	#	'Illuminate\Foundation\Providers\ArtisanServiceProvider',
+		# 'Collective\Bus\BusServiceProvider::class',
 		'Illuminate\Auth\AuthServiceProvider',
-		'Illuminate\Bus\BusServiceProvider',
+		#'Illuminate\Bus\BusServiceProvider',
 		'Illuminate\Cache\CacheServiceProvider',
 		'Illuminate\Foundation\Providers\ConsoleSupportServiceProvider',
-		'Illuminate\Routing\ControllerServiceProvider',
+	#	'Illuminate\Routing\ControllerServiceProvider',
 		'Illuminate\Cookie\CookieServiceProvider',
 		'Illuminate\Database\DatabaseServiceProvider',
 		'Illuminate\Encryption\EncryptionServiceProvider',
@@ -136,18 +138,19 @@ return [
 		'Illuminate\Session\SessionServiceProvider',
 		'Illuminate\Translation\TranslationServiceProvider',
 		'Illuminate\Validation\ValidationServiceProvider',
-		'Illuminate\View\ViewServiceProvider',
-		'Illuminate\Html\HtmlServiceProvider'
+		'Illuminate\View\ViewServiceProvider'
+		#'Illuminate\Html\HtmlServiceProvider'
 		,'Tymon\JWTAuth\Providers\JWTAuthServiceProvider'
 
 		/*
 		 * Application Service Providers...
 		 */
 		,'App\Providers\AppServiceProvider',
-		'App\Providers\BusServiceProvider',
 		'App\Providers\ConfigServiceProvider',
 		'App\Providers\EventServiceProvider',
-		'App\Providers\RouteServiceProvider',
+		'App\Providers\RouteServiceProvider'
+		,'Collective\Html\HtmlServiceProvider'
+
 
 	],
 
@@ -195,10 +198,10 @@ return [
 		'Storage'   => 'Illuminate\Support\Facades\Storage',
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
-		'View'      => 'Illuminate\Support\Facades\View',
-		'Form'      => 'Illuminate\Html\FormFacade',
-    	'Html'      => 'Illuminate\Html\HtmlFacade'
-    	,'JWTAuth' 	=> 'Tymon\JWTAuth\Facades\JWTAuth'
+		'View'      => 'Illuminate\Support\Facades\View'
+		,'JWTAuth' 	=> 'Tymon\JWTAuth\Facades\JWTAuth'
+    	,'Form' 	=> 'Collective\Html\FormFacade'
+		,'Html' 	=> 'Collective\Html\HtmlFacade'
 
 	],
 
