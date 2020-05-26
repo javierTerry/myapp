@@ -12,14 +12,14 @@ class RackView extends Model
 	 * @var string
 	 */
 
-	protected $table = 'rack_equipo';
+	protected $table = 'rackView';
 
 	/**
 	 * The attributes that are mass assignable.
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['id', 'coordenada', 'ur', 'name', 'no_equipo' ];
+	protected $fillable = ['id', 'coordenada', 'ur', 'name', 'no_equipo', 'dc' ];
 	
 	
 	/**

@@ -22,7 +22,7 @@ class RackController extends Controller
     {
 
         Log::info('RACK index ');
-        $racks  = RackView::name( $request ->get('name')) -> get();
+        $racks  = RackView::all();
         return view('infra.rack.index', compact('racks') );
     }
 
@@ -116,9 +116,10 @@ class RackController extends Controller
      */
     public function destroy($id)
     {
-        $item = Rack::find($id);
-        $notices = array("Rack ". $item -> name. " eliminado");
-        $item->delete();
+        $item = Rack::findOrFail($id);
+        $notices = array("Rack ". $item -> name. " borrado");
+        $item -> status = 0;
+        $item->save();
         
 
         return \Redirect::route('infra.rack.index') -> with ('notices',$notices);

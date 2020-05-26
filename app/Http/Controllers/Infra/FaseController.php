@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 use Log;
 use App\Model\Infra\Fase;
 use App\Model\Infra\FaseView;
-use App\Model\Infra\Datacenter;
+use App\Model\Infra\DatacenterView;
 
 class FaseController extends Controller
 {
@@ -22,7 +22,7 @@ class FaseController extends Controller
     public function index(Request $request )
     {
         Log::info('Fase index ');
-        $fases  = FaseView::name( $request -> get('name')) -> get();
+        $fases  = FaseView::all();
 
         return view('infra.fase.index', compact('fases') );
     }
@@ -35,7 +35,7 @@ class FaseController extends Controller
     public function create()
     {
         
-        $dcs  = Datacenter::all();
+        $dcs  = DatacenterView::all();
         $fase = new Fase();
 
         return view('infra.fase.crear', compact('dcs', 'fase'));
@@ -54,7 +54,7 @@ class FaseController extends Controller
               
             $item = new Fase($request->all());
             $item -> save();
-            $notices = array("Carga exitosa");
+            $notices = array("Carga exitosa ".$item -> name);
 
             return \Redirect::route('infra.fase.index') -> with ('notices',$notices);
         } catch (Exception $e) {
@@ -83,7 +83,7 @@ class FaseController extends Controller
     {
         Log::debug("Fase Controller edit ".$id);
         $fase = Fase::find($id);
-        $dcs  = Datacenter::all();
+        $dcs  = DatacenterView::all();
         return view('infra.fase.editar', compact('fase', 'dcs'));
     }
 
@@ -114,9 +114,10 @@ class FaseController extends Controller
      */
     public function destroy($id)
     {
-        $item = Fase::find($id);
-        $notices = array("Fase ". $item -> name. " eliminado");
-        $item->delete();
+        $item = Fase::findOrFail($id);
+        $notices = array("CI ". $item -> name. " borrado");
+        $item->status = 0;
+        $item->save();
         
 
         return \Redirect::route('infra.fase.index') -> with ('notices',$notices);

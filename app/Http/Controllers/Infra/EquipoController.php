@@ -23,7 +23,7 @@ class EquipoController extends Controller
     public function index(Request $request)
     {
         Log::info('EQUIPO index ');
-        $equipos  = Equipo::hostname( $request -> get('hostname')) ->get();
+        $equipos  = Equipo::all();
 
         return view('infra.equipo.index', compact('equipos') );
     }
