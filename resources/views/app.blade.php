@@ -20,6 +20,7 @@
 	<link href="{{ asset('/css/new/ace-skins.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/new/ace-rtl.min.css') }}" rel="stylesheet">
 
+	<link href="{{ asset('/css/datatables/buttons.1.6.2.min.css') }}" rel="stylesheet">
 
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
@@ -41,6 +42,24 @@
 	<script type="text/javascript" src="{{URL::asset('js/jquery.maskMoney.js')}}" ></script>
 	<script type="text/javascript" src="{{URL::asset('js/ace-extra.min.js')}}" ></script>
 	<script type="text/javascript" src="{{URL::asset('js/ace.min.js')}}" ></script>
+
+<!--
+    https://code.jquery.com/jquery-3.5.1.js
+    https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js
+    https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js
+
+    https://cdn.datatables.net/buttons/1.6.2/js/buttons.flash.min.js
+    https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js
+    https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js
+    https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js
+
+    https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js
+    https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js 
+-->
+
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js" ></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js" ></script>
+
 
 
 	
@@ -289,25 +308,20 @@
 		$('#dynamic-table')
 		//.wrap("<div class='dataTables_borderWrap' />")   //if you are applying horizontal scrolling (sScrollX)
 		.DataTable( {
-			bAutoWidth: false,
-			"aoColumns": [
-			  { "bSortable": false },
-			  null, null,null, null, null,
-			  { "bSortable": false }
-			],
-			"aaSorting": [],
-			
-			 "columnDefs": [
-	            {
-	                "targets": [ 0 ],
-	                "visible": false,
-	                "searchable": false
-	            }
-	        ]
-	
-			,select: {
+			select: {
 				style: 'multi'
 			}
+			,dom: 'Bfrtip'
+			,buttons: [
+				{
+		           extend: 'csv',
+		           exportOptions: {
+		                columns: ':not(.notexport)'
+		            }
+		       }    
+	           
+	        ]
+
 			, "pagingType": "full_numbers"
 			,language: {
 			    "decimal": "",
@@ -330,8 +344,13 @@
 			    }
 			}
 	    } );
-		
-	
+
+
+		$(document).on('click', '#dynamic-table .dropdown-toggle', function(e) {
+			e.stopImmediatePropagation();
+			e.stopPropagation();
+			e.preventDefault();
+		});
 	});
 </script>
 

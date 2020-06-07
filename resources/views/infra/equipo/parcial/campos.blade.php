@@ -6,17 +6,17 @@
 	{!! Form::label('alarmadoLbl', ' TIENE ALARMA ?'
 		, ['class'	=> 'col-xs-3']) 
 	!!}
-		<div class="col-xs-4">
+		<div class="col-xs-6">
 			<label>
 				<input name="alarmadoSwtich" id="switchAlarma"  class="ace ace-switch ace-switch-5"  
-				type="checkbox" {{ ( $equipo->alarmado ) ? 'checked' : '' }} 
+					type="checkbox" {{ ( $equipo->alarmado ) ? 'checked' : '' }} 
 				 />
 				<span class="lbl"></span>
 			</label>
 		</div>
 
-		<a href="{{ route('infra.equipo.index') }}" class="btn btn-info" >Regresar</a>
 </div>
+
 <div class="form-group">
 	{!! Form::text('alarmado', $equipo->alarmado ,
 		['class' 		=> 'hidden'
@@ -127,10 +127,25 @@
 	$(function() {
 	    $( "#switchAlarma" ).click(function(){
 	    	console.log($(this).get(0).checked);
-	    	var alarmado = ( $(this).get(0).checked) ? 1 : 0
-	    	
+	    	var alarmado = ( $(this).get(0).checked) ? 1 : 0	    	
 	    	document.getElementById("alarmado").value = alarmado
+
+	    	var x = document.getElementById("myDIV");
+			  if (x.style.display === "none") {
+			    x.style.display = "block";
+			  } else {
+			    x.style.display = "none";
+			  }
 	    });
 	});
 
 </script>
+
+
+
+
+
+
+
+
+FOC2020R263

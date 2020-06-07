@@ -83,17 +83,16 @@ class EquipoController extends Controller
      */
     public function edit($id)
     {
-        Log::debug("Equipo Controller edit ".$id);
-        \DB::enableQueryLog();
+        Log::info("Equipo Controller edit ".$id);
+        #\DB::enableQueryLog();
         $equipo = Equipo::find($id);
         
         $rack  = Rack::all();
         
-        $equipoHisorial = EquipoHistorial::idEquipo($id)
+        $equipoHisorial = EquipoHistorial::where('id_equipo','=',$id)
+                        ->orderBy('id', 'desc')
                         ->get();
-
-        $quries = \DB::getQueryLog();        
-        #dd($quries);
+        #$quries = \DB::getQueryLog();        
         #dd($equipoHisorial);
         
         return view('infra.equipo.editar', compact('equipo', 'rack', 'equipoHisorial'));
@@ -110,8 +109,8 @@ class EquipoController extends Controller
     {
         Log::debug('Equipo actualizar id: '.$id);
         
-        #dd($request->all());
         $item = Equipo::findOrFail($id);
+        #dd($request->all());
         $item -> fill($request->all());
         
         $item -> save();
@@ -130,9 +129,10 @@ class EquipoController extends Controller
      */
     public function destroy($id)
     {
-        $item = Equipo::find($id);
-        $notices = array("Equipo ". $item -> hostname. " eliminado");
-        $item->delete();
+        $item = Equipo::findOrFail($id);
+        $notices = array("Equipo ". $item -> hostname. " borrado");
+        $item -> status = 0;
+        $item->save();
         
 
         return \Redirect::route('infra.equipo.index') -> with ('notices',$notices);

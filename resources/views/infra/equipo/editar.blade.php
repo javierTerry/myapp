@@ -23,6 +23,7 @@
 					@include('infra.equipo.parcial.campos')
 
 					<div class="form-actions center no-padding-right">
+						<a href="{{ route('infra.equipo.index') }}" class="btn btn-info" >Regresar</a>
 						<button type="submit" class="btn btn-success" >Guardar Cambios</button>
 						
 					</div>

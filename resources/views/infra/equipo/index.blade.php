@@ -20,22 +20,27 @@
 		<a class="btn btn-success" href=" {{ route('infra.equipo.create') }} " role="button"> Nuevo  </a>
 
 		<div class="table-responsive text-center">
+			<div class="clearfix">
+				<div class="pull-right tableTools-container"></div>
+			</div>
+
 			<table class="table table-striped table-bordered table-hover" id="dynamic-table">
 				<thead>
 					<tr>
-						<th></th>
+						
 						<th>ID</th>
 						<th>HOSTNAME</th>
 						<th>I P</th>
 						<th>NS</th>
-						<th class="sorting_disabled"></th>
-						<th class="sorting_disabled"></th>
+						<th>MODELO</th>
+						<th class="sorting_disabled notexport"></th>
+						
 					</tr>
 				</thead>
 				<tbody>
 					@foreach( $equipos as $item)
 					<tr>
-						<td></td>
+						
 						<td>{{ $item -> id}}</td>
 						<td>
 							{{ $item -> hostname}}
@@ -44,6 +49,7 @@
 						</td>
 						<td>{{ $item -> iphw}}</td>
 						<td>{{ $item -> serie}}</td>
+						<td>{{ $item -> modelo}}</td>
 						<td> 
 							<a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modal{{ $item -> id }}" ><i class="ace-icon fa fa-trash-o"></i></a>
 							<a href="{{ route('infra.equipo.edit', $item -> id) }}" class="btn btn-info" ><i class="ace-icon fa fa-pencil"></i></a>
@@ -73,7 +79,6 @@
 							</div> <!--modal fad -->
 
 						</td>
-						<td></td>
 					</tr>		
 					@endforeach
 						
@@ -82,7 +87,6 @@
 		</div> <!-- class="table-responsive text-center"--> 
 	</div> <!-- class="col-xs-12" -->
 </div> <!-- class="row" -->
-
 
 @endsection
 
