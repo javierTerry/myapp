@@ -23,20 +23,17 @@
 			<table class="table table-striped table-bordered table-hover" id="dynamic-table">
 				<thead>
 					<tr>
-						<th></th>
 						<th>ID</th>
 						<th>NAME</th>
 						<th>DESCRIPCION</th>
 						<th>No. de Fases</th>
-						<th class="sorting_disabled"></th>
-						<th class="sorting_disabled"></th>
+						<th class="sorting_disabled notexport"></th>
 						
 					</tr>
 				</thead>
 				<tbody>
 					@forelse( $dcs as $item)
 						<tr>
-							<td></td>
 							<td>{{ $item -> id}}</td>
 							<td>{{ $item -> name}} <i class="ace-icon fa fa-check bigger-110 green"></i></td>
 							<td>{{ $item -> desc}} <i class="ace-icon fa fa-bell-o bigger-110 purple"></i></td>
@@ -75,7 +72,7 @@
 								  	</div> <!-- modal-dialog -->
 								</div> <!--modal fad -->
 							</td>
-							<td>
+							
 						</tr>
 					@empty
 					    <p>No existen DCs</p>

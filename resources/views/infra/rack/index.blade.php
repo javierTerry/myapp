@@ -21,21 +21,17 @@
 			<table class="table table-striped table-bordered table-hover" id="dynamic-table">
 				<thead>
 					<tr>
-						<th></th>
 						<th>ID</th>
 						<th>NAME</th>
 						<th>COORDENADA</th>
 						<th>NO EQUIPOS</th>
 						<th>DATACENTER</th>
-						<th>ACCIONES</th>
-						
-						
+						<th class="sorting_disabled notexport"></th>	
 					</tr>
 				</thead>
 				<tbody>
 					@foreach($racks as $item)
 					<tr>
-						<td></td>
 						<td>{{ $item -> id}}</td>
 						<td>{{ $item -> name}}</td>
 						<td>{{$item -> coordenada}}</td>
