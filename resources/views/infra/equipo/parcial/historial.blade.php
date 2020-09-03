@@ -2,10 +2,12 @@
 	<b>Historial del equipo</b>
 </div>
 <br></br>
-
-
-<a href="#" class="btn btn-inverse" data-toggle="modal" data-target="#modal{{ null }}" ><i class="ace-icon glyphicon-plus"> Seguimiento</i></a>
-
+							
+@if (isset($equipo->id))
+	<a href="#" class="btn btn-inverse" data-toggle="modal" data-target="#modal{{ null }}" >
+		<i class="ace-icon glyphicon-plus"> Seguimiento </i>
+	</a>
+@endif
 <div class="modal fade" id="modal{{ null }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
   aria-hidden="true">
 	<div class="modal-dialog" role="document">

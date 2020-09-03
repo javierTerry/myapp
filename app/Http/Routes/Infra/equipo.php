@@ -25,10 +25,23 @@ Route::group([ 'prefix' => 'infra'
 		    }
 		);
 		
+		Route::get('/equipo/alarmado' 
+			,[ 'as' => 'infra.equipo.alarmado'
+				, 'uses' =>'EquipoController@alarmado'
+			]
+		#	, function () { 
+		#		return "ping exitoso";
+		#	}
+		);
+
+
+
 		Route::resource('equipo','EquipoController');
 		Route::resource('equipoHistorial','EquipoHistorialController'
 							,['only' => ['store']]
 						);
+
+		
 	
 });
 
