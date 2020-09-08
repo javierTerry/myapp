@@ -17,7 +17,6 @@ Route::get('home', 'HomeController@index');
 Route::get('empleado', 'EmpleadoController@index');
 Route::get('empleadoorm', 'EmpleadoController@indexOrm');
 
-
 Route::group([ 'prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth' ], function () {
 	Route::resource('users','UsersController');	 	
 	Route::resource('puestos','PuestosController');
@@ -78,7 +77,6 @@ Route::group([ 'prefix' => 'bpo', 'namespace' => 'BPO' ], function () {
 
 Route::get('/api/jwk/token/login', 'Auth\JwtController@index');
 Route::get('/api/jwk/token/validations/', 'Auth\JwtController@getAuthenticatedToken');
-//Route::group([ 'prefix' => 'api', 'middleware' => 'jwkMiddle'], function () {
 
 Route::group([ 'prefix' => 'api', ], function () {		 
 	Route::group([ 'prefix' => 'dbadmins' ], function () {
@@ -118,19 +116,27 @@ Route::group([ 'prefix' => 'api', ], function () {
 Route::group(['prefix' => 'kpi', 'namespace' => 'Kpi'], function () {
 	Route::group(['prefix' => 'aplicaciones'], function ( ) {
 		Route::resource("soa",'SoaController');
-		/*
-		Route::group(['prefix' => 'soa'], function () {
-			Route::get('ping', function () { return "ping exitoso";});
-
-		});
-		*/
 	});
 
 });
 
 
 Route::group([ 'prefix' => 'guests', 'namespace' => 'Guest' ], function () {
-	Route::resource('password','GuestsController');	 	
+	Route::get('/email/ping', function () { 
+			
+			$to_name = 'RECEIVER_NAME';
+			$to_email = 'RECEIVER_EMAIL_ADDRESS';
+			$data = array('name'=>"Ogbonna Vitalis(sender_name)", "body" => "A test mail");
+			Mail::send('emails.mail', $data, function($message) use ($to_name, $to_email) {
+				$message->to($to_email, $to_name)->subject('Laravel Test Mail');
+				$message->from('SENDER_EMAIL_ADDRESS','Test Mail');
+			});
+
+		}
+	);
+	Route::resource('password','GuestsController');
+
+
 });
 
 
@@ -139,5 +145,9 @@ Route::controllers([
 	'auth' => 'Auth\AuthController',	
 	'password' => 'Auth\PasswordController'
 ]);
+
+
+
+
 
 return view('welcome');
