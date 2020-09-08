@@ -13,7 +13,8 @@
 
 
 
-Route::group([ 'prefix' => 'infra'
+Route::group(['as' => 'infra.'
+	,'prefix' => 'infra'
 	, 'namespace' => 'Infra' 
 	, 'middleware' => 'auth']
 	, function () {

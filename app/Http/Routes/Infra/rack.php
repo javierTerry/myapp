@@ -13,18 +13,19 @@
 
 
 
-Route::group([ 'prefix' => 'infra'
+Route::group(['as' => 'infra.'
+		,'prefix' => 'infra'
 		, 'namespace' => 'Infra' 
 		, 'middleware' => 'auth']
 	, function () {
 
-	Route::get('/rack/ping', 
-		function () {
-	    	return '<h1>DATACENTER PING</h1>';
-	    }
-	);
-	
-	Route::resource('rack','RackController');
+		Route::get('/rack/ping', 
+			function () {
+		    	return '<h1>DATACENTER PING</h1>';
+		    }
+		);
+		
+		Route::resource('infra/rack','RackController');
 	
 });
 

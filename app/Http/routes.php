@@ -1,4 +1,4 @@
-	<?php
+<?php
 
 /*
 |--------------------------------------------------------------------------
@@ -141,8 +141,10 @@ Route::group([ 'prefix' => 'guests', 'namespace' => 'Guest' ], function () {
 
 
 
-Route::controllers([
-	'auth' => 'Auth\AuthController',	
+Route::get('auth',[
+	'auth' => 'Auth\AuthController'
+]);
+Route::get('password',[
 	'password' => 'Auth\PasswordController'
 ]);
 
