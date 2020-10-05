@@ -23,11 +23,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-<<<<<<< HEAD
-        parent::registerPolicies();
-=======
+
         $this->registerPolicies();
->>>>>>> master
 
         //
     }
