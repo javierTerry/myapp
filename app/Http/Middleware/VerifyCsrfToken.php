@@ -1,37 +1,17 @@
-<?php namespace App\Http\Middleware;
+<?php
 
-use Closure;
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as BaseVerifier;
-use Log;
+namespace App\Http\Middleware;
 
-class VerifyCsrfToken extends BaseVerifier {
-	
-	
-	protected $except = [
-           'api/dbadmins/upload',
-           'api/dbadmins/upload/test'
-           ,'api/dbadmins/respaldos/uploads'
-   ];
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as Middleware;
 
-	/**
-	 * Handle an incoming request.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @param  \Closure  $next
-	 * @return mixed
-	 */
-	public function handle($request, Closure $next)
-	{
-		foreach( $this-> except as $route )
-        {
-        	Log::debug(print_r("Route ---> ".$route,TRUE));
-			//Log::debug(print_r("dd ---> ".print_r($request,true),TRUE));
-			
-            if( $request-> is( $route ) ) return $next($request);
-        }
-
-		 return $next($request);
-		//return parent::handle($request, $next);
-	}
-
+class VerifyCsrfToken extends Middleware
+{
+    /**
+     * The URIs that should be excluded from CSRF verification.
+     *
+     * @var array
+     */
+    protected $except = [
+        //
+    ];
 }
