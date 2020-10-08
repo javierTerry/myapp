@@ -26,6 +26,8 @@ class CreateEquipoTable extends Migration
             $table->string('serie',50);
             $table->string('power',50);
             $table->tinyInteger('alarmado');
+            $table->mediumInteger('id_rack');
+            $table->boolean('status')->default(1);
 
 
         } );

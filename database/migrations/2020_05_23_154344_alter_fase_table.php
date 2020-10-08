@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterFaseStatusTable extends Migration
+class AlterFaseTable extends Migration
 {
     /**
      * Se agrega la columna status, para poder validar los registros activos.
