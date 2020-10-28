@@ -27,7 +27,7 @@
 						<th>NAME</th>
 						<th>DESCRIPCION</th>
 						<th>No. de Fases</th>
-						
+						<th class="sorting_disabled notexport"></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -37,7 +37,7 @@
 							<td>{{ $item -> name}} <i class="ace-icon fa fa-check bigger-110 green"></i></td>
 							<td>{{ $item -> desc}} <i class="ace-icon fa fa-bell-o bigger-110 purple"></i></td>
 							<td>{{ $item -> no_fase}}</td>
-
+							
 							<td>	
 								
 								<a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modal{{ $item -> id }}" >
