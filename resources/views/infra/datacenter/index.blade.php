@@ -39,7 +39,6 @@
 							<td>{{ $item -> no_fase}}</td>
 							
 							<td>	
-								
 								<a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modal{{ $item -> id }}" >
 									<i class="ace-icon fa fa-trash-o"></i>
 								</a>
