@@ -18,6 +18,7 @@ class CreateFaseTable extends Migration
             $table->string('name',50);
             $table->string('desc',100);
             $table->tinyInteger('id_datacenter');
+            $table->boolean('status')->default(1);
             $table->timestamps();
 
         });
@@ -30,6 +31,7 @@ class CreateFaseTable extends Migration
      */
     public function down()
     {
-        Schema::drop('fase');
+       Schema::drop('fase');
     }
 }
+#

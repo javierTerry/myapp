@@ -26,7 +26,7 @@ class CreateCatalogosAreaTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('catalogoArea');
+		Schema::drop('catalogo_areas');
 	}
 
 }

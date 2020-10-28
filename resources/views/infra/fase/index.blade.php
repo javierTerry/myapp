@@ -23,18 +23,20 @@
 			<table class="table table-striped table-bordered table-hover" id="dynamic-table">
 				<thead>
 					<tr>
+						<th></th>
 						<th>ID</th>
 						<th>FASE</th>
 						<th>NO RACKS</th>
 						<th>DESCRIPCION</th>
-						<th class="sorting_disabled notexport"></th>
+						<th class="sorting_disabled"></th>
+						<th class="sorting_disabled"></th>
 						
 					</tr>
 				</thead>
 				<tbody>
 					@foreach( $fases as $item)
 					<tr>
-	
+						<td></td>
 						<td>{{ $item -> id}}</td>
 						<td>{{ $item -> name}}</td>
 						<td>{{ $item -> no_rack}}</td>
@@ -67,6 +69,8 @@
 							  	</div> <!-- modal-dialog -->
 							</div> <!--modal fad -->
 						</td>
+						<td></td>
+
 					</tr>		
 						
 					@endforeach

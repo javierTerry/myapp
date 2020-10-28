@@ -13,6 +13,52 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+/*
 Route::get('/', function () {
     return view('welcome');
 });
+
+*/
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/test', 'HomeController@index')->name('raiz');
+
+Route::resource('/login','LoginController');
+Route::post('post-login', 'LoginController@postLogin');
+
+
+Route::name('infra.')->group(function () {
+	Route::prefix('infra')->group(function () {
+	    
+		Route::resource('dcs','Infra\DataCenterController');
+
+		Route::resource('fase','Infra\FaseController');
+
+		Route::resource('rack','Infra\RackController');
+
+		Route::resource('equipo','Infra\EquipoController');
+
+	});
+
+
+});
+
+
+/*h']
+	, function () {
+
+	Route::get('/dcs/ping', 
+		function () {
+
+	    	return 'ping';Route::prefix('admin')->group(function () {
+    Route::get('users', function () {
+        // Matches The "/admin/users" URL
+    });
+});
+	    }
+	);
+	Route::resource('dcs','DataCenterController');
+	
+});
+
+*/

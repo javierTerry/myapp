@@ -36,8 +36,7 @@ class CreateHistoryBackupTable extends Migration
      */
     public function down()
     {
-        Schema::table('history_backups', function (Blueprint $table) {
-            //
-        });
+        schema::drop('history_backups');
+        
     }
 }

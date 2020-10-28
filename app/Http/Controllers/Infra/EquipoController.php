@@ -11,7 +11,6 @@ use App\Http\Controllers\Controller;
 use Log;
 use App\Model\Infra\Equipo;
 use App\Model\Infra\EquipoHistorial;
-use App\Model\Infra\EquipoAlarmadoView;
 use App\Model\Infra\Rack;
 
 class EquipoController extends Controller
@@ -39,7 +38,6 @@ class EquipoController extends Controller
 
         $rack  = Rack::all();
         $equipo = new Equipo();
-        
         return view('infra.equipo.crear', compact('rack', 'equipo'));
     }
 
@@ -138,19 +136,6 @@ class EquipoController extends Controller
         
 
         return \Redirect::route('infra.equipo.index') -> with ('notices',$notices);
-    }
-
-    /**
-     * Muestra los equipos alarmados.
-     *
-     * @param  
-     * @return view('infra.equipo.index')
-     */
-    public function alarmado()
-    {
-        $equipos  = EquipoAlarmadoView::all();
-        #dd($equipos);   
-        return view('infra.equipo.alarmado', compact('equipos') );        
     }
 
 }

@@ -42,6 +42,6 @@ class CreateRackView extends Migration
      */
     public function down()
     {
-        Schema::drop('fase');
+        DB::statement("DROP VIEW IF EXISTS  fase_rack");
     }
 }

@@ -54,7 +54,6 @@ class EquipoHistorialController extends Controller
 
             return \Redirect::route('infra.equipo.edit', ['id'=>$idEquipo]) -> with ('notices',$notices);
         } catch (Exception $e) {
-            Log::debug('EquipoHistorial store No se pudo agregar el registro');
             return \Redirect::route('infra.equipo.index') -> withErrors ($e -> getMessage());   
         }
     }

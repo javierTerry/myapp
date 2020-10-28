@@ -27,7 +27,6 @@
 						<th>NAME</th>
 						<th>DESCRIPCION</th>
 						<th>No. de Fases</th>
-						<th class="sorting_disabled notexport"></th>
 						
 					</tr>
 				</thead>

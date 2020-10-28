@@ -40,8 +40,12 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title"><a href="{{ url('/home') }}">MásNegocio</a></div>
+                <div class="title"><a href="{{ url('/login') }}">MásNegocio</a></div>
             </div>
         </div>
     </body>
 </html>
+
+
+
+
