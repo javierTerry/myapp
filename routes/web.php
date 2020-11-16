@@ -20,7 +20,11 @@ Route::get('/', function () {
 });
 
 */
-Route::get('/home', 'HomeController@index')->name('home');
+Route::middleware(['auth'])->group(function () {
+	Route::get('/home', 'HomeController@index')->name('home');
+});
+
+
 Route::get('/test', 'HomeController@index')->name('raiz');
 
 Route::resource('/login','LoginController');

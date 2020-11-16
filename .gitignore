@@ -5,3 +5,5 @@ composer.lock
 *.sql
 *.sublime-project
 *.sublime-workspace
+
+storage/credentials.json
