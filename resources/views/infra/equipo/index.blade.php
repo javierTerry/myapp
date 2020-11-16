@@ -32,7 +32,10 @@
 						<th>HOSTNAME</th>
 						<th>I P</th>
 						<th>NS</th>
+						<th style="display:none;">MARCA</th>
 						<th>MODELO</th>
+						<th style="display:none;" >SOPORTE</th>
+						<th style="display:none;" >POWER</th>
 						<th class="sorting_disabled notexport"></th>
 						
 					</tr>
@@ -49,7 +52,11 @@
 						</td>
 						<td>{{ $item -> iphw}}</td>
 						<td>{{ $item -> serie}}</td>
+						<td style="display:none;">{{ $item -> marca}}</td>
 						<td>{{ $item -> modelo}}</td>
+						<td style="display:none;" >{{ $item -> soporte}}</td>
+						<td style="display:none;" >{{ $item -> power}}</td>
+
 						<td> 
 							<a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modal{{ $item -> id }}" ><i class="ace-icon fa fa-trash-o"></i></a>
 							<a href="{{ route('infra.equipo.edit', $item -> id) }}" class="btn btn-info" ><i class="ace-icon fa fa-pencil"></i></a>
@@ -89,4 +96,5 @@
 </div> <!-- class="row" -->
 
 @endsection
+
 
