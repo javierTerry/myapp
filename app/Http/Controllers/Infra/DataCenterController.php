@@ -99,7 +99,7 @@ class DataCenterController extends Controller
         Log::debug("Datacenter Controller edit ".$id);
 
         $dc = Datacenter::find($id);
-        
+
         return view('infra.datacenter.editar', compact('dc'));
     }
 

@@ -16,7 +16,8 @@
         "laravel/tinker": "^2.0",
         "laravelcollective/html": "~6.0",
         "revolution/laravel-google-sheets": "^5.4",
-        "symfony/polyfill-iconv": "1.20.0"
+        "symfony/polyfill-iconv": "1.20.0",
+        "symfony/polyfill-mbstring": "^1.20"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

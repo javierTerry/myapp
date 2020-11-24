@@ -258,7 +258,6 @@
 			<div class="main-content-inner">
 				<div class="page-content">
 					
-				test
 				 @yield('content')
 				
 				</div> <!-- main-content -->
@@ -373,5 +372,5 @@
   
   });
   </script>
-</body> <<!-- no-skin -->
+</body> <!-- no-skin -->
 </html>

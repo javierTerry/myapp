@@ -42,27 +42,9 @@ Route::name('infra.')->group(function () {
 
 		Route::resource('equipo','Infra\EquipoController');
 
+		Route::resource('equipoHistorial','Infra\EquipoHistorialController');
+
 	});
 
 
 });
-
-
-/*h']
-	, function () {
-
-	Route::get('/dcs/ping', 
-		function () {
-
-	    	return 'ping';Route::prefix('admin')->group(function () {
-    Route::get('users', function () {
-        // Matches The "/admin/users" URL
-    });
-});
-	    }
-	);
-	Route::resource('dcs','DataCenterController');
-	
-});
-
-*/

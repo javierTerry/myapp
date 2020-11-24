@@ -19,73 +19,8 @@ class Datacenter extends Model
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['name', 'desc'];
+	protected $fillable = ['id','name', 'desc'];
 	#					
 	
-	/**
-	 * Parsed form fields to Object DATACENTER .
-	 *
-	 * @author Christian Hernandez <chhernandezs@kionetwork.com>
-	 * 
-	 * @param array Request
-	 * 
-	 */
-	 
-	public function parser($value = '')
-	{
-		Log::info('DATACENTER Parser');
-		Log::debug(print_r($this -> attributes, true));
-		$this -> fecha_inicial_planeada = \Carbon\Carbon::parse($this -> fecha_inicial_planeada);
-		$this -> fecha_final_planeada	= \Carbon\Carbon::parse($this -> fecha_final_planeada);
-		$this -> fecha_inicial_real = \Carbon\Carbon::parse($this -> fecha_inicial_real);
-		$this -> fecha_final_real	 = \Carbon\Carbon::parse($this -> fecha_final_real);
-		Log::info('DATACENTER Parser Finalizado');
-	}
 
-	/**
-	 * Parsed form fields to Object BPO .
-	 *
-	 * @author Christian Hernandez <chhernandezs@masnegocio.com>
-	 * @param array Request
-	 * 
-	 */
-	 
-	public function borradoLogico()
-	{
-		Log::info('Asigando Borrado logico');
-		$this -> status = 0;
-		Log::info('Valor Asignado');
-	}
-
-	/**
-	 * Serch Names by strig, clause like  .
-	 *
-	 * @author Christian Hernandez <chhernandezs@kionetworks.com>
-	 * 
-	 * @param array Request
-	 * 
-	 */
-
-	public function scopeNombre($query, $nombre)
-	{
-		if ( trim($nombre) != "")
-		{
-			$query->where('name', 'like', "%$nombre%");	
-		}
-		
-	}
-	
-	/**
-	 * Serch proyects by strig, clause like  .
-	 *
-	 * @author Christian Hernandez <chhernandezs@kionetworks.com>
-	 * 
-	 * @param array Request
-	 * 
-	 */
-	public function scopeProyectoActivo($query)
-	{
-		$query->where('status', '=', 1);	
-	
-	}
 }
