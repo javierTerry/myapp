@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 
 
 use Log;
+use Illuminate\Routing\Redirector;
 use App\Model\Infra\EquipoHistorial;
 
 class EquipoHistorialController extends Controller
@@ -46,13 +47,15 @@ class EquipoHistorialController extends Controller
             
             $item = new EquipoHistorial($request->all());
             $item->fecha_reporte = \Carbon\Carbon::now();
-            #dd($item);
+            #dd($item->id_equipo);
             $idEquipo = $item->id_equipo;
             $item -> save();
             
-            $notices = array("Se agrego el seguimiento ");
+            $notices = array("Se agrego el seguimiento ".$idEquipo);
 
-            return \Redirect::route('infra.equipo.edit', ['id'=>$idEquipo]) -> with ('notices',$notices);
+            return redirect()->route('infra.equipo.edit' , ['equipo' => $idEquipo])-> with ('notices',$notices);
+
+            #return \Redirect::route('infra.equipo.edit', ['id'=>$idEquipo]) -> with ('notices',$notices);
         } catch (Exception $e) {
             return \Redirect::route('infra.equipo.index') -> withErrors ($e -> getMessage());   
         }
