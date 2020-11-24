@@ -48,3 +48,8 @@ Route::name('infra.')->group(function () {
 
 
 });
+
+
+Route::get('auth/google', 'GoogleController@redirectToGoogle');
+
+Route::get('auth/google/callback', 'GoogleController@handleGoogleCallback');

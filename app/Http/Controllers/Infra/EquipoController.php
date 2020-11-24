@@ -118,7 +118,7 @@ class EquipoController extends Controller
         $tmp = sprintf("Actualizacion correcta de %s con id %d", $item -> hostname, $id);
         $notices = array($tmp);
 
-        return \Redirect::route('infra.equipo.edit', ['id'=>$id]) -> with ('notices',$notices);
+        return \Redirect::route('infra.equipo.edit', ['equipo'=>$id]) -> with ('notices',$notices);
     }
 
     /**

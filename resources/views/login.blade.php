@@ -63,7 +63,7 @@
 					<a href="index.html" class="navbar-brand">
 						<small>
 							<i class="fa fa-leaf"></i>
-							HOMEBLACK LOGIN 1
+							HOMEBLACK LOGIN
 						</small>
 					</a>
 				</div>
@@ -146,6 +146,13 @@
 													<a class="btn btn-link" href="{{ url('/password/email') }}">¿Olvidaste tu contraseña?</a>
 												</div>
 											</div>
+											<div class="form-group">
+												<div class="col-md-6 col-md-offset-4">
+													<a href="{{ url('auth/google') }}" style="margin-top: 20px;" class="btn btn-lg btn-success btn-block">
+					                                  <strong>Login With Google</strong>
+				                                	</a>
+				                                </div>
+				                             </div> 
 										</form>
 									</div>
 								</div>
