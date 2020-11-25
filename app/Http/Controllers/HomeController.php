@@ -35,23 +35,7 @@ class HomeController extends Controller {
 	public function index()
 	{
 		
-
-		#dd(config('google'));
-		$sheets = Sheets::spreadsheet(config('google.spreadsheet_id'))
-                        ->sheet(config('google.sheet_name'))
-                        ->all();
-		
-        #dd($sheets);
-
-        #$sheets = Sheets::spreadsheet('1dNDvTgu0L-zYu7KNbGGNsVIEZOyS1AHQaLv59qEbhjY')->sheet('laravel') ->all();
-
-        #	$sheets->spreadsheet('1dNDvTgu0L-zYu7KNbGGNsVIEZOyS1AHQaLv59qEbhjY')->sheet('laravel')->all();
-        	
-         #dd($sheets);               
-		
-        Sheets::sheet(config('google.sheet_name'))
-        	->append([['3', 'name3', 'mail3']]);
-		return view('app');
+		return view('infra.datacenter.index');
 	}
 
 }
