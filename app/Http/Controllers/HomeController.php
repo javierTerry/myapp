@@ -35,7 +35,7 @@ class HomeController extends Controller {
 	public function index()
 	{
 		
-		return view('infra.datacenter.index');
+		return view('app');
 	}
 
 }
