@@ -25,10 +25,13 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
-Route::get('/test', 'HomeController@index')->name('raiz');
 
-Route::resource('/login','LoginController');
+Route::resource('/login','AuthController');
+Route::get('/auth/logout', 'LoginController@logout');
 Route::post('post-login', 'LoginController@postLogin');
+#Route::post('post-login', 'LoginController@postLogin');
+
+
 
 
 Route::name('infra.')->group(function () {
