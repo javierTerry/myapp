@@ -38,5 +38,21 @@ class HomeController extends Controller {
 		return view('app');
 	}
 
+
+    /**
+	 * Show the application dashboard to the user.
+	 *
+	 * @return Response
+	 */
+	public function up_sheet()
+	{
+		#dd(config('google'));
+		
+		Sheets::sheet(config('google.sheet_name'))
+        	->append([['3', 'name3', 'mail3']]);
+
+        return "1";
+	}
+
 }
 

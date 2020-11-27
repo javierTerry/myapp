@@ -21,14 +21,15 @@ Route::get('/', function () {
 
 */
 Route::middleware(['auth'])->group(function () {
-	Route::get('/home', 'HomeController@index')->name('home');
+	#Route::get('/home', 'HomeController@index')->name('home');
 });
 
+Route::get('/home', 'HomeController@up_sheet')->name('home');
 
 
 Route::resource('/login','AuthController');
-Route::get('/auth/logout', 'LoginController@logout');
-Route::post('post-login', 'LoginController@postLogin');
+#Route::get('/auth/logout', 'LoginController@logout');
+#Route::post('post-login', 'LoginController@postLogin');
 #Route::post('post-login', 'LoginController@postLogin');
 
 

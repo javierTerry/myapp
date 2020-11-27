@@ -34,10 +34,15 @@ class Kernel extends ConsoleKernel
 
         $schedule->call(function () {
 
-            $dcs = \App\Model\Infra\DatacenterView::all();
+            #$dcs = \App\Model\Infra\DatacenterView::all();
             #return "1";
             #protected static $model ='App\Model\Infra\DatacenterView';
-            var_dump($dcs);
+            #var_dump($dcs);
+
+            $controller = new App\Http\Controllers\HomeController();
+            $tmp = $controller->up_sheet();
+            var_dump($tmp);
+
         })->everyMinute();
     }
 
