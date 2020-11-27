@@ -2,8 +2,12 @@
 
 namespace App\Console;
 
+
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+
+
+
 
 class Kernel extends ConsoleKernel
 {
@@ -25,6 +29,16 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        #$schedule->exec('touch /home/javier/test')->everyMinute();
+        
+
+        $schedule->call(function () {
+
+            $dcs = \App\Model\Infra\DatacenterView::all();
+            #return "1";
+            #protected static $model ='App\Model\Infra\DatacenterView';
+            var_dump($dcs);
+        })->everyMinute();
     }
 
     /**
