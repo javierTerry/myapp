@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 
 use Revolution\Google\Sheets\Facades\Sheets;
+use App\Model\Infra\DatacenterView;
+
 
 class HomeController extends Controller {
 
@@ -47,12 +49,35 @@ class HomeController extends Controller {
 	public function up_sheet()
 	{
 		#dd(config('google'));
-		
-		Sheets::sheet(config('google.sheet_name'))
-        	->append([['3', 'name3', 'mail3']]);
 
-        return "1";
+
+		$sheets = Sheets::spreadsheet(config('google.spreadsheet_id'))
+                        ->sheet(config('google.sheet_name'));
+        #                ->get();
+        $header = $sheets ->get() ->pull(0);
+		
+        #$header = $sheets->pull(0); 
+        #Sheets::sheet(config('google.sheet_name'))
+        #	->clear();
+
+        $values = DatacenterView::all()->toArray();
+        
+        #array_unshift($values,$header);
+        #dd($values);
+
+        #$values =  [$header, ['1','dos', 'tres']];
+		#$values = [['name' => 'name4', 'mail' => 'mail4', 'id' => 4]];
+
+		#dd($values);
+		$tmp= Sheets::sheet(config('google.sheet_name'))
+        	->collection($header,$values)
+        	->all();
+        
+        Sheets::sheet(config('google.sheet_name'))
+        	->append($tmp);
+
+        
+        return view('app');
 	}
 
 }
-

@@ -33,15 +33,20 @@ class Kernel extends ConsoleKernel
         
 
         $schedule->call(function () {
+            #\Config
+
+            #\Config::set('google
 
             #$dcs = \App\Model\Infra\DatacenterView::all();
             #return "1";
             #protected static $model ='App\Model\Infra\DatacenterView';
             #var_dump($dcs);
-
-            $controller = new App\Http\Controllers\HomeController();
+            \Config::set('google.service.file', 'storage/credentials.json');
+            $controller = new \App\Http\Controllers\HomeController();
             $tmp = $controller->up_sheet();
-            var_dump($tmp);
+            #$tmp = \Redirect::route("home");
+            
+            var_dump(config('google.service.file'));
 
         })->everyMinute();
     }
