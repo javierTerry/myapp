@@ -76,7 +76,7 @@ class GoogleController extends Controller
 
     
 
-                return redirect('/home');
+                return redirect('/null');
 
      
 
@@ -90,7 +90,7 @@ class GoogleController extends Controller
 
                     'google_id'=> $user->id,
 
-                    'password' => encrypt('123456dummy')
+                    'password' => encrypt('null')
 
                 ]);
 
@@ -100,7 +100,7 @@ class GoogleController extends Controller
 
      
 
-                return redirect('/home');
+                return redirect('/null');
 
             }
 

@@ -25,7 +25,7 @@ class CreateEquipoView extends Migration
                     `equipo`.`modelo` AS `modelo`,
                     `equipo`.`soporte` AS `soporte`,
                     `equipo`.`serie` AS `serie`
-                    `equipo`.`alarmado` AS `alarmado`
+                    ,`equipo`.`alarmado` AS `alarmado`
                     ,`rack`.`name` AS `rack`
                     ,`datacenter`.`name` AS `dc`
                 FROM

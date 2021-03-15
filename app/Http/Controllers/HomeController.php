@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 
 use Revolution\Google\Sheets\Facades\Sheets;
-use App\Model\Infra\DatacenterView;
+use App\Model\Infra\ValidacionVisual;
 
 
 class HomeController extends Controller {
@@ -19,27 +19,6 @@ class HomeController extends Controller {
 	|
 	*/
 
-	/**
-	 * Create a new controller instance.
-	 *
-	 * @return void
-	 */
-	public function __construct()
-	{
-		#$this->middleware('auth');
-	}
-
-	/**
-	 * Show the application dashboard to the user.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		
-		return view('app');
-	}
-
 
     /**
 	 * Show the application dashboard to the user.
@@ -53,14 +32,11 @@ class HomeController extends Controller {
 
 		$sheets = Sheets::spreadsheet(config('google.spreadsheet_id'))
                         ->sheet(config('google.sheet_name'));
-        #                ->get();
+        
         $header = $sheets ->get() ->pull(0);
 		
-        #$header = $sheets->pull(0); 
-        #Sheets::sheet(config('google.sheet_name'))
-        #	->clear();
-
-        $values = DatacenterView::all()->toArray();
+        
+        $values = ValidacionVisual::all()->toArray();
         
         #array_unshift($values,$header);
         #dd($values);
@@ -71,8 +47,9 @@ class HomeController extends Controller {
 		#dd($values);
 		$tmp= Sheets::sheet(config('google.sheet_name'))
         	->collection($header,$values)
-        	->all();
+        	->toArray();
         
+        #dd($tmp->toArray());
         Sheets::sheet(config('google.sheet_name'))
         	->append($tmp);
 

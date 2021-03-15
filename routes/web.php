@@ -24,7 +24,7 @@ Route::middleware(['auth'])->group(function () {
 	#Route::get('/home', 'HomeController@index')->name('home');
 });
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@up_sheet')->name('home');
 
 
 Route::resource('/login','AuthController');
