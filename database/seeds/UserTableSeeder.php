@@ -18,3 +18,4 @@ class UserTableSeeder extends Seeder {
 } 
 
 ?>
+
