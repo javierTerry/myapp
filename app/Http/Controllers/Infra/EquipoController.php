@@ -74,6 +74,7 @@ class EquipoController extends Controller
     public function show($id)
     {
         //
+        Log::info('Equipo show '.$id);
     }
 
     /**
@@ -137,6 +138,21 @@ class EquipoController extends Controller
         
 
         return \Redirect::route('infra.equipo.index') -> with ('notices',$notices);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function alarmado(Request $request)
+    {
+        Log::info('EQUIPO ALARMADO index ');
+        $equipos  = EquipoView::
+                        where('alarmado', 1)
+                        ->get();
+
+        return view('infra.equipo.alarmado', compact('equipos') );
     }
 
 }

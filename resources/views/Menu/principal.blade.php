@@ -91,7 +91,7 @@
 			</li>
 
 			<li class="">
-				<a href="#">
+				<a href="{{ route('infra.equipo.alarmado') }}">
 					<i class="menu-icon fa fa-caret-right"></i>
 					A L A R M A D O
 				</a>

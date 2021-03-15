@@ -27,6 +27,8 @@
 					<tr>
 						
 						<th>ID</th>
+						<th>DC</th>
+						<th>RACK</th>
 						<th>HOSTNAME</th>
 						<th>I P</th>
 						<th>NS</th>
@@ -39,6 +41,8 @@
 					<tr>
 						
 						<td>{{ $item -> id}}</td>
+						<td>{{ $item -> dc}}</td>
+						<td>{{ $item -> rack}}</td>
 						<td>{{ $item -> hostname}}</td>
 						<td>{{ $item -> iphw}}</td>
 						<td>{{ $item -> serie}}</td>

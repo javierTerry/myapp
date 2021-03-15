@@ -296,7 +296,8 @@
 			select: {
 				style: 'multi'
 			}
-			,dom: 'Bfrtip'
+
+			,dom: 'lBfrtip'
 			,buttons: [
 				{
 		           extend: 'csv',
@@ -308,6 +309,9 @@
 	        ]
 
 			, "pagingType": "full_numbers"
+			,"lengthMenu": [[25, 50, 75, -1], [ 25, 50,75, "All"]]
+
+
 			,language: {
 			    "decimal": "",
 			    "emptyTable": "No hay información",

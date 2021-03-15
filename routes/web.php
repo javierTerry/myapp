@@ -44,7 +44,16 @@ Route::name('infra.')->group(function () {
 
 		Route::resource('rack','Infra\RackController');
 
+		Route::name('equipo.')->group(function () {
+			Route::prefix('equipo')->group(function () {
+					Route::get('alarmados', 'Infra\EquipoController@alarmado')->name('alarmado');
+			});
+	
+		});
 		Route::resource('equipo','Infra\EquipoController');
+		
+		
+		
 
 		Route::resource('equipoHistorial','Infra\EquipoHistorialController');
 
