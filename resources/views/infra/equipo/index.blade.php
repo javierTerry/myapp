@@ -29,6 +29,8 @@
 					<tr>
 						
 						<th>ID</th>
+						<th>DC</th>
+						<th>RACK</th>
 						<th>HOSTNAME</th>
 						<th>I P</th>
 						<th>NS</th>
@@ -45,6 +47,8 @@
 					<tr>
 						
 						<td>{{ $item -> id}}</td>
+						<td>{{ $item -> dc}}</td>
+						<td>{{ $item -> rack}}</td>
 						<td>
 							{{ $item -> hostname}}
 							<i class="ace-icon fa {{ $item-> alarmado ? 'fa-times red2' : 'fa-check bigger-110 green' }}"></i>
@@ -96,5 +100,3 @@
 </div> <!-- class="row" -->
 
 @endsection
-
-

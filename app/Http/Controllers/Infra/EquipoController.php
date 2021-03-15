@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 
 use Log;
 use App\Model\Infra\Equipo;
+use App\Model\Infra\EquipoView;
 use App\Model\Infra\EquipoHistorial;
 use App\Model\Infra\Rack;
 
@@ -23,7 +24,7 @@ class EquipoController extends Controller
     public function index(Request $request)
     {
         Log::info('EQUIPO index ');
-        $equipos  = Equipo::all();
+        $equipos  = EquipoView::all();
 
         return view('infra.equipo.index', compact('equipos') );
     }

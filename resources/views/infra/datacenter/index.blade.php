@@ -82,12 +82,3 @@
 </div> <!-- class="row" -->
 				
 @endsection
-
-
-XDCMKIOINTPPG01
-XDCMKIOINTPPG01
-XDCMKIOINTPPG01
-
-JAVIER GONZALEZ
-Francisco Rodriguez
-Oscar Gonzalez

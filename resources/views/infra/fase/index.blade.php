@@ -24,6 +24,7 @@
 				<thead>
 					<tr>
 						<th>ID</th>
+						<th>DC</th>
 						<th>FASE</th>
 						<th>NO RACKS</th>
 						<th>DESCRIPCION</th>
@@ -34,6 +35,7 @@
 					@forelse( $fases as $item)
 						<tr>
 							<td>{{ $item -> id}}</td>
+							<td>{{ $item -> dc}}</td>
 							<td>{{ $item -> name}}</td>
 							<td>{{ $item -> no_rack}}</td>
 							<td>{{ $item -> desc}}</td>						

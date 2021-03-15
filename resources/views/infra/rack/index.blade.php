@@ -23,10 +23,11 @@
 					<tr>
 						
 						<th>ID</th>
+						<th>DATACENTER</th>
+						<th>FASE</th>
 						<th>NAME</th>
 						<th>COORDENADA</th>
 						<th>NO EQUIPOS</th>
-						<th>DATACENTER</th>
 						<th class="sorting_disabled notexport">ACCIONES</th>
 						
 						
@@ -37,10 +38,12 @@
 					<tr>
 						
 						<td>{{ $item -> id}}</td>
+						<td>{{ $item -> dc}}</td>
+						<td>{{ $item -> fase}}</td>
 						<td>{{ $item -> name}}</td>
 						<td>{{$item -> coordenada}}</td>
 						<td>{{ $item -> no_equipo}}</td>
-						<td>{{ $item -> dc}}</td>	
+							
 						<td>
 							<a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modal{{ $item -> id }}" ><i class="ace-icon fa fa-trash-o"></i></a>
 							<a href="{{ route('infra.rack.edit', $item -> id) }}" class="btn btn-info" ><i class="ace-icon fa fa-pencil"></i></a>
