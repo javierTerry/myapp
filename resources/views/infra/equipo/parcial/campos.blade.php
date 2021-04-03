@@ -1,12 +1,13 @@
-<div class="col-xs-12 label label-lg label-success arrowed-in arrowed-right">
-	<b>Descripcion del equipo</b>
-</div>
-<br></br>
 <div class="form-group">
+	<div class="col-xs-12 label label-lg label-success arrowed-in arrowed-right">
+		<b>Descripcion del equipo</b>
+	</div>
+	
+
 	{!! Form::label('alarmadoLbl', ' TIENE ALARMA ?'
-		, ['class'	=> 'col-xs-3']) 
+		, ['class'	=> 'col-sm-3']) 
 	!!}
-		<div class="col-xs-6">
+		<div class="col-sm-9">
 			<label>
 				<input name="alarmadoSwtich" id="switchAlarma"  class="ace ace-switch ace-switch-5"  
 					type="checkbox" {{ ( $equipo->alarmado ) ? 'checked' : '' }} 
@@ -14,7 +15,6 @@
 				<span class="lbl"></span>
 			</label>
 		</div>
-
 </div>
 
 <div class="form-group">
@@ -26,97 +26,127 @@
 
 <div class="form-group">
 	{!! Form::label('hostname', 'HOSTNAME'
-		, ['class'	=> 'col-xs-3 ']) 
+		, ['class'	=> 'col-sm-3']) 
 	!!}
-		{!! Form::text('hostname', null,
-			['class' 		=> 'col-xs-9 '
+	{!! Form::text('hostname', null,
+		['class' 		=> 'col-sm-9'
 			,'placeholder'	=> 'Introduce el hostname del equipo'])
-		!!}
+	!!}
 </div>
 <div class="form-group">
 	{!! Form::label('iphw', 'IP HARDWARE'
-		, ['class' 		=> 'col-xs-3']) 
+		, ['class' 		=> 'col-sm-3']) 
 	!!}
 	{!! Form::text('iphw', null,
-		['class' 		=> 'col-xs-9'
+		['class' 		=> 'col-sm-3'
 		,'placeholder'	=> 'Introduce la IP de hardware'])
+	!!}
+	</p>
+	{!! Form::label('No. SERIE', 'NS'
+		, ['class' 		=> 'col-sm-2']) 
+	!!}
+	{!! Form::text('serie', null,
+		['class' 		=> 'col-sm-4'
+		,'placeholder'	=> 'Introduce el numero de serie '])
 	!!}
 </div>
 
 <div class="form-group">
-	{!! Form::label('No. SERIE', 'NO. SERIE'
-		, ['class' 		=> 'col-xs-3']) 
+	{!! Form::label('garantia', 'GARANTIA'
+		, ['class' 		=> 'col-sm-3']) 
 	!!}
-	{!! Form::text('serie', null,
-		['class' 		=> 'col-xs-9'
-		,'placeholder'	=> 'Introduce el numero de serie '])
+	{!! Form::text('garantia', null,
+		['class' 		=> 'col-sm-3 date-picker '
+		,'placeholder'	=> 'Fecha de Garantia'])
+
+	!!}
+	</p>
+	{!! Form::label('whatts', 'WHATTS'
+		, ['class' 		=> 'col-sm-2']) 
+	!!}
+	{!! Form::text('whatts', null,
+		['class' 		=> 'col-sm-4'
+		,'placeholder'	=> 'Whatts fuentes de poder '])
 	!!}
 </div>
 	
 
 <div class="form-group">
-	{!! Form::label('soporte', 'RESPONSABLE'
-		, ['class' 		=> 'col-xs-3'])
+	{!! Form::label('soporte_lbl', 'RESPONSABLE'
+		, ['class' 		=> 'col-sm-3'])
 	 !!}
 	{!! Form::text('soporte', null,
-		['class' 		=> 'col-xs-9'
-		,'placeholder'	=> 'Introduce el correo del equipos responsable'])
+		['class' 		=> 'col-sm-4'
+		,'placeholder'	=> 'Introduce el correo del equipo responsable'])
 	!!}
+	</p>
+	{!! Form::label('lbl_propiedad', 'PROPIEDAD'
+		, ['class' 		=> 'col-sm-3']) 
+	!!}
+	<div class="col-sm-2 no-padding">
+		{!! Form::select('propiedad', array(1=>'MN', 2=>'CLIENTE',3=>'PROVEEDOR'), null, ['class' => 'form-control ']) !!}
+	</div>
 </div>
 <div class="form-group">
-	{!! Form::label('ur_usada', 'UNIDAD RACK '
-		, ['class' 		=> 'col-xs-3']) 
+	{!! Form::label('ur_usada', 'UR USADA '
+		, ['class' 		=> 'col-sm-3']) 
 	!!}
 	{!! Form::text('ur_usada', null,
-		['class' 		=> 'col-xs-9'
-		,'placeholder'	=> 'Introduce el numero de unidades de rack Usadas'])
+		['class' 		=> 'col-sm-3'
+		,'placeholder'	=> 'Numero de UR Usadas'])
+	!!}
+	</p>
+	{!! Form::label('ur_asignada_lbl', 'UR ASIGNADA '
+		, ['class' 		=> 'col-sm-3']) 
+	!!}
+	{!! Form::text('ur_asignada', null,
+		['class' 		=> 'col-sm-3'
+		,'placeholder'	=> 'UR asignada'])
 	!!}
 </div>
 <div class="form-group">
 	{!! Form::label('equipo_tipo', 'EQUIPO '
-		, ['class' 		=> 'col-xs-3 '
+		, ['class' 		=> 'col-sm-3 '
 		]) 
 	!!}
 	{!! Form::text('equipo_tipo', null,
-		['class' 		=> 'col-xs-9'
+		['class' 		=> 'col-sm-9'
 		,'placeholder'	=> 'Indica si es storage,serve, etc'])
 	!!}
 </div>
 
 <div class="form-group">
 	{!! Form::label('marca', 'MARCA '
-		, ['class' 		=> 'col-xs-3']) 
+		, ['class' 		=> 'col-sm-3']) 
 	!!}
 	{!! Form::text('marca', null,
-		['class' 		=> 'col-xs-9'
+		['class' 		=> 'col-sm-9'
 		,'placeholder'	=> 'Indica que marca'])
 	!!}
 </div>
 <div class="form-group">
 	{!! Form::label('modelo', 'MODELO '
-		, ['class' 		=> 'col-xs-3']) 
+		, ['class' 		=> 'col-sm-3']) 
 	!!}
 	{!! Form::text('modelo', null,
-		['class' 		=> 'col-xs-9'
+		['class' 		=> 'col-sm-9'
 		,'placeholder'	=> 'Indica que modelo'])
 	!!}
 </div>
 
 <div></div>
 <div class="form-group ">
-	{!! Form::Label('rack', 'Rack: '
-		, ['class' 		=> 'col-xs-3 no-padding-left']) 
+	{!! Form::Label('rack', 'RACK: '
+		, ['class' 		=> 'col-sm-3 ']) 
 	!!}
-	<div class="col-xs-9 no-padding">
+	<div class="col-sm-3 no-padding">
 		{!! Form::select('id_rack', $rack->pluck('name','id'), $equipo->id_rack, ['class' => 'form-control ']) !!}
 	</div>
-</div>
 
-<div class="form-group">
-    {!! Form::Label('estado', 'ESTADO: '
-		, ['class' 		=> 'col-xs-3']) 
+    {!! Form::Label('estado', 'ESTATUS: '
+		, ['class' 		=> 'col-sm-3']) 
 	!!}
-	<div class="col-xs-9 no-padding">
+	<div class="col-sm-3 no-padding">
 		{!! Form::select('power', array(1=>'ENCENDIDO', 0=>'APAGADO'), $equipo->power, ['class' => 'form-control ']) !!}
 	</div>
 </div>
@@ -140,12 +170,3 @@
 	});
 
 </script>
-
-
-
-
-
-
-
-
-FOC2020R263

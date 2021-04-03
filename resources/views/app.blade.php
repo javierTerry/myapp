@@ -265,14 +265,13 @@
 			</div> <!-- class="main-content-inner" -->
 		</div> <!-- main-content -->
 
-		
 
 		<div class="footer">
 			<div class="footer-inner">
 				<div class="footer-content">
 					<span class="bigger-120">
 						<span class="blue bolder">MasNegocio</span>
-						 &copy; 2017-2020
+						 &copy; 2017-2021
 					</span>
 				</div>
 			</div>
@@ -374,7 +373,13 @@
     
     $("input.maskMoney_").maskMoney({showSymbol:true, symbol:"", decimal:".", thousands:","});
   
-  });
-  </script>
+  	$('.date-picker').datepicker({
+		autoclose: true,
+		todayHighlight: true
+		,dateFormat: 'yy-mm-dd' 
+	})
+
+});
+</script>
 </body> <!-- no-skin -->
 </html>

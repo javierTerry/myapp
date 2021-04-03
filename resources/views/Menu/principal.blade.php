@@ -84,7 +84,7 @@
 			<li class="">
 				<a href="{{ route('infra.equipo.index') }}">
 					<i class="menu-icon fa fa-caret-right"></i>
-					H O M E
+					A C T I V O 
 				</a>
 
 				<b class="arrow"></b>
@@ -94,6 +94,24 @@
 				<a href="{{ route('infra.equipo.alarmado') }}">
 					<i class="menu-icon fa fa-caret-right"></i>
 					A L A R M A D O
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+
+			<li class="">
+				<a href="{{ route('infra.equipo.index') }}">
+					<i class="menu-icon fa fa-caret-right"></i>
+					I N A C T I V O 
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+
+			<li class="">
+				<a href="{{ route('infra.equipo.index') }}">
+					<i class="menu-icon fa fa-caret-right"></i>
+					HISTORICO 
 				</a>
 
 				<b class="arrow"></b>

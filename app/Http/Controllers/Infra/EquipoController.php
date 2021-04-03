@@ -14,6 +14,8 @@ use App\Model\Infra\EquipoView;
 use App\Model\Infra\EquipoHistorial;
 use App\Model\Infra\Rack;
 
+use Carbon\Carbon;
+
 class EquipoController extends Controller
 {
     /**
@@ -54,7 +56,9 @@ class EquipoController extends Controller
             Log::info('Equipo store');
 
             $item = new Equipo($request->all());
-            #dd();
+            $item -> alarmado =  is_null($item -> alarmado) ? 0 : $item -> alarmado;
+            $item -> garantia =  Carbon::parse($item['garantia']);
+            #dd( $item -> garantia );
             $item -> save();
             
             $notices = array("Carga exitosa");
@@ -112,7 +116,6 @@ class EquipoController extends Controller
         Log::debug('Equipo actualizar id: '.$id);
         
         $item = Equipo::findOrFail($id);
-        #dd($request->all());
         $item -> fill($request->all());
         
         $item -> save();

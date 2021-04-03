@@ -28,11 +28,6 @@ Route::get('/home', 'HomeController@up_sheet')->name('home');
 
 
 Route::resource('/login','AuthController');
-#Route::get('/auth/logout', 'LoginController@logout');
-#Route::post('post-login', 'LoginController@postLogin');
-#Route::post('post-login', 'LoginController@postLogin');
-
-
 
 
 Route::name('infra.')->group(function () {
@@ -47,14 +42,11 @@ Route::name('infra.')->group(function () {
 		Route::name('equipo.')->group(function () {
 			Route::prefix('equipo')->group(function () {
 					Route::get('alarmados', 'Infra\EquipoController@alarmado')->name('alarmado');
+					
 			});
 	
 		});
 		Route::resource('equipo','Infra\EquipoController');
-		
-		
-		
-
 		Route::resource('equipoHistorial','Infra\EquipoHistorialController');
 
 	});
@@ -64,6 +56,6 @@ Route::name('infra.')->group(function () {
 
 
 Route::get('auth/google', 'GoogleController@redirectToGoogle');
-
+Route::get('auth/logout', 'GoogleController@logout');
 Route::get('auth/google/callback', 'GoogleController@handleGoogleCallback');
 
