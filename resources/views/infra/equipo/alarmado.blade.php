@@ -7,7 +7,7 @@
 		I N V E N T A R I O 
 		<small>
 			<i class="ace-icon fa fa-angle-double-right"></i>
-			Equipos Alarmados
+			Equipos {{ $leyenda }}
 		</small>
 	</h1>
 </div><!-- /.page-header -->

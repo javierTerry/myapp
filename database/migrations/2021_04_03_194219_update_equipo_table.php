@@ -19,6 +19,7 @@ class UpdateEquipoTable extends Migration
             $table->unsignedSmallInteger('whatts')->default(100);
             $table->unsignedTinyInteger('propiedad')->default(1);
             $table->string('ur_asignada', 10)->default(1);
+            $table->unsignedTinyInteger('inventario')->default(1);
         });
     }
 
@@ -34,6 +35,7 @@ class UpdateEquipoTable extends Migration
             $table->dropColumn('whatts');
             $table->dropColumn('propiedad');
             $table->dropColumn('ur_asignada');
+            $table->dropColumn('inventario');
         });
     }
 }

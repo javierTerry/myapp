@@ -26,9 +26,12 @@ class EquipoController extends Controller
     public function index(Request $request)
     {
         Log::info('EQUIPO index ');
-        $equipos  = EquipoView::all();
+        $leyenda = "Activos";
 
-        return view('infra.equipo.index', compact('equipos') );
+        $equipos  = EquipoView::
+                        where('inventario', 1)
+                        ->get();
+        return view('infra.equipo.index', compact('equipos', 'leyenda') );
     }
 
     /**
@@ -58,7 +61,7 @@ class EquipoController extends Controller
             $item = new Equipo($request->all());
             $item -> alarmado =  is_null($item -> alarmado) ? 0 : $item -> alarmado;
             $item -> garantia =  Carbon::parse($item['garantia']);
-            #dd( $item -> garantia );
+            #dd( $item  );
             $item -> save();
             
             $notices = array("Carga exitosa");
@@ -151,11 +154,48 @@ class EquipoController extends Controller
     public function alarmado(Request $request)
     {
         Log::info('EQUIPO ALARMADO index ');
+        $leyenda = "Alarmados";
+
         $equipos  = EquipoView::
                         where('alarmado', 1)
                         ->get();
 
-        return view('infra.equipo.alarmado', compact('equipos') );
+        return view('infra.equipo.alarmado', compact('equipos', 'leyenda') );
+    }
+
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return #equipos objeto del modelo EquipoView
+     */
+    public function inactivo()
+    {
+        Log::info('EQUIPO INACTIVO ');
+        $leyenda = "Inactivos";
+        $equipos  = EquipoView::
+                        where('inventario', 2)
+                        ->get();
+
+        return view('infra.equipo.alarmado', compact('equipos', 'leyenda') );
+    }
+
+        /**
+     * Display a listing of the resource.
+     *
+     * @return $equipos objeto del modelo EquipoView
+     */
+    public function historico()
+    {
+        Log::info('EQUIPO HISTORICO ');
+        $equipos  = EquipoView::
+                        where('inventario', 3)
+                        ->get();
+
+        $leyenda = "Historicos";
+
+        return view('infra.equipo.alarmado', compact('equipos', 'leyenda' ) );
     }
 
 }

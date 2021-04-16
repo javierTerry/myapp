@@ -100,7 +100,7 @@
 			</li>
 
 			<li class="">
-				<a href="{{ route('infra.equipo.index') }}">
+				<a href="{{ route('infra.equipo.inactivo') }}">
 					<i class="menu-icon fa fa-caret-right"></i>
 					I N A C T I V O 
 				</a>
@@ -109,7 +109,7 @@
 			</li>
 
 			<li class="">
-				<a href="{{ route('infra.equipo.index') }}">
+				<a href="{{ route('infra.equipo.historico') }}">
 					<i class="menu-icon fa fa-caret-right"></i>
 					HISTORICO 
 				</a>
