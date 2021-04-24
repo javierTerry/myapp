@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Infra;
 
 use Illuminate\Http\Request;
-
 use App\Http\Controllers\Controller;
 
 use Log;

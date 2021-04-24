@@ -14,12 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-/*
-Route::get('/', function () {
-    return view('welcome');
-});
+#dd(config('google.visual_token'));
 
-*/
 Route::middleware(['auth'])->group(function () {
 	#Route::get('/home', 'HomeController@index')->name('home');
 });

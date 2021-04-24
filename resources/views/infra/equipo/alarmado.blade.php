@@ -33,6 +33,9 @@
 						<th>I P</th>
 						<th>NS</th>
 						<th>MODELO</th>
+						@if ( $btn_accion == 1)
+							<th class="sorting_disabled notexport"></th>
+						@endif
 						
 					</tr>
 				</thead>
@@ -47,6 +50,12 @@
 						<td>{{ $item -> iphw}}</td>
 						<td>{{ $item -> serie}}</td>
 						<td>{{ $item -> modelo}}</td>
+
+						@if ( $btn_accion == 1)
+							<td> 
+								<a href="{{ route('infra.equipo.edit', $item -> id) }}" class="btn btn-info" ><i class="ace-icon fa fa-pencil"></i></a>
+							</td>
+						@endif
 						
 					</tr>		
 					@endforeach

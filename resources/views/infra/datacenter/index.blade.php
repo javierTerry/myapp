@@ -9,7 +9,7 @@
 			<i class="ace-icon fa fa-angle-double-right"></i>
 			Vista general &amp; Estadisticas
 		</small>
-	</h1>|
+	</h1>
 </div><!-- /.page-header -->
 
 <div class="row">

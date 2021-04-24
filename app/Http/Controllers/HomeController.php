@@ -1,6 +1,8 @@
 <?php namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Log;
+use Redirect;
 
 use Revolution\Google\Sheets\Facades\Sheets;
 use App\Model\Infra\ValidacionVisual;
@@ -18,6 +20,15 @@ class HomeController extends Controller {
 	| controller as you wish. It is just here to get your app started!
 	|
 	*/
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct(Request $request)
+    {
+        $this->middleware('visual');
+    }
 
 
     /**
@@ -25,36 +36,44 @@ class HomeController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function up_sheet()
+	public function up_sheet(Request $request)
 	{
-		#dd(config('google'));
+        Log:info("HOMECONTROLLER up_sheet");
 
+       
 
 		$sheets = Sheets::spreadsheet(config('google.spreadsheet_id'))
                         ->sheet(config('google.sheet_name'));
         
-        $header = $sheets ->get() ->pull(0);
+        $cabecera = $sheets ->first();
 		
-        
+        #dd($header);
         $values = ValidacionVisual::all()->toArray();
         
-        #array_unshift($values,$header);
-        #dd($values);
+        $cabeceraAssoc= array();
 
-        #$values =  [$header, ['1','dos', 'tres']];
-		#$values = [['name' => 'name4', 'mail' => 'mail4', 'id' => 4]];
+        foreach ($cabecera as $key => $value) {
+        	$cabeceraAssoc[$value] = $value;	
+        }
+        $cabeceraArray[0] = $cabeceraAssoc;
+        #dd($cabeceraArray);
 
-		#dd($values);
-		$tmp= Sheets::sheet(config('google.sheet_name'))
-        	->collection($header,$values)
-        	->toArray();
         
-        #dd($tmp->toArray());
+        Sheets::sheet(config('google.sheet_name'))
+        	->clear();
+
+
+        #$tmp= Sheets::sheet(config('google.sheet_name'))
+        #	->collection($cabecera,$values)
+        #	->toArray()
+        #	;
+        $tmp = array_merge($cabeceraArray, $values);	
+        #dd($tmp);
         Sheets::sheet(config('google.sheet_name'))
         	->append($tmp);
 
         
-        return view('app');
+        return view('login');
 	}
 
 }

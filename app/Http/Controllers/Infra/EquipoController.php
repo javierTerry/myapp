@@ -18,6 +18,8 @@ use Carbon\Carbon;
 
 class EquipoController extends Controller
 {
+
+   
     /**
      * Display a listing of the resource.
      *
@@ -155,12 +157,12 @@ class EquipoController extends Controller
     {
         Log::info('EQUIPO ALARMADO index ');
         $leyenda = "Alarmados";
-
+        $btn_accion = 1;
         $equipos  = EquipoView::
                         where('alarmado', 1)
                         ->get();
 
-        return view('infra.equipo.alarmado', compact('equipos', 'leyenda') );
+        return view('infra.equipo.alarmado', compact('equipos', 'leyenda', 'btn_accion') );
     }
 
 
@@ -174,11 +176,12 @@ class EquipoController extends Controller
     {
         Log::info('EQUIPO INACTIVO ');
         $leyenda = "Inactivos";
+        $btn_accion = 0;
         $equipos  = EquipoView::
                         where('inventario', 2)
                         ->get();
 
-        return view('infra.equipo.alarmado', compact('equipos', 'leyenda') );
+        return view('infra.equipo.alarmado', compact('equipos', 'leyenda', 'btn_accion') );
     }
 
         /**
@@ -189,13 +192,14 @@ class EquipoController extends Controller
     public function historico()
     {
         Log::info('EQUIPO HISTORICO ');
+        $btn_accion = 0;
         $equipos  = EquipoView::
                         where('inventario', 3)
                         ->get();
 
         $leyenda = "Historicos";
 
-        return view('infra.equipo.alarmado', compact('equipos', 'leyenda' ) );
+        return view('infra.equipo.alarmado', compact('equipos', 'leyenda', 'btn_accion' ) );
     }
 
 }

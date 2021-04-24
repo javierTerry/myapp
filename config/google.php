@@ -25,7 +25,8 @@ return [
     'approval_prompt' => 'auto',
     'prompt'           => 'consent',
     'spreadsheet_id' => env('SPREADSHEET_ID',''),
-    'sheet_name'    => env('SHEET_NAME',''),    
+    'sheet_name'    => env('SHEET_NAME',''),
+    'visual_token'    => env('GOOGLE_VISUAL_TOKEN','BASE64'),
 
     /*
     |----------------------------------------------------------------------------
