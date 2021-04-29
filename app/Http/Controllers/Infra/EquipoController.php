@@ -10,11 +10,16 @@ use App\Http\Controllers\Controller;
 
 use Log;
 use App\Model\Infra\Equipo;
+use App\Model\Infra\EquipoView;
 use App\Model\Infra\EquipoHistorial;
 use App\Model\Infra\Rack;
 
+use Carbon\Carbon;
+
 class EquipoController extends Controller
 {
+
+   
     /**
      * Display a listing of the resource.
      *
@@ -23,9 +28,12 @@ class EquipoController extends Controller
     public function index(Request $request)
     {
         Log::info('EQUIPO index ');
-        $equipos  = Equipo::all();
+        $leyenda = "Activos";
 
-        return view('infra.equipo.index', compact('equipos') );
+        $equipos  = EquipoView::
+                        where('inventario', 1)
+                        ->get();
+        return view('infra.equipo.index', compact('equipos', 'leyenda') );
     }
 
     /**
@@ -53,7 +61,9 @@ class EquipoController extends Controller
             Log::info('Equipo store');
 
             $item = new Equipo($request->all());
-            #dd();
+            $item -> alarmado =  is_null($item -> alarmado) ? 0 : $item -> alarmado;
+            $item -> garantia =  Carbon::parse($item['garantia']);
+            #dd( $item  );
             $item -> save();
             
             $notices = array("Carga exitosa");
@@ -73,6 +83,7 @@ class EquipoController extends Controller
     public function show($id)
     {
         //
+        Log::info('Equipo show '.$id);
     }
 
     /**
@@ -110,7 +121,6 @@ class EquipoController extends Controller
         Log::debug('Equipo actualizar id: '.$id);
         
         $item = Equipo::findOrFail($id);
-        #dd($request->all());
         $item -> fill($request->all());
         
         $item -> save();
@@ -136,6 +146,60 @@ class EquipoController extends Controller
         
 
         return \Redirect::route('infra.equipo.index') -> with ('notices',$notices);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function alarmado(Request $request)
+    {
+        Log::info('EQUIPO ALARMADO index ');
+        $leyenda = "Alarmados";
+        $btn_accion = 1;
+        $equipos  = EquipoView::
+                        where('alarmado', 1)
+                        ->get();
+
+        return view('infra.equipo.alarmado', compact('equipos', 'leyenda', 'btn_accion') );
+    }
+
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return #equipos objeto del modelo EquipoView
+     */
+    public function inactivo()
+    {
+        Log::info('EQUIPO INACTIVO ');
+        $leyenda = "Inactivos";
+        $btn_accion = 0;
+        $equipos  = EquipoView::
+                        where('inventario', 2)
+                        ->get();
+
+        return view('infra.equipo.alarmado', compact('equipos', 'leyenda', 'btn_accion') );
+    }
+
+        /**
+     * Display a listing of the resource.
+     *
+     * @return $equipos objeto del modelo EquipoView
+     */
+    public function historico()
+    {
+        Log::info('EQUIPO HISTORICO ');
+        $btn_accion = 0;
+        $equipos  = EquipoView::
+                        where('inventario', 3)
+                        ->get();
+
+        $leyenda = "Historicos";
+
+        return view('infra.equipo.alarmado', compact('equipos', 'leyenda', 'btn_accion' ) );
     }
 
 }

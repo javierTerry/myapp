@@ -25,7 +25,10 @@ return [
     'approval_prompt' => 'auto',
     'prompt'           => 'consent',
     'spreadsheet_id' => env('SPREADSHEET_ID',''),
-    'sheet_name'    => env('SHEET_NAME',''),    
+    'sheet_name'    => env('SHEET_NAME',''),
+    'sheet_name_inactivo'    => env('SHEET_NAME_INACTIVO','INACTIVO'),
+    'sheet_name_historico'    => env('SHEET_NAME_HISTORICO','HISTORICO'),
+    'visual_token'    => env('GOOGLE_VISUAL_TOKEN','BASE64'),
 
     /*
     |----------------------------------------------------------------------------

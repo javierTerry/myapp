@@ -19,7 +19,8 @@ class Equipo extends Model
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['id', 'hostname', 'iphw', 'serie', 'soporte','ur_usada', 'equipo_tipo', 'modelo', 'marca', 'power','alarmado', 'id_rack','soporte'];
+	protected $fillable = ['id', 'hostname', 'iphw', 'serie', 'soporte','ur_usada', 'equipo_tipo', 'modelo', 'marca', 'power','alarmado', 'id_rack'
+								,'garantia','whatts','propiedad','ur_asignada', 'inventario'];
 	
 
 	/**

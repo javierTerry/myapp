@@ -29,6 +29,8 @@
 					<tr>
 						
 						<th>ID</th>
+						<th>DC</th>
+						<th>RACK</th>
 						<th>HOSTNAME</th>
 						<th>I P</th>
 						<th>NS</th>
@@ -45,6 +47,8 @@
 					<tr>
 						
 						<td>{{ $item -> id}}</td>
+						<td>{{ $item -> dc}}</td>
+						<td>{{ $item -> rack}}</td>
 						<td>
 							{{ $item -> hostname}}
 							<i class="ace-icon fa {{ $item-> alarmado ? 'fa-times red2' : 'fa-check bigger-110 green' }}"></i>
@@ -58,33 +62,7 @@
 						<td style="display:none;" >{{ $item -> power}}</td>
 
 						<td> 
-							<a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modal{{ $item -> id }}" ><i class="ace-icon fa fa-trash-o"></i></a>
 							<a href="{{ route('infra.equipo.edit', $item -> id) }}" class="btn btn-info" ><i class="ace-icon fa fa-pencil"></i></a>
-
-							<div class="modal fade" id="modal{{ $item -> id }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
-							  aria-hidden="true">
-								<div class="modal-dialog" role="document">
-								    <div class="modal-content">
-								    	<div class="modal-body">
-								        	<p class="bigger-50 bolder center grey">
-												<i class="ace-icon fa fa-hand-o-right blue bigger-120"></i>
-												
-												Seguro que quieres eliminar el ID {{ $item -> id }} con NOMBRE {{ $item -> hostname}}?  	
-											</p>
-								      	</div>
-									     <div class="modal-footer">
-									      	{!! Form::open([ 'route' => ['infra.equipo.destroy', $item], 'metdod' => 'PUT' ]) !!}
-									      		{{method_field('DELETE')}}
-												<button type="submit" class="btn btn-danger" >
-													OK
-												</button>
-												 <input type="button"  value="Close" data-dismiss="modal" class="btn btn-info" /> 							
-											{!! Form::close() !!}
-									    </div> <!-- modal-footer -->
-								    </div> <!-- modal-content -->
-							  	</div> <!-- modal-dialog -->
-							</div> <!--modal fad -->
-
 						</td>
 					</tr>		
 					@endforeach
@@ -96,5 +74,3 @@
 </div> <!-- class="row" -->
 
 @endsection
-
-

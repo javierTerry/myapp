@@ -1,9 +1,11 @@
 <?php namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Log;
+use Redirect;
 
 use Revolution\Google\Sheets\Facades\Sheets;
-use App\Model\Infra\DatacenterView;
+use App\Model\Infra\ValidacionVisual;
 
 
 class HomeController extends Controller {
@@ -19,65 +21,123 @@ class HomeController extends Controller {
 	|
 	*/
 
-	/**
-	 * Create a new controller instance.
-	 *
-	 * @return void
-	 */
-	public function __construct()
-	{
-		#$this->middleware('auth');
-	}
-
-	/**
-	 * Show the application dashboard to the user.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		
-		return view('app');
-	}
-
 
     /**
 	 * Show the application dashboard to the user.
 	 *
 	 * @return Response
 	 */
-	public function up_sheet()
+	public function activo(Request $request)
 	{
-		#dd(config('google'));
+        Log::info("HOMECONTROLLER activo");
 
+       
 
 		$sheets = Sheets::spreadsheet(config('google.spreadsheet_id'))
                         ->sheet(config('google.sheet_name'));
-        #                ->get();
-        $header = $sheets ->get() ->pull(0);
+        
+        $cabecera = $sheets ->first();
 		
-        #$header = $sheets->pull(0); 
-        #Sheets::sheet(config('google.sheet_name'))
-        #	->clear();
+        $values = ValidacionVisual::where('inventario', 1)
+                        ->orderByDesc('id')
+                        ->get()
+                        ->toArray();
+        $cabeceraAssoc= array();
 
-        $values = DatacenterView::all()->toArray();
+        foreach ($cabecera as $key => $value) {
+        	$cabeceraAssoc[$value] = $value;	
+        }
+        $cabeceraArray[0] = $cabeceraAssoc;
         
-        #array_unshift($values,$header);
-        #dd($values);
+        Sheets::sheet(config('google.sheet_name'))
+        	->clear();
 
-        #$values =  [$header, ['1','dos', 'tres']];
-		#$values = [['name' => 'name4', 'mail' => 'mail4', 'id' => 4]];
 
-		#dd($values);
-		$tmp= Sheets::sheet(config('google.sheet_name'))
-        	->collection($header,$values)
-        	->all();
-        
+        $tmp = array_merge($cabeceraArray, $values);	
+  
         Sheets::sheet(config('google.sheet_name'))
         	->append($tmp);
 
         
-        return view('app');
+        return view('login');
 	}
 
+
+
+    /**
+     * Funcion para obtener el inventario inactivo, mismo que no esta rackeado y peude estar en las oficinas centrales
+     *
+     * @return Response
+     */
+    public function inactivo(Request $request)
+    {
+        Log::info("HOMECONTROLLER inactivo");
+
+        $sheets = Sheets::spreadsheet(config('google.spreadsheet_id'))
+                        ->sheet(config('google.sheet_name_inactivo'));
+        
+        $cabecera = $sheets ->first();       
+        $values = ValidacionVisual::where('inventario', 2)
+                        ->orderByDesc('id')
+                        ->get()
+                        ->toArray();
+        
+        $cabeceraAssoc= array();
+
+        foreach ($cabecera as $key => $value) {
+            $cabeceraAssoc[$value] = $value;    
+        }
+        $cabeceraArray[0] = $cabeceraAssoc;
+        
+
+        Sheets::sheet(config('google.sheet_name_inactivo'))
+            ->clear();
+
+
+        $tmp = array_merge($cabeceraArray, $values);    
+        Sheets::sheet(config('google.sheet_name_inactivo'))
+            ->append($tmp);
+
+        return view('login');
+    }
+
+
+    /**
+     * Obtiene los registros que son hisotricos equipos regresados al cliente o eliminados o destruidos.
+     * @el inventario se tiene como valores 1 = Activo, 2 = inactvio, 3 = historico 
+     *
+     * @return Response
+     */
+    public function historico(Request $request)
+    {
+        Log::info("HOMECONTROLLER historico");
+
+        $sheets = Sheets::spreadsheet(config('google.spreadsheet_id'))
+                        ->sheet(config('google.sheet_name_historico'));
+        
+        $cabecera = $sheets ->first();
+        $values = ValidacionVisual::where('inventario', 3)
+                        ->orderByDesc('id')
+                        ->get()
+                        ->toArray();
+        
+        $cabeceraAssoc= array();
+
+        foreach ($cabecera as $key => $value) {
+            $cabeceraAssoc[$value] = $value;    
+        }
+        $cabeceraArray[0] = $cabeceraAssoc;
+       
+        Sheets::sheet(config('google.sheet_name_historico'))
+            ->clear();
+
+         $tmp = array_merge($cabeceraArray, $values);    
+        
+        Sheets::sheet(config('google.sheet_name_historico'))
+            ->append($tmp);
+
+        
+        return view('login');
+    }
 }
+

@@ -7,7 +7,7 @@
 		I N V E N T A R I O 
 		<small>
 			<i class="ace-icon fa fa-angle-double-right"></i>
-			Equipos Alarmados
+			Equipos {{ $leyenda }}
 		</small>
 	</h1>
 </div><!-- /.page-header -->
@@ -27,10 +27,15 @@
 					<tr>
 						
 						<th>ID</th>
+						<th>DC</th>
+						<th>RACK</th>
 						<th>HOSTNAME</th>
 						<th>I P</th>
 						<th>NS</th>
 						<th>MODELO</th>
+						@if ( $btn_accion == 1)
+							<th class="sorting_disabled notexport"></th>
+						@endif
 						
 					</tr>
 				</thead>
@@ -39,10 +44,18 @@
 					<tr>
 						
 						<td>{{ $item -> id}}</td>
+						<td>{{ $item -> dc}}</td>
+						<td>{{ $item -> rack}}</td>
 						<td>{{ $item -> hostname}}</td>
 						<td>{{ $item -> iphw}}</td>
 						<td>{{ $item -> serie}}</td>
 						<td>{{ $item -> modelo}}</td>
+
+						@if ( $btn_accion == 1)
+							<td> 
+								<a href="{{ route('infra.equipo.edit', $item -> id) }}" class="btn btn-info" ><i class="ace-icon fa fa-pencil"></i></a>
+							</td>
+						@endif
 						
 					</tr>		
 					@endforeach

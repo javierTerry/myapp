@@ -34,7 +34,12 @@
 	<body>
 		<div class="container">
 			<div class="content">
-				<div class="title">Be right back.</div>
+				
+				<a href="{{ route('infra.dcs.index') }}">
+					<i class="menu-icon fa fa-caret-right"></i>
+					<div class="title">MasNegocio</div>
+				</a>
+
 			</div>
 		</div>
 	</body>
