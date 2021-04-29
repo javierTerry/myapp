@@ -19,5 +19,5 @@ class EquipoView extends Model
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['id', 'hostname', 'iphw', 'modelo','serie', 'soporte', 'dc', 'rack'];
+	protected $fillable = ['id', 'hostname', 'iphw', 'modelo','serie', 'soporte', 'dc', 'rack','marca'];
 }

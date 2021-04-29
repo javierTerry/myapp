@@ -34,7 +34,7 @@
 						<th>HOSTNAME</th>
 						<th>I P</th>
 						<th>NS</th>
-						<th style="display:none;">MARCA</th>
+						<th style="display:none;" >MARCA</th>
 						<th>MODELO</th>
 						<th style="display:none;" >SOPORTE</th>
 						<th style="display:none;" >POWER</th>
@@ -56,7 +56,7 @@
 						</td>
 						<td>{{ $item -> iphw}}</td>
 						<td>{{ $item -> serie}}</td>
-						<td style="display:none;">{{ $item -> marca}}</td>
+						<td style="display:none;" >{{ $item -> marca}}</td>
 						<td>{{ $item -> modelo}}</td>
 						<td style="display:none;" >{{ $item -> soporte}}</td>
 						<td style="display:none;" >{{ $item -> power}}</td>
