@@ -176,7 +176,7 @@ class EquipoController extends Controller
     {
         Log::info('EQUIPO INACTIVO ');
         $leyenda = "Inactivos";
-        $btn_accion = 0;
+        $btn_accion = 1;
         $equipos  = EquipoView::
                         where('inventario', 2)
                         ->get();
