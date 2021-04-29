@@ -38,7 +38,8 @@ class HomeController extends Controller {
         
         $cabecera = $sheets ->first();
 		
-        $values = ValidacionVisual::where('inventario', 2)
+        $values = ValidacionVisual::where('inventario', 1)
+                        ->orderByDesc('id')
                         ->get()
                         ->toArray();
         $cabeceraAssoc= array();
@@ -77,7 +78,9 @@ class HomeController extends Controller {
         
         $cabecera = $sheets ->first();       
         $values = ValidacionVisual::where('inventario', 2)
-                        ->get()->toArray();
+                        ->orderByDesc('id')
+                        ->get()
+                        ->toArray();
         
         $cabeceraAssoc= array();
 
@@ -114,6 +117,7 @@ class HomeController extends Controller {
         
         $cabecera = $sheets ->first();
         $values = ValidacionVisual::where('inventario', 3)
+                        ->orderByDesc('id')
                         ->get()
                         ->toArray();
         
