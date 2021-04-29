@@ -20,15 +20,6 @@ class HomeController extends Controller {
 	| controller as you wish. It is just here to get your app started!
 	|
 	*/
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct(Request $request)
-    {
-        $this->middleware('visual');
-    }
 
 
     /**
@@ -36,9 +27,9 @@ class HomeController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function up_sheet(Request $request)
+	public function activo(Request $request)
 	{
-        Log:info("HOMECONTROLLER up_sheet");
+        Log::info("HOMECONTROLLER activo");
 
        
 
@@ -47,28 +38,22 @@ class HomeController extends Controller {
         
         $cabecera = $sheets ->first();
 		
-        #dd($header);
-        $values = ValidacionVisual::all()->toArray();
-        
+        $values = ValidacionVisual::where('inventario', 2)
+                        ->get()
+                        ->toArray();
         $cabeceraAssoc= array();
 
         foreach ($cabecera as $key => $value) {
         	$cabeceraAssoc[$value] = $value;	
         }
         $cabeceraArray[0] = $cabeceraAssoc;
-        #dd($cabeceraArray);
-
         
         Sheets::sheet(config('google.sheet_name'))
         	->clear();
 
 
-        #$tmp= Sheets::sheet(config('google.sheet_name'))
-        #	->collection($cabecera,$values)
-        #	->toArray()
-        #	;
         $tmp = array_merge($cabeceraArray, $values);	
-        #dd($tmp);
+  
         Sheets::sheet(config('google.sheet_name'))
         	->append($tmp);
 
@@ -76,5 +61,79 @@ class HomeController extends Controller {
         return view('login');
 	}
 
+
+
+    /**
+     * Funcion para obtener el inventario inactivo, mismo que no esta rackeado y peude estar en las oficinas centrales
+     *
+     * @return Response
+     */
+    public function inactivo(Request $request)
+    {
+        Log::info("HOMECONTROLLER inactivo");
+
+        $sheets = Sheets::spreadsheet(config('google.spreadsheet_id'))
+                        ->sheet(config('google.sheet_name_inactivo'));
+        
+        $cabecera = $sheets ->first();       
+        $values = ValidacionVisual::where('inventario', 2)
+                        ->get()->toArray();
+        
+        $cabeceraAssoc= array();
+
+        foreach ($cabecera as $key => $value) {
+            $cabeceraAssoc[$value] = $value;    
+        }
+        $cabeceraArray[0] = $cabeceraAssoc;
+        
+
+        Sheets::sheet(config('google.sheet_name_inactivo'))
+            ->clear();
+
+
+        $tmp = array_merge($cabeceraArray, $values);    
+        Sheets::sheet(config('google.sheet_name_inactivo'))
+            ->append($tmp);
+
+        return view('login');
+    }
+
+
+    /**
+     * Obtiene los registros que son hisotricos equipos regresados al cliente o eliminados o destruidos.
+     * @el inventario se tiene como valores 1 = Activo, 2 = inactvio, 3 = historico 
+     *
+     * @return Response
+     */
+    public function historico(Request $request)
+    {
+        Log::info("HOMECONTROLLER historico");
+
+        $sheets = Sheets::spreadsheet(config('google.spreadsheet_id'))
+                        ->sheet(config('google.sheet_name_historico'));
+        
+        $cabecera = $sheets ->first();
+        $values = ValidacionVisual::where('inventario', 3)
+                        ->get()
+                        ->toArray();
+        
+        $cabeceraAssoc= array();
+
+        foreach ($cabecera as $key => $value) {
+            $cabeceraAssoc[$value] = $value;    
+        }
+        $cabeceraArray[0] = $cabeceraAssoc;
+       
+        Sheets::sheet(config('google.sheet_name_historico'))
+            ->clear();
+
+         $tmp = array_merge($cabeceraArray, $values);    
+        
+        Sheets::sheet(config('google.sheet_name_historico'))
+            ->append($tmp);
+
+        
+        return view('login');
+    }
 }
 

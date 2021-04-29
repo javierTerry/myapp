@@ -20,45 +20,52 @@ Route::middleware(['auth'])->group(function () {
 	#Route::get('/home', 'HomeController@index')->name('home');
 });
 
-Route::get('/home', 'HomeController@up_sheet')->name('home');
 
+Route::middleware(['visual'])->group(function () {
+	Route::name('inventario.')->group(function () {
+		Route::prefix('inventario')->group(function () {
+			Route::get('/historico', 'HomeController@historico')->name('historico');
+			Route::get('/activo', 'HomeController@activo')->name('activo');
+			Route::get('/inactivo', 'HomeController@inactivo')->name('inactivo');
 
-Route::resource('/login','AuthController');
-
-
-Route::name('infra.')->group(function () {
-	Route::prefix('infra')->group(function () {
-	    
-		Route::resource('dcs','Infra\DataCenterController');
-
-		Route::resource('fase','Infra\FaseController');
-
-		Route::resource('rack','Infra\RackController');
-
-		Route::name('equipo.')->group(function () {
-			Route::prefix('equipo')->group(function () {
-					Route::get('alarmados', 'Infra\EquipoController@alarmado')->name('alarmado');
-					
-			});
-	
 		});
-		Route::name('equipo.')->group(function () {
-			Route::prefix('equipo')->group(function () {
-					Route::get('inactivo', 'Infra\EquipoController@inactivo')->name('inactivo');
-					Route::get('historico', 'Infra\EquipoController@historico')->name('historico');
-					
-			});
-	
-		});
-		Route::resource('equipo','Infra\EquipoController');
-		Route::resource('equipoHistorial','Infra\EquipoHistorialController');
-
-	});
-
-
+	});	
 });
 
 
+Route::middleware(['auth'])->group(function () {
+	Route::name('infra.')->group(function () {
+		Route::prefix('infra')->group(function () {
+		    
+			Route::resource('dcs','Infra\DataCenterController');
+
+			Route::resource('fase','Infra\FaseController');
+
+			Route::resource('rack','Infra\RackController');
+
+			Route::name('equipo.')->group(function () {
+				Route::prefix('equipo')->group(function () {
+						Route::get('alarmados', 'Infra\EquipoController@alarmado')->name('alarmado');
+						
+				});
+		
+			});
+			Route::name('equipo.')->group(function () {
+				Route::prefix('equipo')->group(function () {
+						Route::get('inactivo', 'Infra\EquipoController@inactivo')->name('inactivo');
+						Route::get('historico', 'Infra\EquipoController@historico')->name('historico');
+						
+				});
+		
+			});
+			Route::resource('equipo','Infra\EquipoController');
+			Route::resource('equipoHistorial','Infra\EquipoHistorialController');
+
+		});
+	});
+});
+
+Route::resource('/login','AuthController');
 Route::get('auth/google', 'GoogleController@redirectToGoogle');
 Route::get('auth/logout', 'GoogleController@logout');
 Route::get('auth/google/callback', 'GoogleController@handleGoogleCallback');

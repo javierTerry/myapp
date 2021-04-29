@@ -13,4 +13,6 @@ class ValidacionVisual extends Model
 	 */
 
 	protected $table = 'validacionVisualView';
+
+	 protected $hidden = array('inventario');
 }
