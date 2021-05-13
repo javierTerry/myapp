@@ -49,15 +49,21 @@ class EquipoHistorialController extends Controller
             $item->fecha_reporte = \Carbon\Carbon::now();
             #dd($item->id_equipo);
             $idEquipo = $item->id_equipo;
+            $route = array('equipo' => $idEquipo);
             $item -> save();
             
             $notices = array("Se agrego el seguimiento ".$idEquipo);
 
             return redirect()->route('infra.equipo.edit' , ['equipo' => $idEquipo])-> with ('notices',$notices);
 
-            #return \Redirect::route('infra.equipo.edit', ['id'=>$idEquipo]) -> with ('notices',$notices);
+        } catch (\Illuminate\Database\QueryException $e) {
+            Log::info('EquipoHistorial store Excepcion QueryException');
+            
+            return \Redirect::route('infra.equipo.edit', $route ) -> withErrors ($e ->errorInfo[2]);
+
         } catch (Exception $e) {
-            return \Redirect::route('infra.equipo.index') -> withErrors ($e -> getMessage());   
+            Log::info('EquipoHistorial store Excepcion General');
+            return \Redirect::route('infra.equipo.index') -> withErrors ($e -> getMessage());       
         }
     }
 
