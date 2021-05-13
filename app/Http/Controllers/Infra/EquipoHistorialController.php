@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers\Infra;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
+use App\Http\Requests\EquipoHistorialRequest;
 use App\Http\Controllers\Controller;
 
 
@@ -40,7 +38,7 @@ class EquipoHistorialController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(EquipoHistorialRequest $request)
     {
         try{
             Log::info('EquipoHistorial store');
