@@ -8,7 +8,6 @@
 
 				<div class="panel-heading"> Nuevo -  R A C K </div>
 				<div class="panel-body">
-					@include('errors.parcial.campos_error')
 					{!! Form::open([ 'route' => 'infra.rack.store', 'method' => 'POST' ]) !!}
 						@include('infra.rack.parcial.campos')
 						  <button type="submit" class="btn btn-success" >Guardar </button>

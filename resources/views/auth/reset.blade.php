@@ -7,10 +7,6 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">Reset Password</div>
 				<div class="panel-body">
-					@include('errors.parcial.campos_error')
-					@include('errors.parcial.campos_notices')
-					
-					
 					{!!	Form::open([ 'route' => ['guests.password.update', Auth::user() -> id], 'method' => 'PUT' ]) !!}
 						  						  
 						<div class="form-group">

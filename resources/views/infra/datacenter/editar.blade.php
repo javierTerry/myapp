@@ -8,7 +8,6 @@
 				<div class="panel-heading">Actualizar Datacenter : {{ $dc -> name}}</div>
 
 				<div class="panel-body">
-					@include('errors.parcial.campos_error')
 					{!! Form::model($dc, [ 'route' => ['infra.dcs.update',$dc], 'method' => 'PUT' ]) !!}
 						  	@include('infra.datacenter.parcial.campos')					  
 						<button type="submit" class="btn btn-success" >Guardar </button>

@@ -54,6 +54,7 @@ Route::middleware(['auth'])->group(function () {
 				Route::prefix('equipo')->group(function () {
 						Route::get('inactivo', 'Infra\EquipoController@inactivo')->name('inactivo');
 						Route::get('historico', 'Infra\EquipoController@historico')->name('historico');
+						Route::put('{equipo}/edit', 'Infra\EquipoController@byPassHistorico')->name('bypasshistorico');
 						
 				});
 		

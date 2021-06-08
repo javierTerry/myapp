@@ -9,12 +9,15 @@ use App\Http\Controllers\Controller;
 
 
 use Log;
+use Carbon\Carbon;
+
 use App\Model\Infra\Equipo;
 use App\Model\Infra\EquipoView;
 use App\Model\Infra\EquipoHistorial;
 use App\Model\Infra\Rack;
 
-use Carbon\Carbon;
+use App\Http\Requests\Infra\EquipoRequest;
+use App\Http\Requests\EquipoHistorialRequest;
 
 class EquipoController extends Controller
 {
@@ -55,7 +58,7 @@ class EquipoController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(EquipoRequest $request)
     {
         try{
             Log::info('Equipo store');
@@ -95,7 +98,7 @@ class EquipoController extends Controller
     public function edit($id)
     {
         Log::info("Equipo Controller edit ".$id);
-        #\DB::enableQueryLog();
+        
         $equipo = Equipo::find($id);
         
         $rack  = Rack::all();
@@ -103,9 +106,8 @@ class EquipoController extends Controller
         $equipoHisorial = EquipoHistorial::where('id_equipo','=',$id)
                         ->orderBy('id', 'desc')
                         ->get();
-        #$quries = \DB::getQueryLog();        
-        #dd($equipoHisorial);
-        
+        Log::debug("Equipo Controller edit ".$equipo);
+        Log::debug("Equipo Controller edit ".$equipoHisorial);
         return view('infra.equipo.editar', compact('equipo', 'rack', 'equipoHisorial'));
     }
 
@@ -116,7 +118,7 @@ class EquipoController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(EquipoRequest $request, $id)
     {
         Log::debug('Equipo actualizar id: '.$id);
         
@@ -128,7 +130,7 @@ class EquipoController extends Controller
         $tmp = sprintf("Actualizacion correcta de %s con id %d", $item -> hostname, $id);
         $notices = array($tmp);
 
-        return \Redirect::route('infra.equipo.edit', ['equipo'=>$id]) -> with ('notices',$notices);
+        return \Redirect::route('infra.equipo.edit', ['equipo'=>$id]) -> withSuccess ($notices);
     }
 
     /**
@@ -184,7 +186,7 @@ class EquipoController extends Controller
         return view('infra.equipo.alarmado', compact('equipos', 'leyenda', 'btn_accion') );
     }
 
-        /**
+    /**
      * Display a listing of the resource.
      *
      * @return $equipos objeto del modelo EquipoView
@@ -200,6 +202,48 @@ class EquipoController extends Controller
         $leyenda = "Historicos";
 
         return view('infra.equipo.alarmado', compact('equipos', 'leyenda', 'btn_accion' ) );
+    }
+
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return $equipos objeto del modelo EquipoView
+     */
+    public function byPassHistorico(EquipoHistorialRequest $request,$id)
+    {
+        Log::info('EQUIPO HISTORICO ');
+        Log::info('EquipoHistorial store');
+        $request->session()->put('quotation', $request->input());
+        $mensajes = array();
+        try {
+
+            $id  = $request->get('id_equipo');            
+            $equipo = Equipo::find($id);
+            $rack  = Rack::all();
+            $equipoHisorial = EquipoHistorial::where('id_equipo','=',$id)
+                            ->orderBy('id', 'desc')
+                            ->get();
+
+            if ($request->validator->fails()) {
+                $notices = $request->validator->messages()->all();
+                return \Redirect::route('infra.equipo.edit', ['equipo'=>$id]) -> with ('notices',$notices);
+            } 
+
+            $item = new EquipoHistorial($request->all());
+            $item->fecha_reporte = \Carbon\Carbon::now();
+            $item -> save();
+            $mensajes[] = "Se agrego el seguimiento";
+               
+        } catch (Exception $exception) {
+            Log::info('EquipoHistorial exception');
+           return \Redirect::route('infra.equipo.edit', ['equipo'=>$id]) -> withErrors ($exception);
+        }
+
+        Log::info('EquipoHistorial Finalizando');
+        return \Redirect::route('infra.equipo.edit', ['equipo'=>$id]) -> withSuccess ($mensajes);
+      
     }
 
 }

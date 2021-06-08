@@ -1,9 +1,4 @@
 <div class="form-group">
-	<div class="col-xs-12 label label-lg label-success arrowed-in arrowed-right">
-		<b>Descripcion del equipo</b>
-	</div>
-	
-
 	{!! Form::label('alarmadoLbl', ' TIENE ALARMA ?'
 		, ['class'	=> 'col-sm-3']) 
 	!!}
@@ -41,7 +36,7 @@
 	!!}
 </div>
 <div class="form-group">
-	{!! Form::label('serue_lbl', 'No. SERIE'
+	{!! Form::label('serie_lbl', 'No. SERIE'
 		, ['class' 		=> 'col-sm-2']) 
 	!!}
 	{!! Form::text('serie', null,

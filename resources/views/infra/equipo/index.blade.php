@@ -14,9 +14,6 @@
 
 <div class="row">
 	<div class="col-xs-12">
-		@include('errors.parcial.campos_error')
-		@include('errors.parcial.campos_notices')
-
 		<a class="btn btn-success" href=" {{ route('infra.equipo.create') }} " role="button"> Nuevo  </a>
 
 		<div class="table-responsive text-center">

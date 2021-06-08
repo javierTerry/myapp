@@ -19,42 +19,37 @@
 	<link href="{{ asset('/css/new/ace.min.css') }}" rel="stylesheet" class="ace-main-stylesheet" id="main-ace-style">
 	<link href="{{ asset('/css/new/ace-skins.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/new/ace-rtl.min.css') }}" rel="stylesheet">
-
 	<link href="{{ asset('/css/datatables/buttons.1.6.2.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('/css/new/jquery-ui.min.css') }}" rel="stylesheet">
+
 
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 	
-
-	<script type="text/javascript" src="{{{ URL::asset('js/jquery-2.1.4.min.js')}}}"></script>
-	<script type="text/javascript" src="{{{ URL::asset('js/jquery-ui.min.js')}}}"></script>
+	<!-- FUENTES DE JQUERY . JS  -->
+  <script type="text/javascript" src="{{{ URL::asset('js/jquery-2.1.4.min.js')}}}"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	
 	<script type="text/javascript" src="{{{ URL::asset('js/jquery.dataTables.min.js')}}}"></script>
 	<script type="text/javascript" src="{{{ URL::asset('js/jquery.dataTables.bootstrap.min.js')}}}"></script>
 	<script type="text/javascript" src="{{{ URL::asset('js/dataTables.buttons.min.js')}}}"></script>
-	
-  	<script type="text/javascript" src="{{{ URL::asset('js/jquery.jqGrid.min.js')}}}"></script>
-  		<script type="text/javascript">
-		if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
-	</script>
+  <script type="text/javascript" src="{{{ URL::asset('js/jquery.jqGrid.min.js')}}}"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js" ></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js" ></script>
 
-	
+  
+  <script type="text/javascript">
+			if('ontouchstart' in document.documentElement) document.write("<script src='../js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+	</script>	
 	<script type="text/javascript" src="{{URL::asset('js/bootstrap.min.js')}}" ></script>
 	<script type="text/javascript" src="{{URL::asset('js/jquery.maskMoney.js')}}" ></script>
 	<script type="text/javascript" src="{{URL::asset('js/ace-extra.min.js')}}" ></script>
 	<script type="text/javascript" src="{{URL::asset('js/ace.min.js')}}" ></script>
-
-
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js" ></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js" ></script>
-
-
-
 	
 </head>
 <body class="no-skin">
-	<div id="navbar" class="navbar navbar-default  ace-save-state">
-		
-			<div class="navbar-container ace-save-state" id="navbar-container">
+	<div id="navbar" class="navbar navbar-default ace-save-state">
+		<div class="navbar-container ace-save-state" id="navbar-container">	
 				<button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
 					<span class="sr-only">Toggle sidebar</span>
 
@@ -76,127 +71,13 @@
 
 				<div class="navbar-buttons navbar-header pull-right" role="navigation">
 					<ul class="nav ace-nav">
-						<li class="green dropdown-modal">
-							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-								<i class="ace-icon fa fa-envelope icon-animated-vertical"></i>
-								<span class="badge badge-success">5</span>
-							</a>
-
-							<ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
-								<li class="dropdown-header">
-									<i class="ace-icon fa fa-envelope-o"></i>
-									5 Messages
-								</li>
-
-								<li class="dropdown-content">
-									<ul class="dropdown-menu dropdown-navbar">
-										<li>
-											<a href="#" class="clearfix">
-												<!-- <img src="assets/images/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" /> -->
-												<span class="msg-body">
-													<span class="msg-title">
-														<span class="blue">Alex:</span>
-														Ciao sociis natoque penatibus et auctor ...
-													</span>
-
-													<span class="msg-time">
-														<i class="ace-icon fa fa-clock-o"></i>
-														<span>a moment ago</span>
-													</span>
-												</span>
-											</a>
-										</li>
-
-										<li>
-											<a href="#" class="clearfix">
-												<!-- <img src="assets/images/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" /> -->
-												<span class="msg-body">
-													<span class="msg-title">
-														<span class="blue">Susan:</span>
-														Vestibulum id ligula porta felis euismod ...
-													</span>
-
-													<span class="msg-time">
-														<i class="ace-icon fa fa-clock-o"></i>
-														<span>20 minutes ago</span>
-													</span>
-												</span>
-											</a>
-										</li>
-
-										<li>
-											<a href="#" class="clearfix">
-												<!-- <img src="assets/images/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar" /> -->
-												<span class="msg-body">
-													<span class="msg-title">
-														<span class="blue">Bob:</span>
-														Nullam quis risus eget urna mollis ornare ...
-													</span>
-
-													<span class="msg-time">
-														<i class="ace-icon fa fa-clock-o"></i>
-														<span>3:15 pm</span>
-													</span>
-												</span>
-											</a>
-										</li>
-
-										<li>
-											<a href="#" class="clearfix">
-												<!-- <img src="assets/images/avatars/avatar2.png" class="msg-photo" alt="Kate's Avatar" /> -->
-												<span class="msg-body">
-													<span class="msg-title">
-														<span class="blue">Kate:</span>
-														Ciao sociis natoque eget urna mollis ornare ...
-													</span>
-
-													<span class="msg-time">
-														<i class="ace-icon fa fa-clock-o"></i>
-														<span>1:33 pm</span>
-													</span>
-												</span>
-											</a>
-										</li>
-
-										<li>
-											<a href="#" class="clearfix">
-												<!-- <img src="assets/images/avatars/avatar5.png" class="msg-photo" alt="Fred's Avatar" /> -->
-												<span class="msg-body">
-													<span class="msg-title">
-														<span class="blue">Fred:</span>
-														Vestibulum id penatibus et auctor  ...
-													</span>
-
-													<span class="msg-time">
-														<i class="ace-icon fa fa-clock-o"></i>
-														<span>10:09 am</span>
-													</span>
-												</span>
-											</a>
-										</li>
-									</ul>
-								</li>
-
-								<li class="dropdown-footer">
-									<a href="inbox.html">
-										See all messages
-										<i class="ace-icon fa fa-arrow-right"></i>
-									</a>
-								</li>
-							</ul>
-						</li>
-
-
-
+	
 						<li class="light-blue dropdown-modal">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
 								
 								<span class="user-info">
-									<small>Welcome,
-									</br>
-										{{Auth::user()->name}}
-									</small>
-									
+									<small>Welcome,</small>
+									{{Auth::user()->name}}
 								</span>
 
 								<i class="ace-icon fa fa-caret-down"></i>
@@ -211,7 +92,7 @@
 								</li>
 
 								<li>
-									<a href="#">
+									<a href="profile.html">
 										<i class="ace-icon fa fa-user"></i>
 										Profile
 									</a>
@@ -226,47 +107,50 @@
 									</a>
 								</li>
 							</ul>
-						</li> <!-- light-blue dropdown-modal -->
+						</li>
+					</ul>
+				</div> <!-- role="navigation" -->
 
-					</ul> <!-- nav ace-nav -->
-					
-				</div> <!-- navbar-buttons navbar-header pull-right -->
-
-			</div> <!-- navbar-container -->
-		
-	</div> <!-- id="navbar" -->
-
+		</div> <!-- navbar-container -->
+	</div> <!-- navbar -->
 
 	<div class="main-container ace-save-state" id="main-container">
-		
-
-		<div id="sidebar" class="sidebar responsive ace-save-state">
 			<script type="text/javascript">
-				try{ace.settings.loadState('sidebar')}catch(e){}
+				try{ace.settings.loadState('main-container')}catch(e){}
 			</script>
 
+			<div id="sidebar" class="sidebar responsive ace-save-state">
+				<script type="text/javascript">
+					try{ace.settings.loadState('sidebar')}catch(e){}
+				</script>
+				<!-- Menu  -->
+				@include('Menu/sidebar-shortcuts') 
+				@include('Menu/principal')
+			</div> <!-- sidebar -->
 
-			<!-- Menu -->
-			@include('Menu/sidebar-shortcuts') 
-			@include('Menu/principal')
-		
-			
-		</div> <!-- sidebar -->
-		
-
-		<div class="main-content">
-			<div class="main-content-inner">
-				<div class="page-content">
+			<div class="main-content">
+				<div class="main-content-inner">
+					<div class="page-content">
+						@include('errors.parcial.campos_error')
+						@include('errors.parcial.campos_notices')
+						@include('errors.parcial.success')
 					
-				 @yield('content')
-				
-				</div> <!-- main-content -->
+					<!-- --> 	
+					 @yield('content')
 
-			</div> <!-- class="main-content-inner" -->
-		</div> <!-- main-content -->
+					
+					</div> <!-- main-content -->
+
+				</div> <!-- class="main-content-inner" -->
+			</div> <!-- main-content -->
 
 
-		<div class="footer">
+
+
+
+	</div> <!-- id="main-container" -->
+
+	<div class="footer">
 			<div class="footer-inner">
 				<div class="footer-content">
 					<span class="bigger-120">
@@ -276,17 +160,15 @@
 				</div>
 			</div>
 		</div> <!-- FOOTER -->
-
-	    
-	</div> <!-- /main-container -->
-	 
-
-	 
-	<!-- Scripts -->
-
+</body>
+		
+<!-- Scripts -->
 
 <script type="text/javascript">
 	jQuery(function($) {
+		//jquery tabs
+		$( "#tabs" ).tabs();
+
 		//initiate dataTables plugin
 		var myTable = 
 		$('#dynamic-table')

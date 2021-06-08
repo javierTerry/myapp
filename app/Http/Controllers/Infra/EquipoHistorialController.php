@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Infra;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\EquipoHistorialRequest;
 use App\Http\Controllers\Controller;
 
@@ -9,6 +10,8 @@ use App\Http\Controllers\Controller;
 use Log;
 use Illuminate\Routing\Redirector;
 use App\Model\Infra\EquipoHistorial;
+use App\Model\Infra\Equipo;
+use App\Model\Infra\Rack;
 
 class EquipoHistorialController extends Controller
 {
@@ -20,6 +23,7 @@ class EquipoHistorialController extends Controller
     public function index()
     {
         //
+        dd("returno");
     }
 
     /**
@@ -40,29 +44,36 @@ class EquipoHistorialController extends Controller
      */
     public function store(EquipoHistorialRequest $request)
     {
-        try{
-            Log::info('EquipoHistorial store');
-            
+        Log::info('EQUIPO HISTORICO ');
+        Log::info('EquipoHistorial store');
+        $request->session()->put('quotation', $request->input());
+        $mensajes = array();
+        try {
+
+            $id  = $request->get('id_equipo');            
+            $equipo = Equipo::find($id);
+            $rack  = Rack::all();
+            $equipoHisorial = EquipoHistorial::where('id_equipo','=',$id)
+                            ->orderBy('id', 'desc')
+                            ->get();
+
+            if ($request->validator->fails()) {
+                $notices = $request->validator->messages()->all();
+                return \Redirect::route('infra.equipo.edit', ['equipo'=>$id]) -> with ('notices',$notices);
+            } 
+
             $item = new EquipoHistorial($request->all());
             $item->fecha_reporte = \Carbon\Carbon::now();
-            #dd($item->id_equipo);
-            $idEquipo = $item->id_equipo;
-            $route = array('equipo' => $idEquipo);
             $item -> save();
-            
-            $notices = array("Se agrego el seguimiento ".$idEquipo);
-
-            return redirect()->route('infra.equipo.edit' , ['equipo' => $idEquipo])-> with ('notices',$notices);
-
-        } catch (\Illuminate\Database\QueryException $e) {
-            Log::info('EquipoHistorial store Excepcion QueryException');
-            
-            return \Redirect::route('infra.equipo.edit', $route ) -> withErrors ($e ->errorInfo[2]);
-
-        } catch (Exception $e) {
-            Log::info('EquipoHistorial store Excepcion General');
-            return \Redirect::route('infra.equipo.index') -> withErrors ($e -> getMessage());       
+            $mensajes[] = "Se agrego el seguimiento";
+               
+        } catch (Exception $exception) {
+            Log::info('EquipoHistorial exception');
+           return \Redirect::route('infra.equipo.edit', ['equipo'=>$id]) -> withErrors ($exception);
         }
+
+        Log::info('EquipoHistorial Finalizando');
+        return \Redirect::route('infra.equipo.edit', ['equipo'=>$id]) -> withSuccess ($mensajes);
     }
 
     /**

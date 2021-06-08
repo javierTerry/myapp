@@ -8,7 +8,6 @@
 				<div class="panel-heading"> Nuevo - DataCenter </div>
 
 				<div class="panel-body">
-					@include('errors.parcial.campos_error')
 					{!! Form::open([ 'route' => 'infra.dcs.store', 'method' => 'POST' ]) !!}
 						@include('infra.datacenter.parcial.campos')
 						  <button type="submit" class="btn btn-success" >Guardar </button>
