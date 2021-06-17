@@ -8,7 +8,6 @@
 				<div class="panel-heading">Actualizar Rack : {{ $rack -> name}}</div>
 
 				<div class="panel-body">
-					@include('errors.parcial.campos_error')
 					{!! Form::model($rack, [ 'route' => ['infra.rack.update',$rack], 'method' => 'PUT' ]) !!}
 						  	@include('infra.rack.parcial.campos')					  
 						<button type="submit" class="btn btn-success" >Guardar </button>

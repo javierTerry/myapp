@@ -8,7 +8,6 @@
 				<div class="panel-heading">Actualizar Fase : {{ $fase -> name}}</div>
 
 				<div class="panel-body">
-					@include('errors.parcial.campos_error')
 					{!! Form::model($fase, [ 'route' => ['infra.fase.update',$fase], 'method' => 'PUT' ]) !!}
 						  	@include('infra.fase.parcial.campos')					  
 						<button type="submit" class="btn btn-success" >Guardar </button>

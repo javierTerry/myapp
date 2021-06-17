@@ -14,9 +14,6 @@
 
 <div class="row">
 	<div class="col-xs-12">
-		@include('errors.parcial.campos_error')
-		@include('errors.parcial.campos_notices')
-
 		<div class="table-responsive text-center">
 			<div class="clearfix">
 				<div class="pull-right tableTools-container"></div>

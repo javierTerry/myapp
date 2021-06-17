@@ -8,7 +8,6 @@
 
 				<div class="panel-heading"> Nueva -  F A S E</div>
 				<div class="panel-body">
-					@include('errors.parcial.campos_error')
 					{!! Form::open([ 'route' => 'infra.fase.store', 'method' => 'POST' ]) !!}
 						@include('infra.fase.parcial.campos')
 						  <button type="submit" class="btn btn-success" >Guardar </button>
