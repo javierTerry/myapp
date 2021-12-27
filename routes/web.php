@@ -14,13 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-#dd(config('google.visual_token'));
-
-Route::middleware(['auth'])->group(function () {
-	#Route::get('/home', 'HomeController@index')->name('home');
-});
-
-
 Route::middleware(['visual'])->group(function () {
 	Route::name('inventario.')->group(function () {
 		Route::prefix('inventario')->group(function () {
@@ -38,33 +31,35 @@ Route::middleware(['auth'])->group(function () {
 		Route::prefix('infra')->group(function () {
 		    
 			Route::resource('dcs','Infra\DataCenterController');
-
 			Route::resource('fase','Infra\FaseController');
-
 			Route::resource('rack','Infra\RackController');
-
 			Route::name('equipo.')->group(function () {
 				Route::prefix('equipo')->group(function () {
 						Route::get('alarmados', 'Infra\EquipoController@alarmado')->name('alarmado');
-						
 				});
-		
 			});
 			Route::name('equipo.')->group(function () {
 				Route::prefix('equipo')->group(function () {
 						Route::get('inactivo', 'Infra\EquipoController@inactivo')->name('inactivo');
 						Route::get('historico', 'Infra\EquipoController@historico')->name('historico');
-						Route::put('{equipo}/edit', 'Infra\EquipoController@byPassHistorico')->name('bypasshistorico');
-						
+						Route::put('{equipo}/edit', 'Infra\EquipoController@byPassHistorico')->name('bypasshistorico');	
 				});
-		
 			});
 			Route::resource('equipo','Infra\EquipoController');
 			Route::resource('equipoHistorial','Infra\EquipoHistorialController');
+			
 
 		});
 	});
-});
+
+	Route::name('auditoria.')->group(function () {
+		Route::prefix('auditoria')->group(function () {
+			Route::resource('cmdb','AuditoriaController');
+		});
+	});
+});//FIN Route::middleware(['auth'])
+
+
 
 Route::resource('/login','AuthController');
 Route::get('auth/google', 'GoogleController@redirectToGoogle');

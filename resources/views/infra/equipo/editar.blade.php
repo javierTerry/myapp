@@ -41,18 +41,18 @@
 
 						<div class="form-actions center no-padding-right">
 							<a href="{{ url()->previous() }}" class="btn btn-info" >Regresar</a>
-							<button type="submit" class="btn btn-success" >Guardar Cambios</button>
+							<button type="submit" class="btn btn-success" >Guardar </button>
 							
 						</div>
 					{!! Form::close() !!}
 				</div>
 
 				<div id="tabs-2" class="tab-pane">
-					<p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla..</p>
+					<p> PROXIMAMENTE.</p>
 				</div>
 
 				<div id="tabs-3" class="tab-pane">
-					<p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Praesent eu risus hendrerit ligula tempus pretium.</p>
+					<p>PROXIMAMENTE.</p>
 				</div>
 			</div>
 		</div><!-- end tabbable -->

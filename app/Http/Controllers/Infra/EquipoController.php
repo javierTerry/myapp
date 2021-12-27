@@ -64,8 +64,6 @@ class EquipoController extends Controller
             Log::info('Equipo store');
 
             $item = new Equipo($request->all());
-            $item -> alarmado =  is_null($item -> alarmado) ? 0 : $item -> alarmado;
-            $item -> garantia =  Carbon::parse($item['garantia']);
             #dd( $item  );
             $item -> save();
             

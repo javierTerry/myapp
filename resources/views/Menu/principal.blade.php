@@ -111,7 +111,29 @@
 			<li class="">
 				<a href="{{ route('infra.equipo.historico') }}">
 					<i class="menu-icon fa fa-caret-right"></i>
-					HISTORICO 
+					H I S T O R I C O 
+				</a>
+
+				<b class="arrow"></b>
+			</li>
+		</ul>
+	</li>
+
+	<li class="">
+		<a href="#" class="dropdown-toggle">
+			<i class="menu-icon fa fa-list"></i>
+			<span class="menu-text"> A U D I T O R I A   </span>
+
+			<b class="arrow fa fa-angle-down"></b>
+		</a>
+
+		<b class="arrow"></b>
+
+		<ul class="submenu">
+			<li class="">
+				<a href="{{ route('auditoria.cmdb.index') }}">
+					<i class="menu-icon fa fa-caret-right"></i>
+					H O M E
 				</a>
 
 				<b class="arrow"></b>
