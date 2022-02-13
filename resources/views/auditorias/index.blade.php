@@ -21,12 +21,37 @@
 				<thead>
 					<tr>
 						<th>ID</th>
-						<th>NAME</th>
-						<th>DESCRIPCION</th>
-						<th>No. de Fases</th>
-						<th class="sorting_disabled notexport"></th>
+						<th>ESTATUS</th>
+						<th>FECHA</th>
+						<th>DC</th>
+						<th>SOLICITANTE</th>
+						<th>RESPONSABLE</th>
+						<th>% DE VALIDACION</th>
+						<th>ACCIONES</th>
+
 					</tr>
 				</thead>
+				<tbody>
+					@foreach( $items as $item)
+					<tr>
+						
+						<td>{{ $item -> id}}</td>
+						<td>
+							{{ $item -> estatus}}
+							<i class="ace-icon fa {{ $item-> alarmado ? 'fa-times red2' : 'fa-check bigger-110 green' }}"></i>
+						</td>
+						<td>{{ $item -> fecha}}</td>
+						<td>{{ $item -> datacenter}}</td>
+						<td>{{ $item -> solicitante}}</td>
+						<td>{{ $item -> responsable}}</td>
+						<td>{{ $item -> validacion}}%</td>
+						<td> 
+							<a href="{{ route('auditoria.cmdb.edit', $item -> id) }}" class="btn btn-info" ><i class="ace-icon fa fa-pencil"></i></a>
+						</td>
+					</tr>		
+					@endforeach
+						
+				</tbody>
 				
 			</table> <!-- id="dynamic-table" -->
 		</div> <!-- class="table-responsive text-center"--> 

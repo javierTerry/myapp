@@ -6,6 +6,13 @@ use Illuminate\Http\Request;
 
 use Log;
 
+#Models que usara el flujo de trabajo
+use App\Model\Auditoria\Cmdb;
+use Socialite;
+use Auth;
+use Exception;
+
+
 class AuditoriaController extends Controller
 {
     /**
@@ -17,9 +24,10 @@ class AuditoriaController extends Controller
     {
 
         Log::info('DATACENTER index ');
-        $dcs = array();//DatacenterView::all();
+
+        $items = Cmdb::all();
         
-        return view('auditorias.index', compact('dcs'));
+        return view('auditorias.index', compact('items'));
 
     }
 
@@ -31,7 +39,7 @@ class AuditoriaController extends Controller
     public function create()
     {
         //
-        return view('auditorias.cmdb.crear');
+        return view('auditorias.cmdb.crear');   
     }
 
     /**
@@ -44,19 +52,19 @@ class AuditoriaController extends Controller
     {
         
         try{
-            Log::info('Datacenter store');
-
-            $dc = new Datacenter();
-            $dc -> name  = $request->get('name');
-            $dc -> desc  = $request->get('desc');
+            Log::info(__FILE__.' store');
             
-            $dc -> save();
+            $item = new Cmdb($request->all());
+            $item -> responsable  = Auth::user()->email;
+            //$dc -> desc  = $request->get('desc');
+            #dd(Auth::user()->email);
+            $item -> save();
             
-            $notices = array("Carga exitosa ".$dc -> name);
+            $notices = array("Registro de auditoria exitoso con ID ".$item -> id);
 
-            return \Redirect::route('infra.dcs.index') -> with ('notices',$notices);
+            return \Redirect::route('auditoria.cmdb.index') -> with ('notices',$notices);
         } catch (Exception $e) {
-            return \Redirect::route('infra.dcs.index') -> withErrors ($e -> getMessage());   
+            return \Redirect::route('auditoria.cmdb.index') -> withErrors ($e -> getMessage());   
         }
     }
 
@@ -81,9 +89,9 @@ class AuditoriaController extends Controller
     {
         Log::debug("Datacenter Controller edit ".$id);
 
-        $dc = Datacenter::find($id);
+        $item = Cmdb::find($id);
 
-        return view('infra.datacenter.editar', compact('dc'));
+        return view('auditorias.editar', compact('item'));
     }
 
     /**
