@@ -10,7 +10,7 @@
 	{!! Form::label('validacion', '% de Validacion') !!}
 	{!! Form::text('validacion', null,
 	['class' 		=> 'form-control'
-	,'placeholder'	=> 'Valor para el % de equipos para auditar'])
+	,'placeholder'	=> 'Valor para el % de equipos para auditar	'])
 	!!}
 </div>
 

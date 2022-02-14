@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Log;
+use Auth;
+
 
 #Models que usara el flujo de trabajo
 use App\Model\Auditoria\Cmdb;
-use Socialite;
-use Auth;
-use Exception;
+use App\Model\Auditoria\Cmdb_reporte;
+use App\Model\Infra\EquipoView;
 
 
 class AuditoriaController extends Controller
@@ -25,8 +26,9 @@ class AuditoriaController extends Controller
 
         Log::info('DATACENTER index ');
 
-        $items = Cmdb::all();
-        
+        $items = Cmdb::orderby('id', 'desc')
+                ->get();
+
         return view('auditorias.index', compact('items'));
 
     }
@@ -39,6 +41,11 @@ class AuditoriaController extends Controller
     public function create()
     {
         //
+        try {
+            
+        } catch (Exception $e) {
+            
+        }
         return view('auditorias.cmdb.crear');   
     }
 
@@ -53,13 +60,47 @@ class AuditoriaController extends Controller
         
         try{
             Log::info(__FILE__.' store');
-            
+
             $item = new Cmdb($request->all());
             $item -> responsable  = Auth::user()->email;
-            //$dc -> desc  = $request->get('desc');
-            #dd(Auth::user()->email);
             $item -> save();
+
+            $dc  = $request->get('datacenter');
+            $validacion = $request->get('validacion');
+            $equipoTmp = EquipoView::where('dc', $dc)->get();
             
+            $equipoPorcentaje = round((count($equipoTmp)*(int)($validacion))/100);
+            
+            $equipo = EquipoView::where('dc', $dc)
+                        ->inRandomOrder()
+                        ->limit($equipoPorcentaje)
+                        ->get();
+            
+            #dd( (array)$equipo);
+                        $i= 0;
+            foreach ($equipo as $key => $value) {
+                // code...
+                #dd($value);
+                $reporte = new Cmdb_reporte();
+                $reporte -> estado = 1;
+                $reporte -> datacenter = $dc;
+                #$reporte -> fase = $value -> fase ;
+                $reporte -> rack = $value -> rack;
+                $reporte -> nombre = $value -> hostname;
+                $reporte -> ns = $value -> serie;
+                #$reporte ->  = $value -> ;
+                #$reporte -> producto = $value -> ;
+                $reporte -> modelo = $value -> modelo;
+                $reporte -> propietarioNombre = $value -> soporte;
+                $reporte -> propietarioContacto = $value -> soporte;
+                $reporte -> idVisual = $value -> id;
+                $reporte -> idCmdb = $item -> id ;
+
+                $reporte -> save();
+                
+            }
+            
+            #dd($i);
             $notices = array("Registro de auditoria exitoso con ID ".$item -> id);
 
             return \Redirect::route('auditoria.cmdb.index') -> with ('notices',$notices);
@@ -90,8 +131,10 @@ class AuditoriaController extends Controller
         Log::debug("Datacenter Controller edit ".$id);
 
         $item = Cmdb::find($id);
+        $tabla = Cmdb_reporte::where('idCmdb',$id)
+                ->get();
 
-        return view('auditorias.editar', compact('item'));
+        return view('auditorias.editar', compact('item','tabla'));
     }
 
     /**
@@ -105,13 +148,13 @@ class AuditoriaController extends Controller
     {
         //
         Log::debug('Datacenter actualizar id: '.$id);
-        $item = Datacenter::findOrFail($id);
+        $item = Cmdb::findOrFail($id);
         $item -> fill($request->all());
         $item -> save();
 
-        $notices = array("Actualizacion correcta de ".$item -> name);
+        $notices = array("Actualizacion correcta de ".$id);
 
-        return \Redirect::route('infra.dcs.index') -> with ('notices',$notices);
+        return \Redirect::route('auditoria.cmdb.index') -> with ('notices',$notices);
 
     }
 
@@ -123,12 +166,11 @@ class AuditoriaController extends Controller
      */
     public function destroy($id)
     {
-        $item = Datacenter::findOrFail($id);
+        $item = Cmdb::findOrFail($id);
         $notices = array("Datacenter ". $item -> name. " borrado");
         $item->status = 0;
         $item->save();
         
-
-        return \Redirect::route('infra.dcs.index') -> with ('notices',$notices);
+        return \Redirect::route('auditoria.cmdb.index') -> with ('notices',$notices);
     }
 }

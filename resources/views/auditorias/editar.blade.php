@@ -24,25 +24,53 @@
 		<thead>
 			<tr>
 				<th>ID Visual</th>
-				<th>Centro de Datos</th>
+				<th>DC</th>
 				<th>Fase</th>
 				<th>Rack</th>
 				<th>Nombre CI</th>
 				<th>NS</th>
 				<th>Nombre Del Producto</th>
 				<th>Modelo / Version</th>
-				<th>Total Memoria Fisica</th>
+				<th style="display:none;">Total Memoria Fisica</th>
 				<th>Nombre Propietario</th>
 				<th>Contacto del propietario</th>
-				<th>Verificador</th>
-				<th>Fecha</th>
-				<th>Gestor de Configuracion</th>
-				<th>Fecha Validacion</th>
-				<th>Observaciones</th>
+				<th style="display:none;">Verificador</th>
+				<th style="display:none;">Fecha</th>
+				<th style="display:none;">Gestor de Configuracion</th>
+				<th style="display:none;">Fecha Validacion</th>
+				<th style="display:none;">Observaciones</th>
 			</tr>
 		</thead>
 		<tbody>
+			@foreach( $tabla as $item)
+					<tr>
+						
+						<td>{{ $item -> idVisual}}</td>
+						<td>{{ $item -> datacenter}}</td>
+						<td>{{ $item -> fase}}</td>
+						<td>{{ $item -> rack}}</td>
+						<td>{{ $item -> nombre}}</td>
+						<td>{{ $item -> ns}}</td>
+						<td>{{ $item -> producto}}</td>
+						<td>{{ $item -> modelo}}</td>
+						<td style="display:none;"></td>
+						<td>{{ $item -> propietarioNombre}}</td>
+						<td>{{ $item -> propietarioContacto}}</td>
+						<td style="display:none;"></td>
+						<td style="display:none;"></td>
+						<td style="display:none;"></td>
+						<td style="display:none;"></td>
+						<td style="display:none;"></td>	
+						
+					</tr>		
+					@endforeach
 		</tbody>
+		<tfoot>
+			
+            <tr >
+                <th colspan="3"><?php echo date('Y-m-d h:i:s T');?></th>
+            </tr>
+		</tfoot>
 	</table>
 </div>
 @endsection

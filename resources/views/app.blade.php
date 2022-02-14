@@ -35,6 +35,8 @@
 	<script type="text/javascript" src="{{{ URL::asset('js/dataTables.buttons.min.js')}}}"></script>
   <script type="text/javascript" src="{{{ URL::asset('js/jquery.jqGrid.min.js')}}}"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js" ></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js" ></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
 	<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js" ></script>
 
   
@@ -174,26 +176,34 @@
 		$('#dynamic-table')
 		//.wrap("<div class='dataTables_borderWrap' />")   //if you are applying horizontal scrolling (sScrollX)
 		.DataTable( {
-			select: {
-				style: 'multi'
-			}
+				select: {
+					style: 'multi'
+				}
+				,"order": [[ 0, "desc"]] 
+				,dom: 'Bfrtip'
+				,buttons: [
+					{
+						extend: 'csv',
+			      exportOptions: {
+			        columns: ':not(.notexport)'
+			        }
+			     }
+			    ,{
+            extend: 'pdf'
+            ,footer: true
+            ,orientation: 'landscape'
+            , pageSize: 'LEGAL'
+          	,exportOptions: {
+                    columns: ':visible'
+                } 
+            
+        	}
+			  ]
 
-			,dom: 'lBfrtip'
-			,buttons: [
-				{
-		           extend: 'csv',
-		           exportOptions: {
-		                columns: ':not(.notexport)'
-		            }
-		       }    
-	           
-	        ]
+				, "pagingType": "full_numbers"
+				,"lengthMenu": [[25, 50, 75, -1], [ 25, 50,75, "All"]]
 
-			, "pagingType": "full_numbers"
-			,"lengthMenu": [[25, 50, 75, -1], [ 25, 50,75, "All"]]
-
-
-			,language: {
+				,language: {
 			    "decimal": "",
 			    "emptyTable": "No hay información",
 			    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
@@ -211,9 +221,9 @@
 			        "last": "Ultimo",
 			        "next": "Siguiente",
 			        "previous": "Anterior"
-			    }
-			}
-	    } );
+			    	}
+					}
+	    });
 
 
 		$(document).on('click', '#dynamic-table .dropdown-toggle', function(e) {
