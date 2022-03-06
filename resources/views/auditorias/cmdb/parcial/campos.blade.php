@@ -1,16 +1,23 @@
-<div style="float:left;width:50%;" class="form-group">
-	{!! Form::label('datacenter', 'DataCenter') !!}
-	{!! Form::text('datacenter', null,
-	['class' 		=> 'form-control'
-	,'placeholder'	=> 'Introduce una descripción del DataCenter  '])
-	!!}
+<div class="form-group" style="float:left;width:50%;">
+    {!! Form::label('datacenter', 'Datacenter') !!}
+	{!! Form::select('datacenter', $dcs
+	, $item->datacenter 
+	,['class' 		=> 'form-control'
+		,'placeholder'	=> 'Seleccionar	'
+		,'required'	=> 'true'
+	] ); !!}
 </div>
 
 <div style="float:right ;width:50%;" class="form-group">
 	{!! Form::label('validacion', '% de Validacion') !!}
-	{!! Form::text('validacion', null,
+	{!! Form::number('validacion', null,
 	['class' 		=> 'form-control'
-	,'placeholder'	=> 'Valor para el % de equipos para auditar	'])
+		,'placeholder'	=> 'Valor para el % de equipos para auditar	'
+		,'required'	=> 'true'
+		,'type'		=> 'number'
+		,'min'		=> '1'
+		,'max'		=> '100'
+	])
 	!!}
 </div>
 
@@ -33,10 +40,13 @@
 	!!}
 </div>
 
-<div class="form-group">
-	{!! Form::label('estatus', 'Estatus') !!}
-	{!! Form::text('estatus', null,
-	['class' 		=> 'form-control'
-	,'placeholder'	=> ''])
-	!!}
+
+<div class="form-group" >
+    {!! Form::label('estatus', 'Estatus') !!}
+	{!! Form::select('estatus', $comboEstatus
+	, $item->estatus 
+	,['class' 		=> 'form-control'
+		,'placeholder'	=> 'Seleccionar	'
+		,'required'	=> 'true'
+	] ); !!}
 </div>

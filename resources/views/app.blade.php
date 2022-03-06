@@ -174,7 +174,6 @@
 		//initiate dataTables plugin
 		var myTable = 
 		$('#dynamic-table')
-		//.wrap("<div class='dataTables_borderWrap' />")   //if you are applying horizontal scrolling (sScrollX)
 		.DataTable( {
 				select: {
 					style: 'multi'
@@ -192,9 +191,9 @@
             extend: 'pdf'
             ,footer: true
             ,orientation: 'landscape'
-            , pageSize: 'LEGAL'
+            , pageSize: 'A3'
           	,exportOptions: {
-                    columns: ':visible'
+                    columns: ':not(.notexport)'
                 } 
             
         	}

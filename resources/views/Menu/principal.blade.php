@@ -133,7 +133,7 @@
 			<li class="">
 				<a href="{{ route('auditoria.cmdb.index') }}">
 					<i class="menu-icon fa fa-caret-right"></i>
-					H O M E
+					C M D B
 				</a>
 
 				<b class="arrow"></b>

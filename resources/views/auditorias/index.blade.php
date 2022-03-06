@@ -19,7 +19,6 @@
 		<div class="table-responsive text-center">
 			<table class="table table-striped table-bordered table-hover" id="dynamic-table">
 				<thead>
-					<tr>
 						<th>ID</th>
 						<th>ESTATUS</th>
 						<th>FECHA</th>
@@ -27,18 +26,21 @@
 						<th>SOLICITANTE</th>
 						<th>RESPONSABLE</th>
 						<th>% DE VALIDACION</th>
-						<th>ACCIONES</th>
-
+						<th class="sorting_disabled notexport">ACCIONES</th>
 					</tr>
 				</thead>
 				<tbody>
 					@foreach( $items as $item)
 					<tr>
 						
-						<td>{{ $item -> id}}</td>
+						<td >{{ $item -> id}}</td>
 						<td>
-							{{ $item -> estatus}}
-							<i class="ace-icon fa {{ $item-> alarmado ? 'fa-times red2' : 'fa-check bigger-110 green' }}"></i>
+							<div style="display:none"> {{ $item -> estatus }} </div>
+							<i class="ace-icon glyphicon {{ ($item -> estatus == 0) ? 'glyphicon-off' : ''}} bigger-130 blue"> </i>
+							<i class="ace-icon glyphicon {{ ($item -> estatus == 1) ? 'glyphicon-play' : ''}} bigger-130 purple"> </i>
+							<i class="ace-icon glyphicon {{ ($item -> estatus == 2) ? 'glyphicon-ok' : ''}} bigger-130 green"> </i>
+							<i class="ace-icon glyphicon {{ ($item -> estatus == 3) ? 'glyphicon-time' : ''}} bigger-130 red"> </i>
+							
 						</td>
 						<td>{{ $item -> fecha}}</td>
 						<td>{{ $item -> datacenter}}</td>

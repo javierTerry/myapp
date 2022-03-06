@@ -5,7 +5,7 @@
 	<div class="row">
 		<div class="col-md-30 col-md-offset-1">
 			<div class="panel panel-default">
-				<div class="panel-heading">Actualizar Datacenter : {{ $item -> id}}</div>
+				<div class="panel-heading">Actualizar Auditoria : {{ $item -> id}}</div>
 
 				<div class="panel-body">
 					{!! Form::model($item, [ 'route' => ['auditoria.cmdb.update',$item], 'method' => 'PUT' ]) !!}

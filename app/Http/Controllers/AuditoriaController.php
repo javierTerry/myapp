@@ -12,6 +12,7 @@ use Auth;
 use App\Model\Auditoria\Cmdb;
 use App\Model\Auditoria\Cmdb_reporte;
 use App\Model\Infra\EquipoView;
+use App\Model\Infra\DatacenterView;
 
 
 class AuditoriaController extends Controller
@@ -42,11 +43,14 @@ class AuditoriaController extends Controller
     {
         //
         try {
-            
+            $item = new Cmdb();
+            $dcs  = DatacenterView::pluck('name','name');
+            $comboEstatus = $item->comboEstatus;
+
         } catch (Exception $e) {
             
         }
-        return view('auditorias.cmdb.crear');   
+        return view('auditorias.cmdb.crear', compact('item','dcs', 'comboEstatus'));   
     }
 
     /**
@@ -67,29 +71,27 @@ class AuditoriaController extends Controller
 
             $dc  = $request->get('datacenter');
             $validacion = $request->get('validacion');
-            $equipoTmp = EquipoView::where('dc', $dc)->get();
+            $equipoTmp = EquipoView::where('dc', $dc);
+            $equipoPorcentaje = round((count($equipoTmp->get())*(int)($validacion))/100);
             
-            $equipoPorcentaje = round((count($equipoTmp)*(int)($validacion))/100);
-            
-            $equipo = EquipoView::where('dc', $dc)
+            $equipo = $equipoTmp
                         ->inRandomOrder()
                         ->limit($equipoPorcentaje)
                         ->get();
             
-            #dd( (array)$equipo);
-                        $i= 0;
+                      
             foreach ($equipo as $key => $value) {
                 // code...
                 #dd($value);
                 $reporte = new Cmdb_reporte();
                 $reporte -> estado = 1;
                 $reporte -> datacenter = $dc;
-                #$reporte -> fase = $value -> fase ;
+                $reporte -> fase = $value -> fase ;
                 $reporte -> rack = $value -> rack;
                 $reporte -> nombre = $value -> hostname;
                 $reporte -> ns = $value -> serie;
                 #$reporte ->  = $value -> ;
-                #$reporte -> producto = $value -> ;
+                $reporte -> producto = $value -> marca;
                 $reporte -> modelo = $value -> modelo;
                 $reporte -> propietarioNombre = $value -> soporte;
                 $reporte -> propietarioContacto = $value -> soporte;
@@ -100,7 +102,6 @@ class AuditoriaController extends Controller
                 
             }
             
-            #dd($i);
             $notices = array("Registro de auditoria exitoso con ID ".$item -> id);
 
             return \Redirect::route('auditoria.cmdb.index') -> with ('notices',$notices);
@@ -131,10 +132,13 @@ class AuditoriaController extends Controller
         Log::debug("Datacenter Controller edit ".$id);
 
         $item = Cmdb::find($id);
+        $dcs  = DatacenterView::pluck('name','name');
         $tabla = Cmdb_reporte::where('idCmdb',$id)
                 ->get();
 
-        return view('auditorias.editar', compact('item','tabla'));
+        $comboEstatus = $item->comboEstatus; 
+
+        return view('auditorias.editar', compact('item','tabla', 'dcs', 'comboEstatus'));
     }
 
     /**
